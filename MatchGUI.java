@@ -14,51 +14,39 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class MatchGUI extends JFrame {
+public class MatchGUI{
 
-	private JPanel contentPane;
+	//if you want to show MatchGUI in the master frame, add g.contentPane to
+	//the frame.
+	public JPanel contentPane;
 	private JTextField matchName;
 	private JTextField matchStrength;
 	private int curMatchShown = 0;
 
-	public static void main(String[] args) {
-		ArrayList<TestMatch> matches = new ArrayList<TestMatch>();
-		matches.add(new TestMatch("Cerny", 99.9));
-		matches.add(new TestMatch("Joe", 98.8));
-		matches.add(new TestMatch("Cerny-ette", 73.4));
-		
-		MatchGUI g = new MatchGUI(matches);
-		g.setVisible(true);
-	}
-
 	public MatchGUI(ArrayList<TestMatch> matches) {		
-		//create empty frame
-		setTitle("Matches");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 793, 400);
 		
 		//create JPanel for the frame.
 		contentPane = new JPanel();
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBounds(100, 100, 900, 550);
 		
 		//text field to handle match's name
 		matchName = new JTextField();
-		matchName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		matchName.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		matchName.setHorizontalAlignment(SwingConstants.CENTER);
 		matchName.setEditable(false);
 		matchName.setText(matches.get(curMatchShown).getMatchName());
-		matchName.setBounds(109, 0, 564, 44);
+		matchName.setBounds(109, 13, 682, 70);
 		contentPane.add(matchName);
 		matchName.setColumns(10);
 		
 		//text field to handle the strength of the match
 		matchStrength = new JTextField();
-		matchStrength.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		matchStrength.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 		matchStrength.setHorizontalAlignment(SwingConstants.CENTER);
 		matchStrength.setEditable(false);
-		matchStrength.setBounds(109, 57, 564, 44);
+		matchStrength.setBounds(109, 96, 682, 70);
 		contentPane.add(matchStrength);
 		matchStrength.setColumns(10);
 		
@@ -76,7 +64,7 @@ public class MatchGUI extends JFrame {
 				}
 			}
 		});
-		prevMatchBtn.setBounds(0, 0, 97, 363);
+		prevMatchBtn.setBounds(0, 0, 97, 550);
 		contentPane.add(prevMatchBtn);
 		
 		//button to handle going to next match in the list.
@@ -93,7 +81,7 @@ public class MatchGUI extends JFrame {
 				}
 			}
 		});
-		nextMatchBtn.setBounds(685, 0, 97, 363);
+		nextMatchBtn.setBounds(803, 0, 97, 550);
 		contentPane.add(nextMatchBtn);
 		
 		//button for accepting match
@@ -116,7 +104,7 @@ public class MatchGUI extends JFrame {
 				acc.setEditable(false);
 				
 				panel.add(acc);
-				frame.add(panel);
+				frame.getContentPane().add(panel);
 				
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
@@ -125,7 +113,8 @@ public class MatchGUI extends JFrame {
 				
 				if(matches.size() == 0) {
 					noMatches();
-					dispose();
+					//dispose();
+					//TODO: IF NO MATCHES, CLOSE VIEW.
 				}
 				else {
 					matchName.setText(matches.get(curMatchShown).getMatchName());
@@ -133,7 +122,7 @@ public class MatchGUI extends JFrame {
 				}
 			}
 		});
-		acceptBtn.setBounds(109, 270, 271, 70);
+		acceptBtn.setBounds(109, 467, 271, 70);
 		contentPane.add(acceptBtn);
 		
 		//button for rejecting match
@@ -156,7 +145,7 @@ public class MatchGUI extends JFrame {
 				rej.setEditable(false);
 				
 				panel.add(rej);
-				frame.add(panel);
+				frame.getContentPane().add(panel);
 				
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
@@ -165,7 +154,8 @@ public class MatchGUI extends JFrame {
 				
 				if(matches.size() == 0) {
 					noMatches();
-					dispose();
+					//dispose();
+					//TODO: IF NO MATCHES, CLOSE THE GUI
 				}
 				else {
 					matchName.setText(matches.get(curMatchShown).getMatchName());
@@ -173,13 +163,13 @@ public class MatchGUI extends JFrame {
 				}
 			}
 		});
-		rejectBtn.setBounds(402, 270, 271, 70);
+		rejectBtn.setBounds(520, 467, 271, 70);
 		contentPane.add(rejectBtn);
 		
 		//button to view other user profile
 		JButton userProfileButton = new JButton("View User Profile");
 		userProfileButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		userProfileButton.setBounds(109, 114, 564, 56);
+		userProfileButton.setBounds(109, 199, 682, 56);
 		contentPane.add(userProfileButton);
 	}
 	
@@ -199,7 +189,7 @@ public class MatchGUI extends JFrame {
 		noMatchField.setEditable(false);
 		
 		panel.add(noMatchField);
-		frame.add(panel);
+		frame.getContentPane().add(panel);
 		
 	}
 	

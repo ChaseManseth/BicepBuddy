@@ -5,23 +5,23 @@
 
 package views;
 
-import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import javax.swing.JFrame;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class OtherProfileView {
 

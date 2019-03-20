@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 public class Master {
 
 	private JFrame frame;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -69,6 +70,11 @@ public class Master {
 				mntmLogin.setBackground(new Color(240,240,240));
 				mntmLogin.setForeground(new Color(0,0,0));
 			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading Login");
+				updateFrame(new Login());
+			}
 		});
 		mntmLogin.setMargin(new Insets(0, 0, 0, 0));
 		mntmLogin.setVerifyInputWhenFocusTarget(false);
@@ -76,6 +82,13 @@ public class Master {
 		menuBar.add(mntmLogin);
 		
 		JMenuItem mntmSignUp = new JMenuItem("Sign Up");
+		mntmSignUp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Loading Signup");
+				updateFrame(new Signup());
+			}
+		});
 		menuBar.add(mntmSignUp);
 		
 		JMenuItem mntmProfile = new JMenuItem("Profile");
@@ -89,9 +102,17 @@ public class Master {
 		
 		
 		
-		JPanel panel = new Login();
+		panel = new Login();
 		frame.getContentPane().add(panel);
 
+		frame.setVisible(true);
+	}
+	
+	public void updateFrame(JPanel j) {
+		panel.setVisible(false);
+		panel = j;
+		panel.setVisible(true);
+		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 	}
 }

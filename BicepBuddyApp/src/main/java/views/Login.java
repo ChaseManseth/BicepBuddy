@@ -25,7 +25,7 @@ public class Login extends JPanel {
 	 * Create the panel.
 	 */
 	public Login() {
-		setBounds(new Rectangle(0, 100, 900, 500));
+		setBounds(new Rectangle(0, 0, 900, 500));
 		setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Login to Bicep Buddy");

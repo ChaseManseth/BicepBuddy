@@ -1,4 +1,4 @@
-
+package views;
 public class TestMatch {
 	private String matchName;
 	private double matchStr;

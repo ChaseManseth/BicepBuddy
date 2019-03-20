@@ -1,11 +1,11 @@
+package views;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,11 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class MatchGUI{
+public class MatchGUI extends JPanel{
 
-	//if you want to show MatchGUI in the master frame, add g.contentPane to
+	//if you want to show MatchGUI in the master frame, add g.this to
 	//the frame.
-	public JPanel contentPane;
 	private JTextField matchName;
 	private JTextField matchStrength;
 	private int curMatchShown = 0;
@@ -26,9 +25,8 @@ public class MatchGUI{
 	public MatchGUI(ArrayList<TestMatch> matches) {		
 		
 		//create JPanel for the frame.
-		contentPane = new JPanel();
-		contentPane.setLayout(null);
-		contentPane.setBounds(100, 100, 900, 550);
+		this.setLayout(null);
+		this.setBounds(100, 100, 900, 550);
 		
 		//text field to handle match's name
 		matchName = new JTextField();
@@ -37,7 +35,7 @@ public class MatchGUI{
 		matchName.setEditable(false);
 		matchName.setText(matches.get(curMatchShown).getMatchName());
 		matchName.setBounds(109, 13, 682, 70);
-		contentPane.add(matchName);
+		this.add(matchName);
 		matchName.setColumns(10);
 		
 		//text field to handle the strength of the match
@@ -47,7 +45,7 @@ public class MatchGUI{
 		matchStrength.setHorizontalAlignment(SwingConstants.CENTER);
 		matchStrength.setEditable(false);
 		matchStrength.setBounds(109, 96, 682, 70);
-		contentPane.add(matchStrength);
+		this.add(matchStrength);
 		matchStrength.setColumns(10);
 		
 		//button to handle going to previous match in the list.
@@ -65,7 +63,7 @@ public class MatchGUI{
 			}
 		});
 		prevMatchBtn.setBounds(0, 0, 97, 550);
-		contentPane.add(prevMatchBtn);
+		this.add(prevMatchBtn);
 		
 		//button to handle going to next match in the list.
 		JButton nextMatchBtn = new JButton(">");
@@ -82,7 +80,7 @@ public class MatchGUI{
 			}
 		});
 		nextMatchBtn.setBounds(803, 0, 97, 550);
-		contentPane.add(nextMatchBtn);
+		this.add(nextMatchBtn);
 		
 		//button for accepting match
 		JButton acceptBtn = new JButton("Accept Match");
@@ -123,7 +121,7 @@ public class MatchGUI{
 			}
 		});
 		acceptBtn.setBounds(109, 467, 271, 70);
-		contentPane.add(acceptBtn);
+		this.add(acceptBtn);
 		
 		//button for rejecting match
 		JButton rejectBtn = new JButton("Reject Match");
@@ -164,13 +162,13 @@ public class MatchGUI{
 			}
 		});
 		rejectBtn.setBounds(520, 467, 271, 70);
-		contentPane.add(rejectBtn);
+		this.add(rejectBtn);
 		
 		//button to view other user profile
 		JButton userProfileButton = new JButton("View User Profile");
 		userProfileButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		userProfileButton.setBounds(109, 199, 682, 56);
-		contentPane.add(userProfileButton);
+		this.add(userProfileButton);
 	}
 	
 	public void noMatches() {

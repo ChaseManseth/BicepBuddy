@@ -85,6 +85,13 @@ public class Master {
 		
 		JMenu mnProfile = new JMenu("Profile");
 		mnProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		mnProfile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading Profile");
+				updateFrame(new ProfileView());
+			}
+		});
 		menuBar.add(mnProfile);
 		
 		JMenu mnOtherUserProfile = new JMenu("Other User Profile");

@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -118,6 +119,19 @@ public class Master {
 		
 		JMenu mnMatch = new JMenu("Match");
 		mnMatch.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		mnMatch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading match view");
+				
+				ArrayList<TestMatch> matches = new ArrayList<>();
+				matches.add(new TestMatch("Cerny", 76.6));
+				matches.add(new TestMatch("Cerniette", 65.23));
+				matches.add(new TestMatch("Donald Trump", 96.83));
+				
+				updateFrame(new MatchGUI(matches));
+			}
+		});
 		menuBar.add(mnMatch);
 		
 //		JMenuItem login = new JMenuItem("Login");

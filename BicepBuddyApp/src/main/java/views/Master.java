@@ -16,6 +16,8 @@ import javax.swing.UIManager;
 import mdlaf.MaterialLookAndFeel;
 
 import java.awt.ComponentOrientation;
+import javax.swing.JMenu;
+import java.awt.Font;
 
 public class Master {
 
@@ -51,6 +53,7 @@ public class Master {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Bicep Buddy v0.1");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,18 +61,9 @@ public class Master {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenuItem login = new JMenuItem("Login");
+		JMenu login = new JMenu("Login");
+		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		login.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				login.setBackground(new Color(48,48,48));
-				login.setForeground(new Color(255,255,255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				login.setBackground(new Color(240,240,240));
-				login.setForeground(new Color(0,0,0));
-			}
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Login");
@@ -78,7 +72,8 @@ public class Master {
 		});
 		menuBar.add(login);
 		
-		JMenuItem signUp = new JMenuItem("Sign Up");
+		JMenu signUp = new JMenu("Sign Up");
+		signUp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		signUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -88,14 +83,56 @@ public class Master {
 		});
 		menuBar.add(signUp);
 		
-		JMenuItem profile = new JMenuItem("Profile");
-		menuBar.add(profile);
+		JMenu mnProfile = new JMenu("Profile");
+		mnProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		menuBar.add(mnProfile);
 		
-		JMenuItem otherUserProfile = new JMenuItem("Other User Profile");
-		menuBar.add(otherUserProfile);
+		JMenu mnOtherUserProfile = new JMenu("Other User Profile");
+		mnOtherUserProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		menuBar.add(mnOtherUserProfile);
 		
-		JMenuItem match = new JMenuItem("Match");
-		menuBar.add(match);
+		JMenu mnMatch = new JMenu("Match");
+		mnMatch.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		menuBar.add(mnMatch);
+		
+//		JMenuItem login = new JMenuItem("Login");
+//		login.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				login.setBackground(new Color(48,48,48));
+//				login.setForeground(new Color(255,255,255));
+//			}
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				login.setBackground(new Color(240,240,240));
+//				login.setForeground(new Color(0,0,0));
+//			}
+//			@Override
+//			public void mouseClicked(MouseEvent arg0) {
+//				System.out.println("Loading Login");
+//				updateFrame(new Login());
+//			}
+//		});
+//		menuBar.add(login);
+//		
+//		JMenuItem signUp = new JMenuItem("Sign Up");
+//		signUp.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				System.out.println("Loading signUp");
+//				updateFrame(new Signup());
+//			}
+//		});
+//		menuBar.add(signUp);
+//		
+//		JMenuItem profile = new JMenuItem("Profile");
+//		menuBar.add(profile);
+//		
+//		JMenuItem otherUserProfile = new JMenuItem("Other User Profile");
+//		menuBar.add(otherUserProfile);
+//		
+//		JMenuItem match = new JMenuItem("Match");
+//		menuBar.add(match);
 		
 		
 		
@@ -103,8 +140,6 @@ public class Master {
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
-		
-		System.out.println(menuBar.getMenuCount());
 	}
 	
 	public void updateFrame(JPanel j) {

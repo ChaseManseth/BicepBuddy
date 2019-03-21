@@ -14,7 +14,7 @@ public class Signup extends JPanel {
 		setLayout(null);
 		
 		JLabel lblSignup = new JLabel("Signup");
-		lblSignup.setBounds(374, 105, 46, 14);
+		lblSignup.setBounds(374, 105, 101, 14);
 		add(lblSignup);
 
 	}

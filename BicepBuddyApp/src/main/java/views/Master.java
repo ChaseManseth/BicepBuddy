@@ -1,22 +1,21 @@
 package views;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
-
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Rectangle;
+import java.awt.EventQueue;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import mdlaf.MaterialLookAndFeel;
+
+import java.awt.ComponentOrientation;
 
 public class Master {
 
@@ -30,6 +29,7 @@ public class Master {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(new MaterialLookAndFeel());
 					Master window = new Master();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -58,17 +58,17 @@ public class Master {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		final JMenuItem mntmLogin = new JMenuItem("Login");
-		mntmLogin.addMouseListener(new MouseAdapter() {
+		JMenuItem login = new JMenuItem("Login");
+		login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				mntmLogin.setBackground(new Color(48,48,48));
-				mntmLogin.setForeground(new Color(255,255,255));
+				login.setBackground(new Color(48,48,48));
+				login.setForeground(new Color(255,255,255));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				mntmLogin.setBackground(new Color(240,240,240));
-				mntmLogin.setForeground(new Color(0,0,0));
+				login.setBackground(new Color(240,240,240));
+				login.setForeground(new Color(0,0,0));
 			}
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -76,29 +76,26 @@ public class Master {
 				updateFrame(new Login());
 			}
 		});
-		mntmLogin.setMargin(new Insets(0, 0, 0, 0));
-		mntmLogin.setVerifyInputWhenFocusTarget(false);
-		mntmLogin.setBounds(new Rectangle(0, 0, 50, 0));
-		menuBar.add(mntmLogin);
+		menuBar.add(login);
 		
-		JMenuItem mntmSignUp = new JMenuItem("Sign Up");
-		mntmSignUp.addMouseListener(new MouseAdapter() {
+		JMenuItem signUp = new JMenuItem("Sign Up");
+		signUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Loading Signup");
+				System.out.println("Loading signUp");
 				updateFrame(new Signup());
 			}
 		});
-		menuBar.add(mntmSignUp);
+		menuBar.add(signUp);
 		
-		JMenuItem mntmProfile = new JMenuItem("Profile");
-		menuBar.add(mntmProfile);
+		JMenuItem profile = new JMenuItem("Profile");
+		menuBar.add(profile);
 		
-		JMenuItem mntmOtherUserProfile = new JMenuItem("Other User Profile");
-		menuBar.add(mntmOtherUserProfile);
+		JMenuItem otherUserProfile = new JMenuItem("Other User Profile");
+		menuBar.add(otherUserProfile);
 		
-		JMenuItem mntmMatch = new JMenuItem("Match");
-		menuBar.add(mntmMatch);
+		JMenuItem match = new JMenuItem("Match");
+		menuBar.add(match);
 		
 		
 		
@@ -106,6 +103,8 @@ public class Master {
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
+		
+		System.out.println(menuBar.getMenuCount());
 	}
 	
 	public void updateFrame(JPanel j) {

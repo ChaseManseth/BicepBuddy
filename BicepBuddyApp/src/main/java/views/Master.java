@@ -89,7 +89,25 @@ public class Master {
 		
 		JMenu mnOtherUserProfile = new JMenu("Other User Profile");
 		mnOtherUserProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		mnOtherUserProfile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading OtherProfile");
+				updateFrame(new OtherProfileView());
+			}
+		});
 		menuBar.add(mnOtherUserProfile);
+		
+		JMenu settings = new JMenu("Settings");
+		settings.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		settings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading Settings");
+				updateFrame(new SettingsView());
+			}
+		});
+		menuBar.add(settings);
 		
 		JMenu mnMatch = new JMenu("Match");
 		mnMatch.setFont(new Font("Segoe UI", Font.PLAIN, 12));

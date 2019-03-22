@@ -53,6 +53,8 @@ public class Master {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Master mFrameReference = this;
+		
 		frame = new JFrame();
 		frame.setTitle("Bicep Buddy v0.1");
 		frame.setResizable(false);
@@ -68,7 +70,7 @@ public class Master {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Login");
-				updateFrame(new Login());
+				updateFrame(new Login(mFrameReference));
 			}
 		});
 		menuBar.add(login);
@@ -90,7 +92,7 @@ public class Master {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Profile");
-				updateFrame(new ProfileView());
+				updateFrame(new ProfileView(mFrameReference));
 			}
 		});
 		menuBar.add(mnProfile);
@@ -129,7 +131,7 @@ public class Master {
 				matches.add(new TestMatch("Cerniette", 65.23));
 				matches.add(new TestMatch("Donald Trump", 96.83));
 				
-				updateFrame(new MatchGUI(matches));
+				updateFrame(new MatchGUI(matches, mFrameReference));
 			}
 		});
 		menuBar.add(mnMatch);
@@ -175,7 +177,7 @@ public class Master {
 		
 		
 		
-		panel = new Login();
+		panel = new Login(mFrameReference);
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
@@ -185,6 +187,10 @@ public class Master {
 		panel.setVisible(false);
 		panel = j;
 		panel.setVisible(true);
+		// remove the current JPanel so that our frame doesn't have a billion
+		// panels in it when we switch views a bunch
+		frame.remove(frame.getContentPane());
+		
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 	}

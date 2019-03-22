@@ -19,7 +19,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login() {
+	public Login(Master mFrame) {
 		
 		setBounds(new Rectangle(0, 0, 900, 500));
 		setLayout(null);
@@ -63,6 +63,10 @@ public class Login extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				loginBtn.setBackground(new Color(108,117,125));
 				loginBtn.setForeground(new Color(255,255,255));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mFrame.updateFrame(new ProfileView(mFrame));
 			}
 		});
 		

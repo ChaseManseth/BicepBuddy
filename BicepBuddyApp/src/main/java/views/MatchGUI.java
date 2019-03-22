@@ -23,7 +23,7 @@ public class MatchGUI extends JPanel{
 	private JTextField matchStrength;
 	private int curMatchShown = 0;
 
-	public MatchGUI(ArrayList<TestMatch> matches) {		
+	public MatchGUI(ArrayList<TestMatch> matches, Master mFrame) {		
 		
 		//create JPanel for the frame.
 		this.setLayout(null);
@@ -158,9 +158,9 @@ public class MatchGUI extends JPanel{
 				}
 				
 				if(matches.size() == 0) {
-					noMatches();
+					//noMatches();
 					//dispose();
-					//TODO: IF NO MATCHES, CLOSE VIEW.
+					mFrame.updateFrame(new ProfileView(mFrame));
 				}
 				else {
 					matchName.setText(matches.get(curMatchShown).getMatchName());
@@ -216,9 +216,8 @@ public class MatchGUI extends JPanel{
 				}
 				
 				if(matches.size() == 0) {
-					noMatches();
-					//dispose();
-					//TODO: IF NO MATCHES, CLOSE THE GUI
+					//noMatches();
+					mFrame.updateFrame(new ProfileView(mFrame));
 				}
 				else {
 					matchName.setText(matches.get(curMatchShown).getMatchName());
@@ -248,6 +247,10 @@ public class MatchGUI extends JPanel{
 				userProfileButton.setBackground(new Color(108,117,125));
 				userProfileButton.setForeground(new Color(255,255,255));
 			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mFrame.updateFrame(new OtherProfileView());
+			}
 		});
 		
 		this.add(userProfileButton);
@@ -264,7 +267,8 @@ public class MatchGUI extends JPanel{
 		panel.setLayout(new FlowLayout());
 		
 		JTextField noMatchField = new JTextField();
-		noMatchField.setText("You have no matches!");
+		noMatchField.setText("You have exhausted your matches from this list."
+				+ "Generate more matches by matching from your profile!");
 		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		noMatchField.setEditable(false);
 		

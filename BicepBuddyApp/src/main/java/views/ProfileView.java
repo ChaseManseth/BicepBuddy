@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ public class ProfileView extends JPanel {
 	/**
 	 * Create the application.
 	 */
-	public ProfileView() {
+	public ProfileView(Master mFrame) {
 		String fname,lname,style,info,email;
 		int age =72;
 		fname="Donald";
@@ -86,6 +87,16 @@ public class ProfileView extends JPanel {
 		add(btnNewButton);
 		
 		JButton btnStartMatching = new JButton("Start Matching");
+		btnStartMatching.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<TestMatch> matches = new ArrayList<>();
+				matches.add(new TestMatch("Cerny", 76.6));
+				matches.add(new TestMatch("Cerniette", 65.23));
+				matches.add(new TestMatch("Donald Trump", 96.83));
+				
+				mFrame.updateFrame(new MatchGUI(matches, mFrame));
+			}
+		});
 		btnStartMatching.setBounds(463, 84, 188, 47);
 		add(btnStartMatching);
 		

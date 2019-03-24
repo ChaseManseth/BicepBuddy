@@ -12,9 +12,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.MatteBorder;
 
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
+import javax.swing.JPasswordField;
+
 public class Login extends JPanel {
 	private JTextField emailTextField;
-	private JTextField passwordTextField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Create the panel.
@@ -30,49 +34,87 @@ public class Login extends JPanel {
 		add(loginLabel);
 		
 		JLabel emailLabel = new JLabel("Email:");
-		emailLabel.setBounds(348, 188, 48, 14);
+		emailLabel.setBounds(322, 187, 48, 14);
 		add(emailLabel);
 		
 		emailTextField = new JTextField();
-		emailTextField.setBackground(new Color(222,222,222));
-		emailTextField.setBounds(457, 185, 152, 20);
+		emailTextField.setBackground(Color.LIGHT_GRAY);
+		emailTextField.setBounds(431, 184, 192, 20);
 		add(emailTextField);
 		emailTextField.setColumns(10);
 		
+		
+		// Password Field
+		passwordField = new JPasswordField();
+		passwordField.setBackground(new Color(41,182,246));
+		passwordField.setBounds(433, 234, 185, 20);
+		add(passwordField);
+		passwordField.setColumns(10);
+		
+		// Password Background color
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(431, 234, 192, 20);
+		add(panel);
+		
 		JLabel passwordLabel = new JLabel("Password:");
-		passwordLabel.setBounds(348, 238, 81, 14);
+		passwordLabel.setBounds(322, 237, 81, 14);
 		add(passwordLabel);
 		
-		passwordTextField = new JTextField();
-		passwordTextField.setBackground(new Color(222,222,222));
-		passwordTextField.setBounds(457, 235, 152, 20);
-		add(passwordTextField);
-		passwordTextField.setColumns(10);
-		
 		JButton loginBtn = new JButton("Login");
-		loginBtn.setBackground(new Color(108,117,125));
-		loginBtn.setForeground(new Color(255,255,255));
+		loginBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		loginBtn.setBackground(MaterialColors.GRAY_400);
+		loginBtn.setForeground(Color.black);
+		
+		MaterialUIMovement.add(loginBtn, MaterialColors.GRAY_600);
 		
 		loginBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				loginBtn.setBackground(new Color(80,87,94));
-				loginBtn.setForeground(new Color(255,255,255));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				loginBtn.setBackground(new Color(108,117,125));
-				loginBtn.setForeground(new Color(255,255,255));
-			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mFrame.updateFrame(new ProfileView(mFrame));
 			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				loginBtn.setForeground(Color.white);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				loginBtn.setForeground(Color.black);
+			}
 		});
 		
-		loginBtn.setBounds(385, 303, 89, 23);
+		loginBtn.setBounds(348, 303, 89, 23);
 		add(loginBtn);
 		
+		JButton btnSignUp = new JButton("Sign Up");
+		btnSignUp.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSignUp.setBounds(498, 303, 89, 23);
+		btnSignUp.setBackground(MaterialColors.GRAY_400);
+		btnSignUp.setForeground(new Color(0,0,0));
+		
+		
+		MaterialUIMovement.add(btnSignUp, MaterialColors.GRAY_600);
+		
+		btnSignUp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mFrame.updateFrame(new Signup(mFrame));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSignUp.setForeground(Color.white);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnSignUp.setForeground(Color.black);
+			}
+		});
+		
+		add(btnSignUp);
 
 	}
 }

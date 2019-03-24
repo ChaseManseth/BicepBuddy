@@ -81,7 +81,7 @@ public class Master {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Loading signUp");
-				updateFrame(new Signup());
+				updateFrame(new Signup(mFrameReference));
 			}
 		});
 		menuBar.add(signUp);

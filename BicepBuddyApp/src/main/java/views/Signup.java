@@ -39,7 +39,7 @@ public class Signup extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Signup() {
+	public Signup(Master mFrame) {
 		setBounds(new Rectangle(0, 0, 900, 500));
 		setLayout(null);
 		
@@ -170,8 +170,8 @@ public class Signup extends JPanel {
 		lblGender.setBounds(455, 225, 99, 14);
 		add(lblGender);
 		
-		JLabel lblPreferedGender = new JLabel("Preferred Gender");
-		lblPreferedGender.setBounds(455, 305, 150, 14);
+		JLabel lblPreferedGender = new JLabel("Preferred Buddy Gender");
+		lblPreferedGender.setBounds(455, 305, 193, 14);
 		add(lblPreferedGender);
 		
 		JLabel lblGoals = new JLabel("Goals");

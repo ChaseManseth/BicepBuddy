@@ -114,7 +114,7 @@ public class Master {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Settings");
-				updateFrame(new SettingsView());
+				updateFrame(new SettingsView(mFrameReference));
 			}
 		});
 		menuBar.add(settings);
@@ -136,48 +136,8 @@ public class Master {
 		});
 		menuBar.add(mnMatch);
 		
-//		JMenuItem login = new JMenuItem("Login");
-//		login.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				login.setBackground(new Color(48,48,48));
-//				login.setForeground(new Color(255,255,255));
-//			}
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				login.setBackground(new Color(240,240,240));
-//				login.setForeground(new Color(0,0,0));
-//			}
-//			@Override
-//			public void mouseClicked(MouseEvent arg0) {
-//				System.out.println("Loading Login");
-//				updateFrame(new Login());
-//			}
-//		});
-//		menuBar.add(login);
-//		
-//		JMenuItem signUp = new JMenuItem("Sign Up");
-//		signUp.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				System.out.println("Loading signUp");
-//				updateFrame(new Signup());
-//			}
-//		});
-//		menuBar.add(signUp);
-//		
-//		JMenuItem profile = new JMenuItem("Profile");
-//		menuBar.add(profile);
-//		
-//		JMenuItem otherUserProfile = new JMenuItem("Other User Profile");
-//		menuBar.add(otherUserProfile);
-//		
-//		JMenuItem match = new JMenuItem("Match");
-//		menuBar.add(match);
 		
-		
-		
-		panel = new Login(mFrameReference);
+		panel = new ProfileView(mFrameReference);
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);

@@ -36,7 +36,7 @@ public class SettingsView extends JPanel {
 	/**
 	 * Create the application.
 	 */
-	public SettingsView() {
+	public SettingsView(Master mFrame) {
 		setBounds(100, 100, 900, 560);
 		setLayout(null);
 		

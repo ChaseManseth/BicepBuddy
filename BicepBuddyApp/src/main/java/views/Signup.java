@@ -2,6 +2,8 @@ package views;
 
 import javax.swing.JPanel;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +17,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
+
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JPasswordField;
 
 public class Signup extends JPanel {
 	private JTextField firstTextField;
 	private JTextField lastTextField;
 	private JTextField emailTextField;
-	private JTextField passwordTextField;
-	private JTextField passwordConfTextField;
 	private JTextField phoneTextField;
 	private JTextField ageTextField;
 	
@@ -35,6 +40,8 @@ public class Signup extends JPanel {
 	private String workoutStyles[] = {"","General Fitness", "Cardio", "Powerlifting","Crossfit", "Bodybuilding", "Weight Loss"};
 	private String weight[] = {"","0-100","100-125","125-150","150-175","175-200","200+"};
 	private String experience[] = {"","None","Little","Average","Experienced"};
+	private JPasswordField password;
+	private JPasswordField confirmPW;
 
 	/**
 	 * Create the panel.
@@ -51,8 +58,27 @@ public class Signup extends JPanel {
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBackground(Color.LIGHT_GRAY);
-		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSubmit.setBounds(30, 430, 115, 32);
+		MaterialUIMovement.add(btnSubmit, MaterialColors.GRAY_600);
+		
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mFrame.updateFrame(new ProfileView(mFrame));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSubmit.setForeground(Color.white);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnSubmit.setForeground(Color.black);
+			}
+		});
+		
 		add(btnSubmit);
 		
 		JComboBox genderCombo = new JComboBox(genders);
@@ -113,18 +139,6 @@ public class Signup extends JPanel {
 		emailTextField.setBounds(200, 240, 150, 25);
 		add(emailTextField);
 		emailTextField.setColumns(10);
-		
-		passwordTextField = new JTextField();
-		passwordTextField.setBackground(Color.LIGHT_GRAY);
-		passwordTextField.setBounds(200, 320, 150, 25);
-		add(passwordTextField);
-		passwordTextField.setColumns(10);
-		
-		passwordConfTextField = new JTextField();
-		passwordConfTextField.setBackground(Color.LIGHT_GRAY);
-		passwordConfTextField.setBounds(200, 400, 150, 25);
-		add(passwordConfTextField);
-		passwordConfTextField.setColumns(10);
 		
 		phoneTextField = new JTextField();
 		phoneTextField.setBackground(Color.LIGHT_GRAY);
@@ -197,6 +211,28 @@ public class Signup extends JPanel {
 		JLabel lblExperience = new JLabel("Experience");
 		lblExperience.setBounds(700, 385, 121, 14);
 		add(lblExperience);
+		
+		password = new JPasswordField();
+		password.setBackground(new Color(41,182,246));
+		password.setBounds(202, 322, 142, 23);
+		add(password);
+		
+		// Password Background color
+		JPanel pwBkg = new JPanel();
+		pwBkg.setBackground(Color.LIGHT_GRAY);
+		pwBkg.setBounds(200, 322, 150, 23);
+		add(pwBkg);
+		
+		confirmPW = new JPasswordField();
+		confirmPW.setBackground(new Color(41,182,246));
+		confirmPW.setBounds(202, 405, 142, 23);
+		add(confirmPW);
+		
+		// Password Background color
+		JPanel confirmPwBkg = new JPanel();
+		confirmPwBkg.setBackground(Color.LIGHT_GRAY);
+		confirmPwBkg.setBounds(200, 405, 150, 23);
+		add(confirmPwBkg);
 
 	}
 }

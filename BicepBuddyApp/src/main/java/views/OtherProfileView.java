@@ -36,12 +36,17 @@ public class OtherProfileView extends JPanel {
 	 */
 	public OtherProfileView() {
 		// TEMP DATA
-				String fname,lname,style,info,email;
+				String fname,lname,email,style,gender,preferedGender,frequency;
 				int age =72;
+			    
 				fname="Donald";
 				lname="Trump";
 				style= "Wall Building";
 				email = "donald@trump.com";
+				gender="Male";
+				preferedGender="Female";
+				style="Wall Building";
+				frequency="Every Day";
 				// END TEMP DATA
 
 				//frame = new JFrame();
@@ -64,38 +69,39 @@ public class OtherProfileView extends JPanel {
 				add(lblPic);
 				
 				JLabel lblName2 = new JLabel(fname +" "+lname);
-				lblName2.setBounds(365, 12, 135, 15);
+				lblName2.setFont(new Font("Dialog", Font.BOLD, 16));
+				lblName2.setBounds(384, 26, 135, 19);
 				add(lblName2);
 				
-				JButton btnStartMatching = new JButton("Invite Buddy");
-				btnStartMatching.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				btnStartMatching.setBackground(MaterialColors.GRAY_400);
-				btnStartMatching.setForeground(Color.black);
-				
-				MaterialUIMovement.add(btnStartMatching, MaterialColors.GRAY_600);
-				
-				btnStartMatching.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						ArrayList<TestMatch> matches = new ArrayList<>();
-						matches.add(new TestMatch("Cerny", 76.6));
-						matches.add(new TestMatch("Cerniette", 65.23));
-						matches.add(new TestMatch("Donald Trump", 96.83));
+				JButton btnInvite = new JButton("Invite Buddy");
+				btnInvite.setFont(new Font("Dialog", Font.BOLD, 14));
+				btnInvite.setBackground(new Color(34, 139, 34));
+				btnInvite.setForeground(Color.white);
+				btnInvite.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JFrame frame = new JFrame();
+						frame.setVisible(true);
+						frame.setTitle("Invite");
+						frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						frame.setBounds(100, 100, 400, 200);
 						
-//						mFrame.updateFrame(new MatchGUI(matches, mFrame));
-					}
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						btnStartMatching.setForeground(Color.white);
-					}
-					
-					@Override
-					public void mouseExited(MouseEvent e) {
-						btnStartMatching.setForeground(Color.black);
+						JPanel panel = new JPanel();
+						panel.setLayout(new FlowLayout());
+						
+						JTextField message = new JTextField();
+						message.setText("You invited Donald Trump to be your buddy!");
+						message.setEditable(false);
+						
+						panel.add(message);
+						frame.getContentPane().add(panel);
+
 					}
 				});
-				btnStartMatching.setBounds(346, 138, 188, 47);
-				add(btnStartMatching);
+			
+				
+			
+				btnInvite.setBounds(331, 103, 188, 47);
+				add(btnInvite);
 				
 				JPanel infoPanel = new JPanel();
 				infoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -104,18 +110,87 @@ public class OtherProfileView extends JPanel {
 				infoPanel.setLayout(null);
 				
 				JLabel lblFirstname = new JLabel("Donald Trump");
+				lblFirstname.setFont(new Font("Dialog", Font.BOLD, 16));
 				lblFirstname.setBounds(10, 224, 165, 28);
 				infoPanel.add(lblFirstname);
 				
 				JLabel lblAge = new JLabel(Integer.toString(age));
+				lblAge.setFont(new Font("Dialog", Font.BOLD, 16));
 				lblAge.setBounds(10, 264, 165, 15);
 				infoPanel.add(lblAge);
 				
 				JButton button = new JButton("Block Buddy");
-				button.setForeground(Color.BLACK);
-				button.setFont(new Font("Dialog", Font.PLAIN, 12));
-				button.setBackground(new Color(189, 189, 189));
-				button.setBounds(346, 288, 188, 47);
+				button.setForeground(Color.white);
+				button.setFont(new Font("Dialog", Font.BOLD, 14));
+				button.setBackground(new Color(255, 0, 0));
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JFrame frame = new JFrame();
+						frame.setVisible(true);
+						frame.setTitle("Block");
+						frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						frame.setBounds(100, 100, 400, 200);
+						
+						JPanel panel = new JPanel();
+						panel.setLayout(new FlowLayout());
+						
+						JTextField message = new JTextField();
+						message.setText("You blocked Donald Trump.");
+						message.setEditable(false);
+						
+						panel.add(message);
+						frame.getContentPane().add(panel);
+
+					}
+				});
+			
+				button.setBounds(599, 103, 188, 47);
 				add(button);
+				
+				JPanel panel = new JPanel();
+				panel.setLayout(null);
+				panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+				panel.setBounds(277, 258, 591, 208);
+				add(panel);
+				
+				JLabel lblWorkoutStyle = new JLabel("Workout Style:");
+				lblWorkoutStyle.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblWorkoutStyle.setBounds(12, 28, 128, 49);
+				panel.add(lblWorkoutStyle);
+				
+				JLabel lblFrequency = new JLabel("Frequency:");
+				lblFrequency.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblFrequency.setBounds(12, 101, 95, 49);
+				panel.add(lblFrequency);
+				
+				JLabel lblGender = new JLabel("Gender:");
+				lblGender.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblGender.setBounds(301, 28, 78, 49);
+				panel.add(lblGender);
+				
+				JLabel lblPreferedBuddyGender = new JLabel("Prefered Buddy Gender:");
+				lblPreferedBuddyGender.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblPreferedBuddyGender.setBounds(301, 101, 200, 49);
+				panel.add(lblPreferedBuddyGender);
+				
+				JLabel lblNewLabel = new JLabel(style);
+				lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel.setBounds(139, 45, 109, 15);
+				panel.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(frequency);
+				lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_1.setBounds(139, 118, 109, 15);
+				panel.add(lblNewLabel_1);
+				
+				JLabel lblNewLabel_2 = new JLabel(gender);
+				lblNewLabel_2.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_2.setBounds(513, 45, 66, 15);
+				panel.add(lblNewLabel_2);
+				
+				JLabel lblNewLabel_3 = new JLabel(preferedGender);
+				lblNewLabel_3.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_3.setBounds(513, 118, 66, 15);
+				panel.add(lblNewLabel_3);
 	}
 }

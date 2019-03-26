@@ -107,7 +107,7 @@ public class ProfileView extends JPanel {
 				ArrayList<TestMatch> matches = new ArrayList<>();
 				matches.add(new TestMatch("Cerny", 76.6));
 				matches.add(new TestMatch("Cerniette", 65.23));
-				matches.add(new TestMatch("Donald Trump", 96.83));
+				matches.add(new TestMatch("Hillary Clinton", 96.83));
 				
 				mFrame.updateFrame(new MatchGUI(matches, mFrame));
 			}

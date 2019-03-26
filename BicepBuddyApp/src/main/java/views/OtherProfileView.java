@@ -37,15 +37,14 @@ public class OtherProfileView extends JPanel {
 	public OtherProfileView() {
 		// TEMP DATA
 				String fname,lname,email,style,gender,preferedGender,frequency;
-				int age =72;
+				int age = 69;
 			    
-				fname="Donald";
-				lname="Trump";
-				style= "Wall Building";
-				email = "donald@trump.com";
-				gender="Male";
-				preferedGender="Female";
-				style="Wall Building";
+				fname="Hillary";
+				lname="Clinton";
+				style= "Email";
+				email = "redacted";
+				gender="Female";
+				preferedGender="Male";
 				frequency="Every Day";
 				// END TEMP DATA
 
@@ -58,7 +57,7 @@ public class OtherProfileView extends JPanel {
 				JLabel lblPic = new JLabel("");
 				lblPic.setBounds(54, 40, 165, 184);
 				try {
-				    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
+				    BufferedImage myPicture = ImageIO.read(new File("hillary.jpg"));
 				    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 				            Image.SCALE_SMOOTH);
 					lblPic.setIcon(new ImageIcon(scaled));
@@ -68,9 +67,9 @@ public class OtherProfileView extends JPanel {
 			
 				add(lblPic);
 				
-				JLabel lblName2 = new JLabel(fname +" "+lname);
+				JLabel lblName2 = new JLabel("Hillary Clinton's Profile");
 				lblName2.setFont(new Font("Dialog", Font.BOLD, 16));
-				lblName2.setBounds(384, 26, 135, 19);
+				lblName2.setBounds(480, 26, 235, 19);
 				add(lblName2);
 				
 				JButton btnInvite = new JButton("Invite Buddy");
@@ -89,7 +88,7 @@ public class OtherProfileView extends JPanel {
 						panel.setLayout(new FlowLayout());
 						
 						JTextField message = new JTextField();
-						message.setText("You invited Donald Trump to be your buddy!");
+						message.setText("You invited Hillary Clinton to be your buddy!");
 						message.setEditable(false);
 						
 						panel.add(message);
@@ -109,13 +108,13 @@ public class OtherProfileView extends JPanel {
 				add(infoPanel);
 				infoPanel.setLayout(null);
 				
-				JLabel lblFirstname = new JLabel("Donald Trump");
-				lblFirstname.setFont(new Font("Dialog", Font.BOLD, 16));
+				JLabel lblFirstname = new JLabel("Hillary Clinton");
+				lblFirstname.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				lblFirstname.setBounds(10, 224, 165, 28);
 				infoPanel.add(lblFirstname);
 				
 				JLabel lblAge = new JLabel(Integer.toString(age));
-				lblAge.setFont(new Font("Dialog", Font.BOLD, 16));
+				lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				lblAge.setBounds(10, 264, 165, 15);
 				infoPanel.add(lblAge);
 				
@@ -135,7 +134,7 @@ public class OtherProfileView extends JPanel {
 						panel.setLayout(new FlowLayout());
 						
 						JTextField message = new JTextField();
-						message.setText("You blocked Donald Trump.");
+						message.setText("You blocked Hillary Clinton.");
 						message.setEditable(false);
 						
 						panel.add(message);
@@ -154,42 +153,42 @@ public class OtherProfileView extends JPanel {
 				add(panel);
 				
 				JLabel lblWorkoutStyle = new JLabel("Workout Style:");
-				lblWorkoutStyle.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblWorkoutStyle.setFont(new Font("Tahoma", Font.BOLD, 12));
 				lblWorkoutStyle.setBounds(12, 28, 128, 49);
 				panel.add(lblWorkoutStyle);
 				
 				JLabel lblFrequency = new JLabel("Frequency:");
-				lblFrequency.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblFrequency.setFont(new Font("Tahoma", Font.BOLD, 12));
 				lblFrequency.setBounds(12, 101, 95, 49);
 				panel.add(lblFrequency);
 				
 				JLabel lblGender = new JLabel("Gender:");
-				lblGender.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblGender.setFont(new Font("Tahoma", Font.BOLD, 12));
 				lblGender.setBounds(301, 28, 78, 49);
 				panel.add(lblGender);
 				
 				JLabel lblPreferedBuddyGender = new JLabel("Prefered Buddy Gender:");
-				lblPreferedBuddyGender.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblPreferedBuddyGender.setFont(new Font("Tahoma", Font.BOLD, 12));
 				lblPreferedBuddyGender.setBounds(301, 101, 200, 49);
 				panel.add(lblPreferedBuddyGender);
 				
 				JLabel lblNewLabel = new JLabel(style);
-				lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblNewLabel.setBounds(139, 45, 109, 15);
 				panel.add(lblNewLabel);
 				
 				JLabel lblNewLabel_1 = new JLabel(frequency);
-				lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblNewLabel_1.setBounds(139, 118, 109, 15);
 				panel.add(lblNewLabel_1);
 				
 				JLabel lblNewLabel_2 = new JLabel(gender);
-				lblNewLabel_2.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblNewLabel_2.setBounds(513, 45, 66, 15);
 				panel.add(lblNewLabel_2);
 				
 				JLabel lblNewLabel_3 = new JLabel(preferedGender);
-				lblNewLabel_3.setFont(new Font("Dialog", Font.BOLD, 14));
+				lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblNewLabel_3.setBounds(513, 118, 66, 15);
 				panel.add(lblNewLabel_3);
 	}

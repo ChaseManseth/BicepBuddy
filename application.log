@@ -1,5 +1,1 @@
-2019-04-07 22:09:05 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-07 22:09:32 INFO bicepBuddyPackage.UserDB notExists :: Opening CSV DB file to check that user doesn't exist already.
-2019-04-07 22:09:32 INFO bicepBuddyPackage.UserController validateSignup :: User's signup information was accepted.
-2019-04-07 22:09:32 INFO bicepBuddyPackage.Signup$1 mouseClicked :: User will be signed up and created in the DB.
-2019-04-07 22:09:32 INFO bicepBuddyPackage.UserDB addUser :: Adding new user woooow getrekt to DB.
+2019-04-07 22:23:49 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App

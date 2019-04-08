@@ -223,7 +223,7 @@ public class Signup extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				UserController uc = new UserController();
-				boolean isGood;
+				boolean isGood = true;
 				
 				//make sure the necessary fields are not empty.
 				if(firstTextField.getText().isEmpty() || lastTextField.getText().isEmpty() ||
@@ -233,16 +233,17 @@ public class Signup extends JPanel {
 					ErrorGUI eg =  new ErrorGUI("Name, Email, and Password fields must have data in them.");
 					isGood = false;
 				}
-				
-				isGood = uc.validateSignup(emailTextField.getText(), password.getText(), confirmPW.getText(), 
-								  phoneTextField.getText(), ageTextField.getText());
+				if(isGood) {
+					isGood = uc.validateSignup(emailTextField.getText(), password.getText(), confirmPW.getText(), 
+							 phoneTextField.getText(), ageTextField.getText());
+				}
 				int phone = 0, age = 0;
 				try {
 					phone = Integer.parseInt(phoneTextField.getText());
 					age = Integer.parseInt(ageTextField.getText());
 				}
 				catch(Exception ex) {
-					Master.appLogger.info(":: Phone / Age should already be verified.");
+					Master.appLogger.info(":: Phone / Age fields need valid data.");
 				}
 				
 				if(isGood) {

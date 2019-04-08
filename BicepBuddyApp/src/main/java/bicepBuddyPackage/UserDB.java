@@ -27,6 +27,4 @@ public class UserDB {
 	public void setReader(BufferedReader reader) {
 		this.reader = reader;
 	}
-	
-	
 }

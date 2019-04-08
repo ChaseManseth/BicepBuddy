@@ -1,4 +1,4 @@
-package views;
+package bicepBuddyPackage;
 
 import java.awt.Font;
 import java.awt.Rectangle;

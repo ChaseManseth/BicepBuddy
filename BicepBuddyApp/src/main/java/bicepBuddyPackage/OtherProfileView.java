@@ -1,4 +1,4 @@
-package views;
+package bicepBuddyPackage;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

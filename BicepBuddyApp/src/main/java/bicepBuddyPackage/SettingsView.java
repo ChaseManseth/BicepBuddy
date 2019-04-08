@@ -1,4 +1,4 @@
-package views;
+package bicepBuddyPackage;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;

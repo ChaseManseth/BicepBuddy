@@ -1,4 +1,4 @@
-package views;
+package bicepBuddyPackage;
 public class TestMatch {
 	private String matchName;
 	private double matchStr;

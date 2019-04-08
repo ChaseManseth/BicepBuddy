@@ -1,4 +1,4 @@
-package views;
+package bicepBuddyPackage;
 
 import javax.swing.JPanel;
 import java.awt.Rectangle;
@@ -61,23 +61,6 @@ public class Signup extends JPanel {
 		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSubmit.setBounds(30, 430, 115, 32);
 		MaterialUIMovement.add(btnSubmit, MaterialColors.GRAY_600);
-		
-		btnSubmit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mFrame.updateFrame(new ProfileView(mFrame));
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnSubmit.setForeground(Color.white);
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnSubmit.setForeground(Color.black);
-			}
-		});
 		
 		add(btnSubmit);
 		
@@ -233,6 +216,25 @@ public class Signup extends JPanel {
 		confirmPwBkg.setBackground(Color.LIGHT_GRAY);
 		confirmPwBkg.setBounds(200, 405, 150, 23);
 		add(confirmPwBkg);
+		
+		//submission of user data. Data will be submitted to the controller,
+		//which will submit to the CSV (or DB)
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mFrame.updateFrame(new ProfileView(mFrame));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSubmit.setForeground(Color.white);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnSubmit.setForeground(Color.black);
+			}
+		});
 
 	}
 }

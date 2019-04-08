@@ -6,7 +6,12 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -21,6 +26,26 @@ import javax.swing.JMenu;
 import java.awt.Font;
 
 public class Master {
+	
+public final static Logger appLogger = Logger.getLogger(Master.class.getName());
+	
+	static {
+		try {
+			InputStream configFile = new FileInputStream("logger.properties");
+			LogManager.getLogManager().readConfiguration(configFile);
+			configFile.close();
+			
+			appLogger.info(":: Beginning Swing App");
+						
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	private JFrame frame;
 	private JPanel panel;
@@ -137,7 +162,7 @@ public class Master {
 		menuBar.add(mnMatch);
 		
 		
-		panel = new ProfileView(mFrameReference);
+		panel = new Login(mFrameReference);
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);

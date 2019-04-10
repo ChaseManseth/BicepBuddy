@@ -9,19 +9,11 @@ const userRoutes = require('./api/routes/user');
 // Delete this when in production
 const mongodbPW = "uXwozBcr3tFtWnbI";
 // Delete this when in production
-
-const uri = "mongodb+srv://Manseth:' + mongodbPW + '@bicepbuddy-gosub.mongodb.net/test?retryWrites=true";
-const mongoose = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-// mongoose.connect('mongodb+srv://Manseth:' + mongodbPW + '@bicepbuddy-gosub.mongodb.net/test?retryWrites=true',
-//     {
-//         useNewUrlParser: true
-//     }
-// );
+mongoose.connect('mongodb+srv://Manseth:' + mongodbPW + '@bicepbuddy-gosub.mongodb.net/test?retryWrites=true&authSource=admin',
+    {
+        useNewUrlParser: true
+    }
+);
 
 mongoose.Promise = global.Promise;
 

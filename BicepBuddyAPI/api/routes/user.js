@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const checkAuth = require('../middleware/check-auth');
 
 const User = require('../models/user');
 
@@ -10,7 +11,9 @@ const User = require('../models/user');
 const JWT_KEY = "secret";
 // END
 
+// User signup
 router.post('/signup', (req, res, next)=> {
+    // See if account exists
     User.find({email: req.body.email})
         .exec()
         .then(user => {
@@ -19,6 +22,7 @@ router.post('/signup', (req, res, next)=> {
                     message: 'Email already exists'
                 });
             } else {
+                // If not encrypt their password and create a new user
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if(err) {
                         return res.status(500).json({
@@ -51,6 +55,57 @@ router.post('/signup', (req, res, next)=> {
         })
 });
 
+// Login a user
+router.post('/login', (req, res, next) => {
+    User.findOne({email: req.body.email})
+        .exec()
+        .then(user => {
+            // Make sure user can be found
+            if(user != null) {
+                return res.status(401).json({
+                    message: 'Auth failed!'
+                });
+            }
+
+            // Check if password is valid
+            bcrypt.compare(req.body.password, user.password, (err, result) => {
+                if(err) {
+                    return res.status(401).json({
+                        message: 'Auth failed'
+                    });
+                }
+
+                if(result) {
+                    const token = jwt.sign({
+                        email: user.email,
+                        userId: user._id
+                    },
+                    JWT_KEY,
+                    {
+                        expiresIn: '1h'
+                    });
+
+                    return res.status(200).json({
+                        message: 'Auth successful',
+                        token: token
+                    });
+                }
+
+                // Error if login doesn't work
+                return res.status(401).json({
+                    message: 'Auth failed'
+                });
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+// Get a list of all the users
 router.get('/', (req, res, next) => {
     User.find()
         .select('_id firstname lastname email')
@@ -69,6 +124,24 @@ router.get('/', (req, res, next) => {
             };
 
             res.status(200).json(response);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+// Delete User
+// TODO: Make sure that a user can only delete their account
+router.delete("/:userId", checkAuth, (req, res, next) => {
+    User.remove({_id: req.params.userId})
+        .exec()
+        .then(result => {
+            res.status(500).json({
+                messsage: 'User Deleted'
+            });
         })
         .catch(err => {
             console.log(err);

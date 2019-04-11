@@ -13,19 +13,19 @@ const userSchema = mongoose.Schema({
     lastname: {type: String, required:true},
     dateCreated: {type: Date, default: Date.now},
     age: {type: Number},
-    gender: {type: String},
+    gender: {type: String, default: "none"},
     phoneNumber: {type: Number},
-    profilePic: {type: String},
+    profilePic: {type: String, default: "none"},
     //acceptedMatches: [{any: []}], //Once Match is Ready Add it
     //rejectedMatches: [{any: []}],
     //matches: [{any: []}],
-    preferredGender: {type: String},
-    weight: {type: Number},
-    workoutStyle: {type: String},
-    goals: {type: String},
-    experience: {type: Number},
-    timeOfDay: {type: Number},
-    frequency: {type: Number}
+    preferredGender: {type: String, default: "none"},
+    weight: {type: Number, default: 0},
+    workoutStyle: {type: String, default: "none"},
+    goals: {type: String}, default: "none",
+    experience: {type: Number, default: "none"},
+    timeOfDay: {type: Number, default: "none"},
+    frequency: {type: Number, default: "none"}
 });
 
 module.exports = mongoose.model('User', userSchema);

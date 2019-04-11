@@ -9,6 +9,7 @@ const userRoutes = require('./api/routes/user');
 // Delete this when in production
 const mongodbPW = "uXwozBcr3tFtWnbI";
 // Delete this when in production
+
 mongoose.connect('mongodb+srv://Manseth:' + mongodbPW + '@bicepbuddy-gosub.mongodb.net/test?retryWrites=true&authSource=admin',
     {
         useNewUrlParser: true

@@ -166,6 +166,10 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
+		
+		ChatRoom chat = new ChatRoom();
+		frame.addComponentListener(chat);
+		chat.setVisible(true);
 	}
 	
 	public void updateFrame(JPanel j) {

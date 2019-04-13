@@ -237,9 +237,10 @@ public class Signup extends JPanel {
 					isGood = uc.validateSignup(emailTextField.getText(), password.getText(), confirmPW.getText(), 
 							 phoneTextField.getText(), ageTextField.getText());
 				}
-				int phone = 0, age = 0;
+				long phone = 0;
+				int age = 0;
 				try {
-					phone = Integer.parseInt(phoneTextField.getText());
+					phone = Long.parseLong(phoneTextField.getText());
 					age = Integer.parseInt(ageTextField.getText());
 				}
 				catch(Exception ex) {

@@ -56,7 +56,7 @@ public class UserController {
 		}
 		
 		try {
-			Integer.parseInt(phone);
+			Long.parseLong(phone);
 			Integer.parseInt(age);
 		}
 		catch(NumberFormatException e) {
@@ -75,7 +75,7 @@ public class UserController {
 		return udb.login(email, pass);
 	}
 	
-	public void createUser(String fName, String lName, String email, int phone, int age, String gender, String prefGender,
+	public void createUser(String fName, String lName, String email, long phone, int age, String gender, String prefGender,
 			String goals, String frequency, String timeOfDay, String style, String weight, String experience,
 			String password) {
 		//name and email fields must have been filled, but if other fields are empty,

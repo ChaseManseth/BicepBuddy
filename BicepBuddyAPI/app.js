@@ -16,6 +16,9 @@ mongoose.connect('mongodb+srv://Manseth:' + mongodbPW + '@bicepbuddy-gosub.mongo
     }
 );
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));

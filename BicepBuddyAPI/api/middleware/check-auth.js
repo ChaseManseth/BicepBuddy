@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     // Replace the key or string "secret"
     try {
         const token = req.headers.authorization.split(" ")[1];
-        console.log(token);
+        //console.log(token);
         const decoded = jwt.verify(token, "secret");
         req.userData = decoded;
         next();

@@ -3,7 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+// Middleware
 const checkAuth = require('../middleware/check-auth');
+const isUser = require('../middleware/is-user');
 
 const User = require('../models/user');
 
@@ -13,6 +16,7 @@ const JWT_KEY = "secret";
 
 // User signup
 router.post('/signup', (req, res, next)=> {
+    console.log(req.body);
     // See if account exists
     User.find({email: req.body.email})
         .exec()
@@ -57,41 +61,36 @@ router.post('/signup', (req, res, next)=> {
 
 // Login a user
 router.post('/login', (req, res, next) => {
-    User.findOne({email: req.body.email})
+    User.find({email: req.body.email})
         .exec()
         .then(user => {
-            // Make sure user can be found
-            if(user != null) {
+            if(user.length < 1) {
                 return res.status(401).json({
-                    message: 'Auth failed!'
+                    message: 'Auth failed'
                 });
             }
-
-            // Check if password is valid
-            bcrypt.compare(req.body.password, user.password, (err, result) => {
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if(err) {
                     return res.status(401).json({
                         message: 'Auth failed'
                     });
                 }
-
                 if(result) {
                     const token = jwt.sign({
-                        email: user.email,
-                        userId: user._id
-                    },
-                    JWT_KEY,
-                    {
-                        expiresIn: '1h'
-                    });
-
+                        email: user[0].email,
+                        userId: user[0]._id
+                        }, 
+                        JWT_KEY,
+                        {
+                            expiresIn: "1h"
+                        },
+                    );
                     return res.status(200).json({
                         message: 'Auth successful',
                         token: token
                     });
                 }
 
-                // Error if login doesn't work
                 return res.status(401).json({
                     message: 'Auth failed'
                 });
@@ -133,10 +132,15 @@ router.get('/', (req, res, next) => {
         });
 });
 
+// Get a specific user
+router.get('/:userID', (req, res, next) => {
+
+});
+
 // Delete User
-// TODO: Make sure that a user can only delete their account
-router.delete("/:userId", checkAuth, (req, res, next) => {
-    User.remove({_id: req.params.userId})
+// TODO: Make sure Admins can delete others accounts
+router.delete("/:userId", checkAuth, isUser, (req, res, next) => {
+    User.deleteOne({_id: req.params.userId})
         .exec()
         .then(result => {
             res.status(500).json({

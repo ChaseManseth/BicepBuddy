@@ -22,10 +22,10 @@ const userSchema = mongoose.Schema({
     preferredGender: {type: String, default: "none"},
     weight: {type: Number, default: 0},
     workoutStyle: {type: String, default: "none"},
-    goals: {type: String}, default: "none",
-    experience: {type: Number, default: "none"},
-    timeOfDay: {type: Number, default: "none"},
-    frequency: {type: Number, default: "none"}
+    goals: {type: String, default: "none"},
+    experience: {type: Number, default: 0},
+    timeOfDay: {type: Number, default: 0},
+    frequency: {type: Number, default: 0}
 });
 
 module.exports = mongoose.model('User', userSchema);

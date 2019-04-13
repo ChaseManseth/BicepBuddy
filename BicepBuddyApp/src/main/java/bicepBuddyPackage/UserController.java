@@ -6,14 +6,14 @@ package bicepBuddyPackage;
 
 public class UserController {
 	private boolean loggedIn;
-	private User curUser;
+	private static User user = null;
 
-	public User getCurUser() {
-		return curUser;
+	public static User getUser() {
+		return user;
 	}
 
-	public void setCurUser(User curUser) {
-		this.curUser = curUser;
+	public static void setUser(User curUser) {
+		user = curUser;
 	}
 
 	public boolean isLoggedIn() {
@@ -50,7 +50,10 @@ public class UserController {
 	}
 	
 	//TO-DO
-	public boolean validateLogin() {
+	public boolean validateLogin(String email, String pass) {
+		UserDB udb = new UserDB();
+		
+		//going to the gym, will finish this
 		return true;
 	}
 	
@@ -85,11 +88,11 @@ public class UserController {
 			experience = "N/A";
 		}
 		
-		this.curUser = new User(fName, lName, email, phone, age, gender, prefGender, goals,
+		user = new User(fName, lName, email, phone, age, gender, prefGender, goals,
 								frequency, timeOfDay, style, weight, experience);
 		
 		UserDB udb = new UserDB();
-		udb.addUser(curUser, password);
+		udb.addUser(user, password);
 	}
 	
 }

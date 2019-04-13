@@ -71,6 +71,9 @@ public class Login extends JPanel {
 		loginBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				UserController uc = new UserController();
+				
+				
 				mFrame.updateFrame(new ProfileView(mFrame));
 			}
 			

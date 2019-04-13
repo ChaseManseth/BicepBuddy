@@ -15,6 +15,25 @@ public class UserController {
 	public static void setUser(User curUser) {
 		user = curUser;
 	}
+	
+	public static void setUserFromDB(String[] uDetails) {
+		user = new User();
+		Master.appLogger.info(":: Setting the static user object.");
+		
+		user.setEmail(uDetails[0]);
+		user.setfName(uDetails[2]);
+		user.setlName(uDetails[3]);
+		user.setStyle(uDetails[4]);
+		user.setTimeOfDay(uDetails[5]);
+		user.setGender(uDetails[6]);
+		user.setPrefGender(uDetails[7]);
+		user.setFrequency(uDetails[8]);;
+		user.setWeight(uDetails[9]);
+		user.setPhone(Integer.parseInt(uDetails[10]));
+		user.setAge(Integer.parseInt(uDetails[11]));
+		user.setGoals(uDetails[12]);
+		user.setExperience(uDetails[13]);
+	}
 
 	public boolean isLoggedIn() {
 		return loggedIn;
@@ -53,8 +72,7 @@ public class UserController {
 	public boolean validateLogin(String email, String pass) {
 		UserDB udb = new UserDB();
 		
-		//going to the gym, will finish this
-		return true;
+		return udb.login(email, pass);
 	}
 	
 	public void createUser(String fName, String lName, String email, int phone, int age, String gender, String prefGender,

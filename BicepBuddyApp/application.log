@@ -1,1 +1,3 @@
-2019-04-13 12:26:05 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-13 16:16:13 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-13 16:16:20 INFO bicepBuddyPackage.UserController setUserFromDB :: Setting the static user object.
+2019-04-13 16:16:20 INFO bicepBuddyPackage.Login$1 mouseClicked :: User was logged in.

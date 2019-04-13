@@ -72,9 +72,11 @@ public class Login extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				UserController uc = new UserController();
-				
-				
-				mFrame.updateFrame(new ProfileView(mFrame));
+				if(uc.validateLogin(emailTextField.getText(), passwordField.getText())) {
+					Master.appLogger.info(":: User was logged in.");
+					mFrame.loggedInMenuLoad();
+					mFrame.updateFrame(new ProfileView(mFrame));
+				}
 			}
 			
 			@Override

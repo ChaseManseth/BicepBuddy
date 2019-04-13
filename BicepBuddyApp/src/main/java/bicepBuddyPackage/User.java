@@ -33,6 +33,8 @@ public class User {
 		this.weight = weight;
 		this.experience = experience;
 	}
+	public User() {
+	}
 	public String getfName() {
 		return fName;
 	}

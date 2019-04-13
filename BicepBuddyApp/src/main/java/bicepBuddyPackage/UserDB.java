@@ -64,32 +64,34 @@ public class UserDB {
 			Master.appLogger.info(":: Adding new user " + u.getfName() + " " + u.getlName() + " to DB.");
 			String lineContent = "";
 
-			lineContent += u.getEmail();
+			lineContent += u.getEmail(); //0
 			lineContent += ",";
-			lineContent += password;
+			lineContent += password; //1
 			lineContent += ",";
-			lineContent += u.getfName();
+			lineContent += u.getfName(); // 2
 			lineContent += ",";
-			lineContent += u.getlName();
+			lineContent += u.getlName(); // 3
 			lineContent += ",";
-			lineContent += u.getStyle();
+			lineContent += u.getStyle(); // 4
 			lineContent += ",";
-			lineContent += u.getTimeOfDay();
+			lineContent += u.getTimeOfDay(); // 5
 			lineContent += ",";
 			
-			lineContent += u.getGender();
+			lineContent += u.getGender(); // 6
 			lineContent += ",";
-			lineContent += u.getPrefGender();
+			lineContent += u.getPrefGender(); // 7
 			lineContent += ",";
-			lineContent += u.getFrequency();
+			lineContent += u.getFrequency(); // 8
 			lineContent += ",";
-			lineContent += u.getWeight();
+			lineContent += u.getWeight(); // 9
 			lineContent += ",";
-			lineContent += u.getPhone();
+			lineContent += u.getPhone(); // 10
 			lineContent += ",";
-			lineContent += u.getAge();
+			lineContent += u.getAge(); // 11
 			lineContent += ",";
-			lineContent += u.getGoals();
+			lineContent += u.getGoals(); // 12
+			lineContent += ",";
+			lineContent += u.getExperience(); // 13
 			
 			buf.write(lineContent);
 			buf.newLine();
@@ -99,5 +101,30 @@ public class UserDB {
 		catch(Exception e) {
 			Master.appLogger.warning(":: File could not be opened.");
 		}
+	}
+
+	public boolean login(String email, String pass) {
+		try {
+			BufferedReader buf = new BufferedReader(new FileReader(new File(filename)));
+			String lineContent;
+			
+			while((lineContent = buf.readLine()) != null) {
+				String[] split = lineContent.split(",");
+				
+				if(split[0].contentEquals(email)) {
+					if(split[1].contentEquals(pass)) {
+						UserController.setUserFromDB(split);
+						return true;
+					}
+					Master.appLogger.info(":: User's password was invalid.");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
+		return false;
 	}
 }

@@ -31,13 +31,13 @@ public class ProfileView extends JPanel {
 
 	public ProfileView(Master mFrame) {
 		
-		// TEMP DATA
+		// USER DATA
 		String fname,lname,style,info,email;
-		int age =72;
-		fname="Donald";
-		lname="Trump";
-		style= "Wall Building";
-		email = "donald@trump.com";
+		int age = UserController.getUser().getAge();
+		fname = UserController.getUser().getfName();
+		lname = UserController.getUser().getlName();
+		style = UserController.getUser().getStyle();
+		email = UserController.getUser().getEmail();
 		// END TEMP DATA
 
 		//frame = new JFrame();
@@ -48,14 +48,14 @@ public class ProfileView extends JPanel {
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(54, 40, 165, 184);
-		try {
+		/*try {
 		    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
 		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 		            Image.SCALE_SMOOTH);
 			lblPic.setIcon(new ImageIcon(scaled));
         } catch (IOException e) {
     	    e.printStackTrace();
-        }
+        }*/
 	
 		add(lblPic);
 		
@@ -139,7 +139,7 @@ public class ProfileView extends JPanel {
 		lblEmail.setBounds(10, 264, 165, 15);
 		infoPanel.add(lblEmail);
 		
-		JLabel lblFirstname = new JLabel("Donald Trump");
+		JLabel lblFirstname = new JLabel(fname);
 		lblFirstname.setBounds(10, 224, 165, 28);
 		infoPanel.add(lblFirstname);
 		

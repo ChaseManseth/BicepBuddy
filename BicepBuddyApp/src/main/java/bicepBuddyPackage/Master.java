@@ -111,6 +111,31 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 		});
 		menuBar.add(signUp);
 		
+		
+		panel = new Login(mFrameReference);
+		frame.getContentPane().add(panel);
+
+		frame.setVisible(true);
+	}
+	
+	public void updateFrame(JPanel j) {
+		panel.setVisible(false);
+		panel = j;
+		panel.setVisible(true);
+		// remove the current JPanel so that our frame doesn't have a billion
+		// panels in it when we switch views a bunch
+		frame.remove(frame.getContentPane());
+		
+		frame.getContentPane().add(panel);
+		frame.setVisible(true);
+	}
+	
+	public void loggedInMenuLoad() {
+		Master mFrameReference = this;
+		//start the master frame with only the signup and login menu bars 
+		//available. When the user logs in, open up the other menu bar options.
+		JMenuBar menuBar = frame.getJMenuBar();
+		
 		JMenu mnProfile = new JMenu("Profile");
 		mnProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		mnProfile.addMouseListener(new MouseAdapter() {
@@ -161,22 +186,51 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 		});
 		menuBar.add(mnMatch);
 		
-		
-		panel = new Login(mFrameReference);
-		frame.getContentPane().add(panel);
-
-		frame.setVisible(true);
+		JMenu logout = new JMenu("Log Out");
+		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		logout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading logout");
+				UserController.setUser(null);
+				
+				Master.appLogger.info(":: User logged out.");
+				loggedOutMenuLoad();
+			}
+		});
+		menuBar.add(logout);
 	}
 	
-	public void updateFrame(JPanel j) {
-		panel.setVisible(false);
-		panel = j;
-		panel.setVisible(true);
-		// remove the current JPanel so that our frame doesn't have a billion
-		// panels in it when we switch views a bunch
-		frame.remove(frame.getContentPane());
+	public void loggedOutMenuLoad() {
+		Master mFrameReference = this;
 		
-		frame.getContentPane().add(panel);
-		frame.setVisible(true);
+		JMenuBar menuBar = new JMenuBar();
+		this.frame.setJMenuBar(null);
+		this.frame.setJMenuBar(menuBar);
+		
+		JMenu login = new JMenu("Login");
+		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading Login");
+				updateFrame(new Login(mFrameReference));
+			}
+		});
+		menuBar.add(login);
+		
+		JMenu signUp = new JMenu("Sign Up");
+		signUp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		signUp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Loading signUp");
+				updateFrame(new Signup(mFrameReference));
+			}
+		});
+		menuBar.add(signUp);
+		
+		
+		updateFrame(new Login(mFrameReference));
 	}
 }

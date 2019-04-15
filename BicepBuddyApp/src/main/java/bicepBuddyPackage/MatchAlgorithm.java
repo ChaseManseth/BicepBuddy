@@ -3,10 +3,15 @@ package bicepBuddyPackage;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class MatchAlgorithm {
+	//Priority % value
+	private static int criticalValue = 100; // Pass or fail
+	private static int importantValue = 40;
+	private static int prefValue = 30;
+	private static int minorValue = 20;
+	private static int qualityValue = 10;
 	//Priority enum
+	//Use .ordinal for rank 1-5
 	enum Priority{
 		Critical, //Pass or fail
 		Important,
@@ -14,12 +19,6 @@ public class MatchAlgorithm {
 		Minor,
 		Quality
 	};
-	//Priority % value
-	private static int criticalValue = 100; // Pass or fail
-	private static int importantValue = 40;
-	private static int prefValue = 30;
-	private static int minorValue = 20;
-	private static int qualityValue = 10;
 	//Used for calculating priorities
 	private static Priority prefGenderPriority = Priority.Critical;
 	private static Priority weightPriority = Priority.Preference;
@@ -29,6 +28,14 @@ public class MatchAlgorithm {
 	private static Priority goalPriority = Priority.Quality;
 	private static Priority expPriority = Priority.Preference;
 	private static Priority agePriority = Priority.Minor;
+	//String arrays for preferences
+	public static String GENDERS[] = {"Male","Female"};
+	public static String WEIGHTCLASS[] = {"100-","100-125","125-150","150-175","175-200","200-225","225-250","250-275","275-300","300+"};
+	public static String STYLES[] = {"Cardio","Weights","Power Lifting","Body Building"};
+	public static String TIMES[] = {"Early Morning","Morning","Afternoon","Evening"};
+	public static String FREQUENCIES[] = {"Once","3 Times","5 Times","Every Day","Multiple Times"};
+	public static String GOALS[] = {"Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
+	public static String EXPERIENCE[] = {"None","Little","Moderate","Regular","Experienced"};
 	
 	
 	public MatchAlgorithm() {

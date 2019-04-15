@@ -32,14 +32,6 @@ public class Signup extends JPanel {
 	private JTextField phoneTextField;
 	private JTextField ageTextField;
 	
-	private String genders[]= {"","Male", "Female"};
-	private String prefGenders[] = {"Any","Male", "Female"};
-	private String goals[] = {"","Lost Weight","Gain Weight","Get Stronger","Coast"};
-	private String frequencies[]= {"","Once a week", "3 times a week", "Everyday"};
-	private String preferedTimes[]= {"","Early Morning", "Morning", "Lunch","Afternoon","Early Evening", "Night"};
-	private String workoutStyles[] = {"","General Fitness", "Cardio", "Powerlifting","Crossfit", "Bodybuilding", "Weight Loss"};
-	private String weight[] = {"","0-100","100-125","125-150","150-175","175-200","200+"};
-	private String experience[] = {"","None","Little","Average","Experienced"};
 	private JPasswordField password;
 	private JPasswordField confirmPW;
 
@@ -64,42 +56,42 @@ public class Signup extends JPanel {
 		
 		add(btnSubmit);
 		
-		JComboBox genderCombo = new JComboBox(genders);
+		JComboBox genderCombo = new JComboBox(MatchAlgorithm.GENDERS);
 		genderCombo.setBackground(Color.LIGHT_GRAY);
 		genderCombo.setBounds(455, 240, 150, 25);
 		add(genderCombo);
 		
-		JComboBox preferedGenderCombo = new JComboBox(prefGenders);
+		JComboBox preferedGenderCombo = new JComboBox(MatchAlgorithm.GENDERS);
 		preferedGenderCombo.setBackground(Color.LIGHT_GRAY);
 		preferedGenderCombo.setBounds(455, 320, 150, 25);
 		add(preferedGenderCombo);
 		
-		JComboBox goalsCombo = new JComboBox(goals);
+		JComboBox goalsCombo = new JComboBox(MatchAlgorithm.GOALS);
 		goalsCombo.setBackground(Color.LIGHT_GRAY);
 		goalsCombo.setBounds(455, 400, 150, 25);
 		add(goalsCombo);
 		
-		JComboBox frequencyCombo = new JComboBox(frequencies);
+		JComboBox frequencyCombo = new JComboBox(MatchAlgorithm.FREQUENCIES);
 		frequencyCombo.setBackground(Color.LIGHT_GRAY);
 		frequencyCombo.setBounds(700, 80, 150, 25);
 		add(frequencyCombo);
 		
-		JComboBox timeOfDayCombo = new JComboBox(preferedTimes);
+		JComboBox timeOfDayCombo = new JComboBox(MatchAlgorithm.TIMES);
 		timeOfDayCombo.setBackground(Color.LIGHT_GRAY);
 		timeOfDayCombo.setBounds(700, 160, 150, 25);
 		add(timeOfDayCombo);
 		
-		JComboBox styleCombo = new JComboBox(workoutStyles);
+		JComboBox styleCombo = new JComboBox(MatchAlgorithm.STYLES);
 		styleCombo.setBackground(Color.LIGHT_GRAY);
 		styleCombo.setBounds(700, 240, 150, 25);
 		add(styleCombo);
 		
-		JComboBox weightCombo = new JComboBox(weight);
+		JComboBox weightCombo = new JComboBox(MatchAlgorithm.WEIGHTCLASS);
 		weightCombo.setBackground(Color.LIGHT_GRAY);
 		weightCombo.setBounds(700, 320, 150, 25);
 		add(weightCombo);
 		
-		JComboBox experienceCombo = new JComboBox(experience);
+		JComboBox experienceCombo = new JComboBox(MatchAlgorithm.EXPERIENCE);
 		experienceCombo.setBackground(Color.LIGHT_GRAY);
 		experienceCombo.setBounds(700, 400, 150, 25);
 		add(experienceCombo);

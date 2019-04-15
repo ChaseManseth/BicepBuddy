@@ -1,7 +1,9 @@
 package bicepBuddyPackage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -44,6 +46,11 @@ public class MatchAlgorithm {
 	
 	public List<Match> matchUser(User user){
 		List<User> users = possibleMatches(user);
+		Map<User,Integer[]> ratios = new HashMap<User,Integer[]>();
+		
+		for (User u : users) {
+			ratios.put(u, calculateRatios(user,u));
+		}
 		
 		return new ArrayList<Match>();
 	}
@@ -52,5 +59,10 @@ public class MatchAlgorithm {
 	public List<User> possibleMatches(User user){
 		
 		return new ArrayList<User>();
+	}
+	
+	public Integer[] calculateRatios(User user, User other) {
+		Integer data[] = {1,2,3};
+		return data;
 	}
 }

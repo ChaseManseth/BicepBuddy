@@ -26,17 +26,17 @@ import javax.swing.JMenu;
 import java.awt.Font;
 
 public class Master {
-	
+
 public final static Logger appLogger = Logger.getLogger(Master.class.getName());
-	
+
 	static {
 		try {
 			InputStream configFile = new FileInputStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(configFile);
 			configFile.close();
-			
+
 			appLogger.info(":: Beginning Swing App");
-						
+
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,16 +79,16 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	 */
 	private void initialize() {
 		Master mFrameReference = this;
-		
+
 		frame = new JFrame();
 		frame.setTitle("Bicep Buddy v0.1");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		JMenu login = new JMenu("Login");
 		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		login.addMouseListener(new MouseAdapter() {
@@ -99,7 +99,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(login);
-		
+
 		JMenu signUp = new JMenu("Sign Up");
 		signUp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		signUp.addMouseListener(new MouseAdapter() {
@@ -110,14 +110,14 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(signUp);
-		
-		
+
+
 		panel = new Login(mFrameReference);
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
 	}
-	
+
 	public void updateFrame(JPanel j) {
 		panel.setVisible(false);
 		panel = j;
@@ -125,17 +125,17 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 		// remove the current JPanel so that our frame doesn't have a billion
 		// panels in it when we switch views a bunch
 		frame.remove(frame.getContentPane());
-		
+
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 	}
-	
+
 	public void loggedInMenuLoad() {
 		Master mFrameReference = this;
-		//start the master frame with only the signup and login menu bars 
+		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
 		JMenuBar menuBar = frame.getJMenuBar();
-		
+
 		JMenu mnProfile = new JMenu("Profile");
 		mnProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		mnProfile.addMouseListener(new MouseAdapter() {
@@ -146,7 +146,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(mnProfile);
-		
+
 		JMenu mnOtherUserProfile = new JMenu("Other User Profile");
 		mnOtherUserProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		mnOtherUserProfile.addMouseListener(new MouseAdapter() {
@@ -157,7 +157,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(mnOtherUserProfile);
-		
+
 		JMenu settings = new JMenu("Settings");
 		settings.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		settings.addMouseListener(new MouseAdapter() {
@@ -168,24 +168,24 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(settings);
-		
+
 		JMenu mnMatch = new JMenu("Match");
 		mnMatch.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		mnMatch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading match view");
-				
+
 				ArrayList<TestMatch> matches = new ArrayList<>();
 				matches.add(new TestMatch("Cerny", 76.6));
 				matches.add(new TestMatch("Cerniette", 65.23));
 				matches.add(new TestMatch("Hillary Clinton", 96.83));
-				
+
 				updateFrame(new MatchGUI(matches, mFrameReference));
 			}
 		});
 		menuBar.add(mnMatch);
-		
+
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		logout.addMouseListener(new MouseAdapter() {
@@ -193,21 +193,21 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading logout");
 				UserController.setUser(null);
-				
+
 				Master.appLogger.info(":: User logged out.");
 				loggedOutMenuLoad();
 			}
 		});
 		menuBar.add(logout);
 	}
-	
+
 	public void loggedOutMenuLoad() {
 		Master mFrameReference = this;
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		this.frame.setJMenuBar(null);
 		this.frame.setJMenuBar(menuBar);
-		
+
 		JMenu login = new JMenu("Login");
 		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		login.addMouseListener(new MouseAdapter() {
@@ -218,7 +218,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(login);
-		
+
 		JMenu signUp = new JMenu("Sign Up");
 		signUp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		signUp.addMouseListener(new MouseAdapter() {
@@ -229,8 +229,8 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			}
 		});
 		menuBar.add(signUp);
-		
-		
+
+
 		updateFrame(new Login(mFrameReference));
 	}
 }

@@ -4,8 +4,8 @@ public class User {
 	private String fName;
 	private String lName;
 	private String email;
-	private long phone;
-	private int age;
+	private String phone;
+	private String age;
 	private String gender;
 	private String prefGender;
 	private String goals;
@@ -16,7 +16,7 @@ public class User {
 	private String experience;
 	
 	
-	public User(String fName, String lName, String email, long phone, int age, String gender, String prefGender,
+	public User(String fName, String lName, String email, String phone, String age, String gender, String prefGender,
 			String goals, String frequency, String timeOfDay, String style, String weight, String experience) {
 		super();
 		this.fName = fName;
@@ -53,16 +53,16 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public String getGender() {

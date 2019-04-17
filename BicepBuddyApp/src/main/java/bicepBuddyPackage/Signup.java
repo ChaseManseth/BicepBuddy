@@ -38,7 +38,7 @@ public class Signup extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Signup(Master mFrame) {
+	public Signup() {
 		setBounds(new Rectangle(0, 0, 900, 500));
 		setLayout(null);
 		
@@ -215,39 +215,15 @@ public class Signup extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				UserController uc = new UserController();
-				boolean isGood = true;
-				
-				//make sure the necessary fields are not empty.
-				if(firstTextField.getText().isEmpty() || lastTextField.getText().isEmpty() ||
-				   emailTextField.getText().isEmpty() || password.getText().isEmpty() ||
-				   confirmPW.getText().isEmpty()) {
-					Master.appLogger.info(":: User tried to submit their signup with necessary fields empty.");
-					ErrorGUI eg =  new ErrorGUI("Name, Email, and Password fields must have data in them.");
-					isGood = false;
-				}
-				if(isGood) {
-					isGood = uc.validateSignup(emailTextField.getText(), password.getText(), confirmPW.getText(), 
-							 phoneTextField.getText(), ageTextField.getText());
-				}
-				long phone = 0;
-				int age = 0;
-				try {
-					phone = Long.parseLong(phoneTextField.getText());
-					age = Integer.parseInt(ageTextField.getText());
-				}
-				catch(Exception ex) {
-					Master.appLogger.info(":: Phone / Age fields need valid data.");
-				}
-				
-				if(isGood) {
-					Master.appLogger.info(":: User will be signed up and created in the DB.");
-					uc.createUser(firstTextField.getText(), lastTextField.getText(), emailTextField.getText(), 
-							phone, age, (String)genderCombo.getSelectedItem(), (String)preferedGenderCombo.getSelectedItem(), 
-							(String)goalsCombo.getSelectedItem(), (String)frequencyCombo.getSelectedItem(), 
-							(String)timeOfDayCombo.getSelectedItem(), (String)styleCombo.getSelectedItem(), 
-							(String)weightCombo.getSelectedItem(), (String)experienceCombo.getSelectedItem(), password.getText());
-					mFrame.updateFrame(new ProfileView(mFrame));
-				}
+				uc.validateSignup(firstTextField.getText(), lastTextField.getText(), 
+						 emailTextField.getText(), 
+						 phoneTextField.getText(), ageTextField.getText(), 
+						 (String)genderCombo.getSelectedItem(), (String)preferedGenderCombo.getSelectedItem(), 
+						 (String)goalsCombo.getSelectedItem(), (String)frequencyCombo.getSelectedItem(), 
+						 (String)timeOfDayCombo.getSelectedItem(), (String)styleCombo.getSelectedItem(), 
+						 (String)weightCombo.getSelectedItem(), 
+						 (String)experienceCombo.getSelectedItem(), password.getText(),
+						 confirmPW.getText());
 			}
 			
 			@Override

@@ -56,7 +56,7 @@ public class UserDB {
 		return true;
 	}
 	
-	//TO-DO: STORE HASHES OF PASSWORD, NOT PLAINTEXT
+	//TODO: STORE HASHES OF PASSWORD, NOT PLAINTEXT
 	public void addUser(User u, String password) {
 		try {
 			BufferedWriter buf = new BufferedWriter(new FileWriter(filename, true));

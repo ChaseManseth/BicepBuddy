@@ -98,11 +98,8 @@ public class SettingsView extends JPanel {
 		txtLastName.setBounds(64, 356, 169, 19);
 		add(txtLastName);
 		txtLastName.setColumns(10);
-		String workoutStyles[] = {"General Fitness", "Cardio", "Powerlifting","Crossfit", "Bodybuilding", "Weight Loss"};
-		String preferedTimes[]= {"Early Morning", "Morning", "Lunch","Afternoon","Early Evening", "Night"};
-		String genders[]= {"Male", "Female"};
-		String frequencies[]= {"Once a week", "3 times a week", "Everyday"};
-		JComboBox comboBox = new JComboBox(workoutStyles);
+
+		JComboBox comboBox = new JComboBox(MatchAlgorithm.STYLES);
 		comboBox.setBounds(584, 62, 203, 32);
 		add(comboBox);
 		
@@ -110,7 +107,7 @@ public class SettingsView extends JPanel {
 		lblWorkoutStyle.setBounds(406, 71, 107, 15);
 		add(lblWorkoutStyle);
 		
-		JComboBox comboBox_1 = new JComboBox(preferedTimes);
+		JComboBox comboBox_1 = new JComboBox(MatchAlgorithm.TIMES);
 		comboBox_1.setBounds(584, 141, 201, 32);
 		add(comboBox_1);
 		
@@ -118,7 +115,7 @@ public class SettingsView extends JPanel {
 		label.setBounds(406, 150, 107, 15);
 		add(label);
 		
-		JComboBox comboBox_2 = new JComboBox(genders);
+		JComboBox comboBox_2 = new JComboBox(MatchAlgorithm.GENDERS);
 		comboBox_2.setBounds(584, 213, 203, 32);
 		add(comboBox_2);
 		
@@ -126,7 +123,7 @@ public class SettingsView extends JPanel {
 		label_1.setBounds(406, 222, 107, 15);
 		add(label_1);
 		
-		JComboBox comboBox_3 = new JComboBox(genders);
+		JComboBox comboBox_3 = new JComboBox(MatchAlgorithm.GENDERS);
 		comboBox_3.setBounds(584, 277, 203, 32);
 		add(comboBox_3);
 		
@@ -134,7 +131,7 @@ public class SettingsView extends JPanel {
 		label_2.setBounds(406, 286, 107, 15);
 		add(label_2);
 		
-		JComboBox comboBox_4 = new JComboBox(frequencies);
+		JComboBox comboBox_4 = new JComboBox(MatchAlgorithm.FREQUENCIES);
 		comboBox_4.setBounds(584, 349, 203, 32);
 		add(comboBox_4);
 		

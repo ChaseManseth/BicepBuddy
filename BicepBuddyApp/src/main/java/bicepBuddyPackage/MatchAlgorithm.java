@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.lang.Math;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -14,6 +13,10 @@ public class MatchAlgorithm {
 	private static int prefValue = 30;
 	private static int minorValue = 20;
 	private static int qualityValue = 10;
+	//Number of priorities
+	public static int PRIORITYCOUNT = 5;
+	//Number of matches returned
+	public static int MATCHESRETURNED = 10;
 	//Priority enum
 	//Use .ordinal for rank 1-5
 	enum Priority{
@@ -48,33 +51,85 @@ public class MatchAlgorithm {
 	
 	public List<Match> matchUser(User user){
 		List<User> users = possibleMatches(user);
-		Map<User,List<Integer>> ratios = new HashMap<>();
+		Map<User,Integer> ratios = new HashMap<>();
 		//Calculating ratios for all possible matches
 		for (User u : users) {
 			ratios.put(u, calculateRatios(user,u));
 		}
+		
+		//Sort by ratios
+		//Check if match already exists
+		//Take top MATCHESRETURNED
 		
 		return new ArrayList<Match>();
 	}
 	
 	//Get all possible users who fit the Priority 1 Category
 	public List<User> possibleMatches(User user){
+		//TO-DO
 		
 		return new ArrayList<User>();
 	}
 	
-	public List<Integer> calculateRatios(User user, User other) {
+	public Integer calculateRatios(User user, User other) {
 		List<List<Integer>> ratios = new ArrayList<>(5);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < PRIORITYCOUNT; i++) {
 			ratios.add(new ArrayList<Integer>());
 		}
+		//Pref Gender ratio
 		ratios.get(prefGenderPriority.ordinal()).add(new Integer(calculateRatio(
 						GENDERS.length,
 						Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
 						Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
-		return new ArrayList<Integer>();
+		//Weight ratio
+		ratios.get(weightPriority.ordinal()).add(new Integer(calculateRatio(
+				WEIGHTCLASS.length,
+				Arrays.asList(WEIGHTCLASS).indexOf(user.getWeight()),
+				Arrays.asList(WEIGHTCLASS).indexOf(other.getWeight()))));
+		//Style ratio
+		ratios.get(stylePriority.ordinal()).add(new Integer(calculateRatio(
+				STYLES.length,
+				Arrays.asList(STYLES).indexOf(user.getStyle()),
+				Arrays.asList(STYLES).indexOf(other.getStyle()))));
+		//Times ratio
+		ratios.get(timePriority.ordinal()).add(new Integer(calculateRatio(
+				TIMES.length,
+				Arrays.asList(TIMES).indexOf(user.getTimeOfDay()),
+				Arrays.asList(TIMES).indexOf(other.getTimeOfDay()))));
+		//Frequency ratio
+		ratios.get(freqPriority.ordinal()).add(new Integer(calculateRatio(
+				FREQUENCIES.length,
+				Arrays.asList(FREQUENCIES).indexOf(user.getFrequency()),
+				Arrays.asList(FREQUENCIES).indexOf(other.getFrequency()))));
+		//Goals ratio
+		ratios.get(goalPriority.ordinal()).add(new Integer(calculateRatio(
+				GOALS.length,
+				Arrays.asList(GOALS).indexOf(user.getGoals()),
+				Arrays.asList(GOALS).indexOf(other.getGoals()))));
+		//Experience ratio
+		ratios.get(expPriority.ordinal()).add(new Integer(calculateRatio(
+				EXPERIENCE.length,
+				Arrays.asList(EXPERIENCE).indexOf(user.getExperience()),
+				Arrays.asList(EXPERIENCE).indexOf(other.getExperience()))));
+		
+		List<Integer> finals = new ArrayList<>();
+		for (int i = 0; i < PRIORITYCOUNT; i++) {
+			int sum = 0;
+			for (Integer c : ratios.get(i)) {
+				sum += c;
+			}
+			finals.add(sum / ratios.get(i).size());
+		}
+		
+		Integer result = 0;
+		for (Integer i : finals) {
+			result += i;
+		}
+		
+		result /= PRIORITYCOUNT;
+		return result;
 	}
-	
+	//Calculates ratio between 2 users
 	public Integer calculateRatio(Integer length,Integer userOptIdx,Integer otherOptIdx) {
 		Integer data = userOptIdx - otherOptIdx;
 		if (data < 0) {

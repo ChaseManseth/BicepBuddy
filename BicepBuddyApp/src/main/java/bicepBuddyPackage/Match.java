@@ -6,11 +6,15 @@ import java.util.Date;
 public class Match {
 	public static Integer KILLTIMEALLOTTED = 2;
 	
+	public static enum Status{
+		Accepted,
+		Rejected,
+		Idle
+	}
+	
 	private User user;
 	private User matched;
-	private Boolean accepted;
-	private Boolean rejected;
-	private Boolean idle;
+	private Status status;
 	private Date dateCreated;
 	private Date killDate;
 	private double strength;
@@ -18,9 +22,7 @@ public class Match {
 	public Match(User user,User matched,double strength){
 		this.user = user;
 		this.matched = matched;
-		this.accepted = false;
-		this.rejected = false;
-		this.idle = true;
+		this.status = Status.Idle;
 		this.dateCreated = new Date();
 		this.strength = strength;
 		//Adding hours to kill date
@@ -29,32 +31,18 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
-	//Used to update a match to the accepted status
-	public void accepted() {
-		accepted = true;
-		rejected = false;
-		idle = false;
+	//Used to determine status
+	public void accept() {
+		status = Status.Accepted;
 	}
-	public Boolean isAccepted() {
-		return accepted;
+	public void reject() {
+		status = Status.Rejected;
 	}
-	//Used to update a match to the rejected status
-	public void rejected() {
-		accepted = false;
-		rejected = true;
-		idle = false;
-	}
-	public Boolean isRejected() {
-		return rejected;
-	}
-	//Used to update a match to the idle status
 	public void idle() {
-		accepted = false;
-		rejected = false;
-		idle = true;
+		status = Status.Idle;
 	}
-	public Boolean isIdle() {
-		return idle;
+	public Status getStatus() {
+		return status;
 	}
 	
 	//Getters and setters
@@ -69,24 +57,6 @@ public class Match {
 	}
 	public void setMatched(User matched) {
 		this.matched = matched;
-	}
-	public Boolean getAccepted() {
-		return accepted;
-	}
-	public void setAccepted(Boolean accepted) {
-		this.accepted = accepted;
-	}
-	public Boolean getRejected() {
-		return rejected;
-	}
-	public void setRejected(Boolean rejected) {
-		this.rejected = rejected;
-	}
-	public Boolean getIdle() {
-		return idle;
-	}
-	public void setIdle(Boolean idle) {
-		this.idle = idle;
 	}
 	public Date getDateCreated() {
 		return dateCreated;
@@ -109,8 +79,7 @@ public class Match {
 	
 	@Override
 	public String toString() {
-		return "Match [user=" + user + ", matched=" + matched + ", accepted=" + accepted + ", rejected=" + rejected
-				+ ", idle=" + idle + ", dateCreated=" + dateCreated + ", killDate=" + killDate + ", strength="
+		return "Match [user=" + user + ", matched=" + matched + ", status=" + status + ", dateCreated=" + dateCreated + ", killDate=" + killDate + ", strength="
 				+ strength + "]";
 	}
 	

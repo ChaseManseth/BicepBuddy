@@ -17,13 +17,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DMView extends JFrame implements ComponentListener {
 	
-	private JSplitPane split;
 	private JScrollPane leftScroll;
 	private JScrollPane messageScroll;
 	private JPanel profileBar;
@@ -31,6 +28,7 @@ public class DMView extends JFrame implements ComponentListener {
 	private JPanel messagePanel;
 	// private List<Jabel> matchIcons;
 	private JTextField messageField;
+	private static DMView view = null;
 	
 	public DMView() {
 		setSize(new Dimension(450, 600));
@@ -96,6 +94,15 @@ public class DMView extends JFrame implements ComponentListener {
 		getContentPane().add(leftScroll);
 		getContentPane().add(rightPanel);
 
+		view = this;
+		
+	}
+	
+	public static DMView getInstance() {
+		if(view == null) {
+			view = new DMView();
+		}
+		return view;
 	}
 	
 	public void updateMessages(List<Message> messages) {

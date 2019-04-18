@@ -1,5 +1,7 @@
 package bicepBuddyPackage;
 
+import java.util.List;
+
 public class User {
 	private String fName;
 	private String lName;
@@ -14,6 +16,9 @@ public class User {
 	private String style;
 	private String weight;
 	private String experience;
+	private List<Match> accepted;
+	private List<Match> rejected;
+	private List<Match> idle;
 	
 	
 	public User(String fName, String lName, String email, long phone, int age, String gender, String prefGender,
@@ -34,6 +39,24 @@ public class User {
 		this.experience = experience;
 	}
 	public User() {
+	}
+	public List<Match> getAccepted() {
+		return accepted;
+	}
+	public void setAccepted(List<Match> accepted) {
+		this.accepted = accepted;
+	}
+	public List<Match> getRejected() {
+		return rejected;
+	}
+	public void setRejected(List<Match> rejected) {
+		this.rejected = rejected;
+	}
+	public List<Match> getIdle() {
+		return idle;
+	}
+	public void setIdle(List<Match> idle) {
+		this.idle = idle;
 	}
 	public String getfName() {
 		return fName;
@@ -112,6 +135,113 @@ public class User {
 	}
 	public void setExperience(String experience) {
 		this.experience = experience;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accepted == null) ? 0 : accepted.hashCode());
+		result = prime * result + age;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((experience == null) ? 0 : experience.hashCode());
+		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
+		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((goals == null) ? 0 : goals.hashCode());
+		result = prime * result + ((idle == null) ? 0 : idle.hashCode());
+		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
+		result = prime * result + (int) (phone ^ (phone >>> 32));
+		result = prime * result + ((prefGender == null) ? 0 : prefGender.hashCode());
+		result = prime * result + ((rejected == null) ? 0 : rejected.hashCode());
+		result = prime * result + ((style == null) ? 0 : style.hashCode());
+		result = prime * result + ((timeOfDay == null) ? 0 : timeOfDay.hashCode());
+		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (accepted == null) {
+			if (other.accepted != null)
+				return false;
+		} else if (!accepted.equals(other.accepted))
+			return false;
+		if (age != other.age)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (experience == null) {
+			if (other.experience != null)
+				return false;
+		} else if (!experience.equals(other.experience))
+			return false;
+		if (fName == null) {
+			if (other.fName != null)
+				return false;
+		} else if (!fName.equals(other.fName))
+			return false;
+		if (frequency == null) {
+			if (other.frequency != null)
+				return false;
+		} else if (!frequency.equals(other.frequency))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (goals == null) {
+			if (other.goals != null)
+				return false;
+		} else if (!goals.equals(other.goals))
+			return false;
+		if (idle == null) {
+			if (other.idle != null)
+				return false;
+		} else if (!idle.equals(other.idle))
+			return false;
+		if (lName == null) {
+			if (other.lName != null)
+				return false;
+		} else if (!lName.equals(other.lName))
+			return false;
+		if (phone != other.phone)
+			return false;
+		if (prefGender == null) {
+			if (other.prefGender != null)
+				return false;
+		} else if (!prefGender.equals(other.prefGender))
+			return false;
+		if (rejected == null) {
+			if (other.rejected != null)
+				return false;
+		} else if (!rejected.equals(other.rejected))
+			return false;
+		if (style == null) {
+			if (other.style != null)
+				return false;
+		} else if (!style.equals(other.style))
+			return false;
+		if (timeOfDay == null) {
+			if (other.timeOfDay != null)
+				return false;
+		} else if (!timeOfDay.equals(other.timeOfDay))
+			return false;
+		if (weight == null) {
+			if (other.weight != null)
+				return false;
+		} else if (!weight.equals(other.weight))
+			return false;
+		return true;
 	}
 	
 	

@@ -31,6 +31,22 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
+	//Used for creating temporary matches for checking existance
+	public Match(User user,User other) {
+		this.user = other;
+		this.matched = other;
+		status = Status.Idle;
+		dateCreated = null;
+		killDate = null;
+		strength = 0;
+	}
+	//Used for comparing to see if matches exist in user arrays
+	public Boolean checkExist(Match match) {
+		if (match.user == this.user && match.matched == this.matched) {
+			return true;
+		}
+		return false;
+	}
 	//Used to determine status
 	public void accept() {
 		status = Status.Accepted;
@@ -82,5 +98,56 @@ public class Match {
 		return "Match [user=" + user + ", matched=" + matched + ", status=" + status + ", dateCreated=" + dateCreated + ", killDate=" + killDate + ", strength="
 				+ strength + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
+		result = prime * result + ((killDate == null) ? 0 : killDate.hashCode());
+		result = prime * result + ((matched == null) ? 0 : matched.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(strength);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Match other = (Match) obj;
+		if (dateCreated == null) {
+			if (other.dateCreated != null)
+				return false;
+		} else if (!dateCreated.equals(other.dateCreated))
+			return false;
+		if (killDate == null) {
+			if (other.killDate != null)
+				return false;
+		} else if (!killDate.equals(other.killDate))
+			return false;
+		if (matched == null) {
+			if (other.matched != null)
+				return false;
+		} else if (!matched.equals(other.matched))
+			return false;
+		if (status != other.status)
+			return false;
+		if (Double.doubleToLongBits(strength) != Double.doubleToLongBits(other.strength))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

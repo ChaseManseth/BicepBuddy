@@ -2,6 +2,8 @@ package bicepBuddyPackage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,7 @@ public class MatchAlgorithm {
 	public static String FREQUENCIES[] = {"Once","3 Times","5 Times","Every Day","Multiple Times"};
 	public static String GOALS[] = {"Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
 	public static String EXPERIENCE[] = {"None","Little","Moderate","Regular","Experienced"};
+	//public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
 	
 	
 	public MatchAlgorithm() {
@@ -58,7 +61,46 @@ public class MatchAlgorithm {
 		}
 		
 		//Sort by ratios
+		//Placing in list to sort
+		List<Map.Entry<User, Integer> > list = new ArrayList<Map.Entry<User, Integer> >(ratios.entrySet()); 
+        //Sort the list 
+        Collections.sort(list, new Comparator<Map.Entry<User, Integer> >() { 
+            public int compare(Map.Entry<User, Integer> o1, Map.Entry<User, Integer> o2) 
+            { 
+                return (o1.getValue()).compareTo(o2.getValue()); 
+            } 
+        }); 
+        //Replace data in ratios
+        ratios.clear();
+        for (Map.Entry<User, Integer> m : list) {
+        	ratios.put(m.getKey(), m.getValue());
+        }
+		
 		//Check if match already exists
+        for (Map.Entry<User, Integer> m : ratios.entrySet()) {
+        	Match temp = new Match(user,m.getKey());
+        	Boolean exists = false;
+        	//Checking accepted, rejected, and idle arrays
+        	for (Match n : user.getAccepted()) {
+        		if (n.checkExist(temp)) {
+        			exists = true;
+        		}
+        	}
+        	for (Match n : user.getRejected()) {
+        		if (n.checkExist(temp)) {
+        			exists = true;
+        		}
+        	}
+        	for (Match n : user.getIdle()) {
+        		if (n.checkExist(temp)) {
+        			exists = true;
+        		}
+        	}
+        	if (exists) {
+        		ratios.remove(m.getKey());
+        	}
+        }
+        
 		//Take top MATCHESRETURNED
 		
 		return new ArrayList<Match>();
@@ -111,7 +153,7 @@ public class MatchAlgorithm {
 				EXPERIENCE.length,
 				Arrays.asList(EXPERIENCE).indexOf(user.getExperience()),
 				Arrays.asList(EXPERIENCE).indexOf(other.getExperience()))));
-		
+
 		List<Integer> finals = new ArrayList<>();
 		for (int i = 0; i < PRIORITYCOUNT; i++) {
 			int sum = 0;

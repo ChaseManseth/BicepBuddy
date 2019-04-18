@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -96,14 +97,28 @@ public class MatchAlgorithm {
         			exists = true;
         		}
         	}
+        	for (Match n : user.getWaiting()) {
+        		if (n.checkExist(temp)) {
+        			exists = true;
+        		}
+        	}
         	if (exists) {
         		ratios.remove(m.getKey());
         	}
         }
         
 		//Take top MATCHESRETURNED
+        List<Match> matches = new ArrayList<>();
+        Integer counter = 0;
+        for (Map.Entry<User, Integer> m : ratios.entrySet()) {
+        	matches.add(new Match(user,m.getKey(),m.getValue()));
+        	counter++;
+        	if (counter > MATCHESRETURNED) {
+        		break;
+        	}
+        }
 		
-		return new ArrayList<Match>();
+		return matches;
 	}
 	
 	//Get all possible users who fit the Priority 1 Category

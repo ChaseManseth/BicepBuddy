@@ -19,6 +19,7 @@ public class User {
 	private List<Match> accepted;
 	private List<Match> rejected;
 	private List<Match> idle;
+	private List<Match> waiting;
 	
 	
 	public User(String fName, String lName, String email, String phone, String age, String gender, String prefGender,
@@ -57,6 +58,12 @@ public class User {
 	}
 	public void setIdle(List<Match> idle) {
 		this.idle = idle;
+	}
+	public List<Match> getWaiting() {
+		return waiting;
+	}
+	public void setWaiting(List<Match> waiting) {
+		this.waiting = waiting;
 	}
 	public String getfName() {
 		return fName;
@@ -141,7 +148,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((accepted == null) ? 0 : accepted.hashCode());
-		result = prime * result + age;
+		result = prime * result + ((age == null) ? 0 : age.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((experience == null) ? 0 : experience.hashCode());
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
@@ -150,11 +157,12 @@ public class User {
 		result = prime * result + ((goals == null) ? 0 : goals.hashCode());
 		result = prime * result + ((idle == null) ? 0 : idle.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
-		result = prime * result + (int) (phone ^ (phone >>> 32));
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((prefGender == null) ? 0 : prefGender.hashCode());
 		result = prime * result + ((rejected == null) ? 0 : rejected.hashCode());
 		result = prime * result + ((style == null) ? 0 : style.hashCode());
 		result = prime * result + ((timeOfDay == null) ? 0 : timeOfDay.hashCode());
+		result = prime * result + ((waiting == null) ? 0 : waiting.hashCode());
 		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		return result;
 	}
@@ -172,7 +180,10 @@ public class User {
 				return false;
 		} else if (!accepted.equals(other.accepted))
 			return false;
-		if (age != other.age)
+		if (age == null) {
+			if (other.age != null)
+				return false;
+		} else if (!age.equals(other.age))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -214,7 +225,10 @@ public class User {
 				return false;
 		} else if (!lName.equals(other.lName))
 			return false;
-		if (phone != other.phone)
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
 			return false;
 		if (prefGender == null) {
 			if (other.prefGender != null)
@@ -236,6 +250,11 @@ public class User {
 				return false;
 		} else if (!timeOfDay.equals(other.timeOfDay))
 			return false;
+		if (waiting == null) {
+			if (other.waiting != null)
+				return false;
+		} else if (!waiting.equals(other.waiting))
+			return false;
 		if (weight == null) {
 			if (other.weight != null)
 				return false;
@@ -243,6 +262,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
 	
 }

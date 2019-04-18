@@ -23,7 +23,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(Master mFrame) {
+	public Login() {
 		
 		setBounds(new Rectangle(0, 0, 900, 500));
 		setLayout(null);
@@ -72,11 +72,7 @@ public class Login extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				UserController uc = new UserController();
-				if(uc.validateLogin(emailTextField.getText(), passwordField.getText())) {
-					Master.appLogger.info(":: User was logged in.");
-					mFrame.loggedInMenuLoad();
-					mFrame.updateFrame(new ProfileView(mFrame));
-				}
+				uc.validateLogin(emailTextField.getText(), passwordField.getText());
 			}
 			
 			@Override
@@ -105,7 +101,7 @@ public class Login extends JPanel {
 		btnSignUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mFrame.updateFrame(new Signup(mFrame));
+				Master.getInstance().updateFrame(new Signup());
 			}
 			
 			@Override

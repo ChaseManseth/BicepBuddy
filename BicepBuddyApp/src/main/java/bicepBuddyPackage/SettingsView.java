@@ -26,7 +26,6 @@ import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 public class SettingsView extends JPanel {
 
-	private JFrame frame;
 	private JTextField txtFirstName;
 	private JTextField txtEmail;
 	private JTextField txtLastName;
@@ -36,7 +35,7 @@ public class SettingsView extends JPanel {
 	/**
 	 * Create the application.
 	 */
-	public SettingsView(Master mFrame) {
+	public SettingsView() {
 		setBounds(100, 100, 900, 560);
 		setLayout(null);
 		

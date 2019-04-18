@@ -28,7 +28,9 @@ import java.awt.Font;
 public class Master {
 
 public final static Logger appLogger = Logger.getLogger(Master.class.getName());
+private static Master master = null;
 
+	//create static logger (singleton)
 	static {
 		try {
 			InputStream configFile = new FileInputStream("logger.properties");
@@ -46,9 +48,20 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 		}
 	}
 
+	
 
 	private JFrame frame;
 	private JPanel panel;
+	
+	//singleton Master
+	public static Master getInstance() {
+		if(master == null) {
+			appLogger.info(":: Loading Master Frame");
+			master = new Master();
+		}
+		
+		return master;
+	}
 
 	/**
 	 * Launch the application.
@@ -58,8 +71,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new MaterialLookAndFeel());
-					Master window = new Master();
-					window.frame.setVisible(true);
+					Master.getInstance().frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,10 +90,9 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		Master mFrameReference = this;
 
 		frame = new JFrame();
-		frame.setTitle("Bicep Buddy v0.1");
+		frame.setTitle("Bicep Buddy v0.3");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,7 +106,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Login");
-				updateFrame(new Login(mFrameReference));
+				updateFrame(new Login());
 			}
 		});
 		menuBar.add(login);
@@ -106,13 +117,13 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Loading signUp");
-				updateFrame(new Signup(mFrameReference));
+				updateFrame(new Signup());
 			}
 		});
 		menuBar.add(signUp);
 
 
-		panel = new Login(mFrameReference);
+		panel = new Login();
 		frame.getContentPane().add(panel);
 
 		frame.setVisible(true);
@@ -131,10 +142,11 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	}
 
 	public void loggedInMenuLoad() {
-		Master mFrameReference = this;
 		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
-		JMenuBar menuBar = frame.getJMenuBar();
+		JMenuBar menuBar = new JMenuBar();
+		this.frame.setJMenuBar(null);
+		this.frame.setJMenuBar(menuBar);
 
 		JMenu mnProfile = new JMenu("Profile");
 		mnProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -142,7 +154,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Profile");
-				updateFrame(new ProfileView(mFrameReference));
+				updateFrame(new ProfileView());
 			}
 		});
 		menuBar.add(mnProfile);
@@ -164,7 +176,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Settings");
-				updateFrame(new SettingsView(mFrameReference));
+				updateFrame(new SettingsView());
 			}
 		});
 		menuBar.add(settings);
@@ -181,10 +193,23 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 				matches.add(new TestMatch("Cerniette", 65.23));
 				matches.add(new TestMatch("Hillary Clinton", 96.83));
 
-				updateFrame(new MatchGUI(matches, mFrameReference));
+				updateFrame(new MatchGUI(matches));
 			}
 		});
 		menuBar.add(mnMatch);
+		
+		JMenu chat = new JMenu("Chat");
+		chat.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		chat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Master.appLogger.info(":: Loading DM View...");
+				DMView view = DMView.getInstance();
+				view.setVisible(true);
+				frame.addComponentListener(view);
+			}
+		});
+		menuBar.add(chat);
 
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -202,8 +227,6 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	}
 
 	public void loggedOutMenuLoad() {
-		Master mFrameReference = this;
-
 		JMenuBar menuBar = new JMenuBar();
 		this.frame.setJMenuBar(null);
 		this.frame.setJMenuBar(menuBar);
@@ -214,7 +237,7 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading Login");
-				updateFrame(new Login(mFrameReference));
+				updateFrame(new Login());
 			}
 		});
 		menuBar.add(login);
@@ -225,12 +248,12 @@ public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Loading signUp");
-				updateFrame(new Signup(mFrameReference));
+				updateFrame(new Signup());
 			}
 		});
 		menuBar.add(signUp);
 
 
-		updateFrame(new Login(mFrameReference));
+		updateFrame(new Login());
 	}
 }

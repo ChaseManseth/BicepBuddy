@@ -29,16 +29,16 @@ import java.awt.Color;
 
 public class ProfileView extends JPanel {
 
-	public ProfileView(Master mFrame) {
+	public ProfileView() {
 		
 		// USER DATA
-		String fname,lname,style,info,email;
-		int age = UserController.getUser().getAge();
+		String fname,lname,style,info,email, age;
+		age = UserController.getUser().getAge();
 		fname = UserController.getUser().getfName();
 		lname = UserController.getUser().getlName();
 		style = UserController.getUser().getStyle();
 		email = UserController.getUser().getEmail();
-		// END TEMP DATA
+		// END USER DATA
 
 		//frame = new JFrame();
 		setBounds(0, 0, 900, 500);
@@ -77,7 +77,7 @@ public class ProfileView extends JPanel {
 		editProfileBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mFrame.updateFrame(new SettingsView(mFrame));
+				Master.getInstance().updateFrame(new SettingsView());
 			}
 			
 			@Override
@@ -109,7 +109,7 @@ public class ProfileView extends JPanel {
 				matches.add(new TestMatch("Cerniette", 65.23));
 				matches.add(new TestMatch("Hillary Clinton", 96.83));
 				
-				mFrame.updateFrame(new MatchGUI(matches, mFrame));
+				Master.getInstance().updateFrame(new MatchGUI(matches));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -143,7 +143,7 @@ public class ProfileView extends JPanel {
 		lblFirstname.setBounds(10, 224, 165, 28);
 		infoPanel.add(lblFirstname);
 		
-		JLabel lblAge = new JLabel(Integer.toString(age));
+		JLabel lblAge = new JLabel(age);
 		lblAge.setBounds(10, 300, 165, 15);
 		infoPanel.add(lblAge);
 	}

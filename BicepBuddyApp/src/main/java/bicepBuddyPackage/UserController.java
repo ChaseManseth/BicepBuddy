@@ -16,6 +16,7 @@ public class UserController {
 		user = curUser;
 	}
 	
+	//TODO
 	public static void setUserFromDB(String[] uDetails) {
 		user = new User();
 		Master.appLogger.info(":: Setting the static user object.");
@@ -29,8 +30,8 @@ public class UserController {
 		user.setPrefGender(uDetails[7]);
 		user.setFrequency(uDetails[8]);;
 		user.setWeight(uDetails[9]);
-		user.setPhone(Integer.parseInt(uDetails[10]));
-		user.setAge(Integer.parseInt(uDetails[11]));
+		user.setPhone(uDetails[10]);
+		user.setAge(uDetails[11]);
 		user.setGoals(uDetails[12]);
 		user.setExperience(uDetails[13]);
 	}
@@ -43,41 +44,63 @@ public class UserController {
 		this.loggedIn = loggedIn;
 	}
 	
-	public boolean validateSignup(String email, String pass, String confPass, String phone, String age) {
+	//TODO
+	public void validateSignup(String fName, String lname, String email, String phone, String age, 
+			String gender, String prefGender, String goals, String freq, 
+			String timeOfDay, String style, String weight, String exp, String pass,
+			String confPass) {
+		if(fName.isEmpty() || lname.isEmpty() || email.isEmpty() || pass.isEmpty() ||
+		   confPass.isEmpty()) {
+			ErrorGUI eg = new ErrorGUI("Required fields: first name, last name, email, password");
+			return;
+		}
+		
 		UserDB dbInstance = new UserDB();
 		if(!dbInstance.notExists(email)) {
 			ErrorGUI eg = new ErrorGUI("This email exists in the system already.");
-			return false;
+			return;
 		}
 		
 		if(!pass.contentEquals(confPass)) {
 			ErrorGUI eg = new ErrorGUI("Make the passwords match to create account.");
-			return false;
+			return;
 		}
 		
 		try {
-			Long.parseLong(phone);
-			Integer.parseInt(age);
+			if(!phone.isEmpty()) {
+				Long.parseLong(phone);
+			}
+			if(!age.isEmpty()) {
+				Integer.parseInt(age);
+			}
 		}
 		catch(NumberFormatException e) {
 			ErrorGUI eg = new ErrorGUI("Phone and/or Age must be integer values ONLY.");
-			return false;
+			return;
 		}
-		
+		//we got here because their stuff was accepted
 		Master.appLogger.info(":: User's signup information was accepted.");
-		return true;
-	}
-	
-	//TO-DO
-	public boolean validateLogin(String email, String pass) {
-		UserDB udb = new UserDB();
 		
-		return udb.login(email, pass);
+		createUser(fName, lname, email, phone, age, gender, prefGender, goals,
+				   freq, timeOfDay, style, weight, exp, pass);
+		
+		Master.getInstance().updateFrame(new ProfileView());
+		//Master.getInstance().loggedInMenuLoad();
 	}
 	
-	public void createUser(String fName, String lName, String email, long phone, int age, String gender, String prefGender,
-			String goals, String frequency, String timeOfDay, String style, String weight, String experience,
-			String password) {
+	//TODO
+	public void validateLogin(String email, String pass) {
+		UserDB udb = new UserDB();
+		if(udb.login(email, pass)) {
+			Master.appLogger.info(":: User was logged in.");
+			Master.getInstance().loggedInMenuLoad();
+			Master.getInstance().updateFrame(new ProfileView());
+		}
+	}
+	
+	public void createUser(String fName, String lName, String email, String phone, String age, 
+			String gender, String prefGender, String goals, String frequency, 
+			String timeOfDay, String style, String weight, String experience, String password) {
 		//name and email fields must have been filled, but if other fields are empty,
 		//then set them to N/A.
 		
@@ -104,6 +127,12 @@ public class UserController {
 		}
 		if(experience.isEmpty()) {
 			experience = "N/A";
+		}
+		if(phone.isEmpty()) {
+			phone = "N/A";
+		}
+		if(age.isEmpty()) {
+			age = "N/A";
 		}
 		
 		user = new User(fName, lName, email, phone, age, gender, prefGender, goals,

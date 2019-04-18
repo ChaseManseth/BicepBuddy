@@ -197,6 +197,19 @@ private static Master master = null;
 			}
 		});
 		menuBar.add(mnMatch);
+		
+		JMenu chat = new JMenu("Chat");
+		chat.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		chat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Master.appLogger.info(":: Loading DM View...");
+				DMView view = DMView.getInstance();
+				view.setVisible(true);
+				frame.addComponentListener(view);
+			}
+		});
+		menuBar.add(chat);
 
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));

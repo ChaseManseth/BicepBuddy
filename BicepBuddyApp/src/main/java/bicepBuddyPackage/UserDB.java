@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Random;
 
 /*
  * class will interact with the database.
@@ -28,6 +29,54 @@ public class UserDB {
 
 	public void setReader(BufferedReader reader) {
 		this.reader = reader;
+	}
+	
+	public int getNumUsers() {
+		int numUsers = 0;
+		try {
+			reader = new BufferedReader(new FileReader(new File(filename)));
+			String line;
+			Master.appLogger.info(":: Opening CSV DB file to count number of users.");
+			while ((line = reader.readLine()) != null) {
+				numUsers++;
+			}
+			
+			reader.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return numUsers;
+	}
+	
+	public User testerGetRandomUser() {
+		Random r = new Random();
+		int userToGet = r.nextInt(getNumUsers() + 1);
+		
+		try {
+			reader = new BufferedReader(new FileReader(new File(filename)));
+			String line;
+			Master.appLogger.info(":: Opening CSV DB file to find random user.");
+			int curUser = 0;
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split(",");
+				
+				//if this user in the db is the one that
+				//random selection gave us, return it.
+				if(curUser == userToGet) {
+					return new User(split);
+				}
+				curUser++;
+			}
+			
+			reader.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	public boolean notExists(String email) {

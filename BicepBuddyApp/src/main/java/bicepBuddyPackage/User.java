@@ -23,6 +23,22 @@ public class User {
 	private List<Match> idle;
 	private List<Match> waiting;
 	
+	public User(String[] uDetails) {		
+		setEmail(uDetails[0]);
+		setfName(uDetails[2]);
+		setlName(uDetails[3]);
+		setStyle(uDetails[4]);
+		setTimeOfDay(uDetails[5]);
+		setGender(uDetails[6]);
+		setPrefGender(uDetails[7]);
+		setFrequency(uDetails[8]);;
+		setWeight(uDetails[9]);
+		setPhone(uDetails[10]);
+		setAge(uDetails[11]);
+		setGoals(uDetails[12]);
+		setExperience(uDetails[13]);
+	}
+	
 	
 	public User(String fName, String lName, String email, String phone, String age, String gender, String prefGender,
 			String goals, String frequency, String timeOfDay, String style, String weight, String experience) {

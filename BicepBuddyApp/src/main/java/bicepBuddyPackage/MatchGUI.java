@@ -249,7 +249,8 @@ public class MatchGUI extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Master.getInstance().updateFrame(new OtherProfileView());
+				UserDB udb = new UserDB();
+				Master.getInstance().updateFrame(new OtherProfileView(udb.testerGetRandomUser()));
 			}
 		});
 		

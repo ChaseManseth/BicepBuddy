@@ -165,7 +165,8 @@ private static Master master = null;
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading OtherProfile");
-				updateFrame(new OtherProfileView());
+				UserDB udb = new UserDB();
+				updateFrame(new OtherProfileView(udb.testerGetRandomUser()));
 			}
 		});
 		menuBar.add(mnOtherUserProfile);

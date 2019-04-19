@@ -1,5 +1,17 @@
 package bicepBuddyPackage;
 
+import java.nio.charset.StandardCharsets;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 /*
  * User Controller will be able to speak with user and the "DB".
  */
@@ -7,6 +19,7 @@ package bicepBuddyPackage;
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
+	private String baseUrl = "http://localhost:3000/user/";
 
 	public static User getUser() {
 		return user;
@@ -84,8 +97,6 @@ public class UserController {
 		createUser(fName, lname, email, phone, age, gender, prefGender, goals,
 				   freq, timeOfDay, style, weight, exp, pass);
 		
-		Master.getInstance().updateFrame(new ProfileView());
-		//Master.getInstance().loggedInMenuLoad();
 	}
 	
 	//TODO
@@ -98,6 +109,7 @@ public class UserController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void createUser(String fName, String lName, String email, String phone, String age, 
 			String gender, String prefGender, String goals, String frequency, 
 			String timeOfDay, String style, String weight, String experience, String password) {
@@ -135,11 +147,78 @@ public class UserController {
 			age = "N/A";
 		}
 		
-		user = new User(fName, lName, email, phone, age, gender, prefGender, goals,
-								frequency, timeOfDay, style, weight, experience);
+		// Create the JSON to post to the API
+		JSONObject signUpJSON = new JSONObject();
+		signUpJSON.put("firstname", fName);
+		signUpJSON.put("lastname", lName);
+		signUpJSON.put("email", email);
+		signUpJSON.put("password", password);
+		signUpJSON.put("phoneNumber", phone);
+		signUpJSON.put("age", age);
+		signUpJSON.put("gender", gender);
+		signUpJSON.put("preferredGender", prefGender);
+		signUpJSON.put("goals", goals);
+		signUpJSON.put("frequency", frequency);
+		signUpJSON.put("timeOfDay", timeOfDay);
+		signUpJSON.put("workoutStyle", style);
+		signUpJSON.put("weight", weight);
+		signUpJSON.put("experience", experience);
 		
-		UserDB udb = new UserDB();
-		udb.addUser(user, password);
+		// Open the post response
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost(baseUrl + "signup");
+		
+		try {
+			// Add JSON to the body and headers indicating type
+			StringEntity params = new StringEntity(signUpJSON.toJSONString());
+		    request.addHeader("content-type", "application/json");
+		    request.setEntity(params);
+			
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+		    
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+		    
+		    JSONParser parse = new JSONParser();
+		    JSONObject o = (JSONObject) parse.parse(json);
+		    
+//		    System.out.println(o.toJSONString());
+		    
+		    // Successful Signup
+		    if(response.getStatusLine().getStatusCode() == 201) {
+		    	// Add the user Object Info
+		    	user = new User(fName, lName, email, phone, age, gender, prefGender, goals,
+						frequency, timeOfDay, style, weight, experience);
+
+		    	// Add it to the DB
+				UserDB udb = new UserDB();
+				udb.addUser(user, password);
+				
+				// Add the ID to the new User as well as the JWT
+				JSONObject userJSON = (JSONObject) o.get("user");
+				user.setId((String) userJSON.get("_id"));
+				user.setJwt((String) o.get("token"));
+				
+				// Update the frame and Profile plus the Menu BAR
+				Master.getInstance().updateFrame(new ProfileView());
+				Master.getInstance().loggedInMenuLoad();
+				
+		    } else {
+		    	ErrorGUI eg = new ErrorGUI((String) o.get("message"));
+				return;
+		    }
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+
+		} finally {
+			// Close or stop the connection
+		    request.releaseConnection();
+		}
+		
+		
 	}
 	
 }

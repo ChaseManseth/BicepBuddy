@@ -3,6 +3,8 @@ package bicepBuddyPackage;
 import java.util.List;
 
 public class User {
+	private String id;
+	private String jwt;
 	private String fName;
 	private String lName;
 	private String email;
@@ -39,10 +41,30 @@ public class User {
 		this.weight = weight;
 		this.experience = experience;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", jwt=" + jwt + ", fName=" + fName + ", lName=" + lName + ", email=" + email
+				+ ", phone=" + phone + ", age=" + age + ", gender=" + gender + ", prefGender=" + prefGender + ", goals="
+				+ goals + ", frequency=" + frequency + ", timeOfDay=" + timeOfDay + ", style=" + style + ", weight="
+				+ weight + ", experience=" + experience + ", accepted=" + accepted + ", rejected=" + rejected
+				+ ", idle=" + idle + ", waiting=" + waiting + "]";
+	}
 	public User() {
 	}
 	public List<Match> getAccepted() {
 		return accepted;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getJwt() {
+		return jwt;
+	}
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
 	}
 	public void setAccepted(List<Match> accepted) {
 		this.accepted = accepted;
@@ -155,7 +177,9 @@ public class User {
 		result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((goals == null) ? 0 : goals.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idle == null) ? 0 : idle.hashCode());
+		result = prime * result + ((jwt == null) ? 0 : jwt.hashCode());
 		result = prime * result + ((lName == null) ? 0 : lName.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((prefGender == null) ? 0 : prefGender.hashCode());
@@ -215,10 +239,20 @@ public class User {
 				return false;
 		} else if (!goals.equals(other.goals))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (idle == null) {
 			if (other.idle != null)
 				return false;
 		} else if (!idle.equals(other.idle))
+			return false;
+		if (jwt == null) {
+			if (other.jwt != null)
+				return false;
+		} else if (!jwt.equals(other.jwt))
 			return false;
 		if (lName == null) {
 			if (other.lName != null)

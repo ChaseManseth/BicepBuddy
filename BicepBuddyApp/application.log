@@ -1,4 +1,5 @@
-2019-04-17 16:02:44 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-17 16:02:46 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-17 16:02:51 INFO bicepBuddyPackage.UserController setUserFromDB :: Setting the static user object.
-2019-04-17 16:02:51 INFO bicepBuddyPackage.UserController validateLogin :: User was logged in.
+2019-04-19 15:38:01 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-19 15:38:01 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-19 15:38:15 INFO bicepBuddyPackage.UserDB notExists :: Opening CSV DB file to check that user doesn't exist already.
+2019-04-19 15:38:15 INFO bicepBuddyPackage.UserController validateSignup :: User's signup information was accepted.
+2019-04-19 15:38:18 INFO bicepBuddyPackage.UserDB addUser :: Adding new user New User to DB.

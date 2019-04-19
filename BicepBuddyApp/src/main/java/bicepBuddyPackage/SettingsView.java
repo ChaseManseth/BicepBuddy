@@ -1,10 +1,13 @@
 package bicepBuddyPackage;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -171,6 +174,61 @@ public class SettingsView extends JPanel {
 		JButton deleter = new JButton("Delete My Profile");
 		deleter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JFrame confirm = new JFrame();
+				JPanel p = new JPanel();
+				p.setLayout(new BorderLayout());
+				confirm.add(p);
+				
+				JTextField uSure = new JTextField();
+				uSure.setText("Are you sure you want to delete your account?");
+				uSure.setEditable(false);
+				
+				JButton yesBtn = new JButton();
+				yesBtn.setText("YES");
+				yesBtn.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						yesBtn.setBackground(Color.RED);
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						yesBtn.setBackground(new JButton().getBackground());
+					}
+				});
+				
+				JButton noBtn = new JButton();
+				noBtn.setText("NO ");
+				noBtn.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						noBtn.setBackground(Color.GREEN);
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						noBtn.setBackground(new JButton().getBackground());
+					}
+				});
+				
+				
+				p.add(uSure, BorderLayout.PAGE_START);
+				p.add(yesBtn, BorderLayout.LINE_START);
+				p.add(noBtn, BorderLayout.LINE_END);
+				
+				confirm.setBounds(100, 100, 500, 200);
+				confirm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				confirm.setVisible(true);
 			}
 		});
 		deleter.setBounds(64, 479, 203, 25);

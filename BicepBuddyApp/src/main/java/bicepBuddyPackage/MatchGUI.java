@@ -34,6 +34,7 @@ public class MatchGUI extends JPanel{
 		matchName.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		matchName.setHorizontalAlignment(SwingConstants.CENTER);
 		matchName.setEditable(false);
+		//*************************************************
 		matchName.setText(matches.get(curMatchShown).getMatchName());
 		matchName.setBounds(109, 13, 682, 70);
 		this.add(matchName);
@@ -42,6 +43,7 @@ public class MatchGUI extends JPanel{
 		//text field to handle the strength of the match
 		matchStrength = new JTextField();
 		matchStrength.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		//*******************************************************************
 		matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 		matchStrength.setHorizontalAlignment(SwingConstants.CENTER);
 		matchStrength.setEditable(false);
@@ -73,6 +75,7 @@ public class MatchGUI extends JPanel{
 					//we can go back in the list, otherwise, if we are at first
 					//match, we can't go back in the list.
 					curMatchShown--;
+					//******************************************************
 					matchName.setText(matches.get(curMatchShown).getMatchName());
 					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 				}
@@ -105,6 +108,7 @@ public class MatchGUI extends JPanel{
 					//we can go forward in the list, otherwise, if we are at last
 					//item, we can't show any more matches
 					curMatchShown++;
+					//*************************************************************
 					matchName.setText(matches.get(curMatchShown).getMatchName());
 					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 				}
@@ -152,6 +156,7 @@ public class MatchGUI extends JPanel{
 				panel.add(acc);
 				frame.getContentPane().add(panel);
 				
+				//**************************************************
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
 					curMatchShown--;
@@ -163,6 +168,7 @@ public class MatchGUI extends JPanel{
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
+					//*************************************************************
 					matchName.setText(matches.get(curMatchShown).getMatchName());
 					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 				}
@@ -209,7 +215,7 @@ public class MatchGUI extends JPanel{
 				
 				panel.add(rej);
 				frame.getContentPane().add(panel);
-				
+				//***************************************************
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
 					curMatchShown--;
@@ -220,6 +226,7 @@ public class MatchGUI extends JPanel{
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
+					//********************************************************
 					matchName.setText(matches.get(curMatchShown).getMatchName());
 					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 				}
@@ -235,7 +242,8 @@ public class MatchGUI extends JPanel{
 		
 		userProfileButton.setBackground(new Color(108,117,125));
 		userProfileButton.setForeground(new Color(255,255,255));
-		
+		//**********************************************************************************************
+		//show profile of user
 		userProfileButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

@@ -126,6 +126,7 @@ public class MatchAlgorithm {
 		return new ArrayList<User>();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Integer calculateRatios(User user, User other) {
 		List<List<Integer>> ratios = new ArrayList<>(5);
 		for (int i = 0; i < PRIORITYCOUNT; i++) {
@@ -133,9 +134,9 @@ public class MatchAlgorithm {
 		}
 		//Pref Gender ratio
 		ratios.get(prefGenderPriority.ordinal()).add(new Integer(calculateRatio(
-						GENDERS.length,
-						Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
-						Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
+				GENDERS.length,
+				Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
+				Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
 		//Weight ratio
 		ratios.get(weightPriority.ordinal()).add(new Integer(calculateRatio(
 				WEIGHTCLASS.length,
@@ -166,6 +167,7 @@ public class MatchAlgorithm {
 				EXPERIENCE.length,
 				Arrays.asList(EXPERIENCE).indexOf(user.getExperience()),
 				Arrays.asList(EXPERIENCE).indexOf(other.getExperience()))));
+		//Age ratio
 
 		List<Integer> finals = new ArrayList<>();
 		for (int i = 0; i < PRIORITYCOUNT; i++) {

@@ -49,9 +49,7 @@ public class MatchAlgorithm {
 	//public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
 	
 	
-	public MatchAlgorithm() {
-		
-	}
+	public MatchAlgorithm() {}
 	
 	public List<Match> matchUser(User user){
 		List<User> users = possibleMatches(user);

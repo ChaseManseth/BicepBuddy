@@ -39,13 +39,13 @@ public class MatchAlgorithm {
 	private static Priority expPriority = Priority.Preference;
 	private static Priority agePriority = Priority.Minor;
 	//String arrays for preferences
-	public static String GENDERS[] = {"Male","Female"};
-	public static String WEIGHTCLASS[] = {"<100","100-125","125-150","150-175","175-200","200-225","225-250","250-275","275-300","300+"};
-	public static String STYLES[] = {"Cardio","Weights","Power Lifting","Body Building"};
-	public static String TIMES[] = {"Early Morning","Morning","Afternoon","Evening"};
-	public static String FREQUENCIES[] = {"Once","3 Times","5 Times","Every Day","Multiple Times"};
-	public static String GOALS[] = {"Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
-	public static String EXPERIENCE[] = {"None","Little","Moderate","Regular","Experienced"};
+	public static String GENDERS[] = {"N/A", "Male","Female"};
+	public static String WEIGHTCLASS[] = {"N/A", "<100","100-125","125-150","150-175","175-200","200-225","225-250","250-275","275-300","300+"};
+	public static String STYLES[] = {"N/A", "Cardio","Weights","Power Lifting","Body Building"};
+	public static String TIMES[] = {"N/A", "Early Morning","Morning","Afternoon","Evening"};
+	public static String FREQUENCIES[] = {"N/A", "Once","3 Times","5 Times","Every Day","Multiple Times"};
+	public static String GOALS[] = {"N/A", "Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
+	public static String EXPERIENCE[] = {"N/A", "None","Little","Moderate","Regular","Experienced"};
 	//public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
 	
 	
@@ -126,7 +126,6 @@ public class MatchAlgorithm {
 		return new ArrayList<User>();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public Integer calculateRatios(User user, User other) {
 		List<List<Integer>> ratios = new ArrayList<>(5);
 		for (int i = 0; i < PRIORITYCOUNT; i++) {
@@ -134,9 +133,9 @@ public class MatchAlgorithm {
 		}
 		//Pref Gender ratio
 		ratios.get(prefGenderPriority.ordinal()).add(new Integer(calculateRatio(
-				GENDERS.length,
-				Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
-				Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
+						GENDERS.length,
+						Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
+						Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
 		//Weight ratio
 		ratios.get(weightPriority.ordinal()).add(new Integer(calculateRatio(
 				WEIGHTCLASS.length,
@@ -167,7 +166,6 @@ public class MatchAlgorithm {
 				EXPERIENCE.length,
 				Arrays.asList(EXPERIENCE).indexOf(user.getExperience()),
 				Arrays.asList(EXPERIENCE).indexOf(other.getExperience()))));
-		//Age ratio
 
 		List<Integer> finals = new ArrayList<>();
 		for (int i = 0; i < PRIORITYCOUNT; i++) {

@@ -36,19 +36,20 @@ public class SettingsView extends JPanel {
 	 * Create the application.
 	 */
 	public SettingsView() {
+		User u = UserController.getUser();
 		setBounds(100, 100, 900, 560);
 		setLayout(null);
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(64, 62, 169, 175);
-		try {
+		/*try {
 		    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
 		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 		            Image.SCALE_SMOOTH);
 			lblPic.setIcon(new ImageIcon(scaled));
         } catch (IOException e) {
     	    e.printStackTrace();
-        }
+        }*/
 	
 		add(lblPic);
 		
@@ -83,23 +84,24 @@ public class SettingsView extends JPanel {
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(64, 307, 169, 19);
 		add(txtFirstName);
-		txtFirstName.setText("Donald");
+		txtFirstName.setText(u.getfName());
 		txtFirstName.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setBounds(64, 405, 169, 19);
 		add(txtEmail);
-		txtEmail.setText("donald@trump.com");
+		txtEmail.setText(u.getEmail());
 		txtEmail.setColumns(10);
 		
 		txtLastName = new JTextField();
-		txtLastName.setText("Trump");
+		txtLastName.setText(u.getlName());
 		txtLastName.setBounds(64, 356, 169, 19);
 		add(txtLastName);
 		txtLastName.setColumns(10);
 
 		JComboBox comboBox = new JComboBox(MatchAlgorithm.STYLES);
 		comboBox.setBounds(584, 62, 203, 32);
+		comboBox.setSelectedItem(u.getStyle());
 		add(comboBox);
 		
 		JLabel lblWorkoutStyle = new JLabel("Workout Style");
@@ -108,15 +110,17 @@ public class SettingsView extends JPanel {
 		
 		JComboBox comboBox_1 = new JComboBox(MatchAlgorithm.TIMES);
 		comboBox_1.setBounds(584, 141, 201, 32);
+		comboBox_1.setSelectedItem(u.getTimeOfDay());
 		add(comboBox_1);
 		
-		JLabel label = new JLabel("Prefered Time");
+		JLabel label = new JLabel("Preferred Time");
 		label.setBounds(406, 150, 107, 15);
 		add(label);
 		
-		JComboBox comboBox_2 = new JComboBox(MatchAlgorithm.GENDERS);
-		comboBox_2.setBounds(584, 213, 203, 32);
-		add(comboBox_2);
+		JComboBox gender = new JComboBox(MatchAlgorithm.GENDERS);
+		gender.setBounds(584, 213, 203, 32);
+		gender.setSelectedItem(u.getGender());
+		add(gender);
 		
 		JLabel label_1 = new JLabel("Gender");
 		label_1.setBounds(406, 222, 107, 15);
@@ -124,6 +128,7 @@ public class SettingsView extends JPanel {
 		
 		JComboBox comboBox_3 = new JComboBox(MatchAlgorithm.GENDERS);
 		comboBox_3.setBounds(584, 277, 203, 32);
+		comboBox_3.setSelectedItem(u.getPrefGender());
 		add(comboBox_3);
 		
 		JLabel label_2 = new JLabel("Buddy Gender");
@@ -132,6 +137,7 @@ public class SettingsView extends JPanel {
 		
 		JComboBox comboBox_4 = new JComboBox(MatchAlgorithm.FREQUENCIES);
 		comboBox_4.setBounds(584, 349, 203, 32);
+		comboBox_4.setSelectedItem(u.getFrequency());
 		add(comboBox_4);
 		
 		JLabel label_3 = new JLabel("Frequency");
@@ -161,6 +167,13 @@ public class SettingsView extends JPanel {
 		});
 		btnNewButton_1.setBounds(584, 479, 203, 25);
 		add(btnNewButton_1);
+		
+		JButton deleter = new JButton("Delete My Profile");
+		deleter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		deleter.setBounds(64, 479, 203, 25);
+		add(deleter);
 	}
-
 }

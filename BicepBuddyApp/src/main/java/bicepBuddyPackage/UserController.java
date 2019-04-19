@@ -57,6 +57,8 @@ public class UserController {
 		this.loggedIn = loggedIn;
 	}
 	
+	
+	
 	//TODO
 	public void validateSignup(String fName, String lname, String email, String phone, String age, 
 			String gender, String prefGender, String goals, String freq, 

@@ -44,7 +44,8 @@ router.post('/signup', (req, res, next)=> {
                         user.save()
                             .then(result => {
                                 res.status(201).json({
-                                    message: 'User Created!'
+                                    message: 'User Created!',
+                                    user: user
                                 });
                             })
                             .catch(err => {
@@ -82,12 +83,13 @@ router.post('/login', (req, res, next) => {
                         }, 
                         JWT_KEY,
                         {
-                            expiresIn: "1h"
+                            expiresIn: "2h"
                         },
                     );
                     return res.status(200).json({
                         message: 'Auth successful',
-                        token: token
+                        token: token,
+                        user: user
                     });
                 }
 
@@ -134,7 +136,38 @@ router.get('/', (req, res, next) => {
 
 // Get a specific user
 router.get('/:userID', (req, res, next) => {
+    const id = req.params.userID;
+    const accessedId = req.headers.id;
+    console.log(accessedId);
+    console.log(id);
 
+     // Check If User accessing this user is self
+    if(accessedId != null && id == accessedId) {
+        User.findById(id)
+        .exec()
+        .then(result => {
+            return res.status(200).json({
+                result: result
+            });
+        })
+        .catch(err => {
+            return res.status(409);
+        });
+    } else {
+        User.findById(id)
+        .select('firstname lastname gender profilePic preferredGender' + 
+        'weight workoutStyle goals experience timeOfDay frequency')
+        .exec()
+        .then(result => {
+            return res.status(200).json({
+                result: result
+            });
+        })
+        .catch(err => {
+            return res.status(409);
+        });
+    }
+    
 });
 
 // Delete User

@@ -102,19 +102,19 @@ public class SettingsView extends JPanel {
 		add(txtLastName);
 		txtLastName.setColumns(10);
 
-		JComboBox comboBox = new JComboBox(MatchAlgorithm.STYLES);
-		comboBox.setBounds(584, 62, 203, 32);
-		comboBox.setSelectedItem(u.getStyle());
-		add(comboBox);
+		JComboBox styleBox = new JComboBox(MatchAlgorithm.STYLES);
+		styleBox.setBounds(584, 62, 203, 32);
+		styleBox.setSelectedItem(u.getStyle());
+		add(styleBox);
 		
 		JLabel lblWorkoutStyle = new JLabel("Workout Style");
 		lblWorkoutStyle.setBounds(406, 71, 107, 15);
 		add(lblWorkoutStyle);
 		
-		JComboBox comboBox_1 = new JComboBox(MatchAlgorithm.TIMES);
-		comboBox_1.setBounds(584, 141, 201, 32);
-		comboBox_1.setSelectedItem(u.getTimeOfDay());
-		add(comboBox_1);
+		JComboBox timeOfDay = new JComboBox(MatchAlgorithm.TIMES);
+		timeOfDay.setBounds(584, 141, 201, 32);
+		timeOfDay.setSelectedItem(u.getTimeOfDay());
+		add(timeOfDay);
 		
 		JLabel label = new JLabel("Preferred Time");
 		label.setBounds(406, 150, 107, 15);
@@ -129,47 +129,36 @@ public class SettingsView extends JPanel {
 		label_1.setBounds(406, 222, 107, 15);
 		add(label_1);
 		
-		JComboBox comboBox_3 = new JComboBox(MatchAlgorithm.GENDERS);
-		comboBox_3.setBounds(584, 277, 203, 32);
-		comboBox_3.setSelectedItem(u.getPrefGender());
-		add(comboBox_3);
+		JComboBox prefGender = new JComboBox(MatchAlgorithm.GENDERS);
+		prefGender.setBounds(584, 277, 203, 32);
+		prefGender.setSelectedItem(u.getPrefGender());
+		add(prefGender);
 		
 		JLabel label_2 = new JLabel("Buddy Gender");
 		label_2.setBounds(406, 286, 107, 15);
 		add(label_2);
 		
-		JComboBox comboBox_4 = new JComboBox(MatchAlgorithm.FREQUENCIES);
-		comboBox_4.setBounds(584, 349, 203, 32);
-		comboBox_4.setSelectedItem(u.getFrequency());
-		add(comboBox_4);
+		JComboBox freqBox = new JComboBox(MatchAlgorithm.FREQUENCIES);
+		freqBox.setBounds(584, 349, 203, 32);
+		freqBox.setSelectedItem(u.getFrequency());
+		add(freqBox);
 		
 		JLabel label_3 = new JLabel("Frequency");
 		label_3.setBounds(406, 358, 107, 15);
 		add(label_3);
 		
-		JButton btnNewButton_1 = new JButton("Save changes");
+		JButton saver = new JButton("Save changes");
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		saver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Save changes");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField message = new JTextField();
-				message.setText("All changes have been successfully changed.");
-				message.setEditable(false);
-				
-				panel.add(message);
-				frame.getContentPane().add(panel);
+				UserController uc = new UserController();
+				uc.editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
+						    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
+						    prefGender.getSelectedItem(), freqBox.getSelectedItem());
 			}
 		});
-		btnNewButton_1.setBounds(584, 479, 203, 25);
-		add(btnNewButton_1);
+		saver.setBounds(584, 479, 203, 25);
+		add(saver);
 		
 		JButton deleter = new JButton("Delete My Profile");
 		deleter.addActionListener(new ActionListener() {
@@ -235,5 +224,23 @@ public class SettingsView extends JPanel {
 		});
 		deleter.setBounds(64, 479, 203, 25);
 		add(deleter);
+	}
+	
+	public static void saved() {
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		frame.setTitle("Save changes");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 400, 200);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		
+		JTextField message = new JTextField();
+		message.setText("All changes have been successfully changed.");
+		message.setEditable(false);
+		
+		panel.add(message);
+		frame.getContentPane().add(panel);
 	}
 }

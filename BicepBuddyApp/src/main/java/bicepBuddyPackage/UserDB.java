@@ -217,4 +217,91 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
+
+	public boolean editUser(User u, String email, String fName, String lName, String style, String timeOfDay,
+			String gender, String prefGender, String freq) {
+		BufferedWriter writer = null;
+		
+		Master.appLogger.info(":: Opening CSV DB file to edit user " + u.getEmail());
+		System.out.println(email);
+		if(!email.contentEquals(u.getEmail()) && !notExists(email)) {
+			ErrorGUI eg = new ErrorGUI("Email already exists. Can't change.");
+			Master.appLogger.info(":: Couldn't edit user settings.");
+			return false;
+		}
+		
+		try {
+			File dbCSV = new File(filename);
+			File tempCSV = new File("buddyTemp.csv");
+			
+			reader = new BufferedReader(new FileReader(dbCSV));
+			writer = new BufferedWriter(new FileWriter(tempCSV, true));
+			String line;
+			//read each line, write it to new DB if it doesn't match deleted user.
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split(",");
+				
+				//check first field: email
+				if(!u.getEmail().contentEquals(split[0])) {
+					writer.write(line);
+				}
+				else {
+					//edit this user
+					String lineContent = "";
+
+					lineContent += email; //0
+					lineContent += ",";
+					lineContent += split[1]; //1
+					lineContent += ",";
+					lineContent += fName; // 2
+					lineContent += ",";
+					lineContent += lName; // 3
+					lineContent += ",";
+					lineContent += style; // 4
+					lineContent += ",";
+					lineContent += timeOfDay; // 5
+					lineContent += ",";
+					
+					lineContent += gender; // 6
+					lineContent += ",";
+					lineContent += prefGender; // 7
+					lineContent += ",";
+					lineContent += freq; // 8
+					lineContent += ",";
+					lineContent += u.getWeight(); // 9
+					lineContent += ",";
+					lineContent += u.getPhone(); // 10
+					lineContent += ",";
+					lineContent += u.getAge(); // 11
+					lineContent += ",";
+					lineContent += u.getGoals(); // 12
+					lineContent += ",";
+					lineContent += u.getExperience(); // 13
+					
+					writer.write(lineContent);
+					
+					u.setEmail(email);
+					u.setfName(fName);
+					u.setlName(lName);
+					u.setStyle(style);
+					u.setGender(gender);
+					u.setPrefGender(prefGender);
+					u.setFrequency(freq);
+				}
+				writer.newLine();
+			}
+			
+			reader.close();
+			writer.close();
+			
+			//delete old csv and rename new db csv
+			dbCSV.delete();
+			tempCSV.renameTo(dbCSV);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
 }

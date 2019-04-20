@@ -50,8 +50,8 @@ private static Master master = null;
 
 	
 
-	private JFrame frame;
-	private JPanel panel;
+	private static JFrame frame;
+	private static JPanel panel;
 	
 	//singleton Master
 	public static Master getInstance() {
@@ -129,7 +129,7 @@ private static Master master = null;
 		frame.setVisible(true);
 	}
 
-	public void updateFrame(JPanel j) {
+	public static void updateFrame(JPanel j) {
 		panel.setVisible(false);
 		panel = j;
 		panel.setVisible(true);
@@ -188,13 +188,8 @@ private static Master master = null;
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading match view");
-
-				ArrayList<TestMatch> matches = new ArrayList<>();
-				matches.add(new TestMatch("Cerny", 76.6));
-				matches.add(new TestMatch("Cerniette", 65.23));
-				matches.add(new TestMatch("Hillary Clinton", 96.83));
-
-				updateFrame(new MatchGUI(matches));
+				//create user controller
+				MatchController.generateFrame(UserController.getUser());
 			}
 		});
 		menuBar.add(mnMatch);

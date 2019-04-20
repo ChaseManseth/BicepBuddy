@@ -1,24 +1,35 @@
 package bicepBuddyPackage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatchController {
 	
-	public void generateMatches(User user) {
+	public static void generateFrame(User user) {
+		Master.updateFrame(new MatchGUI(user));
+	}
+	
+	public static void generateMatches(User user) {
 		user.setIdle(MatchAlgorithm.matchUser(user));
 	}
 	
-	public List<Match> getMatches(User user){
+	public static List<Match> getMatches(User user){
 		return user.getIdle();
 	}
 	
-	public void acceptMatchInitial(Match match) {
+	public static void acceptMatchInitial(Match match) {
 		//add to primary accepted
 		List<Match> matches = match.getUser().getAccepted();
+		if (matches == null) {
+			matches = new ArrayList<Match>();
+		}
 		matches.add(match);
 		match.getUser().setAccepted(matches);
 		//add to other waiting
 		matches = match.getMatched().getWaiting();
+		if (matches == null) {
+			matches = new ArrayList<Match>();
+		}
 		matches.add(match);
 		match.getMatched().setWaiting(matches);
 	}
@@ -31,31 +42,43 @@ public class MatchController {
 		match.getMatched().setWaiting(matches);
 		
 		matches = match.getMatched().getAccepted();
+		if (matches == null) {
+			matches = new ArrayList<Match>();
+		}
 		matches.add(match);
 		match.getMatched().setAccepted(matches);
 	}
 	
-	public void rejectMatch(Match match) {
+	public static void rejectMatch(Match match) {
 		//add to both rejected
 		match.reject();
 		List<Match> matches = match.getUser().getAccepted();
-		if (matches.contains(match)) {
-			matches.remove(match);
-			match.getUser().setAccepted(matches);
+		if (matches != null) {
+			if (matches.contains(match)) {
+				matches.remove(match);
+				match.getUser().setAccepted(matches);
+			}
 		}
 		matches = match.getUser().getRejected();
+		if (matches == null) {
+			matches = new ArrayList<Match>();
+		}
 		matches.add(match);
 		match.getUser().setRejected(matches);
 		
 		matches = match.getMatched().getWaiting();
-		if (matches.contains(match)) {
-			matches.remove(match);
-			match.getMatched().setWaiting(matches);
+		if (matches != null) {
+			if (matches.contains(match)) {
+				matches.remove(match);
+				match.getMatched().setWaiting(matches);
+			}
 		}
 		matches = match.getMatched().getRejected();
+		if (matches == null) {
+			matches = new ArrayList<Match>();
+		}
 		matches.add(match);
 		match.getMatched().setRejected(matches);
 	}
-	
 	
 }

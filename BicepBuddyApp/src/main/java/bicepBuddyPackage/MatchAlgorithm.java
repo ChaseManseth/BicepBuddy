@@ -79,25 +79,33 @@ public class MatchAlgorithm {
         	Match temp = new Match(user,m.getKey());
         	Boolean exists = false;
         	//Checking accepted, rejected, and idle arrays
-        	for (Match n : user.getAccepted()) {
-        		if (n.checkExist(temp)) {
-        			exists = true;
+        	if (user.getAccepted() != null) {
+	        	for (Match n : user.getAccepted()) {
+	        		if (n.checkExist(temp)) {
+	        			exists = true;
+	        		}
+	        	}
+        	}
+        	if (user.getRejected() != null) {
+	        	for (Match n : user.getRejected()) {
+	        		if (n.checkExist(temp)) {
+	        			exists = true;
+	        		}
         		}
         	}
-        	for (Match n : user.getRejected()) {
-        		if (n.checkExist(temp)) {
-        			exists = true;
-        		}
+        	if (user.getIdle() != null) {
+	        	for (Match n : user.getIdle()) {
+	        		if (n.checkExist(temp)) {
+	        			exists = true;
+	        		}
+	        	}
         	}
-        	for (Match n : user.getIdle()) {
-        		if (n.checkExist(temp)) {
-        			exists = true;
-        		}
-        	}
-        	for (Match n : user.getWaiting()) {
-        		if (n.checkExist(temp)) {
-        			exists = true;
-        		}
+        	if (user.getWaiting() != null) {
+	        	for (Match n : user.getWaiting()) {
+	        		if (n.checkExist(temp)) {
+	        			exists = true;
+	        		}
+	        	}
         	}
         	if (exists) {
         		ratios.remove(m.getKey());
@@ -114,6 +122,13 @@ public class MatchAlgorithm {
         		break;
         	}
         }
+        
+        Collections.sort(matches, new Comparator<Match>() {
+			public int compare(Match o1, Match o2) {
+				return -1 * (o1.getStrength()).compareTo(o2.getStrength());
+			}
+        });
+        
 
 		return matches;
 	}
@@ -121,8 +136,18 @@ public class MatchAlgorithm {
 	//Get all possible users who fit the Priority 1 Category
 	public static List<User> possibleMatches(User user){
 		//TO-DO
+		
+		User user1 = new User("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular");
+		User user2 = new User("Other","Dude","otherdude@gmail.com","098-765-4321","26","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
+		User user3 = new User("Lady","Dudette","ladydudette@gmail.com","111-111-1111","32","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
+		User user4 = new User("Lady","Dudette2","ladydudette2@gmail.com","222-222-2222","35","Male","Female","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
+		List<User> users = new ArrayList<>();
+		users.add(user1);
+		users.add(user2);
+		users.add(user3);
+		users.add(user4);
 
-		return new ArrayList<>();
+		return users;
 	}
 
 	@SuppressWarnings("deprecation")

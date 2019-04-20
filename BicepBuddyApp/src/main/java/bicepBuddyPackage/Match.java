@@ -17,9 +17,9 @@ public class Match {
 	private Status status;
 	private Date dateCreated;
 	private Date killDate;
-	private double strength;
+	private Integer strength;
 	
-	public Match(User user,User matched,double strength){
+	public Match(User user,User matched,Integer strength){
 		this.user = user;
 		this.matched = matched;
 		this.status = Status.Idle;
@@ -86,10 +86,10 @@ public class Match {
 	public void setKillDate(Date killDate) {
 		this.killDate = killDate;
 	}
-	public double getStrength() {
+	public Integer getStrength() {
 		return strength;
 	}
-	public void setStrength(double strength) {
+	public void setStrength(Integer strength) {
 		this.strength = strength;
 	}
 	

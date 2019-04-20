@@ -5,15 +5,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MatchGUI extends JPanel{
 
@@ -22,20 +22,22 @@ public class MatchGUI extends JPanel{
 	private JTextField matchName;
 	private JTextField matchStrength;
 	private int curMatchShown = 0;
+	private List<Match> matches;
 
-	public MatchGUI(ArrayList<TestMatch> matches) {		
+	public MatchGUI(User user) {		
 		
 		//create JPanel for the frame.
 		this.setLayout(null);
 		this.setBounds(100, 100, 900, 550);
+		
+		MatchController.generateMatches(user);
+		matches = MatchController.getMatches(user);
 		
 		//text field to handle match's name
 		matchName = new JTextField();
 		matchName.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		matchName.setHorizontalAlignment(SwingConstants.CENTER);
 		matchName.setEditable(false);
-		//*************************************************
-		matchName.setText(matches.get(curMatchShown).getMatchName());
 		matchName.setBounds(109, 13, 682, 70);
 		this.add(matchName);
 		matchName.setColumns(10);
@@ -43,13 +45,13 @@ public class MatchGUI extends JPanel{
 		//text field to handle the strength of the match
 		matchStrength = new JTextField();
 		matchStrength.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		//*******************************************************************
-		matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
 		matchStrength.setHorizontalAlignment(SwingConstants.CENTER);
 		matchStrength.setEditable(false);
 		matchStrength.setBounds(109, 96, 682, 70);
 		this.add(matchStrength);
 		matchStrength.setColumns(10);
+		
+		setCurrentMatch();
 		
 		//button to handle going to previous match in the list.
 		JButton prevMatchBtn = new JButton("<");
@@ -71,14 +73,9 @@ public class MatchGUI extends JPanel{
 		prevMatchBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(curMatchShown > 0) {
-					//we can go back in the list, otherwise, if we are at first
-					//match, we can't go back in the list.
-					curMatchShown--;
-					//******************************************************
-					matchName.setText(matches.get(curMatchShown).getMatchName());
-					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
-				}
+				
+				curMatchShown--;
+				setCurrentMatch();
 			}
 		});
 		prevMatchBtn.setBounds(0, 0, 97, 518);
@@ -104,14 +101,9 @@ public class MatchGUI extends JPanel{
 		});
 		nextMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(curMatchShown < matches.size() - 1) {
-					//we can go forward in the list, otherwise, if we are at last
-					//item, we can't show any more matches
-					curMatchShown++;
-					//*************************************************************
-					matchName.setText(matches.get(curMatchShown).getMatchName());
-					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
-				}
+				
+				curMatchShown++;
+				setCurrentMatch();
 			}
 		});
 		nextMatchBtn.setBounds(803, 0, 97, 518);
@@ -156,7 +148,8 @@ public class MatchGUI extends JPanel{
 				panel.add(acc);
 				frame.getContentPane().add(panel);
 				
-				//**************************************************
+				MatchController.acceptMatchInitial(matches.get(curMatchShown));
+				
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
 					curMatchShown--;
@@ -168,9 +161,7 @@ public class MatchGUI extends JPanel{
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
-					//*************************************************************
-					matchName.setText(matches.get(curMatchShown).getMatchName());
-					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
+					setCurrentMatch();
 				}
 			}
 		});
@@ -213,9 +204,10 @@ public class MatchGUI extends JPanel{
 				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				rej.setEditable(false);
 				
+				MatchController.rejectMatch(matches.get(curMatchShown));
+				
 				panel.add(rej);
 				frame.getContentPane().add(panel);
-				//***************************************************
 				matches.remove(matches.get(curMatchShown));
 				if(curMatchShown != 0) {
 					curMatchShown--;
@@ -226,9 +218,7 @@ public class MatchGUI extends JPanel{
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
-					//********************************************************
-					matchName.setText(matches.get(curMatchShown).getMatchName());
-					matchStrength.setText(matches.get(curMatchShown).getMatchStr() + "% Match");
+					setCurrentMatch();
 				}
 			}
 		});
@@ -242,7 +232,6 @@ public class MatchGUI extends JPanel{
 		
 		userProfileButton.setBackground(new Color(108,117,125));
 		userProfileButton.setForeground(new Color(255,255,255));
-		//**********************************************************************************************
 		//show profile of user
 		userProfileButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -258,7 +247,8 @@ public class MatchGUI extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
-				Master.getInstance().updateFrame(new OtherProfileView(udb.testerGetRandomUser()));
+				//*****************************
+				Master.getInstance().updateFrame(new OtherProfileView(matches.get(curMatchShown).getMatched()));
 			}
 		});
 		
@@ -284,6 +274,12 @@ public class MatchGUI extends JPanel{
 		panel.add(noMatchField);
 		frame.getContentPane().add(panel);
 		
+	}
+	
+	public void setCurrentMatch() {
+		curMatchShown = curMatchShown % matches.size();
+		matchName.setText(matches.get(curMatchShown).getMatched().getfName() + " " + matches.get(curMatchShown).getMatched().getlName());
+		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}
 	
 }

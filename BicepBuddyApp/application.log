@@ -1,4 +1,4 @@
-2019-04-19 20:05:26 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-19 20:05:27 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-19 20:05:31 INFO bicepBuddyPackage.UserController setUserFromDB :: Setting the static user object.
-2019-04-19 20:05:31 INFO bicepBuddyPackage.UserController validateLogin :: User was logged in.
+2019-04-20 15:08:18 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-20 15:08:19 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-20 15:08:24 INFO bicepBuddyPackage.UserController setUserFromDB :: Setting the static user object.
+2019-04-20 15:08:24 INFO bicepBuddyPackage.UserController validateLogin :: User was logged in.

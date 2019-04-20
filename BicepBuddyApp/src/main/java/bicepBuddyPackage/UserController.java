@@ -222,5 +222,11 @@ public class UserController {
 		
 		
 	}
+
+	public void deleteAccount(User u) {
+		UserDB udb = new UserDB();
+		udb.deleteUser(u);
+		Master.getInstance().getFrame().dispose();
+	}
 	
 }

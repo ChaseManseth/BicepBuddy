@@ -188,7 +188,9 @@ public class SettingsView extends JPanel {
 				yesBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
+						UserController uc = new UserController();
+						uc.deleteAccount(UserController.getUser());
+						confirm.dispose();
 					}
 					
 					@Override
@@ -207,7 +209,7 @@ public class SettingsView extends JPanel {
 				noBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
+						confirm.dispose();
 					}
 					
 					@Override

@@ -77,7 +77,8 @@ public class ProfileView extends JPanel {
 		editProfileBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Master.getInstance().updateFrame(new SettingsView());
+				ViewController vc = new ViewController();
+				vc.settingsView();
 			}
 			
 			@Override
@@ -104,6 +105,7 @@ public class ProfileView extends JPanel {
 		btnStartMatching.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//TODO: CHANGE FOR WHEN MATCHING
 				ArrayList<TestMatch> matches = new ArrayList<>();
 				matches.add(new TestMatch("Cerny", 76.6));
 				matches.add(new TestMatch("Cerniette", 65.23));

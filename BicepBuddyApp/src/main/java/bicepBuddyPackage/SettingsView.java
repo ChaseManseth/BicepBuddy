@@ -65,22 +65,8 @@ public class SettingsView extends JPanel {
 		JButton btnNewButton = new JButton("Change Image");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Change Image");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField message = new JTextField();
-				message.setText("We need to build a file selector that only shows image files.");
-				message.setEditable(false);
-				
-				panel.add(message);
-				frame.getContentPane().add(panel);
-
+				ViewController vc = new ViewController();
+				vc.changeProfileImageFrame();
 			}
 		});
 		btnNewButton.setBounds(64, 254, 169, 25);
@@ -303,6 +289,24 @@ public class SettingsView extends JPanel {
 		
 		JTextField message = new JTextField();
 		message.setText("All changes have been successfully changed.");
+		message.setEditable(false);
+		
+		panel.add(message);
+		frame.getContentPane().add(panel);
+	}
+	
+	public static void changeImageFrame() {
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		frame.setTitle("Change Image");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 400, 200);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		
+		JTextField message = new JTextField();
+		message.setText("We need to build a file selector that only shows image files.");
 		message.setEditable(false);
 		
 		panel.add(message);

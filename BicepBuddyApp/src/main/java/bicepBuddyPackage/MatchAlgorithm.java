@@ -1,7 +1,5 @@
 package bicepBuddyPackage;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,9 +7,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -138,9 +133,9 @@ public class MatchAlgorithm {
 		}
 		//Pref Gender ratio
 		ratios.get(prefGenderPriority.ordinal()).add(new Integer(calculateRatio(
-						GENDERS.length,
-						Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
-						Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
+				GENDERS.length,
+				Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
+				Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
 		//Weight ratio
 		ratios.get(weightPriority.ordinal()).add(new Integer(calculateRatio(
 				WEIGHTCLASS.length,

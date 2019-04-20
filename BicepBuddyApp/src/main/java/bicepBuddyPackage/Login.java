@@ -101,7 +101,8 @@ public class Login extends JPanel {
 		btnSignUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Master.getInstance().updateFrame(new Signup());
+				ViewController vc = new ViewController();
+				vc.signUpView();
 			}
 			
 			@Override

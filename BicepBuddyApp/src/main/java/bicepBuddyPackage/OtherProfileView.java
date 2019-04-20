@@ -1,31 +1,17 @@
 package bicepBuddyPackage;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
-
-import javax.swing.JFrame;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
-import mdlaf.animation.MaterialUIMovement;
-import mdlaf.utils.MaterialColors;
-
-import java.awt.Color;
 
 public class OtherProfileView extends JPanel {
 
@@ -78,25 +64,10 @@ public class OtherProfileView extends JPanel {
 		btnInvite.setForeground(Color.white);
 		btnInvite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Invite");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField message = new JTextField();
-				message.setText("You invited " + u.getfName() + " " + u.getlName() + " to be your buddy!");
-				message.setEditable(false);
-				
-				panel.add(message);
-				frame.getContentPane().add(panel);
-
+				ViewController vc = new ViewController();
+				vc.inviteUserChange(u);
 			}
 		});
-	
 		
 	
 		btnInvite.setBounds(331, 103, 188, 47);
@@ -124,22 +95,8 @@ public class OtherProfileView extends JPanel {
 		button.setBackground(new Color(255, 0, 0));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Block");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField message = new JTextField();
-				message.setText("You blocked " + u.getfName() + " " + u.getlName());
-				message.setEditable(false);
-				
-				panel.add(message);
-				frame.getContentPane().add(panel);
-
+				ViewController vc = new ViewController();
+				vc.blockBuddyChange(u);
 			}
 		});
 	
@@ -191,5 +148,41 @@ public class OtherProfileView extends JPanel {
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(513, 118, 66, 15);
 		panel.add(lblNewLabel_3);
+	}
+	
+	public static void inviteBuddyFrame(User u) {
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		frame.setTitle("Invite");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 400, 200);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		
+		JTextField message = new JTextField();
+		message.setText("You invited " + u.getfName() + " " + u.getlName() + " to be your buddy!");
+		message.setEditable(false);
+		
+		panel.add(message);
+		frame.getContentPane().add(panel);
+	}
+	
+	public static void blockBuddyFrame(User u){
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		frame.setTitle("Block");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 400, 200);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		
+		JTextField message = new JTextField();
+		message.setText("You blocked " + u.getfName() + " " + u.getlName());
+		message.setEditable(false);
+		
+		panel.add(message);
+		frame.getContentPane().add(panel);
 	}
 }

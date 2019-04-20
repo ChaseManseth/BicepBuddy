@@ -235,10 +235,12 @@ public class UserController {
 	}
 
 	public void editUser(String email, String fName, String lName, Object style, Object timeOfDay,
-			Object gender, Object prefGender, Object freq) {
+			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
+			String age, String phone) {
 		UserDB udb = new UserDB();
 		if(udb.editUser(UserController.getUser(), email, fName, lName, (String) style, (String) timeOfDay,
-				     (String) gender, (String) prefGender, (String) freq)) {
+				     (String) gender, (String) prefGender, (String) freq, (String) goal, (String) weight,
+				     (String) exp, age, phone)) {
 			SettingsView.saved();
 		}
 		

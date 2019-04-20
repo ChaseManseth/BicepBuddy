@@ -219,11 +219,10 @@ public class UserDB {
 	}
 
 	public boolean editUser(User u, String email, String fName, String lName, String style, String timeOfDay,
-			String gender, String prefGender, String freq) {
+			String gender, String prefGender, String freq, String goal, String weight, String exp, String age, String phone) {
 		BufferedWriter writer = null;
 		
-		Master.appLogger.info(":: Opening CSV DB file to edit user " + u.getEmail());
-		System.out.println(email);
+		Master.appLogger.info(":: Opening CSV DB file to edit user: " + u.getEmail());
 		if(!email.contentEquals(u.getEmail()) && !notExists(email)) {
 			ErrorGUI eg = new ErrorGUI("Email already exists. Can't change.");
 			Master.appLogger.info(":: Couldn't edit user settings.");
@@ -268,15 +267,15 @@ public class UserDB {
 					lineContent += ",";
 					lineContent += freq; // 8
 					lineContent += ",";
-					lineContent += u.getWeight(); // 9
+					lineContent += weight; // 9
 					lineContent += ",";
-					lineContent += u.getPhone(); // 10
+					lineContent += phone; // 10
 					lineContent += ",";
-					lineContent += u.getAge(); // 11
+					lineContent += age; // 11
 					lineContent += ",";
-					lineContent += u.getGoals(); // 12
+					lineContent += goal; // 12
 					lineContent += ",";
-					lineContent += u.getExperience(); // 13
+					lineContent += exp; // 13
 					
 					writer.write(lineContent);
 					

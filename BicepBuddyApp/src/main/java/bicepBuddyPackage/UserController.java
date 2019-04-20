@@ -1,6 +1,11 @@
 package bicepBuddyPackage;
 
+import java.awt.FlowLayout;
 import java.nio.charset.StandardCharsets;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -56,6 +61,8 @@ public class UserController {
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
+	
+	
 	
 	//TODO
 	public void validateSignup(String fName, String lname, String email, String phone, String age, 
@@ -218,6 +225,24 @@ public class UserController {
 		    request.releaseConnection();
 		}
 		
+		
+	}
+
+	public void deleteAccount(User u) {
+		UserDB udb = new UserDB();
+		udb.deleteUser(u);
+		Master.getInstance().getFrame().dispose();
+	}
+
+	public void editUser(String email, String fName, String lName, Object style, Object timeOfDay,
+			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
+			String age, String phone) {
+		UserDB udb = new UserDB();
+		if(udb.editUser(UserController.getUser(), email, fName, lName, (String) style, (String) timeOfDay,
+				     (String) gender, (String) prefGender, (String) freq, (String) goal, (String) weight,
+				     (String) exp, age, phone)) {
+			SettingsView.saved();
+		}
 		
 	}
 	

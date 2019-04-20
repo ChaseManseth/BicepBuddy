@@ -92,6 +92,7 @@ public class UserDB {
 				//check first field: email
 				if(email.contentEquals(split[0])) {
 					Master.appLogger.info(":: email " + email + " exists in the DB already.");
+					reader.close();
 					return false;
 				}
 			}
@@ -163,11 +164,14 @@ public class UserDB {
 				if(split[0].contentEquals(email)) {
 					if(split[1].contentEquals(pass)) {
 						UserController.setUserFromDB(split);
+						buf.close();
 						return true;
 					}
 					Master.appLogger.info(":: User's password was invalid.");
 				}
 			}
+			
+			buf.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -175,5 +179,128 @@ public class UserDB {
 		
 		ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
 		return false;
+	}
+
+	// this method of rewriting the old file seems super inefficient but
+	// seems to be the accepted method online lel
+	public void deleteUser(User u) {
+		BufferedWriter writer = null;
+		try {
+			File dbCSV = new File(filename);
+			File tempCSV = new File("buddyTemp.csv");
+			
+			reader = new BufferedReader(new FileReader(dbCSV));
+			writer = new BufferedWriter(new FileWriter(tempCSV, true));
+			String line;
+			Master.appLogger.info(":: Opening CSV DB file to delete user " + u.getEmail());
+			//read each line, write it to new DB if it doesn't match deleted user.
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split(",");
+				
+				//check first field: email
+				if(!u.getEmail().contentEquals(split[0])) {
+					writer.write(line);
+					writer.newLine();
+				}
+			}
+			
+			reader.close();
+			writer.close();
+			
+			//delete old csv and rename new db csv
+			if(dbCSV.delete()) {
+				Master.appLogger.info(":: Deleted User: " + u.getEmail());
+			}
+			tempCSV.renameTo(dbCSV);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean editUser(User u, String email, String fName, String lName, String style, String timeOfDay,
+			String gender, String prefGender, String freq, String goal, String weight, String exp, String age, String phone) {
+		BufferedWriter writer = null;
+		
+		Master.appLogger.info(":: Opening CSV DB file to edit user: " + u.getEmail());
+		if(!email.contentEquals(u.getEmail()) && !notExists(email)) {
+			ErrorGUI eg = new ErrorGUI("Email already exists. Can't change.");
+			Master.appLogger.info(":: Couldn't edit user settings.");
+			return false;
+		}
+		
+		try {
+			File dbCSV = new File(filename);
+			File tempCSV = new File("buddyTemp.csv");
+			
+			reader = new BufferedReader(new FileReader(dbCSV));
+			writer = new BufferedWriter(new FileWriter(tempCSV, true));
+			String line;
+			//read each line, write it to new DB if it doesn't match deleted user.
+			while ((line = reader.readLine()) != null) {
+				String[] split = line.split(",");
+				
+				//check first field: email
+				if(!u.getEmail().contentEquals(split[0])) {
+					writer.write(line);
+				}
+				else {
+					//edit this user
+					String lineContent = "";
+
+					lineContent += email; //0
+					lineContent += ",";
+					lineContent += split[1]; //1
+					lineContent += ",";
+					lineContent += fName; // 2
+					lineContent += ",";
+					lineContent += lName; // 3
+					lineContent += ",";
+					lineContent += style; // 4
+					lineContent += ",";
+					lineContent += timeOfDay; // 5
+					lineContent += ",";
+					
+					lineContent += gender; // 6
+					lineContent += ",";
+					lineContent += prefGender; // 7
+					lineContent += ",";
+					lineContent += freq; // 8
+					lineContent += ",";
+					lineContent += weight; // 9
+					lineContent += ",";
+					lineContent += phone; // 10
+					lineContent += ",";
+					lineContent += age; // 11
+					lineContent += ",";
+					lineContent += goal; // 12
+					lineContent += ",";
+					lineContent += exp; // 13
+					
+					writer.write(lineContent);
+					
+					u.setEmail(email);
+					u.setfName(fName);
+					u.setlName(lName);
+					u.setStyle(style);
+					u.setGender(gender);
+					u.setPrefGender(prefGender);
+					u.setFrequency(freq);
+				}
+				writer.newLine();
+			}
+			
+			reader.close();
+			writer.close();
+			
+			//delete old csv and rename new db csv
+			dbCSV.delete();
+			tempCSV.renameTo(dbCSV);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 }

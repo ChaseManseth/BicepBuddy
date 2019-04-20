@@ -1,5 +1,7 @@
 package bicepBuddyPackage;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +9,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -51,7 +55,7 @@ public class MatchAlgorithm {
 	
 	public MatchAlgorithm() {}
 	
-	public List<Match> matchUser(User user){
+	public static List<Match> matchUser(User user){
 		List<User> users = possibleMatches(user);
 		Map<User,Integer> ratios = new HashMap<>();
 		//Calculating ratios for all possible matches
@@ -120,14 +124,14 @@ public class MatchAlgorithm {
 	}
 	
 	//Get all possible users who fit the Priority 1 Category
-	public List<User> possibleMatches(User user){
+	public static List<User> possibleMatches(User user){
 		//TO-DO
 		
-		return new ArrayList<User>();
+		return new ArrayList<>();
 	}
 	
 	@SuppressWarnings("deprecation")
-	public Integer calculateRatios(User user, User other) {
+	public static Integer calculateRatios(User user, User other) {
 		List<List<Integer>> ratios = new ArrayList<>(5);
 		for (int i = 0; i < PRIORITYCOUNT; i++) {
 			ratios.add(new ArrayList<Integer>());
@@ -187,11 +191,13 @@ public class MatchAlgorithm {
 		return result;
 	}
 	//Calculates ratio between 2 users
-	public Integer calculateRatio(Integer length,Integer userOptIdx,Integer otherOptIdx) {
+	public static Integer calculateRatio(Integer length,Integer userOptIdx,Integer otherOptIdx) {
 		Integer data = userOptIdx - otherOptIdx;
 		if (data < 0) {
-			data *= 1;
+			data *= -1;
 		}
-		return (length / length) - (data / length);
+		return (int)((1 - ((double)data / (double)length)) * 100);
 	}
+	
+	
 }

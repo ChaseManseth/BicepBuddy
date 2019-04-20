@@ -1,5 +1,8 @@
 package bicepBuddyPackage;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +25,20 @@ public class MatchTesting {
 		users.add(user4);
 	}
 	
-	@Test @DisplayName("Testing calculate Ratios return")
+	@Test @DisplayName("Testing calculate Ratio return")
 	public void calculateRatioReturnValue() {
-		//assertEquals(MatchAlgorithm.calculateRatio(,),0);
+		assertEquals(MatchAlgorithm.calculateRatio(3,1,2),new Integer(66));
+	}
+	
+	@Test @DisplayName("Testing calculate Ratios")
+	public void calculateRatiosTest() {
+		Integer test = MatchAlgorithm.calculateRatios(user1,user2);
+		assertEquals(MatchAlgorithm.calculateRatios(user1,user2),new Integer(0));
+	}
+	
+	@Test @DisplayName("Testing matchUser")
+	public void matchUserTest() {
+		//MatchAlgorithm.matchUser(user1));
 	}
 	
 	@AfterEach

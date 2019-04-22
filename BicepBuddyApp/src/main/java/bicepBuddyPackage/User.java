@@ -57,6 +57,27 @@ public class User {
 		this.weight = weight;
 		this.experience = experience;
 	}
+	
+	// TODO - for other user info and shit
+//	public User() {}
+	public void updateUser(String email, String fName, String lName, Object style, Object timeOfDay,
+			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
+			String age, String phone) {
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.phone = phone;
+		this.age = age;
+		this.gender = (String) gender;
+		this.prefGender = (String) prefGender;
+		this.goals = (String) goal;
+		this.frequency = (String) freq;
+		this.timeOfDay = (String) timeOfDay;
+		this.style = (String) style;
+		this.weight = (String) weight;
+		this.experience = (String) exp;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", jwt=" + jwt + ", fName=" + fName + ", lName=" + lName + ", email=" + email

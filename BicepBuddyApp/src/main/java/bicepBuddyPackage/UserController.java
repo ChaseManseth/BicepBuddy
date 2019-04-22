@@ -28,7 +28,10 @@ import org.json.simple.parser.JSONParser;
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
-	private String baseUrl = "http://localhost:3000/user/";
+	// Testing
+//	private String baseUrl = "http://localhost:3000/user/";
+	// Production
+	private String baseUrl = "http://bb.manseth.com/user/";
 
 	public static User getUser() {
 		return user;

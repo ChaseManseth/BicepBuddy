@@ -1,6 +1,4 @@
-2019-04-22 00:46:09 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-22 00:46:10 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-22 00:46:53 INFO bicepBuddyPackage.UserDB notExists :: Opening CSV DB file to check that user doesn't exist already.
-2019-04-22 00:47:04 INFO bicepBuddyPackage.UserDB notExists :: Opening CSV DB file to check that user doesn't exist already.
-2019-04-22 00:47:04 INFO bicepBuddyPackage.UserController validateSignup :: User's signup information was accepted.
-2019-04-22 00:47:04 INFO bicepBuddyPackage.UserDB addUser :: Adding new user Chase Manseth to DB.
+2019-04-22 01:03:56 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-22 01:03:57 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-22 01:04:25 INFO bicepBuddyPackage.Master$9 mouseClicked :: User logged out.
+2019-04-22 01:04:34 INFO bicepBuddyPackage.Master$9 mouseClicked :: User logged out.

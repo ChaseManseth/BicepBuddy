@@ -3,6 +3,7 @@ package Matching;
 import java.util.List;
 
 import User.User;
+import User.UserController;
 import bicepBuddyPackage.Master;
 
 public class MatchController {
@@ -13,6 +14,10 @@ public class MatchController {
 	
 	public static void generateMatches(User user) {
 		user.setIdle(MatchAlgorithm.matchUser(user));
+	}
+	
+	public static Match directMatch(User user) {
+		return MatchAlgorithm.directMatch(UserController.getUser(),user);
 	}
 	
 	public static List<Match> getMatches(User user){
@@ -30,7 +35,7 @@ public class MatchController {
 		match.getMatched().setWaiting(matches);
 	}
 	
-	public void acceptMatchOther(Match match) {
+	public static void acceptMatchOther(Match match) {
 		//add to other accepted
 		match.accept();
 		List<Match> matches = match.getMatched().getWaiting();

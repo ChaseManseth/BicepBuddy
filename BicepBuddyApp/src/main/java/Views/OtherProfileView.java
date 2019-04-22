@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import Matching.Match;
+import Matching.MatchAlgorithm;
+import Matching.MatchController;
 import User.User;
+import User.UserController;
 
 public class OtherProfileView extends JPanel {
 
@@ -62,31 +68,79 @@ public class OtherProfileView extends JPanel {
 		lblName2.setBounds(480, 26, 235, 19);
 		add(lblName2);
 		
-		JButton btnInvite = new JButton("Invite Buddy");
-		btnInvite.setFont(new Font("Dialog", Font.BOLD, 14));
-		btnInvite.setBackground(new Color(34, 139, 34));
-		btnInvite.setForeground(Color.white);
-		btnInvite.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewController vc = new ViewController();
-				vc.inviteUserChange(u);
-			}
-		});
-		
-		btnInvite.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				btnInvite.setBackground(new Color(26,86,8));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnInvite.setBackground(new Color(34, 139, 34));
-			}
-		});
-		
-	
-		btnInvite.setBounds(331, 103, 188, 47);
-		add(btnInvite);
+		if (!MatchAlgorithm.has(u.getAccepted(),new Match(u,UserController.getUser())) || !MatchAlgorithm.has(u.getRejected(),new Match(u,UserController.getUser()))) {
+			JButton btnInvite = new JButton("Invite Buddy");
+			btnInvite.setFont(new Font("Dialog", Font.BOLD, 14));
+			btnInvite.setBackground(new Color(34, 139, 34));
+			btnInvite.setForeground(Color.white);
+			//*********************************************************************************************
+			btnInvite.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ViewController vc = new ViewController();
+					vc.inviteUserChange(u);
+					if (MatchAlgorithm.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
+						for (Match m : u.getWaiting()) {
+							List<Match> temp = new ArrayList<>();
+							temp.add(m);
+							if (MatchAlgorithm.has(temp,new Match(u,UserController.getUser()))) {
+								MatchController.acceptMatchOther(m);
+							}
+						}
+					}
+					else {
+						MatchController.acceptMatchInitial(MatchController.directMatch(u));
+					}
+				}
+			});
+			btnInvite.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					btnInvite.setBackground(new Color(26,86,8));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnInvite.setBackground(new Color(34, 139, 34));
+				}
+			});
+			btnInvite.setBounds(331, 103, 188, 47);
+			add(btnInvite);
+			
+			JButton btnBlock = new JButton("Block Buddy");
+			btnBlock.setForeground(Color.white);
+			btnBlock.setFont(new Font("Dialog", Font.BOLD, 14));
+			btnBlock.setBackground(new Color(255, 0, 0));
+			//*********************************************************************************************
+			btnBlock.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ViewController vc = new ViewController();
+					vc.blockBuddyChange(u);
+					if (MatchAlgorithm.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
+						for (Match m : u.getWaiting()) {
+							List<Match> temp = new ArrayList<>();
+							temp.add(m);
+							if (MatchAlgorithm.has(temp,new Match(u,UserController.getUser()))) {
+								MatchController.rejectMatch(m);
+							}
+						}
+					}
+					else {
+						MatchController.rejectMatch(MatchController.directMatch(u));
+					}
+				}
+			});
+			btnBlock.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					btnBlock.setBackground(new Color(204,8,8));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnBlock.setBackground(new Color(255, 0, 0));
+				}
+			});
+			btnBlock.setBounds(599, 103, 188, 47);
+			add(btnBlock);
+		}
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -104,30 +158,6 @@ public class OtherProfileView extends JPanel {
 		lblAge.setBounds(10, 264, 165, 15);
 		infoPanel.add(lblAge);
 		
-		JButton button = new JButton("Block Buddy");
-		button.setForeground(Color.white);
-		button.setFont(new Font("Dialog", Font.BOLD, 14));
-		button.setBackground(new Color(255, 0, 0));
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewController vc = new ViewController();
-				vc.blockBuddyChange(u);
-			}
-		});
-		
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				button.setBackground(new Color(204,8,8));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				button.setBackground(new Color(255, 0, 0));
-			}
-		});
-	
-		button.setBounds(599, 103, 188, 47);
-		add(button);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

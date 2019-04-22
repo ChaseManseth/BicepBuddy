@@ -51,6 +51,10 @@ public class MatchAlgorithm {
 
 
 	public MatchAlgorithm() {}
+	
+	public static Match directMatch(User user, User other) {
+		return new Match(user,other,calculateRatios(user,other));
+	}
 
 	public static List<Match> matchUser(User user){
 		List<User> users = possibleMatches(user);

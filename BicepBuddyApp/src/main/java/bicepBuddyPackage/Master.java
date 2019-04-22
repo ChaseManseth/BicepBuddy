@@ -19,6 +19,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import Matching.MatchController;
+import Messaging.DMView;
+import User.UserController;
+import User.UserDB;
+import Views.Login;
+import Views.OtherProfileView;
+import Views.ProfileView;
+import Views.SettingsView;
+import Views.Signup;
 import mdlaf.MaterialLookAndFeel;
 
 import java.awt.ComponentOrientation;

@@ -1,2 +1,4 @@
-2019-04-22 15:32:39 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-22 15:32:40 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-22 16:51:10 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-22 16:51:12 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-22 16:51:36 INFO bicepBuddyPackage.UserDB getNumUsers :: Opening CSV DB file to count number of users.
+2019-04-22 16:51:36 INFO bicepBuddyPackage.UserDB testerGetRandomUser :: Opening CSV DB file to find random user.

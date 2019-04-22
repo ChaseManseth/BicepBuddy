@@ -399,12 +399,12 @@ public class UserController {
 		    			prefGender, freq, goal, weight, exp, age, phone);
 		    	
 		    	// Indicate save and load profile
-		    	SettingsView.saved();
 		    	Master.getInstance().updateFrame(new ProfileView());
+		    	SettingsView.saved();
 		    } else {
 		    	// FAIL!
-		    	ErrorGUI eg = new ErrorGUI("Your changes couldn't be saved!");
 		    	Master.getInstance().updateFrame(new ProfileView());
+		    	ErrorGUI eg = new ErrorGUI("Your changes couldn't be saved!");
 		    }
 			
 			

@@ -1,8 +1,11 @@
 package bicepBuddyPackage;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +13,10 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.border.MatteBorder;
 
 import mdlaf.animation.MaterialUIMovement;
@@ -117,6 +124,19 @@ public class Login extends JPanel {
 		});
 		
 		add(btnSignUp);
+		
+		//ADD THE BICEP PICTURE
+		JLabel logoLabel = new JLabel("");
+		logoLabel.setBounds(322, 339, 301, 148);
+		add(logoLabel);
+		try {
+		    BufferedImage myPicture = ImageIO.read(new File("bicep.jpg"));
+		    Image scaled = myPicture.getScaledInstance(logoLabel.getWidth(), logoLabel.getHeight(),
+		            Image.SCALE_SMOOTH);
+			logoLabel.setIcon(new ImageIcon(scaled));
+	    } catch (IOException e) {
+		    e.printStackTrace();
+	    }
 
 	}
 }

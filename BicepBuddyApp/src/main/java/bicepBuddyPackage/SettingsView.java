@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
 
 import javax.swing.JMenu;
 import javax.swing.JList;
@@ -63,14 +65,24 @@ public class SettingsView extends JPanel {
 		add(lblName2);
 		
 		JButton btnNewButton = new JButton("Change Image");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton.setForeground(Color.white);
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				btnNewButton.setForeground(Color.black);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 				ViewController vc = new ViewController();
 				vc.changeProfileImageFrame();
 			}
 		});
 		btnNewButton.setBounds(64, 254, 169, 25);
 		add(btnNewButton);
+		MaterialUIMovement.add(btnNewButton, MaterialColors.GRAY_600);
 		
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(64, 307, 169, 25);
@@ -209,6 +221,16 @@ public class SettingsView extends JPanel {
 		});
 		deleter.setBounds(64, 479, 203, 25);
 		add(deleter);
+		MaterialUIMovement.add(deleter, MaterialColors.GRAY_600);
+		deleter.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				deleter.setForeground(Color.white);
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				deleter.setForeground(Color.black);
+			}
+		});
 		
 		JLabel lblGoal = new JLabel("Goal");
 		lblGoal.setBounds(591, 70, 56, 16);
@@ -263,6 +285,7 @@ public class SettingsView extends JPanel {
 		add(phoneField);
 		
 		JButton saver = new JButton("Save changes");
+		MaterialUIMovement.add(saver, MaterialColors.GRAY_600);
 		
 		saver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -271,6 +294,15 @@ public class SettingsView extends JPanel {
 						    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
 						    prefGender.getSelectedItem(), freqBox.getSelectedItem(), goalsBox.getSelectedItem(),
 						    weightBox.getSelectedItem(), expBox.getSelectedItem(), ageField.getText(), phoneField.getText());
+			}
+		});
+		saver.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				saver.setForeground(Color.white);
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				saver.setForeground(Color.black);
 			}
 		});
 		saver.setBounds(584, 479, 203, 25);

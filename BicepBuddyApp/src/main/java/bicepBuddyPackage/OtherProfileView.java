@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,6 +71,17 @@ public class OtherProfileView extends JPanel {
 			}
 		});
 		
+		btnInvite.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnInvite.setBackground(new Color(26,86,8));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnInvite.setBackground(new Color(34, 139, 34));
+			}
+		});
+		
 	
 		btnInvite.setBounds(331, 103, 188, 47);
 		add(btnInvite);
@@ -97,6 +110,17 @@ public class OtherProfileView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ViewController vc = new ViewController();
 				vc.blockBuddyChange(u);
+			}
+		});
+		
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				button.setBackground(new Color(204,8,8));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				button.setBackground(new Color(255, 0, 0));
 			}
 		});
 	

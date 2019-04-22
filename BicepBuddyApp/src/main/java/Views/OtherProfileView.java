@@ -41,6 +41,12 @@ public class OtherProfileView extends JPanel {
 		gender = u.getGender();
 		preferedGender = u.getPrefGender();
 		frequency = u.getFrequency();
+		Integer percent = 0;
+		Match tempMatch = MatchController.findMatch(new Match(u,UserController.getUser()),u);
+		if (tempMatch == null) {
+			tempMatch = MatchController.directMatch(u);
+		}
+		percent = tempMatch.getStrength();
 		// END USER DATA
 
 		//frame = new JFrame();
@@ -78,13 +84,14 @@ public class OtherProfileView extends JPanel {
 					ViewController vc = new ViewController();
 					vc.inviteUserChange(u);
 					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
-						for (Match m : u.getWaiting()) {
+						MatchController.acceptMatchOther(MatchController.findMatch(new Match(u,UserController.getUser()), u));
+						/*for (Match m : u.getWaiting()) {
 							List<Match> temp = new ArrayList<>();
 							temp.add(m);
 							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
 								MatchController.acceptMatchOther(m);
 							}
-						}
+						}*/
 					}
 					else {
 						MatchController.acceptMatchInitial(MatchController.directMatch(u));
@@ -114,13 +121,14 @@ public class OtherProfileView extends JPanel {
 					ViewController vc = new ViewController();
 					vc.blockBuddyChange(u);
 					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
-						for (Match m : u.getWaiting()) {
+						MatchController.rejectMatch(MatchController.findMatch(new Match(u,UserController.getUser()), u));
+						/*for (Match m : u.getWaiting()) {
 							List<Match> temp = new ArrayList<>();
 							temp.add(m);
 							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
 								MatchController.rejectMatch(m);
 							}
-						}
+						}*/
 					}
 					else {
 						MatchController.rejectMatch(MatchController.directMatch(u));
@@ -154,8 +162,22 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblAge = new JLabel(age);
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAge.setBounds(10, 264, 165, 15);
+		lblAge.setBounds(48, 263, 127, 15);
 		infoPanel.add(lblAge);
+		
+		JLabel lblAge_1 = new JLabel("Age");
+		lblAge_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblAge_1.setBounds(10, 263, 48, 14);
+		infoPanel.add(lblAge_1);
+		
+		JLabel lblMatchPercent = new JLabel("Match Strength:");
+		lblMatchPercent.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblMatchPercent.setBounds(10, 289, 100, 14);
+		infoPanel.add(lblMatchPercent);
+		
+		JLabel lblLblpercent = new JLabel(Double.toString(percent));
+		lblLblpercent.setBounds(108, 289, 67, 14);
+		infoPanel.add(lblLblpercent);
 		
 		
 		JPanel panel = new JPanel();

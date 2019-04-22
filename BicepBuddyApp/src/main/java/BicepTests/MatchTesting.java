@@ -1,4 +1,4 @@
-package Matching;
+package BicepTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import Matching.MatchAlgorithm;
 import User.User;
 
 public class MatchTesting {
@@ -40,7 +41,9 @@ public class MatchTesting {
 	
 	@Test @DisplayName("Testing matchUser")
 	public void matchUserTest() {
-		//MatchAlgorithm.matchUser(user1));
+		/*Match match1 = new Match(user1,user2);
+		Match match2 = new Match(user1,user2);
+		assertTrue();*/
 	}
 	
 	@AfterEach

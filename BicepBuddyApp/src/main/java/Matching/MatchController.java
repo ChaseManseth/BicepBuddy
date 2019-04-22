@@ -1,5 +1,6 @@
 package Matching;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import User.User;
@@ -26,6 +27,32 @@ public class MatchController {
 	
 	public static List<Match> getMatches(User user){
 		return user.getIdle();
+	}
+	
+	public static Match findMatch(Match match,User u) {
+		Match result = null;
+		for (Match m : u.getAccepted()) {
+			List<Match> temp = new ArrayList<>();
+			temp.add(m);
+			if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
+				result = m;
+			}
+		}
+		for (Match m : u.getRejected()) {
+			List<Match> temp = new ArrayList<>();
+			temp.add(m);
+			if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
+				result = m;
+			}
+		}
+		for (Match m : u.getWaiting()) {
+			List<Match> temp = new ArrayList<>();
+			temp.add(m);
+			if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
+				result = m;
+			}
+		}
+		return result;
 	}
 	
 	public static void acceptMatchInitial(Match match) {

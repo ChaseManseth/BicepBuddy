@@ -123,22 +123,10 @@ public class Match {
 		if (getClass() != obj.getClass())
 			return false;
 		Match other = (Match) obj;
-		if (dateCreated == null) {
-			if (other.dateCreated != null)
-				return false;
-		} else if (!dateCreated.equals(other.dateCreated))
-			return false;
-		if (killDate == null) {
-			if (other.killDate != null)
-				return false;
-		} else if (!killDate.equals(other.killDate))
-			return false;
 		if (matched == null) {
 			if (other.matched != null)
 				return false;
 		} else if (!matched.equals(other.matched))
-			return false;
-		if (status != other.status)
 			return false;
 		if (Double.doubleToLongBits(strength) != Double.doubleToLongBits(other.strength))
 			return false;

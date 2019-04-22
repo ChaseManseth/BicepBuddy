@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import Matching.Match;
-import Matching.MatchAlgorithm;
 import Matching.MatchController;
 import User.User;
 import User.UserController;
@@ -68,7 +67,7 @@ public class OtherProfileView extends JPanel {
 		lblName2.setBounds(480, 26, 235, 19);
 		add(lblName2);
 		
-		if (!MatchAlgorithm.has(u.getAccepted(),new Match(u,UserController.getUser())) || !MatchAlgorithm.has(u.getRejected(),new Match(u,UserController.getUser()))) {
+		if (!MatchController.has(u.getAccepted(),new Match(u,UserController.getUser())) || !MatchController.has(u.getRejected(),new Match(u,UserController.getUser()))) {
 			JButton btnInvite = new JButton("Invite Buddy");
 			btnInvite.setFont(new Font("Dialog", Font.BOLD, 14));
 			btnInvite.setBackground(new Color(34, 139, 34));
@@ -78,11 +77,11 @@ public class OtherProfileView extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					ViewController vc = new ViewController();
 					vc.inviteUserChange(u);
-					if (MatchAlgorithm.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
+					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
 						for (Match m : u.getWaiting()) {
 							List<Match> temp = new ArrayList<>();
 							temp.add(m);
-							if (MatchAlgorithm.has(temp,new Match(u,UserController.getUser()))) {
+							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
 								MatchController.acceptMatchOther(m);
 							}
 						}
@@ -114,11 +113,11 @@ public class OtherProfileView extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					ViewController vc = new ViewController();
 					vc.blockBuddyChange(u);
-					if (MatchAlgorithm.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
+					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
 						for (Match m : u.getWaiting()) {
 							List<Match> temp = new ArrayList<>();
 							temp.add(m);
-							if (MatchAlgorithm.has(temp,new Match(u,UserController.getUser()))) {
+							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
 								MatchController.rejectMatch(m);
 							}
 						}

@@ -20,6 +20,10 @@ public class MatchController {
 		return MatchAlgorithm.directMatch(UserController.getUser(),user);
 	}
 	
+	public static Boolean has(List<Match> matches, Match match) {
+		return MatchAlgorithm.has(matches, match);
+	}
+	
 	public static List<Match> getMatches(User user){
 		return user.getIdle();
 	}

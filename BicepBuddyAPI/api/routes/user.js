@@ -38,13 +38,32 @@ router.post('/signup', (req, res, next)=> {
                             email: req.body.email,
                             password: hash,
                             firstname: req.body.firstname,
-                            lastname: req.body.lastname
+                            lastname: req.body.lastname,
+                            phoneNumber: req.body.phoneNumber,
+                            age: req.body.age,
+                            gender: req.body.gender,
+                            preferredGender: req.body.preferredGender,
+                            goals: req.body.goals,
+                            frequency: req.body.frequency,
+                            timeOfDay: req.body.timeOfDay,
+                            workoutStyle: req.body.workoutStyle,
+                            weight: req.body.weight,
+                            experience: req.body.experience
                         });
 
                         user.save()
                             .then(result => {
+                                const token = jwt.sign({
+                                    email: user.email,
+                                    userId: user._id
+                                    }, 
+                                    JWT_KEY,
+                                    {
+                                        expiresIn: "2h"
+                                    });
                                 res.status(201).json({
                                     message: 'User Created!',
+                                    token: token,
                                     user: user
                                 });
                             })
@@ -106,6 +125,32 @@ router.post('/login', (req, res, next) => {
         });
 });
 
+// Update a user profile info
+router.patch('/:userID', checkAuth, (req, res, next) => {
+    const id = req.params.userID;
+    const accessedId = req.headers.id;
+
+    if(accessedId != null && id == accessedId) {
+        User.findByIdAndUpdate(id, req.body)
+            .exec()
+            .then(result => {
+                res.status(200).json({
+                    message: 'User updated!'
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            });
+    } else {
+        res.status(403).json({
+            message: 'Action not allowed!'
+        });
+    }
+});
+
 // Get a list of all the users
 router.get('/', (req, res, next) => {
     User.find()
@@ -138,8 +183,8 @@ router.get('/', (req, res, next) => {
 router.get('/:userID', (req, res, next) => {
     const id = req.params.userID;
     const accessedId = req.headers.id;
-    console.log(accessedId);
-    console.log(id);
+    // console.log(accessedId);
+    // console.log(id);
 
      // Check If User accessing this user is self
     if(accessedId != null && id == accessedId) {
@@ -172,11 +217,14 @@ router.get('/:userID', (req, res, next) => {
 
 // Delete User
 // TODO: Make sure Admins can delete others accounts
-router.delete("/:userId", checkAuth, isUser, (req, res, next) => {
-    User.deleteOne({_id: req.params.userId})
+router.delete("/:userID", checkAuth, (req, res, next) => {
+    const id = req.params.userID;
+    const accessedId = req.headers.id;
+    if(accessedId != null && id == accessedId) {
+        User.deleteOne({_id: id})
         .exec()
         .then(result => {
-            res.status(500).json({
+            res.status(200).json({
                 messsage: 'User Deleted'
             });
         })
@@ -186,6 +234,13 @@ router.delete("/:userId", checkAuth, isUser, (req, res, next) => {
                 error: err
             });
         });
+    } else {
+        res.status(403).json({
+            message: 'Access not allowed!'
+        });
+    }
+
+    
 });
 
 

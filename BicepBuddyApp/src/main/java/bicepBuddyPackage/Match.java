@@ -33,7 +33,7 @@ public class Match {
 	}
 	//Used for creating temporary matches for checking existance
 	public Match(User user,User other) {
-		this.user = other;
+		this.user = user;
 		this.matched = other;
 		status = Status.Idle;
 		dateCreated = null;

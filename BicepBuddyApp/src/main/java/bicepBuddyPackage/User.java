@@ -1,5 +1,6 @@
 package bicepBuddyPackage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -56,6 +57,10 @@ public class User {
 		this.style = style;
 		this.weight = weight;
 		this.experience = experience;
+		this.accepted = new ArrayList<>();
+		this.rejected = new ArrayList<>();
+		this.idle = new ArrayList<>();
+		this.waiting = new ArrayList<>();
 	}
 	
 	// TODO - for other user info and shit
@@ -76,6 +81,10 @@ public class User {
 		this.style = (String) style;
 		this.weight = (String) weight;
 		this.experience = (String) exp;
+		this.accepted = new ArrayList<>();
+		this.rejected = new ArrayList<>();
+		this.idle = new ArrayList<>();
+		this.waiting = new ArrayList<>();
 	}
 	
 	@Override

@@ -50,7 +50,7 @@ public class MatchGUI extends JPanel{
 		matchStrength.setBounds(109, 96, 682, 70);
 		this.add(matchStrength);
 		matchStrength.setColumns(10);
-		
+		//*********************************************************************************************************************************
 		setCurrentMatch();
 		
 		//button to handle going to previous match in the list.
@@ -71,9 +71,9 @@ public class MatchGUI extends JPanel{
 			}
 		});
 		prevMatchBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		//*********************************************************************************************************************************
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				curMatchShown--;
 				setCurrentMatch();
 			}
@@ -99,9 +99,9 @@ public class MatchGUI extends JPanel{
 				nextMatchBtn.setForeground(new Color(255,255,255));
 			}
 		});
+		//*********************************************************************************************************************************
 		nextMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				curMatchShown++;
 				setCurrentMatch();
 			}
@@ -147,7 +147,7 @@ public class MatchGUI extends JPanel{
 				
 				panel.add(acc);
 				frame.getContentPane().add(panel);
-				
+				//*********************************************************************************************************************************
 				MatchController.acceptMatchInitial(matches.get(curMatchShown));
 				
 				matches.remove(matches.get(curMatchShown));
@@ -203,7 +203,7 @@ public class MatchGUI extends JPanel{
 				rej.setText("You have rejected this match!");
 				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				rej.setEditable(false);
-				
+				//*********************************************************************************************************************************
 				MatchController.rejectMatch(matches.get(curMatchShown));
 				
 				panel.add(rej);
@@ -247,7 +247,7 @@ public class MatchGUI extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
-				//*****************************
+				//*********************************************************************************************************************************
 				Master.getInstance().updateFrame(new OtherProfileView(matches.get(curMatchShown).getMatched()));
 			}
 		});
@@ -275,9 +275,12 @@ public class MatchGUI extends JPanel{
 		frame.getContentPane().add(panel);
 		
 	}
-	
+	//***********************************************************************************************************************************************
 	public void setCurrentMatch() {
 		curMatchShown = curMatchShown % matches.size();
+		if (curMatchShown < 0) {
+			curMatchShown += matches.size();
+		}
 		matchName.setText(matches.get(curMatchShown).getMatched().getfName() + " " + matches.get(curMatchShown).getMatched().getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}

@@ -75,41 +75,16 @@ public class MatchAlgorithm {
         }
 
 		//Check if match already exists
+        List<User> toRemove = new ArrayList<>();
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
         	Match temp = new Match(user,m.getKey());
-        	Boolean exists = false;
         	//Checking accepted, rejected, and idle arrays
-        	if (user.getAccepted() != null) {
-	        	for (Match n : user.getAccepted()) {
-	        		if (n.checkExist(temp)) {
-	        			exists = true;
-	        		}
-	        	}
+        	if (has(user.getAccepted(),temp) || has(user.getRejected(),temp) || has(user.getIdle(),temp) || has(user.getWaiting(),temp)) {
+        		toRemove.add(m.getKey());
         	}
-        	if (user.getRejected() != null) {
-	        	for (Match n : user.getRejected()) {
-	        		if (n.checkExist(temp)) {
-	        			exists = true;
-	        		}
-        		}
-        	}
-        	if (user.getIdle() != null) {
-	        	for (Match n : user.getIdle()) {
-	        		if (n.checkExist(temp)) {
-	        			exists = true;
-	        		}
-	        	}
-        	}
-        	if (user.getWaiting() != null) {
-	        	for (Match n : user.getWaiting()) {
-	        		if (n.checkExist(temp)) {
-	        			exists = true;
-	        		}
-	        	}
-        	}
-        	if (exists) {
-        		ratios.remove(m.getKey());
-        	}
+        }
+        for (User u : toRemove) {
+        	ratios.remove(u);
         }
 
 		//Take top MATCHESRETURNED
@@ -218,5 +193,19 @@ public class MatchAlgorithm {
 		return (int)((1 - ((double)data / (double)length)) * 100);
 	}
 
-
+	public static Boolean has(List<Match> matches, Match match) {
+		for (Match m : matches) {
+			if ((m.getUser().getfName().equals(match.getUser().getfName()) &&			//Checking user to user
+					m.getUser().getlName().equals(match.getUser().getlName()) &&
+					m.getMatched().getfName().equals(match.getMatched().getfName()) &&	//Checking matched to matched
+					m.getMatched().getlName().equals(match.getMatched().getlName())) ||
+					(m.getUser().getfName().equals(match.getMatched().getfName()) &&	//Checking user to matched
+					m.getUser().getlName().equals(match.getMatched().getlName()) &&
+					m.getMatched().getfName().equals(match.getUser().getfName()) &&		//Checking matched to user
+					m.getMatched().getlName().equals(match.getUser().getlName()))) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

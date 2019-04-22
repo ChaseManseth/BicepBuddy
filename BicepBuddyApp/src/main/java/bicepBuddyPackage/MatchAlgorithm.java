@@ -79,7 +79,7 @@ public class MatchAlgorithm {
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
         	Match temp = new Match(user,m.getKey());
         	//Checking accepted, rejected, and idle arrays
-        	if (has(user.getAccepted(),temp) || has(user.getRejected(),temp) || has(user.getIdle(),temp) || has(user.getWaiting(),temp)) {
+        	if (has(user.getAccepted(),temp) || has(user.getRejected(),temp) || has(user.getWaiting(),temp)) {
         		toRemove.add(m.getKey());
         	}
         }

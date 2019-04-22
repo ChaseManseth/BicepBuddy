@@ -33,6 +33,11 @@ public class MatchGUI extends JPanel{
 		MatchController.generateMatches(user);
 		matches = MatchController.getMatches(user);
 		
+		if (matches.size() == 0) {
+			noMatches();
+			return;
+		}
+		
 		//text field to handle match's name
 		matchName = new JTextField();
 		matchName.setFont(new Font("Tahoma", Font.PLAIN, 26));

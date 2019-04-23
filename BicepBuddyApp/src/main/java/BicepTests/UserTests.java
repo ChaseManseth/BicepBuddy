@@ -2,6 +2,7 @@ package BicepTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.After;
 import org.junit.jupiter.api.Test;
 
 import User.User;
@@ -18,6 +19,20 @@ class UserTests {
 		//Coverage plan: User: a., b.
 		assertNotNull(UserController.getUser());
 		assertEquals(u.getEmail(), "chasemanseth@gmail.com");
+		UserController.setUser(null);
+	}
+	
+	@Test
+	void testLoginFails() {
+		UserController uc = new UserController();
+		uc.validateLogin("chasemans", "wowee");
+		
+		assertNull(UserController.getUser());
+	}
+	
+	@After //teardown
+	public void after() {
+		UserController.setUser(null);
 	}
 
 }

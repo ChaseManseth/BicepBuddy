@@ -1,33 +1,25 @@
 package Views;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
-
-import javax.swing.JFrame;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import Matching.Match;
 import Matching.MatchController;
 import User.UserController;
+import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-
-import java.awt.Color;
 
 public class ProfileView extends JPanel {
 
@@ -60,10 +52,6 @@ public class ProfileView extends JPanel {
         }*/
 
 		add(lblPic);
-
-		JLabel lblMore = new JLabel("Recent Matches and Activity Feed");
-		lblMore.setBounds(269, 183, 247, 25);
-		add(lblMore);
 
 		JLabel lblName2 = new JLabel("Your Profile");
 		lblName2.setBounds(96, 11, 135, 15);
@@ -121,11 +109,121 @@ public class ProfileView extends JPanel {
 		});
 		btnStartMatching.setBounds(459, 40, 188, 47);
 		add(btnStartMatching);
-
-		JPanel activityPanel = new JPanel();
-		activityPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		activityPanel.setBounds(269, 219, 587, 281);
-		add(activityPanel);
+		
+		//*************************************************************************************************************************
+		JLabel lblFriends = new JLabel("Buddies");
+		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblFriends.setBounds(269, 183, 150, 25);
+		add(lblFriends);
+		
+		JPanel friendsPanel = new JPanel();
+		friendsPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		friendsPanel.setBounds(269, 219, 150, 281);
+		add(friendsPanel);
+		
+		List<String> data = new ArrayList<>();
+		for (Match m : UserController.getUser().getAccepted()) {
+			if (MatchController.has(m.getMatched().getAccepted(), m) && MatchController.has(m.getUser().getAccepted(), m)) {
+				if (UserController.getUser().getId() == m.getUser().getId()) {
+					data.add(m.getMatched().getfName() + " " + m.getMatched().getlName());
+				}
+				else {
+					data.add(m.getUser().getfName() + " " + m.getUser().getlName());
+				}
+			}
+		}
+		
+		JList freindsList = new JList();
+		freindsList.setListData(data.toArray());
+		freindsList.setFont(new Font("Tahoma", Font.BOLD, 12));
+		MouseListener mouseListener = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		    	if (UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
+		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getMatched()));
+		    	}
+		    	else {
+		           Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getUser()));
+		    	}
+		    }
+		};
+		freindsList.addMouseListener(mouseListener);
+		friendsPanel.add(freindsList);
+		
+		//*************************************************************************************************************************
+		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
+		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblIncomingBuddies.setBounds(589, 188, 150, 14);
+		add(lblIncomingBuddies);
+		
+		JPanel incomingPanel = new JPanel();
+		incomingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		incomingPanel.setBounds(589, 219, 150, 281);
+		add(incomingPanel);
+		
+		List<String> data1 = new ArrayList<>();
+		for (Match m : UserController.getUser().getWaiting()) {
+			if (UserController.getUser().getId() == m.getUser().getId()) {
+				data1.add(m.getMatched().getfName() + " " + m.getMatched().getlName() + " wants to be your buddy!");
+			}
+			else {
+				data1.add(m.getUser().getfName() + " " + m.getUser().getlName() + " wants to be your buddy!");
+			}
+		}
+		
+		JList incomingList = new JList();
+		incomingList.setListData(data1.toArray());
+		incomingList.setFont(new Font("Tahoma", Font.BOLD, 12));
+		MouseListener mouseListener1 = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		    	if (UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
+		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getMatched()));
+		    	}
+		    	else {
+		            Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getUser()));
+		    	}
+		    }
+		};
+		incomingList.addMouseListener(mouseListener1);
+		incomingPanel.add(incomingList);
+		
+		//**********************************************************************************************************************************
+		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
+		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblPendingBuddies.setBounds(429, 189, 150, 14);
+		add(lblPendingBuddies);
+		
+		JPanel pendingPanel = new JPanel();
+		pendingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		pendingPanel.setBounds(429, 219, 150, 281);
+		add(pendingPanel);
+		
+		List<String> data2 = new ArrayList<>();
+		for (Match m : UserController.getUser().getWaiting()) {
+			if (!(MatchController.has(m.getMatched().getAccepted(), m) && MatchController.has(m.getUser().getAccepted(), m))) {
+				if (UserController.getUser().getId() == m.getUser().getId()) {
+					data2.add(m.getMatched().getfName() + " " + m.getMatched().getlName() + " is responding!");
+				}
+				else {
+					data2.add(m.getUser().getfName() + " " + m.getUser().getlName() + " is responding!");
+				}
+			}
+		}
+		
+		JList pendingList = new JList();
+		pendingList.setListData(data2.toArray());
+		pendingList.setFont(new Font("Tahoma", Font.BOLD, 12));
+		MouseListener mouseListener2 = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		    	if (UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
+		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getMatched()));
+		    	}
+		    	else {
+		            Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getUser()));
+		    	}
+		    }
+		};
+		pendingList.addMouseListener(mouseListener2);
+		pendingPanel.add(pendingList);
 
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -144,5 +242,6 @@ public class ProfileView extends JPanel {
 		JLabel lblAge = new JLabel(age);
 		lblAge.setBounds(10, 300, 165, 15);
 		infoPanel.add(lblAge);
+		
 	}
 }

@@ -168,7 +168,7 @@ private static Master master = null;
 		});
 		menuBar.add(mnProfile);
 
-		JMenu mnOtherUserProfile = new JMenu("Other User Profile");
+		/*JMenu mnOtherUserProfile = new JMenu("Other User Profile");
 		mnOtherUserProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		mnOtherUserProfile.addMouseListener(new MouseAdapter() {
 			@Override
@@ -178,7 +178,7 @@ private static Master master = null;
 				updateFrame(new OtherProfileView(udb.testerGetRandomUser()));
 			}
 		});
-		menuBar.add(mnOtherUserProfile);
+		menuBar.add(mnOtherUserProfile);*/
 
 		JMenu settings = new JMenu("Settings");
 		settings.setFont(new Font("Segoe UI", Font.PLAIN, 12));

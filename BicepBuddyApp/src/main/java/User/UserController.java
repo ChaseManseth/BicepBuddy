@@ -33,9 +33,9 @@ public class UserController {
 	private static User user = null;
 	private static UserController uc = null;
 	// Testing
-	private String baseUrl = "http://localhost:3000/user/";
+	//private String baseUrl = "http://localhost:3000/user/";
 	// Production
-//	private String baseUrl = "http://bb.manseth.com/user/";
+	private String baseUrl = "http://bb.manseth.com/user/";
 	
 	// Singleton getInstance
 	public static UserController getInstance() {

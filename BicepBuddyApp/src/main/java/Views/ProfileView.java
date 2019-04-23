@@ -199,7 +199,7 @@ public class ProfileView extends JPanel {
 		
 		List<String> data2 = new ArrayList<>();
 		for (Match m : UserController.getUser().getWaiting()) {
-			if (!(MatchController.has(m.getMatched().getAccepted(), m) && MatchController.has(m.getUser().getAccepted(), m))) {
+			if (MatchController.has(m.getMatched().getWaiting(), m) && MatchController.has(m.getUser().getAccepted(), m)) {
 				if (UserController.getUser().getId() == m.getUser().getId()) {
 					data2.add(m.getMatched().getfName() + " " + m.getMatched().getlName() + " is responding!");
 				}

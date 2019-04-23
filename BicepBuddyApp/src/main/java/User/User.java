@@ -65,8 +65,26 @@ public class User {
 		this.waiting = new ArrayList<>();
 	}
 	
-	// TODO - for other user info and shit
-//	public User() {}
+	// Modified Constructor for getting some data but not all from other users 
+	public User(String id, String firstname, String lastname, String gender, String profilePic, String workoutStyle,
+			String goals, String experience, String timeOfDay, String frequency) {
+		this.id = id;
+		this.fName = firstname;
+		this.lName = lastname;
+		this.gender = gender;
+		this.style = workoutStyle;
+		this.goals = goals;
+		this.experience = experience;
+		this.timeOfDay = timeOfDay;
+		this.frequency = frequency;
+		
+		// Create list
+		this.accepted = new ArrayList<>();
+		this.rejected = new ArrayList<>();
+		this.idle = new ArrayList<>();
+		this.waiting = new ArrayList<>();
+	}
+	
 	public void updateUser(String email, String fName, String lName, Object style, Object timeOfDay,
 			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
 			String age, String phone) {

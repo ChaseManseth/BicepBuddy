@@ -1,11 +1,8 @@
 package User;
 
-import java.awt.FlowLayout;
 import java.nio.charset.StandardCharsets;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,10 +31,20 @@ import bicepBuddyPackage.Master;
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
+	private static UserController uc = null;
 	// Testing
-//	private String baseUrl = "http://localhost:3000/user/";
+	private String baseUrl = "http://localhost:3000/user/";
 	// Production
-	private String baseUrl = "http://bb.manseth.com/user/";
+//	private String baseUrl = "http://bb.manseth.com/user/";
+	
+	// Singleton getInstance
+	public static UserController getInstance() {
+		if(uc == null) {
+			uc = new UserController();
+		}
+		
+		return uc;
+	}
 
 	public static User getUser() {
 		return user;
@@ -420,6 +427,82 @@ public class UserController {
 			request.releaseConnection();
 		}
 		
+	}
+	
+	// Gets all users based on gender
+	public List<User> getUsersByGender(String gender) {
+		List<User> userList = new ArrayList<User>();
+		
+		// Open the post response
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpGet request;
+		
+		// Chose the right url to query
+		if(gender.toLowerCase().equalsIgnoreCase("male")) {
+			request = new HttpGet(baseUrl + "/get_users_by_gender/" + "male");
+		} else if(gender.toLowerCase().equalsIgnoreCase("female")) {
+			request = new HttpGet(baseUrl + "/get_users_by_gender/" + "female");
+		} else {
+			request = new HttpGet(baseUrl + "/get_users_by_gender/" + "none");
+		}
+		
+		// Try to execute the request
+		try {
+			// Set headers
+			request.addHeader("content-type", "application/json");
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(request);
+			
+			// Get the Respose Back
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+			
+			// Get the Respose Back
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	// SUCCESS!
+		    	
+		    	// Get response object
+			    JSONObject o = (JSONObject) new JSONParser().parse(json);
+			    
+			    // Get the Array of Users
+			    JSONArray userArr = (JSONArray) o.get("users");
+			    
+			    // Loop through each user
+			    for(int i = 0; i < userArr.size(); i++) {
+			    	JSONObject user = (JSONObject) userArr.get(i);
+			    	
+			    	// Getting the data of that user
+			    	String id = (String) user.get("_id");
+			    	String firstname = (String) user.get("firstname");
+			    	String lastname = (String) user.get("lastname");
+			    	String genderDB = (String) user.get("gender");
+			    	String profilePic = (String) user.get("profilePic");
+			    	String workoutStyle = (String) user.get("workoutStyle");
+			    	String goals = (String) user.get("goals");
+			    	String experience = (String) user.get("experience");
+			    	String timeOfDay = (String) user.get("timeOfDay");
+			    	String frequency = (String) user.get("frequency");
+			    	
+			    	User otherUser = new User(id, firstname, lastname, genderDB, profilePic, workoutStyle, 
+			    			goals, experience, timeOfDay, frequency);
+			    	
+		    		userList.add(otherUser);	
+			    }
+		    	
+		    } else {
+		    	// FAIL!
+		    	System.err.println("Shit failed yo");
+		    }
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			request.releaseConnection();
+		}
+		
+		
+		return userList;
 	}
 	
 }

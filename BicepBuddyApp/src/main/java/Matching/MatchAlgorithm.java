@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import User.User;
+import User.UserController;
 
 public class MatchAlgorithm {
 	//Priority % value
@@ -116,7 +117,11 @@ public class MatchAlgorithm {
 
 	//Get all possible users who fit the Priority 1 Category
 	public static List<User> possibleMatches(User user){
-		//TO-DO
+		//TODO add DB Connection to get users based on Gender
+		UserController uc = UserController.getInstance();
+		
+		// Gets a list of users based on the current users prefered gender
+		List<User> users1 = uc.getUsersByGender(user.getPrefGender());
 		
 		User user1 = new User("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular");
 		User user2 = new User("Other","Dude","otherdude@gmail.com","098-765-4321","26","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
@@ -128,7 +133,7 @@ public class MatchAlgorithm {
 		users.add(user3);
 		users.add(user4);
 
-		return users;
+		return users1;
 	}
 
 	@SuppressWarnings("deprecation")

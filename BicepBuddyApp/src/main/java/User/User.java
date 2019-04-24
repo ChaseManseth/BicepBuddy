@@ -67,7 +67,7 @@ public class User {
 	
 	// Modified Constructor for getting some data but not all from other users 
 	public User(String id, String firstname, String lastname, String gender, String profilePic, String workoutStyle,
-			String goals, String experience, String timeOfDay, String frequency) {
+			String goals, String experience, String timeOfDay, String frequency, String preferredGender, String age) {
 		this.id = id;
 		this.fName = firstname;
 		this.lName = lastname;
@@ -77,6 +77,8 @@ public class User {
 		this.experience = experience;
 		this.timeOfDay = timeOfDay;
 		this.frequency = frequency;
+		this.prefGender = preferredGender;
+		this.age = age;
 		
 		// Create list
 		this.accepted = new ArrayList<>();

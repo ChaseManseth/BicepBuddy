@@ -260,7 +260,7 @@ public class MatchGUI extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
 				//*********************************************************************************************************************************
-				Master.getInstance().updateFrame(new OtherProfileView(UserController.getUserById(matches.get(curMatchShown)).getOther()));
+				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().getUserById(matches.get(curMatchShown).getOther())));
 			}
 		});
 		
@@ -293,7 +293,7 @@ public class MatchGUI extends JPanel{
 		if (curMatchShown < 0) {
 			curMatchShown += matches.size();
 		}
-		matchName.setText(UserController.getUserById(matches.get(curMatchShown).getOther()).getfName() + " " + UserController.getUserById(matches.get(curMatchShown).getOther()).getlName());
+		matchName.setText(UserController.getInstance().getUserById(matches.get(curMatchShown).getOther()).getfName() + " " + UserController.getInstance().getUserById(matches.get(curMatchShown).getOther()).getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}
 	

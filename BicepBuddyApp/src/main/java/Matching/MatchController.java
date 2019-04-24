@@ -26,66 +26,66 @@ public class MatchController {
 	}
 	
 	public static User getOther(Match match) {
-		return UserController.getUserById(match.getOther());
+		return UserController.getInstance().getUserById(match.getOther());
 	}
 	
 	public static Match findMatch(Match match) {
 		Match result = null;
-		if (UserController.getUserById(UserController.getUser()).getAccepted().contains(match)) {
-			result = UserController.getUserById(UserController.getUser()).getAccepted().get(UserController.getUserById(UserController.getUser()).getAccepted().indexOf(match));
+		if (UserController.getUser().getAccepted().contains(match)) {
+			result = UserController.getUser().getAccepted().get(UserController.getUser().getAccepted().indexOf(match));
 		}
-		else if (UserController.getUserById(UserController.getUser()).getRejected().contains(match)) {
-			result = UserController.getUserById(UserController.getUser()).getRejected().get(UserController.getUserById(UserController.getUser()).getRejected().indexOf(match));
+		else if (UserController.getUser().getRejected().contains(match)) {
+			result = UserController.getUser().getRejected().get(UserController.getUser().getRejected().indexOf(match));
 		}
-		else if (UserController.getUserById(UserController.getUser()).getWaiting().contains(match)) {
-			result = UserController.getUserById(UserController.getUser()).getWaiting().get(UserController.getUserById(UserController.getUser()).getWaiting().indexOf(match));
+		else if (UserController.getUser().getWaiting().contains(match)) {
+			result = UserController.getUser().getWaiting().get(UserController.getUser().getWaiting().indexOf(match));
 		}
 		return result;
 	}
 	
 	public static void acceptMatchInitial(Match match) {
 		//add to primary accepted
-		List<Match> matches = UserController.getUserById(UserController.getUser()).getAccepted();
+		List<Match> matches = UserController.getUser().getAccepted();
 		matches.add(match);
-		UserController.getUserById(UserController.getUser()).setAccepted(matches);
+		UserController.getUser().setAccepted(matches);
 		//add to other waiting
-		matches = UserController.getUserById(match.getOther()).getWaiting();
+		matches = UserController.getInstance().getUserById(match.getOther()).getWaiting();
 		matches.add(match);
-		UserController.getUserById(match.getOther()).setWaiting(matches);
+		UserController.getInstance().getUserById(match.getOther()).setWaiting(matches);
 	}
 	
 	public static void acceptMatchOther(Match match) {
 		//add to other accepted
 		match.accept();
-		List<Match> matches = UserController.getUserById(match.getOther()).getWaiting();
+		List<Match> matches = UserController.getInstance().getUserById(match.getOther()).getWaiting();
 		matches.remove(match);
-		UserController.getUserById(match.getOther()).setWaiting(matches);
+		UserController.getInstance().getUserById(match.getOther()).setWaiting(matches);
 		
-		matches = UserController.getUserById(match.getOther()).getAccepted();
+		matches = UserController.getInstance().getUserById(match.getOther()).getAccepted();
 		matches.add(match);
-		UserController.getUserById(match.getOther()).setAccepted(matches);
+		UserController.getInstance().getUserById(match.getOther()).setAccepted(matches);
 	}
 	
 	public static void rejectMatch(Match match) {
 		//add to both rejected
 		match.reject();
-		List<Match> matches = UserController.getUserById(UserController.getUser()).getAccepted();
+		List<Match> matches = UserController.getUser().getAccepted();
 		if (matches.contains(match)) {
 			matches.remove(match);
-			UserController.getUserById(UserController.getUser()).setAccepted(matches);
+			UserController.getUser().setAccepted(matches);
 		}
-		matches = UserController.getUserById(UserController.getUser()).getRejected();
+		matches = UserController.getUser().getRejected();
 		matches.add(match);
-		UserController.getUserById(UserController.getUser()).setRejected(matches);
+		UserController.getUser().setRejected(matches);
 		
-		UserController.getUserById(match.getOther()).getWaiting();
+		UserController.getInstance().getUserById(match.getOther()).getWaiting();
 		if (matches.contains(match)) {
 			matches.remove(match);
-			UserController.getUserById(match.getOther()).setWaiting(matches);
+			UserController.getInstance().getUserById(match.getOther()).setWaiting(matches);
 		}
-		matches = UserController.getUserById(match.getOther()).getRejected();
+		matches = UserController.getInstance().getUserById(match.getOther()).getRejected();
 		matches.add(match);
-		UserController.getUserById(match.getOther()).setRejected(matches);
+		UserController.getInstance().getUserById(match.getOther()).setRejected(matches);
 	}
 	
 }

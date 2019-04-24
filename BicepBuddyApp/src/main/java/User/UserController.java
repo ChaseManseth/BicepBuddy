@@ -43,9 +43,9 @@ public class UserController {
 	private static UserController uc = null;
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
-	private String baseUrl = "http://localhost:3000/user/";
+	//private String baseUrl = "http://localhost:3000/user/";
 	// Production
-//	private String baseUrl = "http://bb.manseth.com/user/";
+	private String baseUrl = "http://bb.manseth.com/user/";
 
 	// Singleton getInstance
 	public static UserController getInstance() {

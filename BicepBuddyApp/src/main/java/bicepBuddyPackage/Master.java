@@ -36,10 +36,12 @@ import java.awt.Font;
 
 public class Master {
 
-public final static Logger appLogger = Logger.getLogger(Master.class.getName());
-private static Master master = null;
+	public final static Logger appLogger = Logger.getLogger(Master.class.getName());
+	//master is an example of the COMPOSITE PATTERN
+	//holds all of the components (views)
+	private static Master master = null;
 
-	//create static logger (singleton)
+	//create static logger (SINGLETON PATTERN)
 	static {
 		try {
 			InputStream configFile = new FileInputStream("logger.properties");
@@ -62,7 +64,7 @@ private static Master master = null;
 	private static JFrame frame;
 	private static JPanel panel;
 	
-	//singleton Master
+	//SINGLETON PATTERN Master Frame
 	public static Master getInstance() {
 		if(master == null) {
 			appLogger.info(":: Loading Master Frame");
@@ -97,6 +99,8 @@ private static Master master = null;
 
 	/**
 	 * Initialize the contents of the frame.
+	 * FACADE: encapsulates the initialization process.
+	 * COMMAND PATTERN: Every ActionListener represents an example of command.
 	 */
 	private void initialize() {
 
@@ -138,6 +142,7 @@ private static Master master = null;
 		frame.setVisible(true);
 	}
 
+	//FACADE: Handles switching out the panel every time we change views.
 	public static void updateFrame(JPanel j) {
 		panel.setVisible(false);
 		panel = j;
@@ -150,6 +155,8 @@ private static Master master = null;
 		frame.setVisible(true);
 	}
 
+	//FACADE PATTERN: function encapsulates the loading of the logged
+	//in menu bar.
 	public void loggedInMenuLoad() {
 		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
@@ -231,6 +238,8 @@ private static Master master = null;
 		menuBar.add(logout);
 	}
 
+	//FACADE PATTERN: encapsulates loading the logged
+	//out menu bar
 	public void loggedOutMenuLoad() {
 		JMenuBar menuBar = new JMenuBar();
 		this.frame.setJMenuBar(null);

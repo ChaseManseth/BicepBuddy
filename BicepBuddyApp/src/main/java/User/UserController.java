@@ -28,6 +28,14 @@ import bicepBuddyPackage.Master;
  * User Controller will be able to speak with user and the "DB".
  */
 
+/*
+ * UserController is an example of the PROXY PATTERN, acting as a wrapper for
+ * the User object and acting as an intermediate between other classes.
+ * 
+ * Also an example of the CHAIN OF RESPONSIBILITY PATTERN. Pattern explains that
+ * there is a class that decouples the sender and receiver of requests. UserController
+ * will decouple requesters from the User object.
+ */
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
@@ -54,7 +62,7 @@ public class UserController {
 		user = curUser;
 	}
 	
-	//TODO
+	//FACTORY METHOD PATTERN
 	public static void setUserFromDB(String[] uDetails) {
 		user = new User();
 		Master.appLogger.info(":: Setting the static user object.");
@@ -210,6 +218,7 @@ public class UserController {
 		}
 	}
 	
+	//FACTORY METHOD PATTERN
 	@SuppressWarnings("unchecked")
 	public void createUser(String fName, String lName, String email, String phone, String age, 
 			String gender, String prefGender, String goals, String frequency, 

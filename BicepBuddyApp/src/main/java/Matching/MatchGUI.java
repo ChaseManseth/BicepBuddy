@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import User.User;
+import User.UserController;
 import User.UserDB;
 import Views.OtherProfileView;
 import Views.ProfileView;
@@ -259,7 +260,7 @@ public class MatchGUI extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
 				//*********************************************************************************************************************************
-				Master.getInstance().updateFrame(new OtherProfileView(matches.get(curMatchShown).getMatched()));
+				Master.getInstance().updateFrame(new OtherProfileView(UserController.getUserById(matches.get(curMatchShown)).getOther()));
 			}
 		});
 		
@@ -292,7 +293,7 @@ public class MatchGUI extends JPanel{
 		if (curMatchShown < 0) {
 			curMatchShown += matches.size();
 		}
-		matchName.setText(matches.get(curMatchShown).getMatched().getfName() + " " + matches.get(curMatchShown).getMatched().getlName());
+		matchName.setText(UserController.getUserById(matches.get(curMatchShown).getOther()).getfName() + " " + UserController.getUserById(matches.get(curMatchShown).getOther()).getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}
 	

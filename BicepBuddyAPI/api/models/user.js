@@ -16,9 +16,18 @@ const userSchema = mongoose.Schema({
     gender: {type: String, default: "none"},
     phoneNumber: {type: String, default: "none"},
     profilePic: {type: String, default: "none"},
-    //acceptedMatches: [{any: []}], //Once Match is Ready Add it
-    //rejectedMatches: [{any: []}],
-    //matches: [{any: []}],
+    acceptedMatches: [{
+        type: String
+    }],
+    rejectedMatches: [{
+        type: String
+    }],
+    idleMatches: [{
+        type: String
+    }],
+    waitingMatches: [{
+        type: String
+    }],
     preferredGender: {type: String, default: "none"},
     weight: {type: String, default: "none"},
     workoutStyle: {type: String, default: "none"},

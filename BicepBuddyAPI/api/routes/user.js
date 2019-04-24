@@ -179,6 +179,56 @@ router.get('/', (req, res, next) => {
         });
 });
 
+// Get a list of users based on Gender
+router.get('/get_users_by_gender/:gender', (req, res, next) => {
+    const gender = req.params.gender;
+
+    // Male
+    if(gender == 'male') {
+        User.find({'gender': 'Male'})
+        .exec()
+        .then(docs => {
+            res.status(200).json(docs);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+    
+    // Female
+    else if (gender == 'female') {
+        User.find({'gender': 'Female'})
+        .exec()
+        .then(docs => {
+            res.status(200).json(docs);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+    }
+
+    // No Gender Specified
+    else {
+        User.find({'gender': 'N/A'})
+        .exec()
+        .then(docs => {
+            res.status(200).json(docs);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+    }
+});
+
 // Get a specific user
 router.get('/:userID', (req, res, next) => {
     const id = req.params.userID;
@@ -186,32 +236,42 @@ router.get('/:userID', (req, res, next) => {
     // console.log(accessedId);
     // console.log(id);
 
+    User.findById(id)
+    .exec()
+    .then(result => {
+        return res.status(200).json({
+            result: result
+        });
+    })
+    .catch(err => {
+        return res.status(409);
+    });
      // Check If User accessing this user is self
-    if(accessedId != null && id == accessedId) {
-        User.findById(id)
-        .exec()
-        .then(result => {
-            return res.status(200).json({
-                result: result
-            });
-        })
-        .catch(err => {
-            return res.status(409);
-        });
-    } else {
-        User.findById(id)
-        .select('firstname lastname gender profilePic preferredGender' + 
-        'weight workoutStyle goals experience timeOfDay frequency')
-        .exec()
-        .then(result => {
-            return res.status(200).json({
-                result: result
-            });
-        })
-        .catch(err => {
-            return res.status(409);
-        });
-    }
+    // if(accessedId != null && id == accessedId) {
+    //     User.findById(id)
+    //     .exec()
+    //     .then(result => {
+    //         return res.status(200).json({
+    //             result: result
+    //         });
+    //     })
+    //     .catch(err => {
+    //         return res.status(409);
+    //     });
+    // } else {
+    //     User.findById(id)
+    //     .select('firstname lastname gender profilePic preferredGender' + 
+    //     'weight workoutStyle goals experience timeOfDay frequency')
+    //     .exec()
+    //     .then(result => {
+    //         return res.status(200).json({
+    //             result: result
+    //         });
+    //     })
+    //     .catch(err => {
+    //         return res.status(409);
+    //     });
+    // }
     
 });
 
@@ -241,6 +301,26 @@ router.delete("/:userID", checkAuth, (req, res, next) => {
     }
 
     
+});
+
+// Add an match id to a users acceptedMatch array
+router.patch('/:userID/accept/:matchID', (req, res, next) => {
+    const id = req.params.userID;
+    const matchId = req.params.matchID;
+
+    User.findByIdAndUpdate(id, {$push: {acceptedMatches: matchId}})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Match added!'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 

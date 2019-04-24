@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./api/routes/user');
+const matchRoutes = require('./api/routes/match');
 
 // Delete this when in production
 const mongodbPW = "uXwozBcr3tFtWnbI";
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use('/user', userRoutes);
+app.use('/match', matchRoutes);
 
 // Error Handling
 app.use((req, res, next) => {

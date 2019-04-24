@@ -48,7 +48,7 @@ public class MatchAlgorithm {
 	public static String FREQUENCIES[] = {"N/A", "Once","3 Times","5 Times","Every Day","Multiple Times"};
 	public static String GOALS[] = {"N/A", "Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
 	public static String EXPERIENCE[] = {"N/A", "None","Little","Moderate","Regular","Experienced"};
-	//public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
+	public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
 
 
 	public MatchAlgorithm() {}
@@ -86,7 +86,7 @@ public class MatchAlgorithm {
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
         	Match temp = new Match(user,m.getKey());
         	//Checking accepted, rejected, and idle arrays
-        	if (has(user.getAccepted(),temp) || has(user.getRejected(),temp) || has(user.getWaiting(),temp)) {
+        	if (user.getAccepted().contains(temp) || user.getRejected().contains(temp) || user.getWaiting().contains(temp)) {
         		toRemove.add(m.getKey());
         	}
         }
@@ -202,21 +202,5 @@ public class MatchAlgorithm {
 			data *= -1;
 		}
 		return (int)((1 - ((double)data / (double)length)) * 100);
-	}
-
-	public static Boolean has(List<Match> matches, Match match) {
-		for (Match m : matches) {
-			if ((m.getUser().getfName().equals(match.getUser().getfName()) &&			//Checking user to user
-					m.getUser().getlName().equals(match.getUser().getlName()) &&
-					m.getMatched().getfName().equals(match.getMatched().getfName()) &&	//Checking matched to matched
-					m.getMatched().getlName().equals(match.getMatched().getlName())) ||
-					(m.getUser().getfName().equals(match.getMatched().getfName()) &&	//Checking user to matched
-					m.getUser().getlName().equals(match.getMatched().getlName()) &&
-					m.getMatched().getfName().equals(match.getUser().getfName()) &&		//Checking matched to user
-					m.getMatched().getlName().equals(match.getUser().getlName()))) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

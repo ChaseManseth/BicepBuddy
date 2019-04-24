@@ -29,6 +29,14 @@ import bicepBuddyPackage.Master;
  * User Controller will be able to speak with user and the "DB".
  */
 
+/*
+ * UserController is an example of the PROXY PATTERN, acting as a wrapper for
+ * the User object and acting as an intermediate between other classes.
+ *
+ * Also an example of the CHAIN OF RESPONSIBILITY PATTERN. Pattern explains that
+ * there is a class that decouples the sender and receiver of requests. UserController
+ * will decouple requesters from the User object.
+ */
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
@@ -38,13 +46,13 @@ public class UserController {
 	private String baseUrl = "http://localhost:3000/user/";
 	// Production
 //	private String baseUrl = "http://bb.manseth.com/user/";
-	
+
 	// Singleton getInstance
 	public static UserController getInstance() {
 		if(uc == null) {
 			uc = new UserController();
 		}
-		
+
 		return uc;
 	}
 
@@ -55,12 +63,12 @@ public class UserController {
 	public static void setUser(User curUser) {
 		user = curUser;
 	}
-	
-	//TODO
+
+	//FACTORY METHOD PATTERN
 	public static void setUserFromDB(String[] uDetails) {
 		user = new User();
 		Master.appLogger.info(":: Setting the static user object.");
-		
+
 		user.setEmail(uDetails[0]);
 		user.setfName(uDetails[2]);
 		user.setlName(uDetails[3]);
@@ -83,12 +91,12 @@ public class UserController {
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-	
-	
-	
+
+
+
 	//TODO
-	public void validateSignup(String fName, String lname, String email, String phone, String age, 
-			String gender, String prefGender, String goals, String freq, 
+	public void validateSignup(String fName, String lname, String email, String phone, String age,
+			String gender, String prefGender, String goals, String freq,
 			String timeOfDay, String style, String weight, String exp, String pass,
 			String confPass) {
 		if(fName.isEmpty() || lname.isEmpty() || email.isEmpty() || pass.isEmpty() ||
@@ -96,18 +104,18 @@ public class UserController {
 			ErrorGUI eg = new ErrorGUI("Required fields: first name, last name, email, password");
 			return;
 		}
-		
+
 //		UserDB dbInstance = new UserDB();
 //		if(!dbInstance.notExists(email)) {
 //			ErrorGUI eg = new ErrorGUI("This email exists in the system already.");
 //			return;
 //		}
-		
+
 		if(!pass.contentEquals(confPass)) {
 			ErrorGUI eg = new ErrorGUI("Make the passwords match to create account.");
 			return;
 		}
-		
+
 		try {
 			if(!phone.isEmpty()) {
 				Long.parseLong(phone);
@@ -122,12 +130,12 @@ public class UserController {
 		}
 		//we got here because their stuff was accepted
 		Master.appLogger.info(":: User's signup information was accepted.");
-		
+
 		createUser(fName, lname, email, phone, age, gender, prefGender, goals,
 				   freq, timeOfDay, style, weight, exp, pass);
-		
+
 	}
-	
+
 	//TODO
 	@SuppressWarnings("unchecked")
 	public void validateLogin(String email, String pass) {
@@ -137,42 +145,42 @@ public class UserController {
 //			Master.getInstance().loggedInMenuLoad();
 //			Master.getInstance().updateFrame(new ProfileView());
 //		}
-		
+
 		// Actual Database login
 		// Create the object in JSON
 		JSONObject loginJSON = new JSONObject();
 		loginJSON.put("email", email);
 		loginJSON.put("password", pass);
-		
+
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(baseUrl + "login");
-		
+
 		try {
 			// Write to the body and set the Headers
 			StringEntity params = new StringEntity(loginJSON.toJSONString());
 		    request.addHeader("content-type", "application/json");
 		    request.setEntity(params);
-		    
+
 			 // Execute the POST
 		    HttpResponse response = httpClient.execute(request);
-		    
+
 		    // Get the Respose Back
 		    HttpEntity entity = response.getEntity();
 		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-		    
+
 		    // Check if response was successful
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// Get response object
 			    JSONObject o = (JSONObject) new JSONParser().parse(json);
-			    
+
 			    // Get JWT
 			    String jwt = (String) o.get("token");
-			    
+
 			    // Get User Info Namely ID
 			    JSONArray userArr = (JSONArray) o.get("user");
 			    JSONObject userObj = (JSONObject) userArr.get(0);
-			    
+
 			    // Get all user data
 			    String id = (String) userObj.get("_id");
 				String fName = (String) userObj.get("firstname");
@@ -188,105 +196,106 @@ public class UserController {
 				String style = (String) userObj.get("workoutStyle");
 				String weight = (String) userObj.get("weight");
 				String experience = (String) userObj.get("experience");
-				
+
 				// Get all the match arrays
 				List<Match> accepted = new ArrayList<Match>();
 				List<Match> rejected = new ArrayList<Match>();
 				List<Match> idle = new ArrayList<Match>();
 				List<Match> waiting = new ArrayList<Match>();
-				
+
 				JSONArray accept = (JSONArray) userObj.get("acceptedMatches");
 				JSONArray reject = (JSONArray) userObj.get("rejectedMatches");
 				JSONArray idl = (JSONArray) userObj.get("idleMatches");
 				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
-				
+
 				// Go through all the accepted matches and get the from the DB, build them and store it
 				// Accept Matches
 				for(int i = 0; i < accept.size(); i++) {
 					String matchId = (String) accept.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					accepted.add(m);
-					
+
 					// System.out.println(matchId);
 				}
-				
+
 				// Reject Matches
 				for(int i = 0; i < reject.size(); i++) {
 					String matchId = (String) reject.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					rejected.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
+
 				// Idle Matches
 				for(int i = 0; i < idl.size(); i++) {
 					String matchId = (String) idl.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					idle.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
+
 				// Waiting Matches
 				for(int i = 0; i < wait.size(); i++) {
 					String matchId = (String) wait.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					waiting.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
-				// Build the user 
-				user = new User(fName, lName, emailDB, phone, age, gender, prefGender, 
+
+				// Build the user
+				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
 						goals, frequency, timeOfDay, style, weight, experience);
-				
+
 				// Set ID, JWT and Matchs Arrays
 				user.setId(id);
 				user.setJwt(jwt);
-				
+
 				user.setAccepted(accepted);
 				user.setRejected(rejected);
 				user.setIdle(idle);
 				user.setWaiting(waiting);
-				
+
 				// Return the profile page
 				Master.getInstance().loggedInMenuLoad();
 				Master.getInstance().updateFrame(new ProfileView());
-				
+
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
 		    }
-		    
-			
-		    
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			request.releaseConnection();
 		}
 	}
-	
-	// User Signup
+
+    // User Signup
+	//FACTORY METHOD PATTERN
 	@SuppressWarnings("unchecked")
-	public void createUser(String fName, String lName, String email, String phone, String age, 
-			String gender, String prefGender, String goals, String frequency, 
+	public void createUser(String fName, String lName, String email, String phone, String age,
+			String gender, String prefGender, String goals, String frequency,
 			String timeOfDay, String style, String weight, String experience, String password) {
 		//name and email fields must have been filled, but if other fields are empty,
 		//then set them to N/A.
-		
+
 		if(gender.isEmpty()) {
 			gender = "N/A";
 		}
@@ -317,7 +326,7 @@ public class UserController {
 		if(age.isEmpty()) {
 			age = "N/A";
 		}
-		
+
 		// Create the JSON to post to the API
 		JSONObject signUpJSON = new JSONObject();
 		signUpJSON.put("firstname", fName);
@@ -334,29 +343,29 @@ public class UserController {
 		signUpJSON.put("workoutStyle", style);
 		signUpJSON.put("weight", weight);
 		signUpJSON.put("experience", experience);
-		
+
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(baseUrl + "signup");
-		
+
 		try {
 			// Add JSON to the body and headers indicating type
 			StringEntity params = new StringEntity(signUpJSON.toJSONString());
 		    request.addHeader("content-type", "application/json");
 		    request.setEntity(params);
-			
+
 		    // Execute the request
 		    HttpResponse response = httpClient.execute(request);
-		    
+
 		    // Get the body of the response
 		    HttpEntity entity = response.getEntity();
 		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-		    
+
 		    JSONParser parse = new JSONParser();
 		    JSONObject o = (JSONObject) parse.parse(json);
-		    
+
 //		    System.out.println(o.toJSONString());
-		    
+
 		    // Successful Signup
 		    if(response.getStatusLine().getStatusCode() == 201) {
 		    	// Add the user Object Info
@@ -366,21 +375,21 @@ public class UserController {
 		    	// Add it to the DB
 				UserDB udb = new UserDB();
 				udb.addUser(user, password);
-				
+
 				// Add the ID to the new User as well as the JWT
 				JSONObject userJSON = (JSONObject) o.get("user");
 				user.setId((String) userJSON.get("_id"));
 				user.setJwt((String) o.get("token"));
-				
+
 				// Update the frame and Profile plus the Menu BAR
 				Master.getInstance().updateFrame(new ProfileView());
 				Master.getInstance().loggedInMenuLoad();
-				
+
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI((String) o.get("message"));
 				return;
 		    }
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 
@@ -388,29 +397,29 @@ public class UserController {
 			// Close or stop the connection
 		    request.releaseConnection();
 		}
-		
-		
+
+
 	}
 
 	public void deleteAccount(User u) {
 //		UserDB udb = new UserDB();
 //		udb.deleteUser(u);
 //		Master.getInstance().getFrame().dispose();
-		
+
 		// Actually Delete a User from the DB
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpDelete request = new HttpDelete(baseUrl + user.getId());
-		
+
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
 			request.addHeader("Authorization", "Bearer " + user.getJwt());
 			request.addHeader("id", user.getId());
-			
+
 			// Execute the request
 			HttpResponse response = httpClient.execute(request);
-			
+
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// User Profile was Deleted!
@@ -420,7 +429,7 @@ public class UserController {
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI("You don't have access to this action!");
 		    }
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -430,7 +439,7 @@ public class UserController {
 
 	@SuppressWarnings("unchecked")
 	public void editUser(String email, String fName, String lName, Object style, Object timeOfDay,
-			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
+			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp,
 			String age, String phone) {
 //		UserDB udb = new UserDB();
 //		if(udb.editUser(UserController.getUser(), email, fName, lName, (String) style, (String) timeOfDay,
@@ -438,7 +447,7 @@ public class UserController {
 //				     (String) exp, age, phone)) {
 //			SettingsView.saved();
 //		}
-		
+
 		// Create the JSON to post to the API
 		JSONObject editProfileJSON = new JSONObject();
 		editProfileJSON.put("firstname", fName);
@@ -454,33 +463,33 @@ public class UserController {
 		editProfileJSON.put("workoutStyle", (String) style);
 		editProfileJSON.put("weight", (String) weight);
 		editProfileJSON.put("experience", (String) exp);
-				
+
 		// Actual DB edit User
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPatch request = new HttpPatch(baseUrl + user.getId());
-		
+
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
 			request.addHeader("Authorization", "Bearer " + user.getJwt());
 			request.addHeader("id", user.getId());
-			
+
 			// Attach Body
 			StringEntity params = new StringEntity(editProfileJSON.toJSONString());
 			request.setEntity(params);
-			
+
 			// Execute the request
 			HttpResponse response = httpClient.execute(request);
-			
+
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// SUCCESS!
-		    	
+
 		    	// Update User info from DB
-		    	user.updateUser(email, fName, lName, style, timeOfDay, gender, 
+		    	user.updateUser(email, fName, lName, style, timeOfDay, gender,
 		    			prefGender, freq, goal, weight, exp, age, phone);
-		    	
+
 		    	// Indicate save and load profile
 		    	Master.getInstance().updateFrame(new ProfileView());
 		    	SettingsView.saved();
@@ -489,25 +498,25 @@ public class UserController {
 		    	Master.getInstance().updateFrame(new ProfileView());
 		    	ErrorGUI eg = new ErrorGUI("Your changes couldn't be saved!");
 		    }
-			
-			
+
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			request.releaseConnection();
 		}
-		
+
 	}
-	
+
 	// TODO - Create an entire User Object will all arrays
 	// Gets all users based on gender
 	public List<User> getUsersByGender(String gender) {
 		List<User> userList = new ArrayList<User>();
-		
+
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpGet request;
-		
+
 		// Chose the right url to query
 		if(gender.toLowerCase().equalsIgnoreCase("male")) {
 			request = new HttpGet(baseUrl + "/get_users_by_gender/" + "male");
@@ -516,33 +525,33 @@ public class UserController {
 		} else {
 			request = new HttpGet(baseUrl + "/get_users_by_gender/" + "none");
 		}
-		
+
 		// Try to execute the request
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
-			
+
 			// Execute the request
 			HttpResponse response = httpClient.execute(request);
-			
+
 			// Get the Respose Back
 		    HttpEntity entity = response.getEntity();
 		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-			
+
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// SUCCESS!
-		    	
+
 		    	// Get response object
 			    JSONObject o = (JSONObject) new JSONParser().parse(json);
-			    
+
 			    // Get the Array of Users
 			    JSONArray userArr = (JSONArray) o.get("users");
-			    
+
 			    // Loop through each user
 			    for(int i = 0; i < userArr.size(); i++) {
 			    	JSONObject user = (JSONObject) userArr.get(i);
-			    	
+
 			    	// Getting the data of that user
 			    	String id = (String) user.get("_id");
 			    	String firstname = (String) user.get("firstname");
@@ -556,56 +565,56 @@ public class UserController {
 			    	String frequency = (String) user.get("frequency");
 			    	String prefGender = (String) user.get("preferredGender");
 			    	String age = (String) user.get("age");
-			    	
-			    	User otherUser = new User(id, firstname, lastname, genderDB, profilePic, workoutStyle, 
+
+			    	User otherUser = new User(id, firstname, lastname, genderDB, profilePic, workoutStyle,
 			    			goals, experience, timeOfDay, frequency, prefGender, age);
-			    	
-		    		userList.add(otherUser);	
+
+		    		userList.add(otherUser);
 			    }
-		    	
+
 		    } else {
 		    	// FAIL!
 		    	System.err.println("Shit failed yo");
 		    }
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			request.releaseConnection();
 		}
-		
-		
+
+
 		return userList;
 	}
-	
+
 	// TODO Get matches by Id
 	public Match getMatchById(String id) {
 		return null;
 	}
-	
+
 	// TODO Get user by Id
 	public User getUserById(String id) {
 		User newUser = null;
 		// Open the Connection
 		HttpGet request = new HttpGet(baseUrl + id);
-		
+
 		try {
 			// Add Headers
 			request.addHeader("content-type", "application/json");
-			
+
 			// Execute the Request
 			HttpResponse response = httpClient.execute(request);
-			
+
 			// Get the Respose Back
 		    HttpEntity entity = response.getEntity();
 		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-		    
+
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	JSONObject o = (JSONObject) new JSONParser().parse(json);
-			    
+
 			    // Result
 			    JSONObject result = (JSONObject) o.get("result");
-			    
+
 			    // Get Data to build a User object
 			    String fName = (String) result.get("firstname");
 				String lName = (String) result.get("lastname");
@@ -620,95 +629,95 @@ public class UserController {
 				String style = (String) result.get("workoutStyle");
 				String weight = (String) result.get("weight");
 				String experience = (String) result.get("experience");
-				
+
 				// Created a new user
-				newUser = new User(fName, lName, email, phone, age, gender, prefGender, 
+				newUser = new User(fName, lName, email, phone, age, gender, prefGender,
 						goals, frequency, timeOfDay, style, weight, experience);
-				
+
 				// Add its ID
 				String idDB = (String) result.get("_id");
 				newUser.setId(idDB);
-				
+
 				// Load its Match Arrays
 				// Get all the match arrays
 				List<Match> accepted = new ArrayList<Match>();
 				List<Match> rejected = new ArrayList<Match>();
 				List<Match> idle = new ArrayList<Match>();
 				List<Match> waiting = new ArrayList<Match>();
-				
+
 				JSONArray accept = (JSONArray) result.get("acceptedMatches");
 				JSONArray reject = (JSONArray) result.get("rejectedMatches");
 				JSONArray idl = (JSONArray) result.get("idleMatches");
 				JSONArray wait = (JSONArray) result.get("waitingMatches");
-				
+
 				// Go through all the accepted matches and get the from the DB, build them and store it
 				// Accept Matches
 				for(int i = 0; i < accept.size(); i++) {
 					String matchId = (String) accept.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					accepted.add(m);
-					
+
 					// System.out.println(matchId);
 				}
-				
+
 				// Reject Matches
 				for(int i = 0; i < reject.size(); i++) {
 					String matchId = (String) reject.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					rejected.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
+
 				// Idle Matches
 				for(int i = 0; i < idl.size(); i++) {
 					String matchId = (String) idl.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					idle.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
+
 				// Waiting Matches
 				for(int i = 0; i < wait.size(); i++) {
 					String matchId = (String) wait.get(i);
-					
+
 					// Create the Match
 					// TODO move function to MatchController
 					Match m = getMatchById(matchId);
 					waiting.add(m);
-					
+
 					//System.out.println(matchId);
 				}
-				
+
 				// Add the Match Arrays to the User object
 				newUser.setAccepted(accepted);
 				newUser.setRejected(rejected);
 				newUser.setIdle(idle);
 				newUser.setWaiting(waiting);
-			    
-			    
+
+
 		    } else {
 		    	System.out.println("Failed to get the user! Maybe invalid id?");
 		    }
-			
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			request.releaseConnection();
 		}
-		
+
 		return newUser;
 	}
-	
+
 }

@@ -14,7 +14,6 @@ public class UserTests {
 	
 	@After
 	public void tearDown() {
-		//doesn't get called because we need a before
 		UserController.setUser(null);
 	}
 

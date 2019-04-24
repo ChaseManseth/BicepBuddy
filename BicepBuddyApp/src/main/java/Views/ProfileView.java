@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import Matching.Match;
+import Matching.Match.Status;
 import Matching.MatchController;
 import User.UserController;
 import bicepBuddyPackage.Master;
@@ -111,6 +112,7 @@ public class ProfileView extends JPanel {
 		add(btnStartMatching);
 		
 		//*************************************************************************************************************************
+		//In user accepted and other accepted
 		JLabel lblFriends = new JLabel("Buddies");
 		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFriends.setBounds(269, 183, 150, 25);
@@ -123,13 +125,8 @@ public class ProfileView extends JPanel {
 		
 		List<String> data = new ArrayList<>();
 		for (Match m : UserController.getUser().getAccepted()) {
-			if (MatchController.has(m.getMatched().getAccepted(), m) && MatchController.has(m.getUser().getAccepted(), m)) {
-				if (UserController.getUser().getId() == m.getUser().getId()) {
-					data.add(m.getMatched().getfName() + " " + m.getMatched().getlName());
-				}
-				else {
-					data.add(m.getUser().getfName() + " " + m.getUser().getlName());
-				}
+			if (m.getStatus() == Status.Accepted) {
+				data.add(UserController.getUserById(m.getOther()).getfName() + " " + UserController.getUserById(m.getOther()).getlName());
 			}
 		}
 		
@@ -138,12 +135,7 @@ public class ProfileView extends JPanel {
 		freindsList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
-		    	if (UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
-		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getMatched()));
-		    	}
-		    	else {
-		           Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getUser()));
-		    	}
+		    	Master.getInstance().updateFrame(new OtherProfileView(UserController.getUserById(UserController.getUser().getAccepted().get(freindsList.getSelectedIndex()).getOther())));
 		    }
 		};
 		freindsList.addMouseListener(mouseListener);
@@ -162,12 +154,7 @@ public class ProfileView extends JPanel {
 		
 		List<String> data1 = new ArrayList<>();
 		for (Match m : UserController.getUser().getWaiting()) {
-			if (UserController.getUser().getId() == m.getUser().getId()) {
-				data1.add(m.getMatched().getfName() + " " + m.getMatched().getlName() + " wants to be your buddy!");
-			}
-			else {
-				data1.add(m.getUser().getfName() + " " + m.getUser().getlName() + " wants to be your buddy!");
-			}
+			data.add(UserController.getUserById(m.getOther()).getfName() + " " + UserController.getUserById(m.getOther()).getlName() + " wants to be your buddy!");
 		}
 		
 		JList incomingList = new JList();
@@ -175,12 +162,7 @@ public class ProfileView extends JPanel {
 		incomingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener1 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
-		    	if (UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
-		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getMatched()));
-		    	}
-		    	else {
-		            Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getWaiting().get(incomingList.getSelectedIndex()).getUser()));
-		    	}
+		    	Master.getInstance().updateFrame(new OtherProfileView(UserController.getUserById(UserController.getUser().getAccepted().get(incomingList.getSelectedIndex()).getOther())));
 		    }
 		};
 		incomingList.addMouseListener(mouseListener1);
@@ -199,13 +181,8 @@ public class ProfileView extends JPanel {
 		
 		List<String> data2 = new ArrayList<>();
 		for (Match m : UserController.getUser().getWaiting()) {
-			if (MatchController.has(m.getMatched().getWaiting(), m) && MatchController.has(m.getUser().getAccepted(), m)) {
-				if (UserController.getUser().getId() == m.getUser().getId()) {
-					data2.add(m.getMatched().getfName() + " " + m.getMatched().getlName() + " is responding!");
-				}
-				else {
-					data2.add(m.getUser().getfName() + " " + m.getUser().getlName() + " is responding!");
-				}
+			if (m.getStatus() == Status.Idle && UserController.getUserById(m.getOther()).getAccepted().contains(m)) {
+				data.add(UserController.getUserById(m.getOther()).getfName() + " " + UserController.getUserById(m.getOther()).getlName() + " is responding!");
 			}
 		}
 		
@@ -214,12 +191,7 @@ public class ProfileView extends JPanel {
 		pendingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener2 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
-		    	if (UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getUser().getId() == UserController.getUser().getId()){
-		    		Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getMatched()));
-		    	}
-		    	else {
-		            Master.getInstance().updateFrame(new OtherProfileView(UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getUser()));
-		    	}
+		    	Master.getInstance().updateFrame(new OtherProfileView(UserController.getUserById(UserController.getUser().getAccepted().get(pendingList.getSelectedIndex()).getOther())));
 		    }
 		};
 		pendingList.addMouseListener(mouseListener2);

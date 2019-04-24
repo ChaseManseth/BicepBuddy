@@ -40,11 +40,13 @@ public class OtherProfileView extends JPanel {
 		preferedGender = u.getPrefGender();
 		frequency = u.getFrequency();
 		Integer percent = 0;
-		Match tempMatch = MatchController.findMatch(new Match(u,UserController.getUser()),u);
+		//*********************************************************************************************
+		Match tempMatch = MatchController.findMatch(new Match(u,UserController.getUser()));
 		if (tempMatch == null) {
 			tempMatch = MatchController.directMatch(u);
 		}
 		percent = tempMatch.getStrength();
+		//*********************************************************************************************
 		// END USER DATA
 
 		//frame = new JFrame();
@@ -71,25 +73,20 @@ public class OtherProfileView extends JPanel {
 		lblName2.setBounds(480, 26, 235, 19);
 		add(lblName2);
 		
-		if (!MatchController.has(u.getAccepted(),new Match(u,UserController.getUser())) || !MatchController.has(u.getRejected(),new Match(u,UserController.getUser()))) {
+		//*********************************************************************************************
+		//If not accepted or rejected yet display
+		if (!UserController.getUser().getAccepted().contains(new Match(u,UserController.getUser())) && !UserController.getUser().getRejected().contains(new Match(u,UserController.getUser()))) {
 			JButton btnInvite = new JButton("Invite Buddy");
 			btnInvite.setFont(new Font("Dialog", Font.BOLD, 14));
 			btnInvite.setBackground(new Color(34, 139, 34));
 			btnInvite.setForeground(Color.white);
-			//*********************************************************************************************
 			btnInvite.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ViewController vc = new ViewController();
 					vc.inviteUserChange(u);
-					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
-						MatchController.acceptMatchOther(MatchController.findMatch(new Match(u,UserController.getUser()), u));
-						/*for (Match m : u.getWaiting()) {
-							List<Match> temp = new ArrayList<>();
-							temp.add(m);
-							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
-								MatchController.acceptMatchOther(m);
-							}
-						}*/
+					//Accept invite or send invite
+					if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
+						MatchController.acceptMatchOther(MatchController.findMatch(new Match(u,UserController.getUser())));
 					}
 					else {
 						MatchController.acceptMatchInitial(MatchController.directMatch(u));
@@ -113,20 +110,12 @@ public class OtherProfileView extends JPanel {
 			btnBlock.setForeground(Color.white);
 			btnBlock.setFont(new Font("Dialog", Font.BOLD, 14));
 			btnBlock.setBackground(new Color(255, 0, 0));
-			//*********************************************************************************************
 			btnBlock.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ViewController vc = new ViewController();
 					vc.blockBuddyChange(u);
-					if (MatchController.has(u.getWaiting(),new Match(u,UserController.getUser()))) {
-						MatchController.rejectMatch(MatchController.findMatch(new Match(u,UserController.getUser()), u));
-						/*for (Match m : u.getWaiting()) {
-							List<Match> temp = new ArrayList<>();
-							temp.add(m);
-							if (MatchController.has(temp,new Match(u,UserController.getUser()))) {
-								MatchController.rejectMatch(m);
-							}
-						}*/
+					if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
+						MatchController.rejectMatch(MatchController.findMatch(new Match(u,UserController.getUser())));
 					}
 					else {
 						MatchController.rejectMatch(MatchController.directMatch(u));
@@ -146,6 +135,7 @@ public class OtherProfileView extends JPanel {
 			btnBlock.setBounds(599, 103, 188, 47);
 			add(btnBlock);
 		}
+		//*********************************************************************************************
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));

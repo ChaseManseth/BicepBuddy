@@ -53,8 +53,14 @@ public class MatchAlgorithm {
 
 	public MatchAlgorithm() {}
 	
+	// GET MATCH BY ID to get Strength
 	public static Match directMatch(User other) {
-		return new Match(UserController.getUser(),other,calculateRatios(other));
+		Match m = new Match(UserController.getUser(),other,calculateRatios(other));
+		
+		// Create the match in the DB
+//		MatchController.createMatch(m);
+		
+		return m;
 	}
 
 	public static List<Match> matchUser(){
@@ -98,7 +104,14 @@ public class MatchAlgorithm {
         List<Match> matches = new ArrayList<>();
         Integer counter = 0;
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
-        	matches.add(new Match(UserController.getUser(),m.getKey(),m.getValue()));
+        	Match match = new Match(UserController.getUser(),m.getKey(),m.getValue());
+        	
+        	// Create the match in the DB
+    		String id = MatchController.createMatch(match);
+    		// Set the id of the Match
+    		match.setId(id);
+        	
+        	matches.add(match);
         	counter++;
         	if (counter > MATCHESRETURNED) {
         		break;

@@ -22,6 +22,7 @@ public class Match {
 	private Date dateCreated;
 	private Date killDate;
 	private Integer strength;
+	private String id;
 	
 	public Match(User user,User other,Integer strength){
 		this.users = new ArrayList<String>();
@@ -50,6 +51,33 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
+	
+	// Constructor for MatchController getMatchById
+	public Match(String id,String other,Integer strength, Integer status, String matchId){
+		this.users = new ArrayList<String>();
+		this.users.add(id);
+		this.users.add(other);
+		this.strength = strength;
+		this.id = matchId;
+		
+		// Setting Status
+		if(status == 0) {
+			this.status = Status.Accepted;
+		} else if(status == 1) {
+			this.status = Status.Rejected;
+		} else if(status == 2) {
+			this.status = Status.Idle;
+		}
+		
+		
+		this.dateCreated = new Date();
+		//Adding hours to kill date
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
+		this.killDate = c.getTime();
+	}
+	
 	//Used for creating temporary matches for checking existance
 	public Match(User user,User other) {
 		this.users = new ArrayList<String>();
@@ -61,6 +89,13 @@ public class Match {
 		strength = 0;
 	}
 	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 	//Used to determine status
 	public void accept() {
 		status = Status.Accepted;

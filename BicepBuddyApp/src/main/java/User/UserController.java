@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import Matching.Match;
+import Matching.MatchController;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -43,9 +44,9 @@ public class UserController {
 	private static UserController uc = null;
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
-//	private String baseUrl = "http://localhost:3000/user/";
+	private String baseUrl = "http://localhost:3000/user/";
 	// Production
-	private String baseUrl = "http://bb.manseth.com/user/";
+//	private String baseUrl = "http://bb.manseth.com/user/";
 
 	// Singleton getInstance
 	public static UserController getInstance() {
@@ -509,7 +510,6 @@ public class UserController {
 
 	}
 
-	// TODO - Create an entire User Object will all arrays
 	// Gets all users based on gender
 	public List<User> getUsersByGender(String gender) {
 		List<User> userList = new ArrayList<User>();
@@ -575,12 +575,8 @@ public class UserController {
 		return userList;
 	}
 
-	// TODO Get matches by Id
-	public Match getMatchById(String id) {
-		return null;
-	}
 
-	// TODO Get user by Id
+	// Get user by Id
 	public User getUserById(String id) {
 		User newUser = null;
 		// Open the Connection
@@ -645,7 +641,7 @@ public class UserController {
 
 					// Create the Match
 					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
+					Match m = MatchController.getMatchById(matchId);
 					accepted.add(m);
 
 					// System.out.println(matchId);
@@ -657,7 +653,7 @@ public class UserController {
 
 					// Create the Match
 					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
+					Match m =  MatchController.getMatchById(matchId);
 					rejected.add(m);
 
 					//System.out.println(matchId);
@@ -669,7 +665,7 @@ public class UserController {
 
 					// Create the Match
 					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
+					Match m =  MatchController.getMatchById(matchId);
 					idle.add(m);
 
 					//System.out.println(matchId);
@@ -681,7 +677,7 @@ public class UserController {
 
 					// Create the Match
 					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
+					Match m =  MatchController.getMatchById(matchId);
 					waiting.add(m);
 
 					//System.out.println(matchId);
@@ -706,6 +702,89 @@ public class UserController {
 		}
 
 		return newUser;
+	}
+	
+	// TODO - updateMatchedArrayState
+	@SuppressWarnings("unchecked")
+	public void updateMatchedArrayState(User u) {
+		JSONObject updateArrays = new JSONObject();
+		
+		// Create the Arrays
+		JSONArray acceptedMatches = new JSONArray();
+		JSONArray rejectedMatches = new JSONArray();
+		JSONArray idleMatches = new JSONArray();
+		JSONArray waitingMatches = new JSONArray();
+		
+		// Load the accept array
+		List<Match> acceptM = u.getAccepted();
+		for(int i = 0; i < acceptM.size(); i++) {
+			String matchId = acceptM.get(i).getId();
+			
+			acceptedMatches.add(matchId);
+		}
+		
+		// Load the reject array
+		List<Match> rejectM = u.getRejected();
+		for(int i = 0; i < rejectM.size(); i++) {
+			String matchId = rejectM.get(i).getId();
+			
+			rejectedMatches.add(matchId);
+		}
+		
+		// Load the idle array
+		List<Match> idleM = u.getIdle();
+		for(int i = 0; i < idleM.size(); i++) {
+			String matchId = idleM.get(i).getId();
+			
+			idleMatches.add(matchId);
+		}
+		
+		// Load the idle array
+		List<Match> waitM = u.getWaiting();
+		for(int i = 0; i < waitM.size(); i++) {
+			String matchId = waitM.get(i).getId();
+			
+			waitingMatches.add(matchId);
+		}
+		
+		// Add the Arrays to the JSON Object
+		updateArrays.put("acceptedMatches", acceptedMatches);
+		updateArrays.put("rejectedMatches", rejectedMatches);
+		updateArrays.put("idleMatches", idleMatches);
+		updateArrays.put("waitingMatches", waitingMatches);
+		
+		// Now that the JSON is done we want to open a Patch request to update the user
+		
+		// Open the Connection
+		HttpPatch request = new HttpPatch(baseUrl + u.getId());
+		
+		try {
+			// Set headers
+			request.addHeader("content-type", "application/json");
+			
+			// Attach Body
+			StringEntity params = new StringEntity(updateArrays.toJSONString());
+			request.setEntity(params);
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(request);
+			
+			// Get the Respose Back
+			if(response.getStatusLine().getStatusCode() == 200) {
+				// Success!
+				System.out.println("User Arrays Updated!");
+			} else {
+				System.err.println("Failed to Update a User Arrays! Maybe invalid id?");
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			request.releaseConnection();
+		}
+		
+		
 	}
 
 }

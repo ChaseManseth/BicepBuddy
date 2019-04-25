@@ -1,5 +1,6 @@
 package Matching;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,8 @@ public class Match {
 	private Integer strength;
 	
 	public Match(User user,User other,Integer strength){
+		users = new ArrayList<String>();
+		
 		this.users.add(user.getId());
 		this.users.add(other.getId());
 		this.status = Status.Idle;
@@ -34,8 +37,10 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
-	public Match(String user,String other,Integer strength){
-		this.users.add(user);
+	public Match(String u,String other,Integer strength){
+		users = new ArrayList<String>();
+		
+		this.users.add(u);
 		this.users.add(other);
 		this.status = Status.Idle;
 		this.dateCreated = new Date();

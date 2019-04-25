@@ -84,7 +84,7 @@ public class MatchAlgorithm {
 		//Check if match already exists
         List<User> toRemove = new ArrayList<>();
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
-        	Match temp = new Match(user,m.getKey());
+        	Match temp = new Match(user.getId(),m.getKey().getId(),0);
         	//Checking accepted, rejected, and idle arrays
         	if (user.getAccepted().contains(temp) || user.getRejected().contains(temp) || user.getWaiting().contains(temp)) {
         		toRemove.add(m.getKey());

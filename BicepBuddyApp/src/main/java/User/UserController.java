@@ -43,7 +43,7 @@ public class UserController {
 	private static UserController uc = null;
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
-	//private String baseUrl = "http://localhost:3000/user/";
+//	private String baseUrl = "http://localhost:3000/user/";
 	// Production
 	private String baseUrl = "http://bb.manseth.com/user/";
 
@@ -183,92 +183,93 @@ public class UserController {
 
 			    // Get all user data
 			    String id = (String) userObj.get("_id");
-				String fName = (String) userObj.get("firstname");
-				String lName = (String) userObj.get("lastname");
-				String emailDB = (String) userObj.get("email");
-				String phone = (String) userObj.get("phoneNumber");
-				String age = (String) userObj.get("age");
-				String gender = (String) userObj.get("gender");
-				String prefGender = (String) userObj.get("preferredGender");
-				String goals = (String) userObj.get("goals");
-				String frequency = (String) userObj.get("frequency");
-				String timeOfDay = (String) userObj.get("timeOfDay");
-				String style = (String) userObj.get("workoutStyle");
-				String weight = (String) userObj.get("weight");
-				String experience = (String) userObj.get("experience");
-
-				// Get all the match arrays
-				List<Match> accepted = new ArrayList<Match>();
-				List<Match> rejected = new ArrayList<Match>();
-				List<Match> idle = new ArrayList<Match>();
-				List<Match> waiting = new ArrayList<Match>();
-
-				JSONArray accept = (JSONArray) userObj.get("acceptedMatches");
-				JSONArray reject = (JSONArray) userObj.get("rejectedMatches");
-				JSONArray idl = (JSONArray) userObj.get("idleMatches");
-				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
-
-				// Go through all the accepted matches and get the from the DB, build them and store it
-				// Accept Matches
-				for(int i = 0; i < accept.size(); i++) {
-					String matchId = (String) accept.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
-					accepted.add(m);
-
-					// System.out.println(matchId);
-				}
-
-				// Reject Matches
-				for(int i = 0; i < reject.size(); i++) {
-					String matchId = (String) reject.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
-					rejected.add(m);
-
-					//System.out.println(matchId);
-				}
-
-				// Idle Matches
-				for(int i = 0; i < idl.size(); i++) {
-					String matchId = (String) idl.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
-					idle.add(m);
-
-					//System.out.println(matchId);
-				}
-
-				// Waiting Matches
-				for(int i = 0; i < wait.size(); i++) {
-					String matchId = (String) wait.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = getMatchById(matchId);
-					waiting.add(m);
-
-					//System.out.println(matchId);
-				}
-
-				// Build the user
-				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
-						goals, frequency, timeOfDay, style, weight, experience);
-
-				// Set ID, JWT and Matchs Arrays
-				user.setId(id);
-				user.setJwt(jwt);
-
-				user.setAccepted(accepted);
-				user.setRejected(rejected);
-				user.setIdle(idle);
-				user.setWaiting(waiting);
+			    user = getUserById(id);
+//				String fName = (String) userObj.get("firstname");
+//				String lName = (String) userObj.get("lastname");
+//				String emailDB = (String) userObj.get("email");
+//				String phone = (String) userObj.get("phoneNumber");
+//				String age = (String) userObj.get("age");
+//				String gender = (String) userObj.get("gender");
+//				String prefGender = (String) userObj.get("preferredGender");
+//				String goals = (String) userObj.get("goals");
+//				String frequency = (String) userObj.get("frequency");
+//				String timeOfDay = (String) userObj.get("timeOfDay");
+//				String style = (String) userObj.get("workoutStyle");
+//				String weight = (String) userObj.get("weight");
+//				String experience = (String) userObj.get("experience");
+//
+//				// Get all the match arrays
+//				List<Match> accepted = new ArrayList<Match>();
+//				List<Match> rejected = new ArrayList<Match>();
+//				List<Match> idle = new ArrayList<Match>();
+//				List<Match> waiting = new ArrayList<Match>();
+//
+//				JSONArray accept = (JSONArray) userObj.get("acceptedMatches");
+//				JSONArray reject = (JSONArray) userObj.get("rejectedMatches");
+//				JSONArray idl = (JSONArray) userObj.get("idleMatches");
+//				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
+//
+//				// Go through all the accepted matches and get the from the DB, build them and store it
+//				// Accept Matches
+//				for(int i = 0; i < accept.size(); i++) {
+//					String matchId = (String) accept.get(i);
+//
+//					// Create the Match
+//					// TODO move function to MatchController
+//					Match m = getMatchById(matchId);
+//					accepted.add(m);
+//
+//					// System.out.println(matchId);
+//				}
+//
+//				// Reject Matches
+//				for(int i = 0; i < reject.size(); i++) {
+//					String matchId = (String) reject.get(i);
+//
+//					// Create the Match
+//					// TODO move function to MatchController
+//					Match m = getMatchById(matchId);
+//					rejected.add(m);
+//
+//					//System.out.println(matchId);
+//				}
+//
+//				// Idle Matches
+//				for(int i = 0; i < idl.size(); i++) {
+//					String matchId = (String) idl.get(i);
+//
+//					// Create the Match
+//					// TODO move function to MatchController
+//					Match m = getMatchById(matchId);
+//					idle.add(m);
+//
+//					//System.out.println(matchId);
+//				}
+//
+//				// Waiting Matches
+//				for(int i = 0; i < wait.size(); i++) {
+//					String matchId = (String) wait.get(i);
+//
+//					// Create the Match
+//					// TODO move function to MatchController
+//					Match m = getMatchById(matchId);
+//					waiting.add(m);
+//
+//					//System.out.println(matchId);
+//				}
+//
+//				// Build the user
+//				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
+//						goals, frequency, timeOfDay, style, weight, experience);
+//
+//				// Set ID, JWT and Matchs Arrays
+//				user.setId(id);
+//				user.setJwt(jwt);
+//
+//				user.setAccepted(accepted);
+//				user.setRejected(rejected);
+//				user.setIdle(idle);
+//				user.setWaiting(waiting);
 
 				// Return the profile page
 				Master.getInstance().loggedInMenuLoad();
@@ -543,10 +544,10 @@ public class UserController {
 		    	// SUCCESS!
 
 		    	// Get response object
-			    JSONObject o = (JSONObject) new JSONParser().parse(json);
+//			    JSONObject o = (JSONObject) new JSONParser().parse(json);
 
 			    // Get the Array of Users
-			    JSONArray userArr = (JSONArray) o.get("users");
+			    JSONArray userArr = (JSONArray) new JSONParser().parse(json);
 
 			    // Loop through each user
 			    for(int i = 0; i < userArr.size(); i++) {
@@ -554,20 +555,7 @@ public class UserController {
 
 			    	// Getting the data of that user
 			    	String id = (String) user.get("_id");
-			    	String firstname = (String) user.get("firstname");
-			    	String lastname = (String) user.get("lastname");
-			    	String genderDB = (String) user.get("gender");
-			    	String profilePic = (String) user.get("profilePic");
-			    	String workoutStyle = (String) user.get("workoutStyle");
-			    	String goals = (String) user.get("goals");
-			    	String experience = (String) user.get("experience");
-			    	String timeOfDay = (String) user.get("timeOfDay");
-			    	String frequency = (String) user.get("frequency");
-			    	String prefGender = (String) user.get("preferredGender");
-			    	String age = (String) user.get("age");
-
-			    	User otherUser = new User(id, firstname, lastname, genderDB, profilePic, workoutStyle,
-			    			goals, experience, timeOfDay, frequency, prefGender, age);
+			    	User otherUser = getUserById(id);
 
 		    		userList.add(otherUser);
 			    }

@@ -126,29 +126,31 @@ router.post('/login', (req, res, next) => {
 });
 
 // Update a user profile info
-router.patch('/:userID', checkAuth, (req, res, next) => {
+router.patch('/:userID', (req, res, next) => {
     const id = req.params.userID;
     const accessedId = req.headers.id;
 
-    if(accessedId != null && id == accessedId) {
-        User.findByIdAndUpdate(id, req.body)
-            .exec()
-            .then(result => {
-                res.status(200).json({
-                    message: 'User updated!'
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                });
+    User.findByIdAndUpdate(id, req.body)
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'User updated!'
             });
-    } else {
-        res.status(403).json({
-            message: 'Action not allowed!'
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
         });
-    }
+
+    // if(accessedId != null && id == accessedId) {
+        
+    // } else {
+    //     res.status(403).json({
+    //         message: 'Action not allowed!'
+    //     });
+    // }
 });
 
 // Get a list of all the users

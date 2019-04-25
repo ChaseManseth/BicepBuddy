@@ -205,7 +205,7 @@ public class Master {
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading match view");
 				//create user controller
-				MatchController.generateFrame(UserController.getUser());
+				MatchController.generateFrame();
 			}
 		});
 		menuBar.add(mnMatch);

@@ -24,7 +24,7 @@ public class Match {
 	private Integer strength;
 	
 	public Match(User user,User other,Integer strength){
-		users = new ArrayList<String>();
+		this.users = new ArrayList<String>();
 		
 		this.users.add(user.getId());
 		this.users.add(other.getId());
@@ -37,10 +37,9 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
-	public Match(String u,String other,Integer strength){
-		users = new ArrayList<String>();
-		
-		this.users.add(u);
+	public Match(String id,String other,Integer strength){
+		this.users = new ArrayList<String>();
+		this.users.add(id);
 		this.users.add(other);
 		this.status = Status.Idle;
 		this.dateCreated = new Date();
@@ -53,6 +52,7 @@ public class Match {
 	}
 	//Used for creating temporary matches for checking existance
 	public Match(User user,User other) {
+		this.users = new ArrayList<String>();
 		this.users.add(user.getId());
 		this.users.add(other.getId());
 		status = Status.Idle;
@@ -74,9 +74,9 @@ public class Match {
 	//Used to get user not currently logged in
 	public String getOther() {
 		if (UserController.getUser().getId() == users.get(0)) {
-			return users.get(0);
+			return users.get(1);
 		}
-		return users.get(1);
+		return users.get(0);
 	}
 	
 	public Status getStatus() {

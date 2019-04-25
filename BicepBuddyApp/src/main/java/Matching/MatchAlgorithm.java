@@ -53,16 +53,16 @@ public class MatchAlgorithm {
 
 	public MatchAlgorithm() {}
 	
-	public static Match directMatch(User user, User other) {
-		return new Match(user,other,calculateRatios(user,other));
+	public static Match directMatch(User other) {
+		return new Match(UserController.getUser(),other,calculateRatios(other));
 	}
 
-	public static List<Match> matchUser(User user){
-		List<User> users = possibleMatches(user);
+	public static List<Match> matchUser(){
+		List<User> users = possibleMatches();
 		Map<User,Integer> ratios = new HashMap<>();
 		//Calculating ratios for all possible matches
 		for (User u : users) {
-			ratios.put(u, calculateRatios(user,u));
+			ratios.put(u, calculateRatios(u));
 		}
 
 		//Sort by ratios
@@ -84,9 +84,9 @@ public class MatchAlgorithm {
 		//Check if match already exists
         List<User> toRemove = new ArrayList<>();
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
-        	Match temp = new Match(user.getId(),m.getKey().getId(),0);
+        	Match temp = new Match(UserController.getUser().getId(),m.getKey().getId(),0);
         	//Checking accepted, rejected, and idle arrays
-        	if (user.getAccepted().contains(temp) || user.getRejected().contains(temp) || user.getWaiting().contains(temp)) {
+        	if (UserController.getUser().getAccepted().contains(temp) || UserController.getUser().getRejected().contains(temp) || UserController.getUser().getWaiting().contains(temp) || UserController.getUser().getId().equals(m.getKey().getId())) {
         		toRemove.add(m.getKey());
         	}
         }
@@ -98,7 +98,7 @@ public class MatchAlgorithm {
         List<Match> matches = new ArrayList<>();
         Integer counter = 0;
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
-        	matches.add(new Match(user,m.getKey(),m.getValue()));
+        	matches.add(new Match(UserController.getUser(),m.getKey(),m.getValue()));
         	counter++;
         	if (counter > MATCHESRETURNED) {
         		break;
@@ -116,12 +116,12 @@ public class MatchAlgorithm {
 	}
 
 	//Get all possible users who fit the Priority 1 Category
-	public static List<User> possibleMatches(User user){
+	public static List<User> possibleMatches(){
 		//TODO add DB Connection to get users based on Gender
 		UserController uc = UserController.getInstance();
 		
 		// Gets a list of users based on the current users prefered gender
-		List<User> users1 = uc.getUsersByGender(user.getPrefGender());
+		List<User> users1 = uc.getUsersByGender(UserController.getUser().getPrefGender());
 		
 		User user1 = new User("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular");
 		User user2 = new User("Other","Dude","otherdude@gmail.com","098-765-4321","26","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
@@ -137,7 +137,7 @@ public class MatchAlgorithm {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static Integer calculateRatios(User user, User other) {
+	public static Integer calculateRatios(User other) {
 		List<List<Integer>> ratios = new ArrayList<>(5);
 		for (int i = 0; i < PRIORITYCOUNT; i++) {
 			ratios.add(new ArrayList<Integer>());
@@ -145,37 +145,37 @@ public class MatchAlgorithm {
 		//Pref Gender ratio
 		ratios.get(prefGenderPriority.ordinal()).add(new Integer(calculateRatio(
 				GENDERS.length,
-				Arrays.asList(GENDERS).indexOf(user.getPrefGender()),
+				Arrays.asList(GENDERS).indexOf(UserController.getUser().getPrefGender()),
 				Arrays.asList(GENDERS).indexOf(other.getPrefGender()))));
 		//Weight ratio
 		ratios.get(weightPriority.ordinal()).add(new Integer(calculateRatio(
 				WEIGHTCLASS.length,
-				Arrays.asList(WEIGHTCLASS).indexOf(user.getWeight()),
+				Arrays.asList(WEIGHTCLASS).indexOf(UserController.getUser().getWeight()),
 				Arrays.asList(WEIGHTCLASS).indexOf(other.getWeight()))));
 		//Style ratio
 		ratios.get(stylePriority.ordinal()).add(new Integer(calculateRatio(
 				STYLES.length,
-				Arrays.asList(STYLES).indexOf(user.getStyle()),
+				Arrays.asList(STYLES).indexOf(UserController.getUser().getStyle()),
 				Arrays.asList(STYLES).indexOf(other.getStyle()))));
 		//Times ratio
 		ratios.get(timePriority.ordinal()).add(new Integer(calculateRatio(
 				TIMES.length,
-				Arrays.asList(TIMES).indexOf(user.getTimeOfDay()),
+				Arrays.asList(TIMES).indexOf(UserController.getUser().getTimeOfDay()),
 				Arrays.asList(TIMES).indexOf(other.getTimeOfDay()))));
 		//Frequency ratio
 		ratios.get(freqPriority.ordinal()).add(new Integer(calculateRatio(
 				FREQUENCIES.length,
-				Arrays.asList(FREQUENCIES).indexOf(user.getFrequency()),
+				Arrays.asList(FREQUENCIES).indexOf(UserController.getUser().getFrequency()),
 				Arrays.asList(FREQUENCIES).indexOf(other.getFrequency()))));
 		//Goals ratio
 		ratios.get(goalPriority.ordinal()).add(new Integer(calculateRatio(
 				GOALS.length,
-				Arrays.asList(GOALS).indexOf(user.getGoals()),
+				Arrays.asList(GOALS).indexOf(UserController.getUser().getGoals()),
 				Arrays.asList(GOALS).indexOf(other.getGoals()))));
 		//Experience ratio
 		ratios.get(expPriority.ordinal()).add(new Integer(calculateRatio(
 				EXPERIENCE.length,
-				Arrays.asList(EXPERIENCE).indexOf(user.getExperience()),
+				Arrays.asList(EXPERIENCE).indexOf(UserController.getUser().getExperience()),
 				Arrays.asList(EXPERIENCE).indexOf(other.getExperience()))));
 
 		List<Integer> finals = new ArrayList<>();

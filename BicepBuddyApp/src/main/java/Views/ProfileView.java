@@ -96,7 +96,7 @@ public class ProfileView extends JPanel {
 		btnStartMatching.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MatchController.generateFrame(UserController.getUser());
+				MatchController.generateFrame();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

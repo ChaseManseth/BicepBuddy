@@ -31,14 +31,14 @@ public class MatchGUI extends JPanel{
 	private int curMatchShown = 0;
 	private List<Match> matches;
 
-	public MatchGUI(User user) {		
+	public MatchGUI() {		
 		
 		//create JPanel for the frame.
 		this.setLayout(null);
 		this.setBounds(100, 100, 900, 550);
 		
-		MatchController.generateMatches(user);
-		matches = MatchController.getMatches(user);
+		MatchController.generateMatches();
+		matches = MatchController.getMatches(UserController.getUser());
 		
 		if (matches.size() == 0) {
 			noMatches();

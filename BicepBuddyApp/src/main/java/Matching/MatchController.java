@@ -9,16 +9,16 @@ import bicepBuddyPackage.Master;
 
 public class MatchController {
 	
-	public static void generateFrame(User user) {
-		Master.updateFrame(new MatchGUI(user));
+	public static void generateFrame() {
+		Master.updateFrame(new MatchGUI());
 	}
 	
-	public static void generateMatches(User user) {
-		user.setIdle(MatchAlgorithm.matchUser(user));
+	public static void generateMatches() {
+		UserController.getUser().setIdle(MatchAlgorithm.matchUser());
 	}
 	
 	public static Match directMatch(User user) {
-		return MatchAlgorithm.directMatch(UserController.getUser(),user);
+		return MatchAlgorithm.directMatch(user);
 	}
 	
 	public static List<Match> getMatches(User user){

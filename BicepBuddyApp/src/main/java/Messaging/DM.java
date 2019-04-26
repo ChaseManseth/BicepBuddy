@@ -1,5 +1,6 @@
 package Messaging;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -8,22 +9,15 @@ import java.util.stream.Collectors;
 
 import User.User;
 import User.UserController;
+import bicepBuddyPackage.Master;
 
 public class DM {
-	private Set<Message> messages;
-	private User partner;
+	private Set<Message> messages; // Conversation with accepted match
+	private User partner; // Current accepted match the user is conversing with
 	
 	public DM() {
 		messages = new HashSet<>();
-		for(int i = 0; i < 40; i++) {
-			Message message;
-			if((i % 2) == 0) {
-				message = new Message(UserController.getUser(), null, "There's a lady who's sure; All that glitters is gold; And she's buying a stairway to heaven;" + i, Calendar.getInstance().getTime());
-			} else {
-				message = new Message(null, null, "test " + i, Calendar.getInstance().getTime());
-			}
-			messages.add(message);
-		}
+		
 	}
 	
 	public List<Message> getSorted() {
@@ -36,7 +30,24 @@ public class DM {
 		return partner;
 	}
 	
+	public void setPartner(User partner) {
+		this.partner = partner;
+	}
+	
+	public Set<Message> getMessages() {
+		return messages;
+	}
+	
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
+	}
+	
 	public void add(Message message) {
 		messages.add(message);
+	}
+	
+	public List<User> getAcceptedMatches() {
+		// TODO: Retrieve list of accepted matches
+		return new ArrayList<User>();
 	}
 }

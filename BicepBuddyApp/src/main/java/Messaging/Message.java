@@ -14,7 +14,7 @@ public class Message {
 		
 	}
 	
-	public Message(User from, User to, String text, Date sendDate) {
+	public Message(User from, User to, Date sendDate, String text) {
 		this.sender = from;
 		this.receiver = to;
 		this.text = text;

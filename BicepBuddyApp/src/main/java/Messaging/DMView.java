@@ -1,12 +1,11 @@
 package Messaging;
 
 import javax.swing.Box;
+import javax.swing.Box.Filler;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -16,153 +15,109 @@ import bicepBuddyPackage.Master;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.util.List;
 
-public class DMView extends JFrame implements ComponentListener {
+public class DMView extends JFrame {
 	
-	private JScrollPane leftScroll;
 	private JScrollPane messageScroll;
-	private JPanel profileBar;
-	private JPanel rightPanel;
+	private JPanel mainPanel;
 	private JPanel messagePanel;
 	// private List<Jabel> matchIcons;
-	private JTextField messageField;
-	private static DMView view = null;
+	private JPanel bottomPanel;
+	protected JTextField messageField;
+	private JButton sendButton;
 	
-	public DMView() {
+	public DMView(ActionListener actionListener, WindowListener windowListener) {
+		// JFrame setup
 		setSize(new Dimension(450, 600));
 		setTitle("Direct Messaging");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+		addWindowListener(windowListener);
 		
-		profileBar = new JPanel();
-		profileBar.setLayout(new BoxLayout(profileBar, BoxLayout.Y_AXIS));
-		profileBar.setMaximumSize(new Dimension(60, Integer.MAX_VALUE));
-		profileBar.setPreferredSize(new Dimension(60, getSize().height));
-		profileBar.setBackground(Color.DARK_GRAY);
+		// Contents of JFrame
+		mainPanel = new JPanel();
+		mainPanel.setMaximumSize(new Dimension(getSize().width, Integer.MAX_VALUE));
+		mainPanel.setPreferredSize(new Dimension(getSize().width, getSize().height));
+		mainPanel.setLayout(new BorderLayout());
 		
-		
-		// Placeholder for generating user profile pictures
-		for(int i = 1; i <= 21; i++) {
-			ImageIcon ii;
-			if(i % 3 == 0) {
-				ii = new ImageIcon(getClass().getClassLoader().getResource("jediOrder.png"));
-			} else if(i % 2 == 0) {
-				ii = new ImageIcon(getClass().getClassLoader().getResource("rebel.png"));
-			} else {
-				ii = new ImageIcon(getClass().getClassLoader().getResource("avengers.png"));
-			}
-			JLabel label = new JLabel(ii);
-			label.setAlignmentX(Component.LEFT_ALIGNMENT);
-			profileBar.add(label);
-			profileBar.add(Box.createRigidArea(new Dimension(0, 10)));
-		}
-		
-		rightPanel = new JPanel();
-		rightPanel.setMaximumSize(new Dimension(getSize().width - 50, Integer.MAX_VALUE));
-		rightPanel.setPreferredSize(new Dimension(getSize().width - 50, getSize().height));
-		rightPanel.setLayout(new BorderLayout());
-		
+		// Panel to hold messages and scrollbar
 		messagePanel = new JPanel();
 		messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
-		messagePanel.setBackground(Color.CYAN);
+		//messagePanel.setBackground(Color.GRAY);
 		messageScroll = new JScrollPane(messagePanel);
 		messageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		messageScroll.getVerticalScrollBar().setUnitIncrement(16);
 		
-		rightPanel.add(messageScroll, BorderLayout.CENTER);
+		mainPanel.add(messageScroll, BorderLayout.CENTER);
+		
+		// JTextField for entering messages
+		bottomPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		
 		messageField = new JTextField("Enter a message...");
 		messageField.setColumns(25);
-		rightPanel.add(messageField, BorderLayout.PAGE_END);
+		messageField.addActionListener(actionListener);
+		messageField.setActionCommand("send");
 		
-		rightPanel.setBackground(Color.GRAY);
+		sendButton = new JButton("Send");
+		sendButton.addActionListener(actionListener);
+		sendButton.setActionCommand("send");
 		
-		leftScroll = new JScrollPane(profileBar, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-		JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL) {
-			@Override
-			public boolean isVisible() {
-				return true;
-			}
-		};
+		bottomPanel.add(messageField);
+		bottomPanel.add(sendButton);
 		
-		scrollBar.setUnitIncrement(16);
-		leftScroll.setVerticalScrollBar(scrollBar);
-		leftScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
 		
-		getContentPane().add(leftScroll);
-		getContentPane().add(rightPanel);
+		//mainPanel.setBackground(Color.GRAY);
 		
-		view = this;
+		getContentPane().add(mainPanel);
 		
-		DM dm = new DM();
-		updateMessages(dm.getSorted());
-
 	}
 	
-	public static DMView getInstance() {
-		if(view == null) {
-			view = new DMView();
-		}
-		return view;
-	}
-	
-	public void updateMessages(List<Message> messages) {
+	public void update(List<Message> messages) {
 		Master.appLogger.info(":: Updating all messages in view");
 		messagePanel.removeAll();
-		for(Message message : messages) {
+		messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+		
+		/*
+		 * Filler glue = (Filler) Box.createVerticalGlue();
+		 * glue.changeShape(glue.minimumSize(), getSize(), messagePanel.getSize());
+		 * messagePanel.add(glue);
+		 */
+		
+		for(int i = 0; i < messages.size(); i++) {
 			JPanel p = new JPanel();
-			JTextArea mArea = new JTextArea(message.getText());
+			JTextArea mArea = new JTextArea(messages.get(i).getText());
+			
 			mArea.setLineWrap(true);
 			mArea.setWrapStyleWord(true);
 			mArea.setEditable(false);
 			mArea.setColumns(30);
-			if(message.getSender() != null && message.getSender().equals(UserController.getUser())) {
+			
+			// Message alignment
+			if(messages.get(i).getSender() != null && messages.get(i).getSender().equals(UserController.getUser())) {
 				p.setLayout(new FlowLayout(FlowLayout.TRAILING));
-				
-				p.add(Box.createRigidArea(new Dimension(35, 0)));
+				//p.add(Box.createRigidArea(new Dimension(35, 0)));
+				mArea.setBackground(Color.GREEN);
 				p.add(mArea);
 			} else {
 				p.setLayout(new FlowLayout(FlowLayout.LEADING));
+				mArea.setBackground(Color.GRAY);
 				p.add(mArea);
-				p.add(Box.createRigidArea(new Dimension(35, 0)));
+				//p.add(Box.createRigidArea(new Dimension(35, 0)));
 			}
 			
+			//p.setMaximumSize(mArea.getSize());
 			
 			messagePanel.add(p);
+			messagePanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		}
-	}
-
-	@Override
-	public void componentResized(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		int x = e.getComponent().getLocation().x + e.getComponent().getSize().width;
-		int y = e.getComponent().getLocation().y;
-		setLocation(x, y);
-		
-	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

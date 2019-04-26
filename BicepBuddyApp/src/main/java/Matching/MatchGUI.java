@@ -290,10 +290,8 @@ public class MatchGUI extends JPanel{
 	//***********************************************************************************************************************************************
 	public void setCurrentMatch() {
 		curMatchShown = curMatchShown % matches.size();
-		if (curMatchShown < 0) {
-			curMatchShown += matches.size();
-		}
-		matchName.setText(UserController.getInstance().getUserById(matches.get(curMatchShown).getOther()).getfName() + " " + UserController.getInstance().getUserById(matches.get(curMatchShown).getOther()).getlName());
+		User other = UserController.getInstance().getUserById(matches.get(curMatchShown).getOther());
+		matchName.setText(other.getfName() + " " + other.getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}
 	

@@ -111,11 +111,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", jwt=" + jwt + ", fName=" + fName + ", lName=" + lName + ", email=" + email
-				+ ", phone=" + phone + ", age=" + age + ", gender=" + gender + ", prefGender=" + prefGender + ", goals="
-				+ goals + ", frequency=" + frequency + ", timeOfDay=" + timeOfDay + ", style=" + style + ", weight="
-				+ weight + ", experience=" + experience + ", accepted=" + accepted + ", rejected=" + rejected
-				+ ", idle=" + idle + ", waiting=" + waiting + "]";
+		return fName + " " + lName;
 	}
 	public User() {
 	}

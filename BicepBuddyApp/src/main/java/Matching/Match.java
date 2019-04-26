@@ -14,7 +14,7 @@ public class Match {
 	public static enum Status{
 		Accepted,
 		Rejected,
-		Idle
+		Idle;
 	}
 	
 	private List<String> users;
@@ -108,7 +108,7 @@ public class Match {
 	}
 	//Used to get user not currently logged in
 	public String getOther() {
-		if (UserController.getUser().getId() == users.get(0)) {
+		if (UserController.getUser().getId().contentEquals(users.get(0))) {
 			return users.get(1);
 		}
 		return users.get(0);
@@ -157,6 +157,9 @@ public class Match {
 	}
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
 		Match other = (Match) obj;
 		if (users.contains(other.getUsers().get(0)) && users.contains(other.getUsers().get(1))) {
 			return true;

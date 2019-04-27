@@ -114,6 +114,8 @@ public class ProfileView extends JPanel {
 		
 		//*************************************************************************************************************************
 		//In user accepted and other accepted
+		UserController.getInstance().populateUserMatchesArray();
+		
 		JLabel lblFriends = new JLabel("Buddies");
 		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFriends.setBounds(269, 183, 150, 25);
@@ -122,17 +124,6 @@ public class ProfileView extends JPanel {
 		JPanel friendsPanel = new JPanel();
 		friendsPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		friendsPanel.setBounds(269, 219, 150, 281);
-		
-		
-		if(UserController.getInstance().getUser().getAcceptedUsers().isEmpty()) {
-			for (Match m : UserController.getUser().getAccepted()) {
-				if (m.getStatus() == Status.Accepted) {
-					User other = UserController.getInstance().onlyGetUserById(m.getOther());
-					System.out.println("hey");
-					UserController.getInstance().getUser().getAcceptedUsers().add(other);
-				}
-			}
-		}
 		
 		JList friendsList = new JList();
 		friendsList.setListData(UserController.getInstance().getUser().getAcceptedUsers().toArray());
@@ -156,14 +147,6 @@ public class ProfileView extends JPanel {
 		incomingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		incomingPanel.setBounds(589, 219, 150, 281);
 		
-		
-		if(UserController.getInstance().getUser().getWaitingUsers().isEmpty()) {
-			for (Match m : UserController.getUser().getWaiting()) {
-				User other = UserController.getInstance().onlyGetUserById(m.getOther());
-				UserController.getInstance().getUser().getWaitingUsers().add(other);
-			}
-		}
-		
 		JList incomingList = new JList();
 		incomingList.setListData(UserController.getInstance().getUser().getWaitingUsers().toArray());
 		incomingList.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -185,16 +168,6 @@ public class ProfileView extends JPanel {
 		JPanel pendingPanel = new JPanel();
 		pendingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		pendingPanel.setBounds(429, 219, 150, 281);
-		
-		
-		if(UserController.getInstance().getUser().getPendingUsers().isEmpty()) {
-			for (Match m : UserController.getUser().getAccepted()) {
-				User other = UserController.getInstance().onlyGetUserById(m.getOther());
-				if (m.getStatus() == Status.Idle && other.getWaiting().contains(m)) {
-					UserController.getInstance().getUser().getPendingUsers().add(other);
-				}
-			}
-		}
 		
 		JList pendingList = new JList();
 		pendingList.setListData(UserController.getInstance().getUser().getPendingUsers().toArray());

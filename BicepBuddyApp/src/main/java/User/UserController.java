@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 
 import Matching.Match;
 import Matching.MatchController;
+import Matching.Match.Status;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -41,6 +42,7 @@ import bicepBuddyPackage.Master;
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
+	private boolean changesToMatches = true;
 	private static UserController uc = null;
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
@@ -56,6 +58,18 @@ public class UserController {
 
 		return uc;
 	}
+
+	public boolean isChangesToMatches() {
+		return changesToMatches;
+	}
+
+
+
+	public void setChangesToMatches(boolean changesToMatches) {
+		this.changesToMatches = changesToMatches;
+	}
+
+
 
 	public static User getUser() {
 		return user;
@@ -845,6 +859,34 @@ public class UserController {
 			}
 
 			return newUser;
+		}
+		
+		public void populateUserMatchesArray() {
+			//if we made some new matches, this flag will be set, and we will
+			//re-populate our recent activity feed.
+			if(changesToMatches) {
+				for (Match m : UserController.getUser().getAccepted()) {
+					if (m.getStatus() == Status.Accepted) {
+						User other = UserController.getInstance().onlyGetUserById(m.getOther());
+						UserController.getInstance().getUser().getAcceptedUsers().add(other);
+					}
+				}
+				
+				for (Match m : UserController.getUser().getWaiting()) {
+					User other = UserController.getInstance().onlyGetUserById(m.getOther());
+					UserController.getInstance().getUser().getWaitingUsers().add(other);
+				}
+				
+				for (Match m : UserController.getUser().getAccepted()) {
+					User other = UserController.getInstance().onlyGetUserById(m.getOther());
+					if (m.getStatus() == Status.Idle && other.getWaiting().contains(m)) {
+						UserController.getInstance().getUser().getPendingUsers().add(other);
+					}
+				}
+				
+				changesToMatches = false;
+			}
+			
 		}
 
 }

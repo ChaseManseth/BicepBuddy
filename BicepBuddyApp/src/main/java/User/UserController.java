@@ -786,5 +786,65 @@ public class UserController {
 		
 		
 	}
+	
+	// Get user by Id
+		public User onlyGetUserById(String id) {
+			User newUser = null;
+			// Open the Connection
+			HttpGet request = new HttpGet(baseUrl + id);
+
+			try {
+				// Add Headers
+				request.addHeader("content-type", "application/json");
+
+				// Execute the Request
+				HttpResponse response = httpClient.execute(request);
+
+				// Get the Response Back
+			    HttpEntity entity = response.getEntity();
+			    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+			    if(response.getStatusLine().getStatusCode() == 200) {
+			    	JSONObject o = (JSONObject) new JSONParser().parse(json);
+
+				    // Result
+				    JSONObject result = (JSONObject) o.get("result");
+
+				    // Get Data to build a User object
+				    String fName = (String) result.get("firstname");
+					String lName = (String) result.get("lastname");
+					String email = (String) result.get("email");
+					String phone = (String) result.get("phoneNumber");
+					String age = (String) result.get("age");
+					String gender = (String) result.get("gender");
+					String prefGender = (String) result.get("preferredGender");
+					String goals = (String) result.get("goals");
+					String frequency = (String) result.get("frequency");
+					String timeOfDay = (String) result.get("timeOfDay");
+					String style = (String) result.get("workoutStyle");
+					String weight = (String) result.get("weight");
+					String experience = (String) result.get("experience");
+
+					// Created a new user
+					newUser = new User(fName, lName, email, phone, age, gender, prefGender,
+							goals, frequency, timeOfDay, style, weight, experience);
+
+					// Add its ID
+					String idDB = (String) result.get("_id");
+					newUser.setId(idDB);
+
+			    } else {
+			    	System.out.println("Failed to get the user! Maybe invalid id?");
+			    }
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				request.releaseConnection();
+			}
+
+			return newUser;
+		}
 
 }

@@ -1,2 +1,4 @@
-2019-04-25 22:02:01 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-25 22:02:02 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-27 17:57:08 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-27 17:57:10 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-27 17:57:34 INFO org.apache.http.impl.execchain.RetryExec execute I/O exception (org.apache.http.NoHttpResponseException) caught when processing request to {}->http://bb.manseth.com:80: The target server failed to respond
+2019-04-27 17:57:34 INFO org.apache.http.impl.execchain.RetryExec execute Retrying request to {}->http://bb.manseth.com:80

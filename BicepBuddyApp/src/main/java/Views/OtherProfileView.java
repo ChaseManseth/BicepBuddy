@@ -160,11 +160,11 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblMatchPercent = new JLabel("Match Strength:");
 		lblMatchPercent.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblMatchPercent.setBounds(10, 289, 100, 14);
+		lblMatchPercent.setBounds(10, 289, 120, 14);
 		infoPanel.add(lblMatchPercent);
 		
 		JLabel lblLblpercent = new JLabel(Double.toString(percent));
-		lblLblpercent.setBounds(108, 289, 67, 14);
+		lblLblpercent.setBounds(129, 289, 67, 14);
 		infoPanel.add(lblLblpercent);
 		
 		

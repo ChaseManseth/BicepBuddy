@@ -26,6 +26,64 @@ public class User {
 	private List<Match> idle;
 	private List<Match> waiting;
 	
+	// users in memory to speed up profile view loading
+	private List<User> acceptedUsers;
+	private List<User> rejectedUsers;
+	private List<User> idleUsers;
+	private List<User> waitingUsers;
+	private List<User> pendingUsers;
+
+
+	public List<User> getPendingUsers() {
+		return pendingUsers;
+	}
+
+
+	public void setPendingUsers(List<User> pendingUsers) {
+		this.pendingUsers = pendingUsers;
+	}
+
+
+	public List<User> getAcceptedUsers() {
+		return acceptedUsers;
+	}
+
+
+	public void setAcceptedUsers(List<User> acceptedUsers) {
+		this.acceptedUsers = acceptedUsers;
+	}
+
+
+	public List<User> getRejectedUsers() {
+		return rejectedUsers;
+	}
+
+
+	public void setRejectedUsers(List<User> rejectedUsers) {
+		this.rejectedUsers = rejectedUsers;
+	}
+
+
+	public List<User> getIdleUsers() {
+		return idleUsers;
+	}
+
+
+	public void setIdleUsers(List<User> idleUsers) {
+		this.idleUsers = idleUsers;
+	}
+
+
+	public List<User> getWaitingUsers() {
+		return waitingUsers;
+	}
+
+
+	public void setWaitingUsers(List<User> waitingUsers) {
+		this.waitingUsers = waitingUsers;
+	}
+
+
 	public User(String[] uDetails) {		
 		setEmail(uDetails[0]);
 		setfName(uDetails[2]);
@@ -59,10 +117,17 @@ public class User {
 		this.style = style;
 		this.weight = weight;
 		this.experience = experience;
+		
 		this.accepted = new ArrayList<>();
 		this.rejected = new ArrayList<>();
 		this.idle = new ArrayList<>();
 		this.waiting = new ArrayList<>();
+		
+		this.acceptedUsers = new ArrayList<>();
+		this.rejectedUsers = new ArrayList<>();
+		this.idleUsers = new ArrayList<>();
+		this.waitingUsers = new ArrayList<>();
+		this.pendingUsers = new ArrayList<>();
 	}
 	
 	// Modified Constructor for getting some data but not all from other users 
@@ -85,6 +150,12 @@ public class User {
 		this.rejected = new ArrayList<>();
 		this.idle = new ArrayList<>();
 		this.waiting = new ArrayList<>();
+		
+		this.acceptedUsers = new ArrayList<>();
+		this.rejectedUsers = new ArrayList<>();
+		this.idleUsers = new ArrayList<>();
+		this.waitingUsers = new ArrayList<>();
+		this.pendingUsers = new ArrayList<>();
 	}
 	
 	public void updateUser(String email, String fName, String lName, Object style, Object timeOfDay,

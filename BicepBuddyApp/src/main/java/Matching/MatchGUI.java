@@ -86,7 +86,13 @@ public class MatchGUI extends JPanel{
 		//*********************************************************************************************************************************
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				curMatchShown--;
+				if(curMatchShown == 0) {
+					curMatchShown = matches.size() - 1;
+				}
+				else {
+					curMatchShown--;
+				}
+				System.out.println(curMatchShown);
 				setCurrentMatch();
 			}
 		});
@@ -260,7 +266,7 @@ public class MatchGUI extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
 				//*********************************************************************************************************************************
-				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().getUserById(matches.get(curMatchShown).getOther())));
+				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther())));
 			}
 		});
 		
@@ -272,7 +278,7 @@ public class MatchGUI extends JPanel{
 		frame.setVisible(true);
 		frame.setTitle("No Matches");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(200, 200, 400, 400);
+		frame.setBounds(200, 200, 800, 400);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -290,7 +296,7 @@ public class MatchGUI extends JPanel{
 	//***********************************************************************************************************************************************
 	public void setCurrentMatch() {
 		curMatchShown = curMatchShown % matches.size();
-		User other = UserController.getInstance().getUserById(matches.get(curMatchShown).getOther());
+		User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
 		matchName.setText(other.getfName() + " " + other.getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}

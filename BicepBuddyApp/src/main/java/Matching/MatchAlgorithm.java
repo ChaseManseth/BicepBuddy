@@ -136,7 +136,7 @@ public class MatchAlgorithm {
 		// Gets a list of users based on the current users prefered gender
 		List<User> users1 = uc.getUsersByGender(UserController.getUser().getPrefGender());
 		
-		User user1 = new User("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular");
+		/*User user1 = new User("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular");
 		User user2 = new User("Other","Dude","otherdude@gmail.com","098-765-4321","26","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
 		User user3 = new User("Lady","Dudette","ladydudette@gmail.com","111-111-1111","32","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
 		User user4 = new User("Lady","Dudette2","ladydudette2@gmail.com","222-222-2222","35","Male","Female","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate");
@@ -144,7 +144,7 @@ public class MatchAlgorithm {
 		users.add(user1);
 		users.add(user2);
 		users.add(user3);
-		users.add(user4);
+		users.add(user4);*/
 
 		return users1;
 	}

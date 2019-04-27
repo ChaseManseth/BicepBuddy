@@ -92,7 +92,6 @@ public class MatchGUI extends JPanel{
 				else {
 					curMatchShown--;
 				}
-				System.out.println(curMatchShown);
 				setCurrentMatch();
 			}
 		});
@@ -166,6 +165,7 @@ public class MatchGUI extends JPanel{
 				panel.add(acc);
 				frame.getContentPane().add(panel);
 				//*********************************************************************************************************************************
+				UserController.getInstance().setChangesToMatches(true);
 				MatchController.acceptMatchInitial(matches.get(curMatchShown));
 				
 				matches.remove(matches.get(curMatchShown));

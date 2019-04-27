@@ -91,6 +91,7 @@ public class OtherProfileView extends JPanel {
 					else {
 						MatchController.acceptMatchInitial(MatchController.directMatch(u));
 					}
+					UserController.getInstance().setChangesToMatches(true);
 				}
 			});
 			btnInvite.addMouseListener(new MouseAdapter() {

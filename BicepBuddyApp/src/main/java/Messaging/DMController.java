@@ -40,11 +40,28 @@ import User.User;
 import bicepBuddyPackage.Master;
 import User.UserController;
 
-public class DMController implements ActionListener, WindowListener, ComponentListener {
-
-	private DMView dmView = null;
+public class DMController{
 	private DM dm = null;
+	private DMView dmView = null;
 	
+	public DM getDm() {
+		return dm;
+	}
+
+	public void setDm(DM dm) {
+		this.dm = dm;
+	}
+
+	public DMView getDmView() {
+		return dmView;
+	}
+
+	public void setDmView(DMView dmView) {
+		this.dmView = dmView;
+	}
+
+
+
 	// DMController singleton
 	private static DMController controller = null;
 	
@@ -58,87 +75,20 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		// Production
 		private String baseUrl = "http://bb.manseth.com/chat/";
 	
-	public DMController(User partner) {
+	public DMController(User partner, DMView dmView) {
 		dm = new DM();
 		dm.setPartner(partner);
-		dmView = new DMView(this, this);
-		dmView.setTitle("Chatting with -- " + partner.getfName() + " " + partner.getlName());
 		updateMessages();
-		dmView.setVisible(true);
 	}
 	
 	/*
 	 * Updates the DMView
 	 */
-	public void updateView() {
+	/*public void updateView() {
 		dmView.update(dm.getSorted());
-		dmView.setVisible(true);
-	}
-	
-	/*
-	 * Reads all Messages from csv file that were sent by the logged in user and
-	 * received by the specified User
-	 */
-	/*public static Set<Message> loadMessages(User partner) {
-		Set<Message> messages = new HashSet<>();
-		
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(MESSAGE_FILE));
-			
-			String line = new String();
-			while((line = reader.readLine()) != null) {
-				String[] split = line.split(",");
-				
-				if(split.length == 4) {
-					User sender = null, receiver = null;
-					Date sendDate = null;
-					Message message = null;
-					UserController uc = UserController.getInstance();
-					
-					sender = uc.getUserById(split[0]);
-					receiver = uc.getUserById(split[1]);
-					
-					// Filter out messages not applicable
-					if((sender.getId().equals(UserController.getUser().getId()) && receiver.getId().equals(partner.getId()))
-							|| (sender.getId().equals(partner.getId()) && receiver.getId().equals(UserController.getUser().getId()))) {
-					
-						try {
-							sendDate = DATE_FORMAT.parse(split[2]);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							Master.appLogger.log(Level.WARNING, e.getMessage());
-							sendDate = new Date();
-						}
-						String text = split[3];
-						message = new Message(sender, receiver, sendDate, text);
-						messages.add(message);
-					}
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Master.appLogger.log(Level.WARNING, e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Master.appLogger.log(Level.WARNING, e.getMessage());
-		} finally {
-			if(reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					Master.appLogger.log(Level.WARNING, e.getMessage());
-				}
-			}
-		}
-		
-		return messages;
 	}*/
+	
+	
 	
 	/*
 	 * Updates all messages and the DMView
@@ -146,62 +96,20 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 	public void updateMessages() {
 		Master.appLogger.info(":: Updating messages...");
 		this.dm.setMessages(getMessageList(dm.getPartner().getId()));
-		updateView();
 	}
 	
-	/*
-	 * Creates message to send, adds it to DM instance, updates the DMView accordingly
-	 */
-	/*public void sendMessage(String text) {
-		Message message = new Message(UserController.getUser(), dm.getPartner(), Calendar.getInstance().getTime(), text);
-		dm.add(message);
-		updateView();
-		saveMessage(message);
-	}*/
 	
-	/*
-	 * Writes all Messages from DM instance to csv file
-	 */
-	/*public static void saveMessage(Message message) {
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(MESSAGE_FILE, true));
-			
-			String line = message.getSender()getId()
-					+ "," + message.getReceiver().getId()
-					+ "," + DATE_FORMAT.format(message.getSendDate())
-					+ "," + message.getText().replaceAll("[^\\p{L}\\p{Z}]","");
-			
-			writer.write(line);
-			writer.newLine();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Master.appLogger.log(Level.WARNING, e.getMessage());
-		} finally {
-			if(writer != null) {
-				try {
-					writer.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					Master.appLogger.log(Level.WARNING, e.getMessage());
-				}
-			}
-		}
-	}*/
 	
 	/*
 	 * Creates instance if it does not exist or the partner changes
 	 */
-	public static DMController getInstance(User partner) {
+	public static DMController getInstance(User partner, DMView dmView) {
 		// If not made, make one; if different User, refresh
 		if(controller == null) {
-			controller = new DMController(partner);
+			controller = new DMController(partner, dmView);
 		}
 		else if(!controller.dm.getPartner().getId().equals(partner.getId())) {
-			controller = new DMController(partner);
+			controller = new DMController(partner, dmView);
 		}
 		
 		return controller;
@@ -212,92 +120,6 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 	 */
 	public static DMController getInstance() {
 		return controller;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("send")) {
-			DMController controller = DMController.getInstance();
-			Master.appLogger.info(":: Message Field triggered!");
-			
-			Message message = new Message(UserController.getUser().getId(), dm.getPartner().getId(), 
-					Calendar.getInstance().getTime(), controller.dmView.messageField.getText());
-			controller.sendMessage(message);
-			controller.dmView.messageField.setText("");
-		}
-		
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
-	@Override
-	public void componentResized(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		int x = e.getComponent().getLocation().x + e.getComponent().getSize().width;
-		int y = e.getComponent().getLocation().y;
-		dmView.setLocation(x, y);
-		
-	}
-	
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -346,7 +168,6 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		}
 		
 		dm.add(msg);
-		updateView();
 	}
 	
 	public Message getChatById(String id) {
@@ -492,3 +313,111 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		return messages;
 	}
 }
+
+/*
+ * Creates message to send, adds it to DM instance, updates the DMView accordingly
+ */
+/*public void sendMessage(String text) {
+	Message message = new Message(UserController.getUser(), dm.getPartner(), Calendar.getInstance().getTime(), text);
+	dm.add(message);
+	updateView();
+	saveMessage(message);
+}*/
+
+/*
+ * Writes all Messages from DM instance to csv file
+ */
+/*public static void saveMessage(Message message) {
+	BufferedWriter writer = null;
+	try {
+		writer = new BufferedWriter(new FileWriter(MESSAGE_FILE, true));
+		
+		String line = message.getSender()getId()
+				+ "," + message.getReceiver().getId()
+				+ "," + DATE_FORMAT.format(message.getSendDate())
+				+ "," + message.getText().replaceAll("[^\\p{L}\\p{Z}]","");
+		
+		writer.write(line);
+		writer.newLine();
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		Master.appLogger.log(Level.WARNING, e.getMessage());
+	} finally {
+		if(writer != null) {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Master.appLogger.log(Level.WARNING, e.getMessage());
+			}
+		}
+	}
+}*/
+
+/*
+ * Reads all Messages from csv file that were sent by the logged in user and
+ * received by the specified User
+ */
+/*public static Set<Message> loadMessages(User partner) {
+	Set<Message> messages = new HashSet<>();
+	
+	BufferedReader reader = null;
+	try {
+		reader = new BufferedReader(new FileReader(MESSAGE_FILE));
+		
+		String line = new String();
+		while((line = reader.readLine()) != null) {
+			String[] split = line.split(",");
+			
+			if(split.length == 4) {
+				User sender = null, receiver = null;
+				Date sendDate = null;
+				Message message = null;
+				UserController uc = UserController.getInstance();
+				
+				sender = uc.getUserById(split[0]);
+				receiver = uc.getUserById(split[1]);
+				
+				// Filter out messages not applicable
+				if((sender.getId().equals(UserController.getUser().getId()) && receiver.getId().equals(partner.getId()))
+						|| (sender.getId().equals(partner.getId()) && receiver.getId().equals(UserController.getUser().getId()))) {
+				
+					try {
+						sendDate = DATE_FORMAT.parse(split[2]);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Master.appLogger.log(Level.WARNING, e.getMessage());
+						sendDate = new Date();
+					}
+					String text = split[3];
+					message = new Message(sender, receiver, sendDate, text);
+					messages.add(message);
+				}
+			}
+		}
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		Master.appLogger.log(Level.WARNING, e.getMessage());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		Master.appLogger.log(Level.WARNING, e.getMessage());
+	} finally {
+		if(reader != null) {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Master.appLogger.log(Level.WARNING, e.getMessage());
+			}
+		}
+	}
+	
+	return messages;
+}*/

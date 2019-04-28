@@ -18,9 +18,11 @@ import javax.swing.border.LineBorder;
 import Matching.Match;
 import Matching.MatchController;
 import Messaging.DMController;
+import Messaging.DMView;
 import Matching.Match.Status;
 import User.User;
 import User.UserController;
+import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -227,7 +229,8 @@ public class OtherProfileView extends JPanel {
 			btnChat.setForeground(Color.black);
 			btnChat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					DMController.getInstance(u);
+					Master.updateFrame(new DMView(u));
+					//DMController.getInstance(u);
 				}
 			});
 			btnChat.setBounds(277, 174, 263, 71);

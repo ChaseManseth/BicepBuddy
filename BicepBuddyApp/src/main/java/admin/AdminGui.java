@@ -57,15 +57,15 @@ public class AdminGui extends JPanel {
 		add(lblNewLabel);
 		
         JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(643, 191, 66, 15);
+        lblAllUsers.setBounds(591, 191, 66, 15);
         add(lblAllUsers);
         
         JLabel lblFancyChartOr = new JLabel("Fancy chart or something");
-        lblFancyChartOr.setBounds(33, 340, 192, 15);
+        lblFancyChartOr.setBounds(271, 119, 192, 15);
         add(lblFancyChartOr);
         
     	JLabel label = new JLabel("All users");
-    	label.setBounds(313, 191, 66, 15);
+    	label.setBounds(73, 191, 66, 15);
 		add(label);
 		
 	          
@@ -78,7 +78,7 @@ public class AdminGui extends JPanel {
 		//copied from reece i think
 
 		JPanel panel = new JPanel();
-		panel.setBounds(258, 218, 205, 212);
+		panel.setBounds(33, 218, 205, 212);
 		add(panel);
 		panel.setLayout(null);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -96,11 +96,13 @@ public class AdminGui extends JPanel {
 		panel.add(list);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(522, 218, 344, 212);
+		scrollPane.setBounds(381, 218, 485, 212);
 		add(scrollPane);
 		
 		table = new JTable(new AdminTableModel(UserController.getInstance().getAllUsers()));
 		table.setAutoCreateRowSorter(true);
+		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
+		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 		
 		

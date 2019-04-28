@@ -115,6 +115,11 @@ public class MatchController {
 	public static void acceptMatchInitial(Match match) {
 		UserController uc = UserController.getInstance();
 		
+		if(match.getId() == null) {
+			String id = createMatch(match);
+			match.setId(id);
+		}
+		
 		//add to primary accepted
 		List<Match> matches = UserController.getUser().getAccepted();
 		matches.add(match);

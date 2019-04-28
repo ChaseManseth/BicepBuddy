@@ -191,6 +191,7 @@ public class Master {
 		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
 		JMenuBar menuBar = new JMenuBar();
+		
 		this.frame.setJMenuBar(null);
 		this.frame.setJMenuBar(menuBar);
 

@@ -499,8 +499,8 @@ public class UserController {
 				user.setJwt((String) o.get("token"));
 
 				// Update the frame and Profile plus the Menu BAR
-				Master.getInstance().updateFrame(new ProfileView());
 				Master.getInstance().loggedInMenuLoad();
+				Master.getInstance().updateFrame(new ProfileView());
 
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI((String) o.get("message"));

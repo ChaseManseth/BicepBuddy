@@ -1,39 +1,28 @@
 package admin;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 
-import Matching.Match;
 import User.User;
 import User.UserController;
-import User.UserDB;
 import Views.OtherProfileView;
-import Views.ProfileView;
 import bicepBuddyPackage.Master;
-
-import javax.swing.JLabel;
-import javax.swing.JTable;
 public class AdminGui extends JPanel {
 	private JTable table_1;
 
 	public AdminGui() {
 		setLayout(null);		
+		// TO-DO: Make these loaded and not hard coded
 		Integer userCount= 12, numActions=2;
 		JLabel lblAdministrator = new JLabel("Administrator");
 		lblAdministrator.setBounds(381, 24, 135, 15);
@@ -56,13 +45,52 @@ public class AdminGui extends JPanel {
         add(lblAllUsers);
         
         JLabel lblFancyChartOr = new JLabel("Fancy chart or something");
-        lblFancyChartOr.setBounds(65, 341, 230, 15);
+        lblFancyChartOr.setBounds(33, 340, 192, 15);
         add(lblFancyChartOr);
+        
+    	JLabel label = new JLabel("All users");
+		label.setBounds(313, 191, 66, 15);
+		add(label);
+		
 	          
 		table_1 = new JTable(new AdminTableModel());
-		table_1.setBounds(475, 218, 369, 323);
+		table_1.setBounds(475, 218, 356, 212);
 		add(table_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(258, 218, 205, 212);
+		add(panel);
+		panel.setLayout(null);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		
+		JList list = new JList();
+		String nameArray[]= {"bob","bill"}; 
+		list.setBounds(12, 12, 181, 162);
+		list.setListData(nameArray);
+		panel.add(list);
+		
+		
+		
+//		//copied from reece i think
 
+
+//
+////		list.setListData(AdminController.getInstance().getAllUsers().toArray());
+//		list.setListData(AdminController.getInstance().getAllUsers().toArray());
+//		list.setFont(new Font("Tahoma", Font.BOLD, 12));
+//		MouseListener mouseListener = new MouseAdapter() {
+//		    public void mouseClicked(MouseEvent e) {
+//		    	Master.getInstance().updateFrame(new OtherProfileView((User)list.getSelectedValue()));
+//		    }
+//		};
+//		list.addMouseListener(mouseListener);
+//		add(list);
+		
+
+		
+		
+		
+		
        
 	}
 }

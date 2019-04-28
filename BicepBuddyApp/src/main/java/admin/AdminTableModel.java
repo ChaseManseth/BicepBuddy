@@ -1,6 +1,5 @@
 package admin;
 
-import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -10,10 +9,12 @@ import User.User;
 public class AdminTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"Email","age","style"};
+  //TO-DO: make columns email, button, button
     private ArrayList<User> users = new ArrayList<User>();
 
      
      public AdminTableModel () {
+//TO-DO: Get info from db not hard coding
     	    User a = new User();
     	    a.setEmail("test@bob.com");
     	    a.setAge("25");

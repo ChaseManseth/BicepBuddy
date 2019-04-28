@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 
 import Matching.Match;
 import Matching.MatchController;
+import Matching.Match.Status;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -41,6 +42,7 @@ import bicepBuddyPackage.Master;
 public class UserController {
 	private boolean loggedIn;
 	private static User user = null;
+	private boolean changesToMatches = true;
 	private static UserController uc = null;
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
@@ -56,6 +58,18 @@ public class UserController {
 
 		return uc;
 	}
+
+	public boolean isChangesToMatches() {
+		return changesToMatches;
+	}
+
+
+
+	public void setChangesToMatches(boolean changesToMatches) {
+		this.changesToMatches = changesToMatches;
+	}
+
+
 
 	public static User getUser() {
 		return user;
@@ -786,5 +800,102 @@ public class UserController {
 		
 		
 	}
+	
+	// Get user by Id
+		public User onlyGetUserById(String id) {
+			User newUser = null;
+			// Open the Connection
+			HttpGet request = new HttpGet(baseUrl + id);
+
+			try {
+				// Add Headers
+				request.addHeader("content-type", "application/json");
+
+				// Execute the Request
+				HttpResponse response = httpClient.execute(request);
+
+				// Get the Response Back
+			    HttpEntity entity = response.getEntity();
+			    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+			    if(response.getStatusLine().getStatusCode() == 200) {
+			    	JSONObject o = (JSONObject) new JSONParser().parse(json);
+
+				    // Result
+				    JSONObject result = (JSONObject) o.get("result");
+
+				    // Get Data to build a User object
+				    String fName = (String) result.get("firstname");
+					String lName = (String) result.get("lastname");
+					String email = (String) result.get("email");
+					String phone = (String) result.get("phoneNumber");
+					String age = (String) result.get("age");
+					String gender = (String) result.get("gender");
+					String prefGender = (String) result.get("preferredGender");
+					String goals = (String) result.get("goals");
+					String frequency = (String) result.get("frequency");
+					String timeOfDay = (String) result.get("timeOfDay");
+					String style = (String) result.get("workoutStyle");
+					String weight = (String) result.get("weight");
+					String experience = (String) result.get("experience");
+
+					// Created a new user
+					newUser = new User(fName, lName, email, phone, age, gender, prefGender,
+							goals, frequency, timeOfDay, style, weight, experience);
+
+					// Add its ID
+					String idDB = (String) result.get("_id");
+					newUser.setId(idDB);
+
+			    } else {
+			    	System.out.println("Failed to get the user! Maybe invalid id?");
+			    }
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				request.releaseConnection();
+			}
+
+			return newUser;
+		}
+		
+		public void populateUserMatchesArray() {
+			//if we made some new matches, this flag will be set, and we will
+			//re-populate our recent activity feed.
+			if(changesToMatches) {
+				UserController.getInstance().getUser().setAcceptedUsers(new ArrayList<User>());
+				UserController.getInstance().getUser().setWaitingUsers(new ArrayList<User>());
+				UserController.getInstance().getUser().setPendingUsers(new ArrayList<User>());
+				for (Match m : UserController.getUser().getAccepted()) {
+					if (m.getStatus() == Status.Accepted) {
+						User other = UserController.getInstance().onlyGetUserById(m.getOther());
+						List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setAcceptedUsers(users);
+					}
+				}
+				
+				for (Match m : UserController.getUser().getWaiting()) {
+					User other = UserController.getInstance().onlyGetUserById(m.getOther());
+					List<User> users = UserController.getInstance().getUser().getWaitingUsers();
+					users.add(other);
+					UserController.getInstance().getUser().setWaitingUsers(users);
+				}
+				
+				for (Match m : UserController.getUser().getAccepted()) {
+					if (m.getStatus() == Status.Idle) {
+						User other = UserController.getInstance().onlyGetUserById(m.getOther());
+						List<User> users = UserController.getInstance().getUser().getPendingUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setPendingUsers(users);
+					}
+				}
+				
+				changesToMatches = false;
+			}
+			
+		}
 
 }

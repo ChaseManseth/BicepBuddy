@@ -37,6 +37,7 @@ public class MatchGUI extends JPanel{
 		this.setLayout(null);
 		this.setBounds(100, 100, 900, 550);
 		
+		//Matches generated here
 		MatchController.generateMatches();
 		matches = MatchController.getMatches(UserController.getUser());
 		
@@ -62,7 +63,6 @@ public class MatchGUI extends JPanel{
 		matchStrength.setBounds(109, 96, 682, 70);
 		this.add(matchStrength);
 		matchStrength.setColumns(10);
-		//*********************************************************************************************************************************
 		setCurrentMatch();
 		
 		//button to handle going to previous match in the list.
@@ -83,10 +83,14 @@ public class MatchGUI extends JPanel{
 			}
 		});
 		prevMatchBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		//*********************************************************************************************************************************
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				curMatchShown--;
+				if(curMatchShown == 0) {
+					curMatchShown = matches.size() - 1;
+				}
+				else {
+					curMatchShown--;
+				}
 				setCurrentMatch();
 			}
 		});
@@ -111,7 +115,6 @@ public class MatchGUI extends JPanel{
 				nextMatchBtn.setForeground(new Color(255,255,255));
 			}
 		});
-		//*********************************************************************************************************************************
 		nextMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				curMatchShown++;
@@ -159,7 +162,8 @@ public class MatchGUI extends JPanel{
 				
 				panel.add(acc);
 				frame.getContentPane().add(panel);
-				//*********************************************************************************************************************************
+				//Accepts match here
+				UserController.getInstance().setChangesToMatches(true);
 				MatchController.acceptMatchInitial(matches.get(curMatchShown));
 				
 				matches.remove(matches.get(curMatchShown));
@@ -168,8 +172,6 @@ public class MatchGUI extends JPanel{
 				}
 				
 				if(matches.size() == 0) {
-					//noMatches();
-					//dispose();
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
@@ -215,7 +217,7 @@ public class MatchGUI extends JPanel{
 				rej.setText("You have rejected this match!");
 				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				rej.setEditable(false);
-				//*********************************************************************************************************************************
+				//Rejects match here
 				MatchController.rejectMatch(matches.get(curMatchShown));
 				
 				panel.add(rej);
@@ -226,7 +228,6 @@ public class MatchGUI extends JPanel{
 				}
 				
 				if(matches.size() == 0) {
-					//noMatches();
 					Master.getInstance().updateFrame(new ProfileView());
 				}
 				else {
@@ -259,8 +260,8 @@ public class MatchGUI extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				UserDB udb = new UserDB();
-				//*********************************************************************************************************************************
-				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().getUserById(matches.get(curMatchShown).getOther())));
+				//Goes to other profile here
+				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther())));
 			}
 		});
 		
@@ -272,7 +273,7 @@ public class MatchGUI extends JPanel{
 		frame.setVisible(true);
 		frame.setTitle("No Matches");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(200, 200, 400, 400);
+		frame.setBounds(200, 200, 800, 400);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -287,10 +288,10 @@ public class MatchGUI extends JPanel{
 		frame.getContentPane().add(panel);
 		
 	}
-	//***********************************************************************************************************************************************
+	//Updates match shown by index
 	public void setCurrentMatch() {
 		curMatchShown = curMatchShown % matches.size();
-		User other = UserController.getInstance().getUserById(matches.get(curMatchShown).getOther());
+		User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
 		matchName.setText(other.getfName() + " " + other.getlName());
 		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
 	}

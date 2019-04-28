@@ -113,7 +113,9 @@ public class ProfileView extends JPanel {
 		add(btnStartMatching);
 		
 		//*************************************************************************************************************************
-		//In user accepted and other accepted
+		//Match status = accpeted
+		UserController.getInstance().populateUserMatchesArray();
+		
 		JLabel lblFriends = new JLabel("Buddies");
 		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFriends.setBounds(269, 183, 150, 25);
@@ -123,17 +125,8 @@ public class ProfileView extends JPanel {
 		friendsPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		friendsPanel.setBounds(269, 219, 150, 281);
 		
-		
-		List<User> data = new ArrayList<>();
-		for (Match m : UserController.getUser().getAccepted()) {
-			if (m.getStatus() == Status.Accepted) {
-				User other = UserController.getInstance().getUserById(m.getOther());
-				data.add(other);
-			}
-		}
-		
 		JList friendsList = new JList();
-		friendsList.setListData(data.toArray());
+		friendsList.setListData(UserController.getInstance().getUser().getAcceptedUsers().toArray());
 		friendsList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
@@ -145,6 +138,7 @@ public class ProfileView extends JPanel {
 		add(friendsPanel);
 		
 		//*************************************************************************************************************************
+		//Match in users waiting
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblIncomingBuddies.setBounds(589, 188, 150, 14);
@@ -154,14 +148,8 @@ public class ProfileView extends JPanel {
 		incomingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		incomingPanel.setBounds(589, 219, 150, 281);
 		
-		
-		List<User> data1 = new ArrayList<>();
-		for (Match m : UserController.getUser().getWaiting()) {
-			data1.add(UserController.getInstance().getUserById(m.getOther()));
-		}
-		
 		JList incomingList = new JList();
-		incomingList.setListData(data1.toArray());
+		incomingList.setListData(UserController.getInstance().getUser().getWaitingUsers().toArray());
 		incomingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener1 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
@@ -173,6 +161,7 @@ public class ProfileView extends JPanel {
 		add(incomingPanel);
 		
 		//**********************************************************************************************************************************
+		//match status = idle
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPendingBuddies.setBounds(429, 189, 150, 14);
@@ -182,17 +171,8 @@ public class ProfileView extends JPanel {
 		pendingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		pendingPanel.setBounds(429, 219, 150, 281);
 		
-		
-		List<User> data2 = new ArrayList<>();
-		for (Match m : UserController.getUser().getAccepted()) {
-			User other = UserController.getInstance().getUserById(m.getOther());
-			if (m.getStatus() == Status.Idle && other.getWaiting().contains(m)) {
-				data2.add(other);
-			}
-		}
-		
 		JList pendingList = new JList();
-		pendingList.setListData(data2.toArray());
+		pendingList.setListData(UserController.getInstance().getUser().getPendingUsers().toArray());
 		pendingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener2 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {

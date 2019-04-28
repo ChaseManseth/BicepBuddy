@@ -74,6 +74,7 @@ public class UserController {
 	// Singleton getInstance
 	public static UserController getInstance() {
 		if(uc == null) {
+			Master.appLogger.info(":: Instantiating instance of UserController.");
 			uc = new UserController();
 		}
 
@@ -370,6 +371,7 @@ public class UserController {
 				// Return the profile page
 				Master.getInstance().loggedInMenuLoad();
 				Master.getInstance().updateFrame(new ProfileView());
+				Master.appLogger.info(":: User was logged in.");
 
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
@@ -543,6 +545,7 @@ public class UserController {
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// User Profile was Deleted!
+		    	Master.appLogger.info(":: Deleting user " + u.getfName() + " " + u.getlName() + " from DB.");
 		    	user = null;
 		    	Master.getInstance().loggedOutMenuLoad();
 		    	Master.getInstance().updateFrame(new Login());
@@ -629,6 +632,7 @@ public class UserController {
 
 		    	// Indicate save and load profile
 		    	Master.getInstance().updateFrame(new ProfileView());
+		    	Master.appLogger.info(":: Editing user " + user.getfName() + " " + user.getlName() + ".");
 		    	SettingsView.saved();
 		    } else {
 		    	// FAIL!
@@ -689,6 +693,7 @@ public class UserController {
 
 			    // Get the Array of Users
 			    JSONArray userArr = (JSONArray) new JSONParser().parse(json);
+			    Master.appLogger.info(":: Retrieving users by gender: " + gender);
 
 			    // Loop through each user
 			    for(int i = 0; i < userArr.size(); i++) {
@@ -764,6 +769,7 @@ public class UserController {
 				// Created a new user
 				newUser = new User(fName, lName, email, phone, age, gender, prefGender,
 						goals, frequency, timeOfDay, style, weight, experience);
+				Master.appLogger.info(":: Getting user by ID: " + fName + " " + lName + " from DB.");
 
 				// Add its ID
 				String idDB = (String) result.get("_id");
@@ -986,13 +992,14 @@ public class UserController {
 					// Created a new user
 					newUser = new User(fName, lName, email, phone, age, gender, prefGender,
 							goals, frequency, timeOfDay, style, weight, experience);
+					Master.appLogger.info(":: Getting user " + fName + " " + lName + " from DB WITHOUT their match info.");
 
 					// Add its ID
 					String idDB = (String) result.get("_id");
 					newUser.setId(idDB);
 
 			    } else {
-			    	System.out.println("Failed to get the user! Maybe invalid id?");
+			    	Master.appLogger.warning(":: Failed to get the user! Maybe invalid id?");
 			    }
 
 
@@ -1012,6 +1019,7 @@ public class UserController {
 			//if we made some new matches, this flag will be set, and we will
 			//re-populate our recent activity feed.
 			if(changesToMatches) {
+				Master.appLogger.info(":: Updating user matches array.");
 				UserController.getInstance().getUser().setAcceptedUsers(new ArrayList<User>());
 				UserController.getInstance().getUser().setWaitingUsers(new ArrayList<User>());
 				UserController.getInstance().getUser().setPendingUsers(new ArrayList<User>());
@@ -1053,6 +1061,7 @@ public class UserController {
 		// Gets all users based on gender
 		public List<User> getAllUsers() {
 			List<User> userList = new ArrayList<User>();
+			Master.appLogger.info(":: Retrieving all users from the DB.");
 
 			// Open the post response
 //			HttpClient httpClient = HttpClientBuilder.create().build();

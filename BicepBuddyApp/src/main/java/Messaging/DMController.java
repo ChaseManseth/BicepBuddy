@@ -294,6 +294,9 @@ public class DMController{
 		HttpGet request = new HttpGet(baseUrl + "from/" + UserController.getInstance().getUser().getId()
 				+ "/to/" + otherID);
 		
+		Master.appLogger.info(":: Getting all messages between " + UserController.getUser().getfName()
+				+ " and " + dm.getPartner().getfName());
+		
 		try {
 			// Add JSON to the body and headers indicating type
 		    request.addHeader("content-type", "application/json");

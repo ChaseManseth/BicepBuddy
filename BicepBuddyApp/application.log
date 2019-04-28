@@ -1,2 +1,10 @@
-2019-04-28 12:25:18 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 12:25:20 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 12:45:39 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 12:45:41 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 12:45:47 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
+2019-04-28 12:45:48 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-28 12:45:48 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 12:45:49 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 12:45:49 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 12:45:49 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 12:45:52 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-28 12:45:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Chase

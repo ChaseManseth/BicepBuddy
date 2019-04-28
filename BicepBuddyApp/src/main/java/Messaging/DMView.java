@@ -53,6 +53,8 @@ public class DMView extends JPanel {
 		JTextArea messageField = new JTextArea();
 		messageField.setEditable(false);
 		messageField.setBounds(12, 13, 876, 441);
+		messageField.setWrapStyleWord(true);
+		messageField.setLineWrap(true);
 		
 		JLabel messageLbl = new JLabel("Enter message to " + otherUser.getfName() + ":");
 		messageLbl.setBounds(12, 478, 226, 16);
@@ -69,7 +71,7 @@ public class DMView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("send")) {
 					DMController controller = DMController.getInstance();
-					Master.appLogger.info(":: Message Field triggered!");
+					Master.appLogger.info(":: Message " + messageSender.getText() + " to be sent.");
 					
 					Message message = new Message(UserController.getUser().getId(), otherUser.getId(), 
 							Calendar.getInstance().getTime(), messageSender.getText());
@@ -85,7 +87,7 @@ public class DMView extends JPanel {
 		
 		DMController.getInstance().populateMessages(messageField);
 		
-		JScrollPane messagePane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane messagePane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messagePane.setBounds(12, 13, 876, 452);
 		messagePane.setViewportView(messageField);
 		messagePane.setVisible(true);

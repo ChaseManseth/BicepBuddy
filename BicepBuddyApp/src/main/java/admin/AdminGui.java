@@ -38,7 +38,7 @@ public class AdminGui extends JPanel {
 	 */
 	public AdminGui() {
 		// TO-DO: Make these loaded and not hard coded
-		Integer userCount= 12, numActions=2;
+		Integer userCount= UserController.getInstance().getAllUsers().size();
 		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator");
 		lblAdministrator.setBounds(381, 24, 135, 15);
@@ -100,6 +100,7 @@ public class AdminGui extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable(new AdminTableModel(UserController.getInstance().getAllUsers()));
+		table.setAutoCreateRowSorter(true);
 		scrollPane.setViewportView(table);
 		
 		

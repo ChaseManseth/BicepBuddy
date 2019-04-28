@@ -50,7 +50,7 @@ public class MatchController {
 	}
 	
 	public static User getOther(Match match) {
-		return UserController.getInstance().getUserById(match.getOther());
+		return UserController.getInstance().onlyGetUserById(match.getOther());
 	}
 	
 	public static Match findMatch(Match match) {
@@ -67,7 +67,7 @@ public class MatchController {
 		
 		return result;
 	}
-	
+	//************************************************************************************************************************
 	public static void acceptMatchInitial(Match match) {
 		UserController uc = UserController.getInstance();
 		
@@ -85,50 +85,27 @@ public class MatchController {
 		matches = other.getWaiting();
 		matches.add(match);
 		other.setWaiting(matches);
-		User otherUser = uc.getUserById(match.getOther());
-		otherUser.setWaiting(matches);
 		
 		// Updating Array State for Other User
-		uc.updateMatchedArrayState(otherUser);
-		
-//		UserController.getInstance().getUserById(match.getOther()).setWaiting(matches);
+		uc.updateMatchedArrayState(other);
 	}
 	
 	public static void acceptMatchOther(Match match) {
-		UserController uc = UserController.getInstance();
-		
 		//add to other accepted
 		match.accept();
 		
 		// Save Status change to DB
 		updateMatch(match);
+
+		List<Match> matches = UserController.getUser().getWaiting();
+		matches.remove(match);
+		UserController.getUser().setWaiting(matches);
 		
-		User other = UserController.getInstance().getUserById(match.getOther());
-		if (other.getWaiting().contains(match)) {
-			List<Match> matches = other.getWaiting();
-			matches.remove(match);
-			other.setWaiting(matches);
-			
-			matches = other.getAccepted();
-			matches.add(match);
-			other.setAccepted(matches);
-			// Updating Array State for Other User
-			User otherUser = uc.getUserById(match.getOther());
-			uc.updateMatchedArrayState(otherUser);
-		}
-		else {
-			List<Match> matches = UserController.getUser().getWaiting();
-			matches.remove(match);
-			UserController.getUser().setWaiting(matches);
-			
-			matches = UserController.getUser().getAccepted();
-			matches.add(match);
-			UserController.getUser().setAccepted(matches);
-			// Updating Array State for Other User
-			uc.updateMatchedArrayState(UserController.getUser());
-		}
-		
-		
+		matches = UserController.getUser().getAccepted();
+		matches.add(match);
+		UserController.getUser().setAccepted(matches);
+		// Updating Array State for Other User
+		UserController.getInstance().updateMatchedArrayState(UserController.getUser());
 	}
 	
 	public static void rejectMatch(Match match) {
@@ -145,6 +122,11 @@ public class MatchController {
 			matches.remove(match);
 			UserController.getUser().setAccepted(matches);
 		}
+		matches = UserController.getUser().getWaiting();
+		if (matches.contains(match)) {
+			matches.remove(match);
+			UserController.getUser().setWaiting(matches);
+		}
 		matches = UserController.getUser().getRejected();
 		matches.add(match);
 		UserController.getUser().setRejected(matches);
@@ -155,18 +137,23 @@ public class MatchController {
 		
 		
 		// Other User
-		UserController.getInstance().getUserById(match.getOther()).getWaiting();
+		User other = UserController.getInstance().getUserById(match.getOther());
+		matches = other.getAccepted();
 		if (matches.contains(match)) {
 			matches.remove(match);
-			UserController.getInstance().getUserById(match.getOther()).setWaiting(matches);
+			other.setWaiting(matches);
 		}
-		matches = UserController.getInstance().getUserById(match.getOther()).getRejected();
+		matches = other.getWaiting();
+		if (matches.contains(match)) {
+			matches.remove(match);
+			other.setWaiting(matches);
+		}
+		matches = other.getRejected();
 		matches.add(match);
-		UserController.getInstance().getUserById(match.getOther()).setRejected(matches);
+		other.setRejected(matches);
 		
 		// Updating Array State for Other User
-		User otherUser = uc.getUserById(match.getOther());
-		uc.updateMatchedArrayState(otherUser);
+		uc.updateMatchedArrayState(other);
 	}
 	
 	// TODO - getMatchById

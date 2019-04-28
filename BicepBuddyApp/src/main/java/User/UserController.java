@@ -865,22 +865,31 @@ public class UserController {
 			//if we made some new matches, this flag will be set, and we will
 			//re-populate our recent activity feed.
 			if(changesToMatches) {
+				UserController.getInstance().getUser().setAcceptedUsers(new ArrayList<User>());
+				UserController.getInstance().getUser().setWaitingUsers(new ArrayList<User>());
+				UserController.getInstance().getUser().setPendingUsers(new ArrayList<User>());
 				for (Match m : UserController.getUser().getAccepted()) {
 					if (m.getStatus() == Status.Accepted) {
 						User other = UserController.getInstance().onlyGetUserById(m.getOther());
-						UserController.getInstance().getUser().getAcceptedUsers().add(other);
+						List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setAcceptedUsers(users);
 					}
 				}
 				
 				for (Match m : UserController.getUser().getWaiting()) {
 					User other = UserController.getInstance().onlyGetUserById(m.getOther());
-					UserController.getInstance().getUser().getWaitingUsers().add(other);
+					List<User> users = UserController.getInstance().getUser().getWaitingUsers();
+					users.add(other);
+					UserController.getInstance().getUser().setWaitingUsers(users);
 				}
 				
 				for (Match m : UserController.getUser().getAccepted()) {
-					User other = UserController.getInstance().onlyGetUserById(m.getOther());
-					if (m.getStatus() == Status.Idle && other.getWaiting().contains(m)) {
-						UserController.getInstance().getUser().getPendingUsers().add(other);
+					if (m.getStatus() == Status.Idle) {
+						User other = UserController.getInstance().onlyGetUserById(m.getOther());
+						List<User> users = UserController.getInstance().getUser().getPendingUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setPendingUsers(users);
 					}
 				}
 				

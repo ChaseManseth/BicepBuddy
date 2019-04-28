@@ -46,12 +46,10 @@ public class MatchController {
 	 * Generate matches.
 	 */
 	public static void generateMatches() {
-		UserController uc = UserController.getInstance();
-		
 		UserController.getUser().setIdle(MatchAlgorithm.matchUser());
-		
+		Master.appLogger.info(":: Matches generated from algorithm and added to idle");
 		// Updating Array State for User
-		uc.updateMatchedArrayState(uc.getUser());
+		UserController.getInstance().updateMatchedArrayState(UserController.getInstance().getUser());
 		
 	}
 	
@@ -62,6 +60,7 @@ public class MatchController {
 	 * @return the match
 	 */
 	public static Match directMatch(User user) {
+		Master.appLogger.info(":: Direct Match");
 		return MatchAlgorithm.directMatch(user);
 	}
 	
@@ -113,6 +112,10 @@ public class MatchController {
 	 */
 	//************************************************************************************************************************
 	public static void acceptMatchInitial(Match match) {
+		Master.appLogger.info(":: Match sent from " + 
+				UserController.getUser().toString() + " to " + 
+				UserController.getInstance().onlyGetUserById(match.getOther()).toString());
+		
 		UserController uc = UserController.getInstance();
 		
 		if(match.getId() == null) {
@@ -145,6 +148,10 @@ public class MatchController {
 	 * @param match the match
 	 */
 	public static void acceptMatchOther(Match match) {
+		Master.appLogger.info(":: Match accepted from " + 
+				UserController.getInstance().onlyGetUserById(match.getOther()).toString() + " by " + 
+				UserController.getUser().toString());
+		
 		//add to other accepted
 		match.accept();
 		
@@ -168,7 +175,16 @@ public class MatchController {
 	 * @param match the match
 	 */
 	public static void rejectMatch(Match match) {
+		Master.appLogger.info(":: Match rejected by " + UserController.getUser().toString() + " with " + 
+				UserController.getInstance().onlyGetUserById(match.getOther()).toString());
+		
 		UserController uc = UserController.getInstance();
+		
+		if(match.getId() == null) {
+			String id = createMatch(match);
+			match.setId(id);
+		}
+		
 		//add to both rejected
 		match.reject();
 		
@@ -223,6 +239,8 @@ public class MatchController {
 	 */
 	// TODO - getMatchById
 	public static Match getMatchById(String id) {
+		Master.appLogger.info(":: Match fully fetched with id " + id);
+		
 		Match getMatch = null;
 		
 		// Open the Connection
@@ -257,8 +275,6 @@ public class MatchController {
 	
 		    	getMatch = new Match(userId, otherUserId, strength, status, matchId);
 		    	
-		    	System.out.println("Got Match");
-		    	
 		    } else {
 		    	System.err.println("Failed to get Match Object");
 		    }
@@ -284,6 +300,7 @@ public class MatchController {
 	@SuppressWarnings("unchecked")
 	public static String createMatch(Match m) {
 		String id = "";
+		
 		
 		// Create the Post JSON
 		JSONObject createMatchJSON = new JSONObject();
@@ -332,6 +349,8 @@ public class MatchController {
 			request.releaseConnection();
 		}
 		
+		Master.appLogger.info(":: Match generated with id " + id);
+		
 		return id;
 		
 	}
@@ -344,6 +363,7 @@ public class MatchController {
 	// Update an Existing Match in the DB
 	@SuppressWarnings("unchecked")
 	public static void updateMatch(Match m) {
+		Master.appLogger.info(":: Match updated with id " + m.getId());
 		// Create the Post JSON
 		JSONObject patchMatchJSON = new JSONObject();
 		patchMatchJSON.put("status", m.getStatus().ordinal());

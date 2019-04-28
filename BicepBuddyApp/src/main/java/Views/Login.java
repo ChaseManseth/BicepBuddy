@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -68,6 +70,17 @@ public class Login extends JPanel {
 		passwordField.setBounds(433, 234, 185, 20);
 		add(passwordField);
 		passwordField.setColumns(10);
+		
+		passwordField.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// user can press enter to log in.
+				UserController uc = new UserController();
+				uc.validateLogin(emailTextField.getText(), passwordField.getText());
+			}
+			
+		});
 		
 		// Password Background color
 		JPanel panel = new JPanel();

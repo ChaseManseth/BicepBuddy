@@ -19,7 +19,7 @@ import User.User;
 public class AdminTableModel extends AbstractTableModel {
 
  
-    private String[] columnNames = {"Email","Delete","View"};
+    private String[] columnNames = {"User","Delete User"," View Profile"};
 
     private ArrayList<AdminTableModelRow> data = new ArrayList<AdminTableModelRow>();
 
@@ -46,7 +46,7 @@ public Object getValueAt(int row, int col) {
 	Object val;
 	switch(col) {
 	  case 0:
-		  val=data.get(row).getMyUser().getEmail();
+		  val=data.get(row).getMyUser();
 		  break;
 	  case 1:
 		  val=data.get(row).getDeleteString();
@@ -55,19 +55,15 @@ public Object getValueAt(int row, int col) {
 		  val=data.get(row).getViewString();
 		  break;
 	  default:
-		  val=data.get(row).getMyUser().getEmail();
+		  val=data.get(row).getMyUser();
 	} 
 	return val;
 }
-
-/*
-* JTable uses this method to determine the default renderer/
-* editor for each cell.  If we didn't implement this method,
-* then the last column would contain text ("true"/"false"),
-* rather than a check box.
-*/
+public User getUserFromRow(int row) {
+	return data.get(row).getMyUser();
+}
 public Class getColumnClass(int c) {
-return getValueAt(0, c).getClass();
+	return getValueAt(0, c).getClass();
 }
 
 

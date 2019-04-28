@@ -98,11 +98,11 @@ public class AdminGui extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(381, 218, 485, 212);
 		add(scrollPane);
-		
-		table = new JTable(new AdminTableModel(UserController.getInstance().getAllUsers()));
+		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
+		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
-		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
-		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
+		ButtonColumn buttonColumn1 = new ButtonColumn(table, model,1);
+		ButtonColumn buttonColumn2 = new ButtonColumn(table, model,2);
 		scrollPane.setViewportView(table);
 		
 		

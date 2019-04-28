@@ -1,38 +1,48 @@
-2019-04-28 15:35:30 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 15:35:31 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 15:35:51 INFO User.UserController getUserById :: Getting user by ID: Chase Manseth from DB.
-2019-04-28 15:35:53 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-28 15:35:53 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 15:35:53 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
-2019-04-28 15:35:53 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-28 15:35:53 INFO User.UserController validateLogin :: User was logged in.
-2019-04-28 15:35:57 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 15:35:57 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 15:35:57 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
-2019-04-28 15:35:57 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
-2019-04-28 15:35:57 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
-2019-04-28 15:35:58 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-28 15:35:59 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
-2019-04-28 15:36:00 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
-2019-04-28 15:36:00 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
-2019-04-28 15:36:00 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 15:36:00 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 15:36:00 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
-2019-04-28 15:36:01 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
-2019-04-28 15:36:02 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 16:40:08 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 16:40:10 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 16:40:19 INFO User.UserController getUserById :: Getting user by ID: ABC ABC from DB.
+2019-04-28 16:40:19 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-28 16:40:19 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 16:40:19 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 16:40:21 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 16:40:22 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 16:40:23 INFO User.UserController onlyGetUserById :: Getting user ABC ABC from DB WITHOUT their match info.
+2019-04-28 16:40:24 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 16:40:24 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 16:40:24 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 16:40:24 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-28 16:40:24 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
+2019-04-28 16:40:24 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 16:40:25 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user ABC ABC from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-28 16:40:26 INFO User.UserController onlyGetUserById :: Getting user Name3 LName3 from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 16:40:27 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 16:40:28 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 16:40:28 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 16:40:28 INFO User.UserController onlyGetUserById :: Getting user ABC ABC from DB WITHOUT their match info.

@@ -17,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 import Matching.Match;
 import Matching.MatchController;
+import Messaging.DMController;
 import Matching.Match.Status;
 import User.User;
 import User.UserController;
@@ -220,13 +221,13 @@ public class OtherProfileView extends JPanel {
 		
 		int ind = UserController.getUser().getAccepted().indexOf(new Match(u,UserController.getUser()));
 		
-		//if(ind != -1 && UserController.getUser().getAccepted().get(ind).getStatus() == Status.Accepted) {
+		if(ind != -1 && UserController.getUser().getAccepted().get(ind).getStatus() == Status.Accepted) {
 			JButton btnChat = new JButton("Chat with " + u.getfName());
 			btnChat.setBackground(MaterialColors.GRAY_400);
 			btnChat.setForeground(Color.black);
 			btnChat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
+					DMController.getInstance(u);
 				}
 			});
 			btnChat.setBounds(277, 174, 263, 71);
@@ -244,7 +245,7 @@ public class OtherProfileView extends JPanel {
 			
 			add(btnChat);
 			
-			JButton notifyBtn = new JButton("It's gym time " + u.getfName());
+			JButton notifyBtn = new JButton("It's gym time " + u.getfName() + "!");
 			notifyBtn.setBackground(MaterialColors.GRAY_400);
 			notifyBtn.setForeground(Color.black);
 			
@@ -261,7 +262,7 @@ public class OtherProfileView extends JPanel {
 			
 			notifyBtn.setBounds(605, 174, 263, 71);
 			add(notifyBtn);
-		//}
+		}
 		
 	}
 	

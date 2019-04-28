@@ -646,7 +646,6 @@ public class UserController {
 		} finally {
 			request.releaseConnection();
 		}
-
 	}
 
 	/**

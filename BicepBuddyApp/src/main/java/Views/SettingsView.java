@@ -295,8 +295,7 @@ public class SettingsView extends JPanel {
 		
 		saver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserController uc = new UserController();
-				uc.editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
+				UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
 						    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
 						    prefGender.getSelectedItem(), freqBox.getSelectedItem(), goalsBox.getSelectedItem(),
 						    weightBox.getSelectedItem(), expBox.getSelectedItem(), ageField.getText(), phoneField.getText());

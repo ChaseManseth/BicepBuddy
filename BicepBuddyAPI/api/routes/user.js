@@ -156,7 +156,7 @@ router.patch('/:userID', (req, res, next) => {
 // Get a list of all the users
 router.get('/', (req, res, next) => {
     User.find()
-        .select('_id firstname lastname email')
+        // .select('_id firstname lastname email')
         .exec()
         .then(docs => {
             const response = {
@@ -171,7 +171,7 @@ router.get('/', (req, res, next) => {
                 })
             };
 
-            res.status(200).json(response);
+            res.status(200).json(docs);
         })
         .catch(err => {
             console.log(err);

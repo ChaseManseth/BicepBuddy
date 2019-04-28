@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // Middleware
 const checkAuth = require('../middleware/check-auth');
 
-const Match = require('../models/match');
+const Chat = require('../models/chat');
 
 // Set this to an env variable
 const JWT_KEY = "secret";
@@ -15,22 +15,19 @@ const JWT_KEY = "secret";
 
 // Match Creation
 router.post('/', (req, res, next) => {
-    const match = new Match({
+    const chat = new Chat({
         _id: new mongoose.Types.ObjectId(),
         userId: req.body.userId,
-        matchedUserId: req.body.matchedUserId,
-        status: req.body.status,
-// TODO Uncomment this when ready
-        // killDate: req.body.killDate,
-        strength: req.body.strength
+        otherUserId: req.body.otherUserId,
+        message: req.body.message
     });
 
-    match.save()
+    chat.save()
         .then(result => {
-            console.log('Match Created!');
+            console.log('Chat Created!');
             res.status(201).json({
-                message: 'Match Created!',
-                match: result
+                message: 'Chat Created!',
+                chat: result
             });
         })
         .catch(err => {
@@ -41,9 +38,9 @@ router.post('/', (req, res, next) => {
         });
 });
 
-// Get Matches
+// Get all Chats
 router.get('/', (req, res, next) => {
-    Match.find()
+    Chat.find()
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -59,10 +56,10 @@ router.get('/', (req, res, next) => {
         });
 });
 
-// Get Match by Id
-router.get('/:matchId', (req, res, next) => {
+// Get Chat by Id
+router.get('/:chat', (req, res, next) => {
     const id = req.params.matchId;
-    Match.findById(id)
+    Chat.findById(id)
         .exec()
         .then(result => {
             res.status(200).json({
@@ -77,34 +74,39 @@ router.get('/:matchId', (req, res, next) => {
         });
 });
 
-// Update a Match
-router.patch('/:matchId', (req, res, next) => {
-    const id = req.params.matchId;
-    Match.findByIdAndUpdate(id, req.body)
+// Get chats from user to other user
+router.get('/from/:userId/to/:otherUserId', (req, res, next) => {
+    const userId = req.params.userId;
+    const otherUserId = req.params.otherUserId;
+
+    var query = {
+        userId: userId,
+        otherUserId: otherUserId
+    };
+    Chat.find(query)
         .exec()
         .then(result => {
-            res.status(200).json({
-                message: 'Match Updated!'
-            });
+            console.log('Chat Made');
+            res.status(200).json(result);
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
                 error: err
             });
-        })
+        });
 });
 
-// Delete Match by Id
-router.delete('/:matchId', (req, res, next) => {
-    const matchId = req.params.matchId;
+// Delete Chat msg
+router.delete('/:chatId', (req, res, next) => {
+    const chatId = req.params.chatId;
 
-    Match.findByIdAndDelete(matchId)
+    Chat.findByIdAndDelete(chatId)
         .exec()
         .then(result => {
-            console.log('Match deleted');
+            console.log('Chat deleted');
             res.status(200).json({
-                message: 'Match deleted'
+                message: 'Chat deleted'
             });
         })
         .catch(err => {
@@ -114,7 +116,6 @@ router.delete('/:matchId', (req, res, next) => {
             });
         });
 })
-
 
 
 module.exports = router;

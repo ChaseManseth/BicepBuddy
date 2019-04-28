@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const userRoutes = require('./api/routes/user');
 const matchRoutes = require('./api/routes/match');
+const chatRoutes = require('./api/routes/chat');
 
 // Delete this when in production
 const mongodbPW = "uXwozBcr3tFtWnbI";
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use('/user', userRoutes);
 app.use('/match', matchRoutes);
+app.use('/chat', chatRoutes);
 
 // Error Handling
 app.use((req, res, next) => {

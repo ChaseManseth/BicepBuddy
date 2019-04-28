@@ -216,11 +216,8 @@ public class MatchAlgorithm {
 	 */
 	//Get all possible users who fit the Priority 1 Category
 	public static List<User> possibleMatches(){
-		//TODO add DB Connection to get users based on Gender
-		UserController uc = UserController.getInstance();
-		
 		// Gets a list of users based on the current users prefered gender
-		List<User> users1 = uc.getUsersByGender(UserController.getUser().getPrefGender());
+		List<User> users1 = UserController.getInstance().getUsersByGender(UserController.getUser().getPrefGender());
 
 		return users1;
 	}

@@ -53,6 +53,7 @@ public class MatchGUI extends JPanel{
 		this.setBounds(100, 100, 900, 550);
 		
 		//Matches generated here
+		Master.appLogger.info(":: Match generation called by MatchGUI");
 		MatchController.generateMatches();
 		matches = MatchController.getMatches(UserController.getUser());
 		
@@ -100,12 +101,14 @@ public class MatchGUI extends JPanel{
 		prevMatchBtn.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(curMatchShown == 0) {
+				Master.appLogger.info(":: MatchGUI left button action");
+				/*if(curMatchShown == 0) {
 					curMatchShown = matches.size() - 1;
 				}
 				else {
 					curMatchShown--;
-				}
+				}*/
+				curMatchShown--;
 				setCurrentMatch();
 			}
 		});
@@ -132,6 +135,7 @@ public class MatchGUI extends JPanel{
 		});
 		nextMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Master.appLogger.info(":: MatchGUI right button action");
 				curMatchShown++;
 				setCurrentMatch();
 			}
@@ -161,6 +165,7 @@ public class MatchGUI extends JPanel{
 		
 		acceptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Master.appLogger.info(":: Accept button pressed");
 				JFrame frame = new JFrame();
 				frame.setVisible(true);
 				frame.setTitle("Accepted");
@@ -188,6 +193,7 @@ public class MatchGUI extends JPanel{
 				
 				if(matches.size() == 0) {
 					Master.getInstance().updateFrame(new ProfileView());
+					noMatches();
 				}
 				else {
 					setCurrentMatch();
@@ -223,6 +229,7 @@ public class MatchGUI extends JPanel{
 			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 			 */
 			public void actionPerformed(ActionEvent e) {
+				Master.appLogger.info(":: Reject button pressed");
 				JFrame frame = new JFrame();
 				frame.setVisible(true);
 				frame.setTitle("Rejection");
@@ -278,7 +285,7 @@ public class MatchGUI extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				UserDB udb = new UserDB();
+				Master.appLogger.info(":: Button to " + matches.get(curMatchShown).getOther().toString() + " profile pressed");
 				//Goes to other profile here
 				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther())));
 			}
@@ -291,6 +298,8 @@ public class MatchGUI extends JPanel{
 	 * No matches.
 	 */
 	public void noMatches() {
+		Master.appLogger.info(":: No matches found");
+		
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
 		frame.setTitle("No Matches");
@@ -316,6 +325,7 @@ public class MatchGUI extends JPanel{
 	 */
 	//Updates match shown by index
 	public void setCurrentMatch() {
+		Master.appLogger.info(":: Currently shown match updated");
 		curMatchShown = curMatchShown % matches.size();
 		User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
 		matchName.setText(other.getfName() + " " + other.getlName());

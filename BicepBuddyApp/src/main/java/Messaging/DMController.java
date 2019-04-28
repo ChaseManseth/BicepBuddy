@@ -1,5 +1,6 @@
 package Messaging;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -19,9 +20,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.apache.http.HttpEntity;
@@ -311,6 +314,28 @@ public class DMController{
 		}
 		
 		return messages;
+	}
+
+	public void populateMessages(JTextArea messageField) {
+		// first get the sorted message list
+		List<Message> sortedMessages = dm.getSorted();
+		
+		for(int i = 0; i < sortedMessages.size(); i++) {
+			//for each message, print the date, then the sender, then the message.
+			addMessage(messageField, sortedMessages.get(i));
+		}
+	}
+	
+	public void addMessage(JTextArea messageField, Message message) {
+		if(message.getSender().contentEquals(UserController.getUser().getId())) {
+			//this is us
+			messageField.setText(messageField.getText() + "\n" + message.getSendDate() + 
+					" " + "You: " + message.getText());
+		}
+		else {
+			messageField.setText(messageField.getText() + "\n" + message.getSendDate() + 
+					" " + dm.getPartner().getfName() + " " + dm.getPartner().getlName() + ": " + message.getText());
+		}
 	}
 }
 

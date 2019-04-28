@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
+import mdlaf.utils.MaterialColors;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,33 +25,62 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JLabel;
 
 public class DMView extends JPanel {
+	private JTextField messageSender;
 	
 	public DMView(User otherUser) {
 		DMController.getInstance(otherUser, this);
 		
-		// Contents of JFrame
-		JPanel mainPanel = new JPanel();
-		mainPanel.setMaximumSize(new Dimension(getSize().width, Integer.MAX_VALUE));
-		mainPanel.setPreferredSize(new Dimension(getSize().width, getSize().height));
-		mainPanel.setLayout(new BorderLayout());
+		this.setLayout(null);
+		this.setBounds(100, 100, 900, 550);
 		
-		// Panel to hold messages and scrollbar
-		JPanel messagePanel = new JPanel();
-		messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
-		//messagePanel.setBackground(Color.GRAY);
-		JScrollPane messageScroll = new JScrollPane(messagePanel);
+		JTextArea messageField = new JTextArea();
+		messageField.setEditable(false);
+		messageField.setBounds(12, 13, 876, 441);
 		
-		messageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		messageScroll.getVerticalScrollBar().setUnitIncrement(16);
+		JLabel messageLbl = new JLabel("Enter message to " + otherUser.getfName() + ":");
+		messageLbl.setBounds(12, 478, 226, 16);
+		add(messageLbl);
 		
-		mainPanel.add(messageScroll, BorderLayout.CENTER);
+		messageSender = new JTextField();
+		messageSender.setBounds(283, 475, 605, 22);
+		add(messageSender);
+		messageSender.setColumns(10);
+		messageSender.setBackground(MaterialColors.GRAY_400);
 		
-		// JTextField for entering messages
-		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+		messageSender.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("send")) {
+					DMController controller = DMController.getInstance();
+					Master.appLogger.info(":: Message Field triggered!");
+					
+					Message message = new Message(UserController.getUser().getId(), otherUser.getId(), 
+							Calendar.getInstance().getTime(), messageSender.getText());
+					controller.sendMessage(message);
+					messageSender.setText("");
+					
+					controller.addMessage(messageField, message);
+				}
+				
+			}
+		});
+		messageSender.setActionCommand("send");
 		
-		JTextField messageField = new JTextField("Enter message here...");
+		DMController.getInstance().populateMessages(messageField);
+		
+		JScrollPane messagePane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		messagePane.setBounds(12, 13, 876, 452);
+		messagePane.setViewportView(messageField);
+		messagePane.setVisible(true);
+		add(messagePane);
+		
+		
+				
+		/*JTextField messageField = new JTextField("Enter message here...");
+		messageField.setBounds(0, 356, 830, -356);
 		messageField.setColumns(25);
 		messageField.addActionListener(new ActionListener() {
 			@Override
@@ -70,6 +100,7 @@ public class DMView extends JPanel {
 		messageField.setActionCommand("send");
 		
 		JButton sendButton = new JButton("Send");
+		sendButton.setBounds(0, 149, 194, -149);
 		sendButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -87,13 +118,10 @@ public class DMView extends JPanel {
 		});
 		sendButton.setActionCommand("send");
 		
-		bottomPanel.add(messageField);
-		bottomPanel.add(sendButton);
-		
-		mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
-		
+		this.add(messageField);
+		this.add(sendButton);*/
+				
 		//mainPanel.setBackground(Color.GRAY);
 				
 	}
-
 }

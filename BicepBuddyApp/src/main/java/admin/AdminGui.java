@@ -17,13 +17,15 @@ import User.User;
 import User.UserController;
 import Views.OtherProfileView;
 import bicepBuddyPackage.Master;
+import javax.swing.JScrollPane;
 public class AdminGui extends JPanel {
 	private JTable table_1;
+	private JTable table;
 
 	public AdminGui() {
-		setLayout(null);		
 		// TO-DO: Make these loaded and not hard coded
 		Integer userCount= 12, numActions=2;
+		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator");
 		lblAdministrator.setBounds(381, 24, 135, 15);
 		add(lblAdministrator);
@@ -49,14 +51,18 @@ public class AdminGui extends JPanel {
         add(lblFancyChartOr);
         
     	JLabel label = new JLabel("All users");
-		label.setBounds(313, 191, 66, 15);
+    	label.setBounds(313, 191, 66, 15);
 		add(label);
 		
 	          
-		table_1 = new JTable(new AdminTableModel());
-		table_1.setBounds(475, 218, 356, 212);
-		add(table_1);
+	//table wont scroll
+		//table_1 = new JTable(new AdminTableModel(UserController.getInstance().getAllUsers()));
+		//table_1.setBounds(475, 218, 356, 212);
+		//add(table_1);
 		
+		
+		//copied from reece i think
+
 		JPanel panel = new JPanel();
 		panel.setBounds(258, 218, 205, 212);
 		add(panel);
@@ -64,27 +70,29 @@ public class AdminGui extends JPanel {
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		
 		JList list = new JList();
-		String nameArray[]= {"bob","bill"}; 
 		list.setBounds(12, 12, 181, 162);
-		list.setListData(nameArray);
+		list.setListData(UserController.getInstance().getAllUsers().toArray());
+		list.setFont(new Font("Tahoma", Font.BOLD, 12));
+		MouseListener mouseListener = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		    	Master.getInstance().updateFrame(new OtherProfileView((User)list.getSelectedValue()));
+		    }
+		};
+		list.addMouseListener(mouseListener);
 		panel.add(list);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(522, 218, 344, 212);
+		add(scrollPane);
+		
+		table = new JTable(new AdminTableModel(UserController.getInstance().getAllUsers()));
+		scrollPane.setViewportView(table);
 		
 		
-//		//copied from reece i think
+		
 
 
-//
-////		list.setListData(AdminController.getInstance().getAllUsers().toArray());
-//		list.setListData(AdminController.getInstance().getAllUsers().toArray());
-//		list.setFont(new Font("Tahoma", Font.BOLD, 12));
-//		MouseListener mouseListener = new MouseAdapter() {
-//		    public void mouseClicked(MouseEvent e) {
-//		    	Master.getInstance().updateFrame(new OtherProfileView((User)list.getSelectedValue()));
-//		    }
-//		};
-//		list.addMouseListener(mouseListener);
-//		add(list);
+
 		
 
 		

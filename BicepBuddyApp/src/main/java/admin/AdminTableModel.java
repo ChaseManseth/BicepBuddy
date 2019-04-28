@@ -1,6 +1,8 @@
 package admin;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 import User.User;
@@ -13,28 +15,29 @@ public class AdminTableModel extends AbstractTableModel {
     private ArrayList<User> users = new ArrayList<User>();
 
      
-     public AdminTableModel () {
+     public AdminTableModel (List<User> myList) {
 //TO-DO: Get info from db not hard coding
-    	    User a = new User();
-    	    a.setEmail("test@bob.com");
-    	    a.setAge("25");
-    	    a.setStyle("power");
-    	    users.add(a);
-    	    User b = new User();
-    	    b.setEmail("blah@bob.com");
-    	    b.setAge("15");
-    	    b.setStyle("cardio");
-    	    users.add(b);
-    	    User c = new User();
-    	    c.setEmail("hi@bob.com");
-    	    c.setAge("20");
-    	    c.setStyle("casual");
-    	    users.add(c);
-    	    User d = new User();
-    	    d.setEmail("hey@bob.com");
-    	    d.setAge("40");
-    	    d.setStyle("cardio");
-    	    users.add(d);
+    	 users= (ArrayList<User>) myList;
+//    	    User a = new User();
+//    	    a.setEmail("test@bob.com");
+//    	    a.setAge("25");
+//    	    a.setStyle("power");
+//    	    users.add(a);
+//    	    User b = new User();
+//    	    b.setEmail("blah@bob.com");
+//    	    b.setAge("15");
+//    	    b.setStyle("cardio");
+//    	    users.add(b);
+//    	    User c = new User();
+//    	    c.setEmail("hi@bob.com");
+//    	    c.setAge("20");
+//    	    c.setStyle("casual");
+//    	    users.add(c);
+//    	    User d = new User();
+//    	    d.setEmail("hey@bob.com");
+//    	    d.setAge("40");
+//    	    d.setStyle("cardio");
+//    	    users.add(d);
      }
 			
 	public int getColumnCount() {

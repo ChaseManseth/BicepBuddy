@@ -17,8 +17,11 @@ import javax.swing.border.LineBorder;
 
 import Matching.Match;
 import Matching.MatchController;
+import Matching.Match.Status;
 import User.User;
 import User.UserController;
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
 
 public class OtherProfileView extends JPanel {
 
@@ -214,6 +217,52 @@ public class OtherProfileView extends JPanel {
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(513, 118, 66, 15);
 		panel.add(lblNewLabel_3);
+		
+		int ind = UserController.getUser().getAccepted().indexOf(new Match(u,UserController.getUser()));
+		
+		//if(ind != -1 && UserController.getUser().getAccepted().get(ind).getStatus() == Status.Accepted) {
+			JButton btnChat = new JButton("Chat with " + u.getfName());
+			btnChat.setBackground(MaterialColors.GRAY_400);
+			btnChat.setForeground(Color.black);
+			btnChat.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+				}
+			});
+			btnChat.setBounds(277, 174, 263, 71);
+			
+			MaterialUIMovement.add(btnChat, MaterialColors.GRAY_600);
+			btnChat.addMouseListener(new MouseAdapter() {
+				public void mouseEntered(MouseEvent e) {
+					btnChat.setForeground(Color.white);
+				}
+				
+				public void mouseExited(MouseEvent e) {
+					btnChat.setForeground(Color.black);
+				}
+			});
+			
+			add(btnChat);
+			
+			JButton notifyBtn = new JButton("It's gym time " + u.getfName());
+			notifyBtn.setBackground(MaterialColors.GRAY_400);
+			notifyBtn.setForeground(Color.black);
+			
+			MaterialUIMovement.add(notifyBtn, MaterialColors.GRAY_600);
+			notifyBtn.addMouseListener(new MouseAdapter() {
+				public void mouseEntered(MouseEvent e) {
+					notifyBtn.setForeground(Color.white);
+				}
+				
+				public void mouseExited(MouseEvent e) {
+					notifyBtn.setForeground(Color.black);
+				}
+			});
+			
+			notifyBtn.setBounds(605, 174, 263, 71);
+			add(notifyBtn);
+		//}
+		
 	}
 	
 	public static void inviteBuddyFrame(User u) {

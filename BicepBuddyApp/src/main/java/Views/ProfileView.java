@@ -113,7 +113,7 @@ public class ProfileView extends JPanel {
 		add(btnStartMatching);
 		
 		//*************************************************************************************************************************
-		//Match status = accpeted
+		//In user accepted and other accepted
 		UserController.getInstance().populateUserMatchesArray();
 		
 		JLabel lblFriends = new JLabel("Buddies");
@@ -138,7 +138,6 @@ public class ProfileView extends JPanel {
 		add(friendsPanel);
 		
 		//*************************************************************************************************************************
-		//Match in users waiting
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblIncomingBuddies.setBounds(589, 188, 150, 14);
@@ -161,7 +160,6 @@ public class ProfileView extends JPanel {
 		add(incomingPanel);
 		
 		//**********************************************************************************************************************************
-		//match status = idle
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPendingBuddies.setBounds(429, 189, 150, 14);

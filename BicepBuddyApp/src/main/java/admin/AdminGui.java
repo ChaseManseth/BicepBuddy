@@ -1,6 +1,7 @@
 package admin;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,10 +19,23 @@ import User.UserController;
 import Views.OtherProfileView;
 import bicepBuddyPackage.Master;
 import javax.swing.JScrollPane;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class AdminGui.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class AdminGui extends JPanel {
+	
+	/** The table 1. */
 	private JTable table_1;
+	
+	/** The table. */
 	private JTable table;
 
+	/**
+	 * Instantiates a new admin gui.
+	 */
 	public AdminGui() {
 		// TO-DO: Make these loaded and not hard coded
 		Integer userCount= 12, numActions=2;

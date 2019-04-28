@@ -22,15 +22,30 @@ import Views.OtherProfileView;
 import Views.ProfileView;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MatchGUI.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class MatchGUI extends JPanel{
 
 	//if you want to show MatchGUI in the master frame, add g.this to
+	/** The match name. */
 	//the frame.
 	private JTextField matchName;
+	
+	/** The match strength. */
 	private JTextField matchStrength;
+	
+	/** The cur match shown. */
 	private int curMatchShown = 0;
+	
+	/** The matches. */
 	private List<Match> matches;
 
+	/**
+	 * Instantiates a new match GUI.
+	 */
 	public MatchGUI() {		
 		
 		//create JPanel for the frame.
@@ -203,6 +218,10 @@ public class MatchGUI extends JPanel{
 		});
 		
 		rejectBtn.addActionListener(new ActionListener() {
+			
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 */
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = new JFrame();
 				frame.setVisible(true);
@@ -268,6 +287,9 @@ public class MatchGUI extends JPanel{
 		this.add(userProfileButton);
 	}
 	
+	/**
+	 * No matches.
+	 */
 	public void noMatches() {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
@@ -288,6 +310,10 @@ public class MatchGUI extends JPanel{
 		frame.getContentPane().add(panel);
 		
 	}
+	
+	/**
+	 * Sets the current match.
+	 */
 	//Updates match shown by index
 	public void setCurrentMatch() {
 		curMatchShown = curMatchShown % matches.size();

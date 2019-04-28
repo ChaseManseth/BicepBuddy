@@ -1,3 +1,6 @@
+/*
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 package Messaging;
 
 import javax.swing.Box;
@@ -27,9 +30,20 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
 
+/**
+ * The Class DMView.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class DMView extends JPanel {
+	
+	/** The message sender. */
 	private JTextField messageSender;
 	
+	/**
+	 * Instantiates a new DM view.
+	 *
+	 * @param otherUser the other user
+	 */
 	public DMView(User otherUser) {
 		DMController.getInstance(otherUser, this);
 		

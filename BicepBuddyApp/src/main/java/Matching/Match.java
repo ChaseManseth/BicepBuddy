@@ -8,22 +8,56 @@ import java.util.List;
 import User.User;
 import User.UserController;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Match.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class Match {
+	
+	/** The killtimeallotted. */
 	public static Integer KILLTIMEALLOTTED = 2;
 	
+	/**
+	 * The Enum Status.
+	 */
 	public static enum Status{
+		
+		/** The Accepted. */
 		Accepted,
+		
+		/** The Rejected. */
 		Rejected,
+		
+		/** The Idle. */
 		Idle;
 	}
 	
+	/** The users. */
 	private List<String> users;
+	
+	/** The status. */
 	private Status status;
+	
+	/** The date created. */
 	private Date dateCreated;
+	
+	/** The kill date. */
 	private Date killDate;
+	
+	/** The strength. */
 	private Integer strength;
+	
+	/** The id. */
 	private String id;
 	
+	/**
+	 * Instantiates a new match.
+	 *
+	 * @param user the user
+	 * @param other the other
+	 * @param strength the strength
+	 */
 	public Match(User user,User other,Integer strength){
 		this.users = new ArrayList<String>();
 		
@@ -38,6 +72,14 @@ public class Match {
 		c.add(Calendar.HOUR_OF_DAY,KILLTIMEALLOTTED);
 		this.killDate = c.getTime();
 	}
+	
+	/**
+	 * Instantiates a new match.
+	 *
+	 * @param id the id
+	 * @param other the other
+	 * @param strength the strength
+	 */
 	public Match(String id,String other,Integer strength){
 		this.users = new ArrayList<String>();
 		this.users.add(id);
@@ -52,6 +94,15 @@ public class Match {
 		this.killDate = c.getTime();
 	}
 	
+	/**
+	 * Instantiates a new match.
+	 *
+	 * @param id the id
+	 * @param other the other
+	 * @param strength the strength
+	 * @param status the status
+	 * @param matchId the match id
+	 */
 	// Constructor for MatchController getMatchById
 	public Match(String id,String other,Integer strength, Integer status, String matchId){
 		this.users = new ArrayList<String>();
@@ -78,6 +129,12 @@ public class Match {
 		this.killDate = c.getTime();
 	}
 	
+	/**
+	 * Instantiates a new match.
+	 *
+	 * @param user the user
+	 * @param other the other
+	 */
 	//Used for creating temporary matches for checking existance
 	public Match(User user,User other) {
 		this.users = new ArrayList<String>();
@@ -89,23 +146,51 @@ public class Match {
 		strength = 0;
 	}
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
 	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Accept.
+	 */
 	//Used to determine status
 	public void accept() {
 		status = Status.Accepted;
 	}
+	
+	/**
+	 * Reject.
+	 */
 	public void reject() {
 		status = Status.Rejected;
 	}
+	
+	/**
+	 * Idle.
+	 */
 	public void idle() {
 		status = Status.Idle;
 	}
+	
+	/**
+	 * Gets the other.
+	 *
+	 * @return the other
+	 */
 	//Used to get user not currently logged in
 	public String getOther() {
 		if (UserController.getUser().getId().contentEquals(users.get(0))) {
@@ -114,36 +199,99 @@ public class Match {
 		return users.get(0);
 	}
 	
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public Status getStatus() {
 		return status;
 	}
+	
+	/**
+	 * Gets the users.
+	 *
+	 * @return the users
+	 */
 	public List<String> getUsers() {
 		return users;
 	}
+	
+	/**
+	 * Sets the users.
+	 *
+	 * @param users the new users
+	 */
 	public void setUsers(List<String> users) {
 		this.users = users;
 	}
+	
+	/**
+	 * Gets the date created.
+	 *
+	 * @return the date created
+	 */
 	public Date getDateCreated() {
 		return dateCreated;
 	}
+	
+	/**
+	 * Sets the date created.
+	 *
+	 * @param dateCreated the new date created
+	 */
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
+	
+	/**
+	 * Gets the kill date.
+	 *
+	 * @return the kill date
+	 */
 	public Date getKillDate() {
 		return killDate;
 	}
+	
+	/**
+	 * Sets the kill date.
+	 *
+	 * @param killDate the new kill date
+	 */
 	public void setKillDate(Date killDate) {
 		this.killDate = killDate;
 	}
+	
+	/**
+	 * Gets the strength.
+	 *
+	 * @return the strength
+	 */
 	public Integer getStrength() {
 		return strength;
 	}
+	
+	/**
+	 * Sets the strength.
+	 *
+	 * @param strength the new strength
+	 */
 	public void setStrength(Integer strength) {
 		this.strength = strength;
 	}
+	
+	/**
+	 * Sets the status.
+	 *
+	 * @param status the new status
+	 */
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,6 +303,10 @@ public class Match {
 		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

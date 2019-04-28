@@ -27,29 +27,50 @@ import Views.SettingsView;
 import bicepBuddyPackage.ErrorGUI;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
 /*
  * User Controller will be able to speak with user and the "DB".
  */
 
-/*
+/**
+ * The Class UserController.
+ *
  * UserController is an example of the PROXY PATTERN, acting as a wrapper for
  * the User object and acting as an intermediate between other classes.
  *
  * Also an example of the CHAIN OF RESPONSIBILITY PATTERN. Pattern explains that
  * there is a class that decouples the sender and receiver of requests. UserController
  * will decouple requesters from the User object.
+ * 
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class UserController {
+	
+	/** The logged in. */
 	private boolean loggedIn;
+	
+	/** The user. */
 	private static User user = null;
+	
+	/** The changes to matches. */
 	private boolean changesToMatches = true;
+	
+	/** The uc. */
 	private static UserController uc = null;
+	
+	/** The http client. */
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
 //	private String baseUrl = "http://localhost:3000/user/";
+	/** The base url. */
 	// Production
 	private String baseUrl = "http://bb.manseth.com/user/";
 
+	/**
+	 * Gets the single instance of UserController.
+	 *
+	 * @return single instance of UserController
+	 */
 	// Singleton getInstance
 	public static UserController getInstance() {
 		if(uc == null) {
@@ -59,26 +80,51 @@ public class UserController {
 		return uc;
 	}
 
+	/**
+	 * Checks if is changes to matches.
+	 *
+	 * @return true, if is changes to matches
+	 */
 	public boolean isChangesToMatches() {
 		return changesToMatches;
 	}
 
 
 
+	/**
+	 * Sets the changes to matches.
+	 *
+	 * @param changesToMatches the new changes to matches
+	 */
 	public void setChangesToMatches(boolean changesToMatches) {
 		this.changesToMatches = changesToMatches;
 	}
 
 
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public static User getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param curUser the new user
+	 */
 	public static void setUser(User curUser) {
 		user = curUser;
 	}
 
+	/**
+	 * Sets the user from DB.
+	 *
+	 * @param uDetails the new user from DB
+	 */
 	//FACTORY METHOD PATTERN
 	public static void setUserFromDB(String[] uDetails) {
 		user = new User();
@@ -99,16 +145,45 @@ public class UserController {
 		user.setExperience(uDetails[13]);
 	}
 
+	/**
+	 * Checks if is logged in.
+	 *
+	 * @return true, if is logged in
+	 */
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
 
+	/**
+	 * Sets the logged in.
+	 *
+	 * @param loggedIn the new logged in
+	 */
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
 
 
 
+	/**
+	 * Validate signup.
+	 *
+	 * @param fName the f name
+	 * @param lname the lname
+	 * @param email the email
+	 * @param phone the phone
+	 * @param age the age
+	 * @param gender the gender
+	 * @param prefGender the pref gender
+	 * @param goals the goals
+	 * @param freq the freq
+	 * @param timeOfDay the time of day
+	 * @param style the style
+	 * @param weight the weight
+	 * @param exp the exp
+	 * @param pass the pass
+	 * @param confPass the conf pass
+	 */
 	//TODO
 	public void validateSignup(String fName, String lname, String email, String phone, String age,
 			String gender, String prefGender, String goals, String freq,
@@ -151,6 +226,12 @@ public class UserController {
 
 	}
 
+	/**
+	 * Validate login.
+	 *
+	 * @param email the email
+	 * @param pass the pass
+	 */
 	//TODO
 	@SuppressWarnings("unchecked")
 	public void validateLogin(String email, String pass) {
@@ -304,7 +385,25 @@ public class UserController {
 	}
 
     // User Signup
-	//FACTORY METHOD PATTERN
+	/**
+     * Creates the user.
+     *
+     * @param fName the f name
+     * @param lName the l name
+     * @param email the email
+     * @param phone the phone
+     * @param age the age
+     * @param gender the gender
+     * @param prefGender the pref gender
+     * @param goals the goals
+     * @param frequency the frequency
+     * @param timeOfDay the time of day
+     * @param style the style
+     * @param weight the weight
+     * @param experience the experience
+     * @param password the password
+     */
+    //FACTORY METHOD PATTERN
 	@SuppressWarnings("unchecked")
 	public void createUser(String fName, String lName, String email, String phone, String age,
 			String gender, String prefGender, String goals, String frequency,
@@ -417,6 +516,11 @@ public class UserController {
 
 	}
 
+	/**
+	 * Delete account.
+	 *
+	 * @param u the u
+	 */
 	public void deleteAccount(User u) {
 //		UserDB udb = new UserDB();
 //		udb.deleteUser(u);
@@ -453,6 +557,23 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Edits the user.
+	 *
+	 * @param email the email
+	 * @param fName the f name
+	 * @param lName the l name
+	 * @param style the style
+	 * @param timeOfDay the time of day
+	 * @param gender the gender
+	 * @param prefGender the pref gender
+	 * @param freq the freq
+	 * @param goal the goal
+	 * @param weight the weight
+	 * @param exp the exp
+	 * @param age the age
+	 * @param phone the phone
+	 */
 	@SuppressWarnings("unchecked")
 	public void editUser(String email, String fName, String lName, Object style, Object timeOfDay,
 			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp,
@@ -524,6 +645,12 @@ public class UserController {
 
 	}
 
+	/**
+	 * Gets the users by gender.
+	 *
+	 * @param gender the gender
+	 * @return the users by gender
+	 */
 	// Gets all users based on gender
 	public List<User> getUsersByGender(String gender) {
 		List<User> userList = new ArrayList<User>();
@@ -590,6 +717,12 @@ public class UserController {
 	}
 
 
+	/**
+	 * Gets the user by id.
+	 *
+	 * @param id the id
+	 * @return the user by id
+	 */
 	// Get user by Id
 	public User getUserById(String id) {
 		User newUser = null;
@@ -718,6 +851,11 @@ public class UserController {
 		return newUser;
 	}
 	
+	/**
+	 * Update matched array state.
+	 *
+	 * @param u the u
+	 */
 	// TODO - updateMatchedArrayState
 	@SuppressWarnings("unchecked")
 	public void updateMatchedArrayState(User u) {
@@ -801,6 +939,12 @@ public class UserController {
 		
 	}
 	
+	/**
+	 * Only get user by id.
+	 *
+	 * @param id the id
+	 * @return the user
+	 */
 	// Get user by Id
 		public User onlyGetUserById(String id) {
 			User newUser = null;
@@ -861,6 +1005,9 @@ public class UserController {
 			return newUser;
 		}
 		
+		/**
+		 * Populate user matches array.
+		 */
 		public void populateUserMatchesArray() {
 			//if we made some new matches, this flag will be set, and we will
 			//re-populate our recent activity feed.
@@ -898,6 +1045,11 @@ public class UserController {
 			
 		}
 		
+		/**
+		 * Gets the all users.
+		 *
+		 * @return the all users
+		 */
 		// Gets all users based on gender
 		public List<User> getAllUsers() {
 			List<User> userList = new ArrayList<User>();

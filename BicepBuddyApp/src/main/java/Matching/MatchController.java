@@ -20,17 +20,31 @@ import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MatchController.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class MatchController {
+	
+	/** The http client. */
 	private static HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
 	//private static String baseUrl = "http://localhost:3000/match/";
+	/** The base url. */
 	// Production
 	private static String baseUrl = "http://bb.manseth.com/match/";
 	
+	/**
+	 * Generate frame.
+	 */
 	public static void generateFrame() {
 		Master.updateFrame(new MatchGUI());
 	}
 	
+	/**
+	 * Generate matches.
+	 */
 	public static void generateMatches() {
 		UserController uc = UserController.getInstance();
 		
@@ -41,18 +55,42 @@ public class MatchController {
 		
 	}
 	
+	/**
+	 * Direct match.
+	 *
+	 * @param user the user
+	 * @return the match
+	 */
 	public static Match directMatch(User user) {
 		return MatchAlgorithm.directMatch(user);
 	}
 	
+	/**
+	 * Gets the matches.
+	 *
+	 * @param user the user
+	 * @return the matches
+	 */
 	public static List<Match> getMatches(User user){
 		return user.getIdle();
 	}
 	
+	/**
+	 * Gets the other.
+	 *
+	 * @param match the match
+	 * @return the other
+	 */
 	public static User getOther(Match match) {
 		return UserController.getInstance().onlyGetUserById(match.getOther());
 	}
 	
+	/**
+	 * Find match.
+	 *
+	 * @param match the match
+	 * @return the match
+	 */
 	public static Match findMatch(Match match) {
 		Match result = null;
 		if (UserController.getUser().getWaiting().contains(match)) {
@@ -67,6 +105,12 @@ public class MatchController {
 		
 		return result;
 	}
+	
+	/**
+	 * Accept match initial.
+	 *
+	 * @param match the match
+	 */
 	//************************************************************************************************************************
 	public static void acceptMatchInitial(Match match) {
 		UserController uc = UserController.getInstance();
@@ -90,6 +134,11 @@ public class MatchController {
 		uc.updateMatchedArrayState(other);
 	}
 	
+	/**
+	 * Accept match other.
+	 *
+	 * @param match the match
+	 */
 	public static void acceptMatchOther(Match match) {
 		//add to other accepted
 		match.accept();
@@ -108,6 +157,11 @@ public class MatchController {
 		UserController.getInstance().updateMatchedArrayState(UserController.getUser());
 	}
 	
+	/**
+	 * Reject match.
+	 *
+	 * @param match the match
+	 */
 	public static void rejectMatch(Match match) {
 		UserController uc = UserController.getInstance();
 		//add to both rejected
@@ -156,6 +210,12 @@ public class MatchController {
 		uc.updateMatchedArrayState(other);
 	}
 	
+	/**
+	 * Gets the match by id.
+	 *
+	 * @param id the id
+	 * @return the match by id
+	 */
 	// TODO - getMatchById
 	public static Match getMatchById(String id) {
 		Match getMatch = null;
@@ -209,6 +269,12 @@ public class MatchController {
 		return getMatch;
 	}
 	
+	/**
+	 * Creates the match.
+	 *
+	 * @param m the m
+	 * @return the string
+	 */
 	// Create a Match in the DB
 	@SuppressWarnings("unchecked")
 	public static String createMatch(Match m) {
@@ -265,6 +331,11 @@ public class MatchController {
 		
 	}
 	
+	/**
+	 * Update match.
+	 *
+	 * @param m the m
+	 */
 	// Update an Existing Match in the DB
 	@SuppressWarnings("unchecked")
 	public static void updateMatch(Match m) {

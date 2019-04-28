@@ -5,10 +5,24 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ErrorGUI.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class ErrorGUI {
+	
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The error msg. */
 	private JTextField errorMsg;
 	
+	/**
+	 * Instantiates a new error GUI.
+	 *
+	 * @param message the message
+	 */
 	public ErrorGUI(String message) {
 		frame = new JFrame("ERROR");
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));

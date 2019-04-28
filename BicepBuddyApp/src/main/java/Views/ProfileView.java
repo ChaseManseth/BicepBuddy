@@ -22,9 +22,14 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-
+/**
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class ProfileView extends JPanel {
 
+	/**
+	 * Instantiates a new profile view.
+	 */
 	public ProfileView() {
 
 		// USER DATA

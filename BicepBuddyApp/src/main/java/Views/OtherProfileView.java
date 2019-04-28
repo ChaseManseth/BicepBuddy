@@ -25,13 +25,17 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-
+/**
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class OtherProfileView extends JPanel {
 
 	//private JFrame frame;
 
 	/**
 	 * Create the application.
+	 *
+	 * @param u the u
 	 */
 	public OtherProfileView(User u) {
 		// user data

@@ -8,13 +8,26 @@ import javax.swing.table.AbstractTableModel;
 import User.User;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminTableModel.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class AdminTableModel extends AbstractTableModel {
 
+    /** The column names. */
     private String[] columnNames = {"Email","age","style"};
+  
+  /** The users. */
   //TO-DO: make columns email, button, button
     private ArrayList<User> users = new ArrayList<User>();
 
      
+     /**
+      * Instantiates a new admin table model.
+      *
+      * @param myList the my list
+      */
      public AdminTableModel (List<User> myList) {
 //TO-DO: Get info from db not hard coding
     	 users= (ArrayList<User>) myList;
@@ -40,18 +53,30 @@ public class AdminTableModel extends AbstractTableModel {
 //    	    users.add(d);
      }
 			
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getColumnCount()
+	 */
 	public int getColumnCount() {
 		return columnNames.length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getRowCount()
+	 */
 	public int getRowCount() {
 		return users.size();
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+	 */
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	 */
 	public Object getValueAt(int row, int col) {
 
 		Object val;
@@ -71,15 +96,24 @@ public class AdminTableModel extends AbstractTableModel {
 		return val;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+	 */
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
+	 */
 	public boolean isCellEditable(int row, int column)
     {
       return column == 3 || column == 4;
     }
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
+	 */
 	public void setValueAt(Object value, int row, int col) {
 		switch(col) {
 		  case 0:

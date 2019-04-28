@@ -1,5 +1,8 @@
 package Views;
 import java.awt.BorderLayout;
+/**
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;

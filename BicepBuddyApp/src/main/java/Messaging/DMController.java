@@ -43,41 +43,82 @@ import User.User;
 import bicepBuddyPackage.Master;
 import User.UserController;
 
+/**
+ * The Class DMController.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class DMController{
+	
+	/** The dm. */
 	private DM dm = null;
+	
+	/** The dm view. */
 	private DMView dmView = null;
 	
+	/**
+	 * Gets the dm.
+	 *
+	 * @return the dm
+	 */
 	public DM getDm() {
 		return dm;
 	}
 
+	/**
+	 * Sets the dm.
+	 *
+	 * @param dm the new dm
+	 */
 	public void setDm(DM dm) {
 		this.dm = dm;
 	}
 
+	/**
+	 * Gets the dm view.
+	 *
+	 * @return the dm view
+	 */
 	public DMView getDmView() {
 		return dmView;
 	}
 
+	/**
+	 * Sets the dm view.
+	 *
+	 * @param dmView the new dm view
+	 */
 	public void setDmView(DMView dmView) {
 		this.dmView = dmView;
 	}
 
 
 
+	/** The controller. */
 	// DMController singleton
 	private static DMController controller = null;
 	
+	/** The Constant DATE_FORMAT. */
 	// Various constants
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss::MM:dd::yyyy");
+	
+	/** The Constant MESSAGE_FILE. */
 	private static final String MESSAGE_FILE = "messageDB.csv";
+	
+	/** The http client. */
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	
 	// Testing
 //		private String baseUrl = "http://localhost:3000/chat/";
-		// Production
+		/** The base url. */
+	// Production
 		private String baseUrl = "http://bb.manseth.com/chat/";
 	
+	/**
+	 * Instantiates a new DM controller.
+	 *
+	 * @param partner the partner
+	 * @param dmView the dm view
+	 */
 	public DMController(User partner, DMView dmView) {
 		dm = new DM();
 		dm.setPartner(partner);
@@ -93,6 +134,9 @@ public class DMController{
 	
 	
 	
+	/**
+	 * Update messages.
+	 */
 	/*
 	 * Updates all messages and the DMView
 	 */
@@ -103,6 +147,13 @@ public class DMController{
 	
 	
 	
+	/**
+	 * Gets the single instance of DMController.
+	 *
+	 * @param partner the partner
+	 * @param dmView the dm view
+	 * @return single instance of DMController
+	 */
 	/*
 	 * Creates instance if it does not exist or the partner changes
 	 */
@@ -118,6 +169,11 @@ public class DMController{
 		return controller;
 	}
 	
+	/**
+	 * Gets the single instance of DMController.
+	 *
+	 * @return single instance of DMController
+	 */
 	/*
 	 * Should only be used to get an already existing DMController instance
 	 */
@@ -125,6 +181,11 @@ public class DMController{
 		return controller;
 	}
 	
+	/**
+	 * Send message.
+	 *
+	 * @param msg the msg
+	 */
 	@SuppressWarnings("unchecked")
 	public void sendMessage(Message msg) {
 		JSONObject chat = new JSONObject();
@@ -155,9 +216,7 @@ public class DMController{
 		    	
 		    	String id = (String) chatter.get("_id");
 		    	msg.setId(id);
-		    	
-		    	System.out.println(msg.getId());
-		    	
+		    			    	
 		    }
 		    else {
 		    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
@@ -173,6 +232,12 @@ public class DMController{
 		dm.add(msg);
 	}
 	
+	/**
+	 * Gets the chat by id.
+	 *
+	 * @param id the id
+	 * @return the chat by id
+	 */
 	public Message getChatById(String id) {
 		HttpGet request = new HttpGet(baseUrl + id);
 		
@@ -217,6 +282,12 @@ public class DMController{
 		return null;
 	}
 	
+	/**
+	 * Gets the message list.
+	 *
+	 * @param otherID the other ID
+	 * @return the message list
+	 */
 	public Set<Message> getMessageList(String otherID) {
 		Set<Message> messages = new HashSet<Message>();
 		//first request: all the messages from logged in user to the other user.
@@ -316,6 +387,11 @@ public class DMController{
 		return messages;
 	}
 
+	/**
+	 * Populate messages.
+	 *
+	 * @param messageField the message field
+	 */
 	public void populateMessages(JTextArea messageField) {
 		// first get the sorted message list
 		List<Message> sortedMessages = dm.getSorted();
@@ -326,14 +402,20 @@ public class DMController{
 		}
 	}
 	
+	/**
+	 * Adds the message.
+	 *
+	 * @param messageField the message field
+	 * @param message the message
+	 */
 	public void addMessage(JTextArea messageField, Message message) {
 		if(message.getSender().contentEquals(UserController.getUser().getId())) {
 			//this is us
-			messageField.setText(messageField.getText() + "\n" + message.getSendDate() + 
+			messageField.setText(messageField.getText() + "\n\n" + message.getSendDate() + 
 					" " + "You: " + message.getText());
 		}
 		else {
-			messageField.setText(messageField.getText() + "\n" + message.getSendDate() + 
+			messageField.setText(messageField.getText() + "\n\n" + message.getSendDate() + 
 					" " + dm.getPartner().getfName() + " " + dm.getPartner().getlName() + ": " + message.getText());
 		}
 	}

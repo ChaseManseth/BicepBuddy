@@ -10,13 +10,24 @@ import User.UserController;
 import Views.ProfileView;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserTests.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class UserTests {
 	
+	/**
+	 * Tear down.
+	 */
 	@After
 	public void tearDown() {
 		UserController.setUser(null);
 	}
 
+	/**
+	 * Test login correct.
+	 */
 	@Test
 	public void testLoginCorrect() {
 		UserController uc = new UserController();
@@ -29,6 +40,9 @@ public class UserTests {
 		UserController.setUser(null);
 	}
 	
+	/**
+	 * Test login fails.
+	 */
 	@Test
 	public void testLoginFails() {
 		UserController uc = new UserController();
@@ -37,6 +51,9 @@ public class UserTests {
 		assertNull(UserController.getUser());
 	}
 	
+	/**
+	 * Test new user and delete.
+	 */
 	@Test
 	public void testNewUserAndDelete() {
 		UserController uc = new UserController();
@@ -51,6 +68,9 @@ public class UserTests {
 		assertNull(UserController.getUser());
 	}
 	
+	/**
+	 * Change settings.
+	 */
 	@Test
 	public void changeSettings() {
 		UserController uc = new UserController();

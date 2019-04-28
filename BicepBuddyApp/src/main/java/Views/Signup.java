@@ -27,14 +27,33 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JPasswordField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Signup.
+ *
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class Signup extends JPanel {
+	
+	/** The first text field. */
 	private JTextField firstTextField;
+	
+	/** The last text field. */
 	private JTextField lastTextField;
+	
+	/** The email text field. */
 	private JTextField emailTextField;
+	
+	/** The phone text field. */
 	private JTextField phoneTextField;
+	
+	/** The age text field. */
 	private JTextField ageTextField;
 	
+	/** The password. */
 	private JPasswordField password;
+	
+	/** The confirm PW. */
 	private JPasswordField confirmPW;
 
 	/**

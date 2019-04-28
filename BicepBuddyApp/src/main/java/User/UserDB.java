@@ -11,29 +11,63 @@ import java.util.Random;
 import bicepBuddyPackage.ErrorGUI;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserDB.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 /*
  * class will interact with the database.
  */
 public class UserDB {
+	
+	/** The reader. */
 	private BufferedReader reader = null;
+	
+	/** The filename. */
 	private String filename = "buddyDB.csv";
 	
+	/**
+	 * Gets the filename.
+	 *
+	 * @return the filename
+	 */
 	public String getFilename() {
 		return filename;
 	}
 
+	/**
+	 * Sets the filename.
+	 *
+	 * @param filename the new filename
+	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
+	/**
+	 * Gets the reader.
+	 *
+	 * @return the reader
+	 */
 	public BufferedReader getReader() {
 		return reader;
 	}
 
+	/**
+	 * Sets the reader.
+	 *
+	 * @param reader the new reader
+	 */
 	public void setReader(BufferedReader reader) {
 		this.reader = reader;
 	}
 	
+	/**
+	 * Gets the num users.
+	 *
+	 * @return the num users
+	 */
 	public int getNumUsers() {
 		int numUsers = 0;
 		try {
@@ -53,6 +87,11 @@ public class UserDB {
 		return numUsers;
 	}
 	
+	/**
+	 * Tester get random user.
+	 *
+	 * @return the user
+	 */
 	public User testerGetRandomUser() {
 		Random r = new Random();
 		int userToGet = r.nextInt(getNumUsers() + 1);
@@ -82,6 +121,12 @@ public class UserDB {
 		return null;
 	}
 	
+	/**
+	 * Not exists.
+	 *
+	 * @param email the email
+	 * @return true, if successful
+	 */
 	public boolean notExists(String email) {
 		try {
 			reader = new BufferedReader(new FileReader(new File(filename)));
@@ -109,6 +154,12 @@ public class UserDB {
 		return true;
 	}
 	
+	/**
+	 * Adds the user.
+	 *
+	 * @param u the u
+	 * @param password the password
+	 */
 	//TODO: STORE HASHES OF PASSWORD, NOT PLAINTEXT
 	public void addUser(User u, String password) {
 		try {
@@ -156,6 +207,13 @@ public class UserDB {
 		}
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param email the email
+	 * @param pass the pass
+	 * @return true, if successful
+	 */
 	public boolean login(String email, String pass) {
 		try {
 			BufferedReader buf = new BufferedReader(new FileReader(new File(filename)));
@@ -185,6 +243,11 @@ public class UserDB {
 	}
 
 	// this method of rewriting the old file seems super inefficient but
+	/**
+	 * Delete user.
+	 *
+	 * @param u the u
+	 */
 	// seems to be the accepted method online lel
 	public void deleteUser(User u) {
 		BufferedWriter writer = null;
@@ -221,6 +284,25 @@ public class UserDB {
 		}
 	}
 
+	/**
+	 * Edits the user.
+	 *
+	 * @param u the u
+	 * @param email the email
+	 * @param fName the f name
+	 * @param lName the l name
+	 * @param style the style
+	 * @param timeOfDay the time of day
+	 * @param gender the gender
+	 * @param prefGender the pref gender
+	 * @param freq the freq
+	 * @param goal the goal
+	 * @param weight the weight
+	 * @param exp the exp
+	 * @param age the age
+	 * @param phone the phone
+	 * @return true, if successful
+	 */
 	public boolean editUser(User u, String email, String fName, String lName, String style, String timeOfDay,
 			String gender, String prefGender, String freq, String goal, String weight, String exp, String age, String phone) {
 		BufferedWriter writer = null;

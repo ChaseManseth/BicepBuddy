@@ -1,3 +1,6 @@
+/*
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 package User;
 
 import java.util.ArrayList;
@@ -5,85 +8,192 @@ import java.util.List;
 
 import Matching.Match;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class User.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class User {
+	
+	/** The id. */
 	private String id;
+	
+	/** The jwt. */
 	private String jwt;
+	
+	/** The name. */
 	private String fName;
+	
+	/** The l name. */
 	private String lName;
+	
+	/** The email. */
 	private String email;
+	
+	/** The phone. */
 	private String phone;
+	
+	/** The age. */
 	private String age;
+	
+	/** The gender. */
 	private String gender;
+	
+	/** The pref gender. */
 	private String prefGender;
+	
+	/** The goals. */
 	private String goals;
+	
+	/** The frequency. */
 	private String frequency;
+	
+	/** The time of day. */
 	private String timeOfDay;
+	
+	/** The style. */
 	private String style;
+	
+	/** The weight. */
 	private String weight;
+	
+	/** The experience. */
 	private String experience;
+	
+	/** The accepted. */
 	private List<Match> accepted;
+	
+	/** The rejected. */
 	private List<Match> rejected;
+	
+	/** The idle. */
 	private List<Match> idle;
+	
+	/** The waiting. */
 	private List<Match> waiting;
 	
+	/** The accepted users. */
 	// users in memory to speed up profile view loading
 	private List<User> acceptedUsers;
+	
+	/** The rejected users. */
 	private List<User> rejectedUsers;
+	
+	/** The idle users. */
 	private List<User> idleUsers;
+	
+	/** The waiting users. */
 	private List<User> waitingUsers;
+	
+	/** The pending users. */
 	private List<User> pendingUsers;
 
 
+	/**
+	 * Gets the pending users.
+	 *
+	 * @return the pending users
+	 */
 	public List<User> getPendingUsers() {
 		return pendingUsers;
 	}
 
 
+	/**
+	 * Sets the pending users.
+	 *
+	 * @param pendingUsers the new pending users
+	 */
 	public void setPendingUsers(List<User> pendingUsers) {
 		this.pendingUsers = pendingUsers;
 	}
 
 
+	/**
+	 * Gets the accepted users.
+	 *
+	 * @return the accepted users
+	 */
 	public List<User> getAcceptedUsers() {
 		return acceptedUsers;
 	}
 
 
+	/**
+	 * Sets the accepted users.
+	 *
+	 * @param acceptedUsers the new accepted users
+	 */
 	public void setAcceptedUsers(List<User> acceptedUsers) {
 		this.acceptedUsers = acceptedUsers;
 	}
 
 
+	/**
+	 * Gets the rejected users.
+	 *
+	 * @return the rejected users
+	 */
 	public List<User> getRejectedUsers() {
 		return rejectedUsers;
 	}
 
 
+	/**
+	 * Sets the rejected users.
+	 *
+	 * @param rejectedUsers the new rejected users
+	 */
 	public void setRejectedUsers(List<User> rejectedUsers) {
 		this.rejectedUsers = rejectedUsers;
 	}
 
 
+	/**
+	 * Gets the idle users.
+	 *
+	 * @return the idle users
+	 */
 	public List<User> getIdleUsers() {
 		return idleUsers;
 	}
 
 
+	/**
+	 * Sets the idle users.
+	 *
+	 * @param idleUsers the new idle users
+	 */
 	public void setIdleUsers(List<User> idleUsers) {
 		this.idleUsers = idleUsers;
 	}
 
 
+	/**
+	 * Gets the waiting users.
+	 *
+	 * @return the waiting users
+	 */
 	public List<User> getWaitingUsers() {
 		return waitingUsers;
 	}
 
 
+	/**
+	 * Sets the waiting users.
+	 *
+	 * @param waitingUsers the new waiting users
+	 */
 	public void setWaitingUsers(List<User> waitingUsers) {
 		this.waitingUsers = waitingUsers;
 	}
 
 
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param uDetails the u details
+	 */
 	public User(String[] uDetails) {		
 		setEmail(uDetails[0]);
 		setfName(uDetails[2]);
@@ -101,6 +211,23 @@ public class User {
 	}
 	
 	
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param fName the f name
+	 * @param lName the l name
+	 * @param email the email
+	 * @param phone the phone
+	 * @param age the age
+	 * @param gender the gender
+	 * @param prefGender the pref gender
+	 * @param goals the goals
+	 * @param frequency the frequency
+	 * @param timeOfDay the time of day
+	 * @param style the style
+	 * @param weight the weight
+	 * @param experience the experience
+	 */
 	public User(String fName, String lName, String email, String phone, String age, String gender, String prefGender,
 			String goals, String frequency, String timeOfDay, String style, String weight, String experience) {
 		super();
@@ -130,6 +257,22 @@ public class User {
 		this.pendingUsers = new ArrayList<>();
 	}
 	
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param id the id
+	 * @param firstname the firstname
+	 * @param lastname the lastname
+	 * @param gender the gender
+	 * @param profilePic the profile pic
+	 * @param workoutStyle the workout style
+	 * @param goals the goals
+	 * @param experience the experience
+	 * @param timeOfDay the time of day
+	 * @param frequency the frequency
+	 * @param preferredGender the preferred gender
+	 * @param age the age
+	 */
 	// Modified Constructor for getting some data but not all from other users 
 	public User(String id, String firstname, String lastname, String gender, String profilePic, String workoutStyle,
 			String goals, String experience, String timeOfDay, String frequency, String preferredGender, String age) {
@@ -158,6 +301,23 @@ public class User {
 		this.pendingUsers = new ArrayList<>();
 	}
 	
+	/**
+	 * Update user.
+	 *
+	 * @param email the email
+	 * @param fName the f name
+	 * @param lName the l name
+	 * @param style the style
+	 * @param timeOfDay the time of day
+	 * @param gender the gender
+	 * @param prefGender the pref gender
+	 * @param freq the freq
+	 * @param goal the goal
+	 * @param weight the weight
+	 * @param exp the exp
+	 * @param age the age
+	 * @param phone the phone
+	 */
 	public void updateUser(String email, String fName, String lName, Object style, Object timeOfDay,
 			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp, 
 			String age, String phone) {
@@ -180,126 +340,365 @@ public class User {
 		this.waiting = new ArrayList<>();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return fName + " " + lName;
 	}
+	
+	/**
+	 * Instantiates a new user.
+	 */
 	public User() {
 	}
+	
+	/**
+	 * Gets the accepted.
+	 *
+	 * @return the accepted
+	 */
 	public List<Match> getAccepted() {
 		return accepted;
 	}
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Gets the jwt.
+	 *
+	 * @return the jwt
+	 */
 	public String getJwt() {
 		return jwt;
 	}
+	
+	/**
+	 * Sets the jwt.
+	 *
+	 * @param jwt the new jwt
+	 */
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
 	}
+	
+	/**
+	 * Sets the accepted.
+	 *
+	 * @param accepted the new accepted
+	 */
 	public void setAccepted(List<Match> accepted) {
 		this.accepted = accepted;
 	}
+	
+	/**
+	 * Gets the rejected.
+	 *
+	 * @return the rejected
+	 */
 	public List<Match> getRejected() {
 		return rejected;
 	}
+	
+	/**
+	 * Sets the rejected.
+	 *
+	 * @param rejected the new rejected
+	 */
 	public void setRejected(List<Match> rejected) {
 		this.rejected = rejected;
 	}
+	
+	/**
+	 * Gets the idle.
+	 *
+	 * @return the idle
+	 */
 	public List<Match> getIdle() {
 		return idle;
 	}
+	
+	/**
+	 * Sets the idle.
+	 *
+	 * @param idle the new idle
+	 */
 	public void setIdle(List<Match> idle) {
 		this.idle = idle;
 	}
+	
+	/**
+	 * Gets the waiting.
+	 *
+	 * @return the waiting
+	 */
 	public List<Match> getWaiting() {
 		return waiting;
 	}
+	
+	/**
+	 * Sets the waiting.
+	 *
+	 * @param waiting the new waiting
+	 */
 	public void setWaiting(List<Match> waiting) {
 		this.waiting = waiting;
 	}
+	
+	/**
+	 * Gets the f name.
+	 *
+	 * @return the f name
+	 */
 	public String getfName() {
 		return fName;
 	}
+	
+	/**
+	 * Sets the f name.
+	 *
+	 * @param fName the new f name
+	 */
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
+	
+	/**
+	 * Gets the l name.
+	 *
+	 * @return the l name
+	 */
 	public String getlName() {
 		return lName;
 	}
+	
+	/**
+	 * Sets the l name.
+	 *
+	 * @param lName the new l name
+	 */
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
+	
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
+	
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	/**
+	 * Gets the phone.
+	 *
+	 * @return the phone
+	 */
 	public String getPhone() {
 		return phone;
 	}
+	
+	/**
+	 * Sets the phone.
+	 *
+	 * @param phone the new phone
+	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	/**
+	 * Gets the age.
+	 *
+	 * @return the age
+	 */
 	public String getAge() {
 		return age;
 	}
+	
+	/**
+	 * Sets the age.
+	 *
+	 * @param age the new age
+	 */
 	public void setAge(String age) {
 		this.age = age;
 	}
+	
+	/**
+	 * Gets the gender.
+	 *
+	 * @return the gender
+	 */
 	public String getGender() {
 		return gender;
 	}
+	
+	/**
+	 * Sets the gender.
+	 *
+	 * @param gender the new gender
+	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	/**
+	 * Gets the pref gender.
+	 *
+	 * @return the pref gender
+	 */
 	public String getPrefGender() {
 		return prefGender;
 	}
+	
+	/**
+	 * Sets the pref gender.
+	 *
+	 * @param prefGender the new pref gender
+	 */
 	public void setPrefGender(String prefGender) {
 		this.prefGender = prefGender;
 	}
+	
+	/**
+	 * Gets the goals.
+	 *
+	 * @return the goals
+	 */
 	public String getGoals() {
 		return goals;
 	}
+	
+	/**
+	 * Sets the goals.
+	 *
+	 * @param goals the new goals
+	 */
 	public void setGoals(String goals) {
 		this.goals = goals;
 	}
+	
+	/**
+	 * Gets the frequency.
+	 *
+	 * @return the frequency
+	 */
 	public String getFrequency() {
 		return frequency;
 	}
+	
+	/**
+	 * Sets the frequency.
+	 *
+	 * @param frequency the new frequency
+	 */
 	public void setFrequency(String frequency) {
 		this.frequency = frequency;
 	}
+	
+	/**
+	 * Gets the time of day.
+	 *
+	 * @return the time of day
+	 */
 	public String getTimeOfDay() {
 		return timeOfDay;
 	}
+	
+	/**
+	 * Sets the time of day.
+	 *
+	 * @param timeOfDay the new time of day
+	 */
 	public void setTimeOfDay(String timeOfDay) {
 		this.timeOfDay = timeOfDay;
 	}
+	
+	/**
+	 * Gets the style.
+	 *
+	 * @return the style
+	 */
 	public String getStyle() {
 		return style;
 	}
+	
+	/**
+	 * Sets the style.
+	 *
+	 * @param style the new style
+	 */
 	public void setStyle(String style) {
 		this.style = style;
 	}
+	
+	/**
+	 * Gets the weight.
+	 *
+	 * @return the weight
+	 */
 	public String getWeight() {
 		return weight;
 	}
+	
+	/**
+	 * Sets the weight.
+	 *
+	 * @param weight the new weight
+	 */
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+	
+	/**
+	 * Gets the experience.
+	 *
+	 * @return the experience
+	 */
 	public String getExperience() {
 		return experience;
 	}
+	
+	/**
+	 * Sets the experience.
+	 *
+	 * @param experience the new experience
+	 */
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -325,6 +724,10 @@ public class User {
 		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		return result;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

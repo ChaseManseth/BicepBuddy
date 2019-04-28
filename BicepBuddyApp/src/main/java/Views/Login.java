@@ -1,3 +1,4 @@
+
 package Views;
 
 import java.awt.Font;
@@ -24,8 +25,17 @@ import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 import javax.swing.JPasswordField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Login.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class Login extends JPanel {
+	
+	/** The email text field. */
 	private JTextField emailTextField;
+	
+	/** The password field. */
 	private JPasswordField passwordField;
 
 	/**

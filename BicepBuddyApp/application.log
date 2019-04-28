@@ -1,7 +1,3 @@
-2019-04-28 11:13:57 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 11:13:58 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 11:14:09 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-28 11:14:26 INFO Messaging.DMView$1 actionPerformed :: Message Field triggered!
-2019-04-28 11:14:31 INFO Messaging.DMView$1 actionPerformed :: Message Field triggered!
-2019-04-28 11:14:34 INFO Messaging.DMView$1 actionPerformed :: Message Field triggered!
-2019-04-28 11:14:43 INFO Messaging.DMView$1 actionPerformed :: Message Field triggered!
+2019-04-28 11:58:37 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 11:58:39 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 11:58:52 INFO Messaging.DMController updateMessages :: Updating messages...

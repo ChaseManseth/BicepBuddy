@@ -36,10 +36,17 @@ import java.awt.ComponentOrientation;
 import javax.swing.JMenu;
 import java.awt.Font;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Master.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class Master {
 
+	/** The Constant appLogger. */
 	public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	//master is an example of the COMPOSITE PATTERN
+	/** The master. */
 	//holds all of the components (views)
 	private static Master master = null;
 
@@ -63,9 +70,17 @@ public class Master {
 
 	
 
+	/** The frame. */
 	private static JFrame frame;
+	
+	/** The panel. */
 	private static JPanel panel;
 	
+	/**
+	 * Gets the single instance of Master.
+	 *
+	 * @return single instance of Master
+	 */
 	//SINGLETON PATTERN Master Frame
 	public static Master getInstance() {
 		if(master == null) {
@@ -78,6 +93,8 @@ public class Master {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -144,6 +161,11 @@ public class Master {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Update frame.
+	 *
+	 * @param j the j
+	 */
 	//FACADE: Handles switching out the panel every time we change views.
 	public static void updateFrame(JPanel j) {
 		panel.setVisible(false);
@@ -158,6 +180,9 @@ public class Master {
 	}
 
 	//FACADE PATTERN: function encapsulates the loading of the logged
+	/**
+	 * Logged in menu load.
+	 */
 	//in menu bar.
 	public void loggedInMenuLoad() {
 		//start the master frame with only the signup and login menu bars
@@ -258,6 +283,9 @@ public class Master {
 	}
 
 	//FACADE PATTERN: encapsulates loading the logged
+	/**
+	 * Logged out menu load.
+	 */
 	//out menu bar
 	public void loggedOutMenuLoad() {
 		JMenuBar menuBar = new JMenuBar();
@@ -290,10 +318,20 @@ public class Master {
 		updateFrame(new Login());
 	}
 	
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
+	/**
+	 * Sets the frame.
+	 *
+	 * @param frame the new frame
+	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}

@@ -695,12 +695,89 @@ public class UserController {
 			    Master.appLogger.info(":: Retrieving users by gender: " + gender);
 
 			    // Loop through each user
-			    for(int i = 0; i < userArr.size(); i++) {
-			    	JSONObject user = (JSONObject) userArr.get(i);
+			    for(int j = 0; j < userArr.size(); j++) {
+			    	JSONObject result = (JSONObject) userArr.get(j);
 
 			    	// Getting the data of that user
-			    	String id = (String) user.get("_id");
-			    	User otherUser = getUserById(id);
+			    	String id = (String) result.get("_id");
+			    	String fName = (String) result.get("firstname");
+					String lName = (String) result.get("lastname");
+					String email = (String) result.get("email");
+					String phone = (String) result.get("phoneNumber");
+					String age = (String) result.get("age");
+					String gend = (String) result.get("gender");
+					String prefGender = (String) result.get("preferredGender");
+					String goals = (String) result.get("goals");
+					String frequency = (String) result.get("frequency");
+					String timeOfDay = (String) result.get("timeOfDay");
+					String style = (String) result.get("workoutStyle");
+					String weight = (String) result.get("weight");
+					String experience = (String) result.get("experience");
+					
+					List<Match> accepted = new ArrayList<Match>();
+					List<Match> rejected = new ArrayList<Match>();
+					List<Match> idle = new ArrayList<Match>();
+					List<Match> waiting = new ArrayList<Match>();
+
+					JSONArray accept = (JSONArray) result.get("acceptedMatches");
+					JSONArray reject = (JSONArray) result.get("rejectedMatches");
+					JSONArray idl = (JSONArray) result.get("idleMatches");
+					JSONArray wait = (JSONArray) result.get("waitingMatches");
+					
+			    	User otherUser = new User(fName, lName, email, phone, age, gend, prefGender, goals, frequency,
+			    			timeOfDay, style, weight, experience);
+			    	otherUser.setId(id);
+			    	
+			    	for(int i = 0; i < accept.size(); i++) {
+						String matchId = (String) accept.get(i);
+
+						// Create the Match
+						// TODO move function to MatchController
+						Match m = MatchController.getMatchById(matchId);
+						accepted.add(m);
+
+						// System.out.println(matchId);
+					}
+
+					// Reject Matches
+					for(int i = 0; i < reject.size(); i++) {
+						String matchId = (String) reject.get(i);
+
+						// Create the Match
+						// TODO move function to MatchController
+						Match m =  MatchController.getMatchById(matchId);
+						rejected.add(m);
+
+						//System.out.println(matchId);
+					}
+
+					// Idle Matches
+					/*for(int i = 0; i < idl.size(); i++) {
+						String matchId = (String) idl.get(i);
+
+						// Create the Match
+						// TODO move function to MatchController
+						Match m =  MatchController.getMatchById(matchId);
+						idle.add(m);
+
+					}*/
+
+					// Waiting Matches
+					for(int i = 0; i < wait.size(); i++) {
+						String matchId = (String) wait.get(i);
+
+						// Create the Match
+						// TODO move function to MatchController
+						Match m =  MatchController.getMatchById(matchId);
+						waiting.add(m);
+
+					}
+
+					// Add the Match Arrays to the User object
+					otherUser.setAccepted(accepted);
+					otherUser.setRejected(rejected);
+					//otherUser.setIdle(idle);
+					otherUser.setWaiting(waiting);
 
 		    		userList.add(otherUser);
 			    }
@@ -812,7 +889,7 @@ public class UserController {
 				}
 
 				// Idle Matches
-				for(int i = 0; i < idl.size(); i++) {
+				/*for(int i = 0; i < idl.size(); i++) {
 					String matchId = (String) idl.get(i);
 
 					// Create the Match
@@ -821,7 +898,7 @@ public class UserController {
 					idle.add(m);
 
 					//System.out.println(matchId);
-				}
+				}*/
 
 				// Waiting Matches
 				for(int i = 0; i < wait.size(); i++) {

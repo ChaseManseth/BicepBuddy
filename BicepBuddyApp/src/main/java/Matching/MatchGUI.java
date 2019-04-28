@@ -57,8 +57,8 @@ public class MatchGUI extends JPanel{
 		matches = MatchController.getMatches(UserController.getUser());
 		
 		if (matches.size() == 0) {
+			Master.updateFrame(new ProfileView());
 			noMatches();
-			return;
 		}
 		
 		//text field to handle match's name

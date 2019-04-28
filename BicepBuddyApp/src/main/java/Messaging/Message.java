@@ -5,16 +5,17 @@ import java.util.Date;
 import User.User;
 
 public class Message {
-	private User sender;
-	private User receiver;
+	private String sender;
+	private String receiver;
 	private Date sendDate;
 	private String text;
+	private String id;
 	
 	public Message() {
 		
 	}
 	
-	public Message(User from, User to, Date sendDate, String text) {
+	public Message(String from, String to, Date sendDate, String text) {
 		this.sender = from;
 		this.receiver = to;
 		this.text = text;
@@ -25,12 +26,34 @@ public class Message {
 		return sendDate;
 	}
 	
-	public User getSender() {
+	
+	
+	public String getSender() {
 		return sender;
 	}
-	
-	public User getReceiver() {
+
+	public String getReceiver() {
 		return receiver;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 	
 	public String getText() {
@@ -41,13 +64,6 @@ public class Message {
 		this.sendDate = sendDate;
 	}
 	
-	public void setSender(User sender) {
-		this.sender = sender;
-	}
-	
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
-	}
 	
 	public int compareTo(Message other) {
 		if(other == null || other.getSendDate() == null) {

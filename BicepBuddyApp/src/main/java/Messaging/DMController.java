@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,18 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import User.User;
 import bicepBuddyPackage.Master;
@@ -38,6 +51,12 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 	// Various constants
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss::MM:dd::yyyy");
 	private static final String MESSAGE_FILE = "messageDB.csv";
+	private HttpClient httpClient = HttpClientBuilder.create().build();
+	
+	// Testing
+//		private String baseUrl = "http://localhost:3000/chat/";
+		// Production
+		private String baseUrl = "http://bb.manseth.com/chat/";
 	
 	public DMController(User partner) {
 		dm = new DM();
@@ -60,7 +79,7 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 	 * Reads all Messages from csv file that were sent by the logged in user and
 	 * received by the specified User
 	 */
-	public static Set<Message> loadMessages(User partner) {
+	/*public static Set<Message> loadMessages(User partner) {
 		Set<Message> messages = new HashSet<>();
 		
 		BufferedReader reader = null;
@@ -119,36 +138,36 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		}
 		
 		return messages;
-	}
+	}*/
 	
 	/*
 	 * Updates all messages and the DMView
 	 */
 	public void updateMessages() {
 		Master.appLogger.info(":: Updating messages...");
-		this.dm.setMessages(loadMessages(dm.getPartner()));
+		this.dm.setMessages(getMessageList(dm.getPartner().getId()));
 		updateView();
 	}
 	
 	/*
 	 * Creates message to send, adds it to DM instance, updates the DMView accordingly
 	 */
-	public void sendMessage(String text) {
+	/*public void sendMessage(String text) {
 		Message message = new Message(UserController.getUser(), dm.getPartner(), Calendar.getInstance().getTime(), text);
 		dm.add(message);
 		updateView();
 		saveMessage(message);
-	}
+	}*/
 	
 	/*
 	 * Writes all Messages from DM instance to csv file
 	 */
-	public static void saveMessage(Message message) {
+	/*public static void saveMessage(Message message) {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(MESSAGE_FILE, true));
 			
-			String line = message.getSender().getId()
+			String line = message.getSender()getId()
 					+ "," + message.getReceiver().getId()
 					+ "," + DATE_FORMAT.format(message.getSendDate())
 					+ "," + message.getText().replaceAll("[^\\p{L}\\p{Z}]","");
@@ -171,7 +190,7 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 				}
 			}
 		}
-	}
+	}*/
 	
 	/*
 	 * Creates instance if it does not exist or the partner changes
@@ -201,7 +220,9 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 			DMController controller = DMController.getInstance();
 			Master.appLogger.info(":: Message Field triggered!");
 			
-			controller.sendMessage(controller.dmView.messageField.getText());
+			Message message = new Message(UserController.getUser().getId(), dm.getPartner().getId(), 
+					Calendar.getInstance().getTime(), controller.dmView.messageField.getText());
+			controller.sendMessage(message);
 			controller.dmView.messageField.setText("");
 		}
 		
@@ -277,5 +298,194 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void sendMessage(Message msg) {
+		JSONObject chat = new JSONObject();
+		
+		chat.put("userId", msg.getSender());
+		chat.put("otherUserId", msg.getReceiver());
+		chat.put("message", msg.getText());
+		
+		HttpPost request = new HttpPost(baseUrl);
+		try {
+			// Add JSON to the body and headers indicating type
+			StringEntity params = new StringEntity(chat.toJSONString());
+		    request.addHeader("content-type", "application/json");
+		    request.setEntity(params);
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    JSONObject o = (JSONObject) parse.parse(json);
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONObject chatter = ((JSONObject) o.get("chat"));
+		    	
+		    	String id = (String) chatter.get("_id");
+		    	msg.setId(id);
+		    	
+		    	System.out.println(msg.getId());
+		    	
+		    }
+		    else {
+		    	System.out.println("boke");
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+	}
+	
+	public Message getChatById(String id) {
+		HttpGet request = new HttpGet(baseUrl + id);
+		
+		try {
+			// Add JSON to the body and headers indicating type
+		    request.addHeader("content-type", "application/json");
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    JSONObject o = (JSONObject) parse.parse(json);
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONObject chatter = (JSONObject) o.get("chat");
+		    	Message msg = new Message();
+		    	
+		    	msg.setId((String) chatter.get("_id"));
+		    	long msTime =  ((Long) chatter.get("dateCreated"));
+		    	msg.setSendDate(new Date(msTime));
+		    	msg.setReceiver((String) chatter.get("otherUserId"));
+		    	msg.setSender((String) chatter.get("userId"));
+		    	msg.setText((String) chatter.get("message"));
+		    	
+		    	return msg;
+		    }
+		    else {
+		    	Master.appLogger.info(":: Problem with get for message..");
+		    }
+		}
+		catch(Exception e) {
+			
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+		return null;
+	}
+	
+	public Set<Message> getMessageList(String otherID) {
+		Set<Message> messages = new HashSet<Message>();
+		//first request: all the messages from logged in user to the other user.
+		HttpGet request = new HttpGet(baseUrl + "from/" + UserController.getInstance().getUser().getId()
+				+ "/to/" + otherID);
+		
+		try {
+			// Add JSON to the body and headers indicating type
+		    request.addHeader("content-type", "application/json");
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONArray msgArray = (JSONArray) parse.parse(json);
+		    	
+		    	//loop through each message
+		    	for(int i = 0; i < msgArray.size(); i++) {
+		    		JSONObject chatter = (JSONObject) msgArray.get(i);
+			    	Message msg = new Message();
+			    	
+			    	msg.setId((String) chatter.get("_id"));
+			    	long msTime =  ((Long) chatter.get("dateCreated"));
+			    	msg.setSendDate(new Date(msTime));
+			    	msg.setReceiver((String) chatter.get("otherUserId"));
+			    	msg.setSender((String) chatter.get("userId"));
+			    	msg.setText((String) chatter.get("message"));
+			    	
+			    	messages.add(msg);
+		    	}
+		    	
+		    }
+		    else {
+		    	Master.appLogger.info(":: Problem with get for message..");
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+		//second request: all the messages from other user to the logged in user.
+		request = new HttpGet(baseUrl + "from/" + otherID
+				+ "/to/" + UserController.getInstance().getUser().getId());
+		
+		try {
+			// Add JSON to the body and headers indicating type
+		    request.addHeader("content-type", "application/json");
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONArray msgArray = (JSONArray) parse.parse(json);
+		    	
+		    	//loop through each message
+		    	for(int i = 0; i < msgArray.size(); i++) {
+		    		JSONObject chatter = (JSONObject) msgArray.get(i);
+			    	Message msg = new Message();
+			    	
+			    	msg.setId((String) chatter.get("_id"));
+			    	long msTime =  ((Long) chatter.get("dateCreated"));
+			    	msg.setSendDate(new Date(msTime));
+			    	msg.setReceiver((String) chatter.get("otherUserId"));
+			    	msg.setSender((String) chatter.get("userId"));
+			    	msg.setText((String) chatter.get("message"));
+			    	
+			    	messages.add(msg);
+		    	}
+		    	
+		    }
+		    else {
+		    	Master.appLogger.info(":: Problem with get for message..");
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+		return messages;
 	}
 }

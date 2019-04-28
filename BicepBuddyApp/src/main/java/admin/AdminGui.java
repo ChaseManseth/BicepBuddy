@@ -77,23 +77,23 @@ public class AdminGui extends JPanel {
 		
 		//copied from reece i think
 
-		JPanel panel = new JPanel();
-		panel.setBounds(33, 218, 205, 212);
-		add(panel);
-		panel.setLayout(null);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		
-		JList list = new JList();
-		list.setBounds(12, 12, 181, 162);
-		list.setListData(UserController.getInstance().getAllUsers().toArray());
-		list.setFont(new Font("Tahoma", Font.BOLD, 12));
-		MouseListener mouseListener = new MouseAdapter() {
-		    public void mouseClicked(MouseEvent e) {
-		    	Master.getInstance().updateFrame(new OtherProfileView((User)list.getSelectedValue()));
-		    }
-		};
-		list.addMouseListener(mouseListener);
-		panel.add(list);
+//		JPanel panel = new JPanel();
+//		panel.setBounds(33, 218, 205, 212);
+//		add(panel);
+//		panel.setLayout(null);
+//		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+//		
+//		JList list = new JList();
+//		list.setBounds(12, 12, 181, 162);
+//		list.setListData(UserController.getInstance().getAllUsers().toArray());
+//		list.setFont(new Font("Tahoma", Font.BOLD, 12));
+//		MouseListener mouseListener = new MouseAdapter() {
+//		    public void mouseClicked(MouseEvent e) {
+//		    	Master.getInstance().updateFrame(new OtherProfileView((User)list.getSelectedValue()));
+//		    }
+//		};
+//		list.addMouseListener(mouseListener);
+//		panel.add(list);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(381, 218, 485, 212);
@@ -101,8 +101,8 @@ public class AdminGui extends JPanel {
 		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
-		ButtonColumn buttonColumn1 = new ButtonColumn(table, model,1);
-		ButtonColumn buttonColumn2 = new ButtonColumn(table, model,2);
+		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
+		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 		
 		

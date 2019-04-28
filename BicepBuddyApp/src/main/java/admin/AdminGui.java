@@ -26,10 +26,10 @@ import javax.swing.JScrollPane;
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class AdminGui extends JPanel {
-	
+
 	/** The table 1. */
 	private JTable table_1;
-	
+
 	/** The table. */
 	private JTable table;
 
@@ -42,42 +42,44 @@ public class AdminGui extends JPanel {
 		JLabel lblAdministrator = new JLabel("Administrator");
 		lblAdministrator.setBounds(381, 24, 135, 15);
 		add(lblAdministrator);
-		
+
 		JLabel lblTotalUsers = new JLabel("Total users:");
 		lblTotalUsers.setBounds(33, 119, 90, 15);
 		add(lblTotalUsers);
-		
+
 		JButton btnRefresh = new JButton("Refresh ");
 		btnRefresh.setBounds(608, 114, 114, 25);
 		add(btnRefresh);
-		
+
 		JLabel lblNewLabel = new JLabel(userCount.toString());
 		lblNewLabel.setBounds(129, 119, 66, 15);
 		add(lblNewLabel);
-		
+
         JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(591, 191, 66, 15);
+        lblAllUsers.setBounds(643, 191, 66, 15);
         add(lblAllUsers);
-        
+
         JLabel lblFancyChartOr = new JLabel("Fancy chart or something");
-        lblFancyChartOr.setBounds(271, 119, 192, 15);
+        lblFancyChartOr.setBounds(33, 340, 192, 15);
         add(lblFancyChartOr);
-        
+
     	JLabel label = new JLabel("All users");
-    	label.setBounds(73, 191, 66, 15);
+    	label.setBounds(313, 191, 66, 15);
 		add(label);
-		
+
+
+
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(381, 218, 485, 212);
+		scrollPane.setBounds(522, 218, 344, 212);
 		add(scrollPane);
 		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
-		scrollPane.setViewportView(table);	
-		
-       
+		scrollPane.setViewportView(table);
+
+
 	}
 }

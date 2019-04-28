@@ -101,7 +101,7 @@ public class DMView extends JFrame {
 			mArea.setColumns(30);
 			
 			// Message alignment
-			if(messages.get(i).getSender() != null && messages.get(i).getSender().equals(UserController.getUser())) {
+			if(messages.get(i).getSender() != null && messages.get(i).getSender().equals(UserController.getUser().getId())) {
 				p.setLayout(new FlowLayout(FlowLayout.TRAILING));
 				//p.add(Box.createRigidArea(new Dimension(35, 0)));
 				mArea.setBackground(Color.GREEN);

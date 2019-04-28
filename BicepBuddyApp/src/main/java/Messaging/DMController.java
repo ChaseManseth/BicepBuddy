@@ -325,7 +325,7 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		    JSONParser parse = new JSONParser();
 		    JSONObject o = (JSONObject) parse.parse(json);
 		    
-		    if(response.getStatusLine().getStatusCode() == 200) {
+		    if(response.getStatusLine().getStatusCode() == 201) {
 		    	JSONObject chatter = ((JSONObject) o.get("chat"));
 		    	
 		    	String id = (String) chatter.get("_id");
@@ -335,7 +335,7 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		    	
 		    }
 		    else {
-		    	System.out.println("boke");
+		    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
 		    }
 		}
 		catch(Exception e) {
@@ -344,6 +344,9 @@ public class DMController implements ActionListener, WindowListener, ComponentLi
 		finally {
 			request.releaseConnection();
 		}
+		
+		dm.add(msg);
+		updateView();
 	}
 	
 	public Message getChatById(String id) {

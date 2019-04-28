@@ -188,15 +188,15 @@ public class ProfileView extends JPanel {
 		infoPanel.setLayout(null);
 
 		JLabel lblEmail = new JLabel(email);
-		lblEmail.setBounds(10, 264, 165, 15);
+		lblEmail.setBounds(10, 264, 186, 15);
 		infoPanel.add(lblEmail);
 
 		JLabel lblFirstname = new JLabel(fname);
-		lblFirstname.setBounds(10, 224, 165, 28);
+		lblFirstname.setBounds(10, 224, 186, 28);
 		infoPanel.add(lblFirstname);
 
 		JLabel lblAge = new JLabel(age);
-		lblAge.setBounds(10, 300, 165, 15);
+		lblAge.setBounds(10, 300, 186, 15);
 		infoPanel.add(lblAge);
 		
 	}

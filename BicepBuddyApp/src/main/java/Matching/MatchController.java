@@ -168,6 +168,11 @@ public class MatchController {
 	 * @param match the match
 	 */
 	public static void rejectMatch(Match match) {
+		if(match.getId() == null) {
+			String id = createMatch(match);
+			match.setId(id);
+		}
+		
 		UserController uc = UserController.getInstance();
 		//add to both rejected
 		match.reject();

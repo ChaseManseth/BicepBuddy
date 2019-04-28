@@ -1,16 +1,23 @@
-2019-04-28 17:03:54 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 17:03:56 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 17:04:02 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
-2019-04-28 17:04:02 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-28 17:04:02 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 17:04:02 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 17:04:02 INFO User.UserController validateLogin :: User was logged in.
-2019-04-28 17:04:06 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-28 17:04:08 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
-2019-04-28 17:04:14 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
-2019-04-28 17:04:22 INFO User.UserController getUserById :: Getting user by ID: testerbuddy loser from DB.
-2019-04-28 17:04:27 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 17:04:27 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 17:04:28 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
-2019-04-28 17:04:33 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-28 17:04:35 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 18:26:23 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 18:26:24 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 18:26:31 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
+2019-04-28 18:26:31 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-28 18:26:31 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 18:26:31 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 18:26:31 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 18:26:32 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 18:26:32 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 18:26:33 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-28 18:26:36 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 18:26:47 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 18:26:50 INFO User.UserController getUserById :: Getting user by ID: howdy pardner from DB.
+2019-04-28 18:26:50 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 18:27:02 INFO bicepBuddyPackage.Master$8 mouseClicked :: User logged out.
+2019-04-28 18:27:07 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
+2019-04-28 18:27:08 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 18:27:08 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 18:27:08 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 18:27:08 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 18:27:08 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 18:27:14 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-28 18:27:16 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.

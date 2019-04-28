@@ -28,6 +28,8 @@ import Views.OtherProfileView;
 import Views.ProfileView;
 import Views.SettingsView;
 import Views.Signup;
+import admin.AdminController;
+import admin.AdminGui;
 import mdlaf.MaterialLookAndFeel;
 
 import java.awt.ComponentOrientation;
@@ -204,11 +206,25 @@ public class Master {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading match view");
-				//create user controller
+				//create match controller
 				MatchController.generateFrame();
 			}
 		});
 		menuBar.add(mnMatch);
+		
+		
+		JMenu administrator = new JMenu("Administrator"); 
+		administrator.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		administrator.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Loading administrator view");
+				//create user controller
+				AdminController.generateFrame();
+			}
+		});
+		menuBar.add(administrator);
+
 		
 		/*
 		 * JMenu chat = new JMenu("Chat"); chat.setFont(new Font("Segoe UI", Font.PLAIN,
@@ -223,6 +239,7 @@ public class Master {
 		 * System.out.println(UserController.getUser().getId()); } });
 		 * menuBar.add(chat);
 		 */
+		
 
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));

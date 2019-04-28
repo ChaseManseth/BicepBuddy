@@ -168,15 +168,18 @@ public class Master {
 	 */
 	//FACADE: Handles switching out the panel every time we change views.
 	public static void updateFrame(JPanel j) {
-		panel.setVisible(false);
+		frame.getContentPane().removeAll();
 		panel = j;
-		panel.setVisible(true);
-		// remove the current JPanel so that our frame doesn't have a billion
-		// panels in it when we switch views a bunch
-		frame.remove(frame.getContentPane());
-
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
+		//panel.setVisible(false);
+		//panel = j;
+		//panel.setVisible(true);
+		// remove the current JPanel so that our frame doesn't have a billion
+		// panels in it when we switch views a bunch
+		//frame.remove(frame.getContentPane());
+		
+		//frame.setVisible(true);
 	}
 
 	//FACADE PATTERN: function encapsulates the loading of the logged

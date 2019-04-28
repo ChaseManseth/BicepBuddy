@@ -1,8 +1,15 @@
-2019-04-28 14:15:00 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 14:15:02 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 14:15:07 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
-2019-04-28 14:15:08 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-28 14:15:08 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 14:15:08 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-28 14:15:08 INFO User.UserController validateLogin :: User was logged in.
-2019-04-28 14:15:14 INFO User.UserController editUser :: Editing user bigtester bogtester.
+2019-04-28 15:41:41 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 15:41:42 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 15:41:49 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
+2019-04-28 15:41:50 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-28 15:41:50 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 15:41:50 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 15:41:50 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 15:41:51 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:52 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:54 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:55 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:56 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:56 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:59 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-28 15:41:59 INFO User.UserController getAllUsers :: Retrieving all users from the DB.

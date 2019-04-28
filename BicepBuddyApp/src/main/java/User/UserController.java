@@ -1090,11 +1090,26 @@ public class UserController {
 
 				    // Loop through each user
 				    for(int i = 0; i < userArr.size(); i++) {
-				    	JSONObject user = (JSONObject) userArr.get(i);
-
+				    	JSONObject result = (JSONObject) userArr.get(i);
 				    	// Getting the data of that user
-				    	String id = (String) user.get("_id");
-				    	User otherUser = onlyGetUserById(id);
+				    	String id = (String) result.get("_id");
+				    	
+				    	String fName = (String) result.get("firstname");
+						String lName = (String) result.get("lastname");
+						String email = (String) result.get("email");
+						String phone = (String) result.get("phoneNumber");
+						String age = (String) result.get("age");
+						String gender = (String) result.get("gender");
+						String prefGender = (String) result.get("preferredGender");
+						String goals = (String) result.get("goals");
+						String frequency = (String) result.get("frequency");
+						String timeOfDay = (String) result.get("timeOfDay");
+						String style = (String) result.get("workoutStyle");
+						String weight = (String) result.get("weight");
+						String experience = (String) result.get("experience");
+						
+				    	User otherUser = new User(fName, lName, email, phone, age, gender, prefGender, goals, frequency,
+				    			timeOfDay, style, weight, experience);
 
 			    		userList.add(otherUser);
 				    }

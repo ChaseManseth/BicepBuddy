@@ -1,10 +1,14 @@
-2019-04-28 23:51:35 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 23:51:36 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 23:52:00 INFO User.UserController getUserById :: Getting user by ID: ABC ABC from DB.
-2019-04-28 23:52:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62cfb43c8083bcd876dff
-2019-04-28 23:52:00 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-28 23:52:00 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 23:52:01 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-28 23:52:01 INFO User.UserController validateLogin :: User was logged in.
-2019-04-28 23:52:04 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 23:52:04 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 00:03:22 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-29 00:03:23 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-29 00:03:38 INFO User.UserController getUserById :: Getting user by ID: bigtester bogtester from DB.
+2019-04-29 00:03:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc5f46843c8083bcd876d32
+2019-04-29 00:03:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6236443c8083bcd876dd9
+2019-04-29 00:03:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
+2019-04-29 00:03:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc636aa43c8083bcd876e35
+2019-04-29 00:03:39 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-29 00:03:39 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-29 00:03:39 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-29 00:03:39 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-29 00:03:40 INFO User.UserController validateLogin :: User was logged in.
+2019-04-29 00:03:51 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 00:03:51 INFO User.UserController getAllUsers :: Retrieving all users from the DB.

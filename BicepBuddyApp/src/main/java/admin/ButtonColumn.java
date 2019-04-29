@@ -87,8 +87,7 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 					yesBtn.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							UserController uc = new UserController();
-							//uc.deleteAccount(UserController.getUser());
+							UserController.getInstance().deleteUser((User)(table.getValueAt(table.getSelectedRow(), 0)));
 							confirm.dispose();
 						}
 						

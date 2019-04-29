@@ -220,5 +220,8 @@ public class ProfileView extends JPanel {
 		notificationText.setBounds(269, 92, 470, 98);
 		add(notificationText);
 		
+		//retrieve notifications and populate the field.
+		UserController.getInstance().populateMessages(notificationText);
+		
 	}
 }

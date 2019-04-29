@@ -3,8 +3,13 @@ package User;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.swing.JTextArea;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -1214,76 +1219,152 @@ public class UserController {
 			return userList;
 		}
 		
-		public void notifyUser(User u) {
-			Message msg = new Message();
-			//generate random notification text.
-			Random r = new Random();
-			int messg = r.nextInt(5);
-			System.out.println(messg);
-			
-			//set the notification details
-			msg.setSender("5cc6843f8554b0748e7505db");
-			msg.setReceiver(u.getId());
-			msg.setSendDate(new Date());
-			if(messg == 0) {
-				msg.setText(u.getfName() + " " + u.getlName() + " is going to go pump iron!");
-			}
-			else if(messg == 1) {
-				msg.setText(u.getfName() + " " + u.getlName() + " is hitting up the SLC now!");
-			}
-			else if(messg == 2) {
-				msg.setText(u.getfName() + " " + u.getlName() + " is letting you know they're going to the gym!");
-			}
-			else if(messg == 3) {
-				msg.setText(u.getfName() + " " + u.getlName() + " wants you to come to the gym with them!");
-			}
-			else if(messg == 4) {
-				msg.setText(u.getfName() + " " + u.getlName() + " wants you to be their gym buddy right now!");
-			}
-			
-			Master.appLogger.info(":: Notification: " + msg.getText() + " going to user: " + u.getEmail());
-			
-			JSONObject notify = new JSONObject();
-			
-			notify.put("userId", msg.getSender());
-			notify.put("otherUserId", msg.getReceiver());
-			notify.put("message", msg.getText());
-			
-			HttpPost request = new HttpPost("http://bb.manseth.com/chat/");
-			try {
-				// Add JSON to the body and headers indicating type
-				StringEntity params = new StringEntity(notify.toJSONString());
-			    request.addHeader("content-type", "application/json");
-			    request.setEntity(params);
+	public void notifyUser(User u) {
+		Message msg = new Message();
+		//generate random notification text.
+		Random r = new Random();
+		int messg = r.nextInt(5);
+		System.out.println(messg);
+		
+		//set the notification details
+		msg.setSender("5cc6843f8554b0748e7505db");
+		msg.setReceiver(u.getId());
+		msg.setSendDate(new Date());
+		if(messg == 0) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is going to go pump iron!");
+		}
+		else if(messg == 1) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is hitting up the SLC now!");
+		}
+		else if(messg == 2) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is letting you know they're going to the gym!");
+		}
+		else if(messg == 3) {
+			msg.setText(user.getfName() + " " + user.getlName() + " wants you to come to the gym with them!");
+		}
+		else if(messg == 4) {
+			msg.setText(user.getfName() + " " + user.getlName() + " wants you to be their gym buddy right now!");
+		}
+		
+		Master.appLogger.info(":: Notification: " + msg.getText() + " going to user: " + u.getEmail());
+		
+		JSONObject notify = new JSONObject();
+		
+		notify.put("userId", msg.getSender());
+		notify.put("otherUserId", msg.getReceiver());
+		notify.put("message", msg.getText());
+		
+		HttpPost request = new HttpPost("http://bb.manseth.com/chat/");
+		try {
+			// Add JSON to the body and headers indicating type
+			StringEntity params = new StringEntity(notify.toJSONString());
+		    request.addHeader("content-type", "application/json");
+		    request.setEntity(params);
 
-			    // Execute the request
-			    HttpResponse response = httpClient.execute(request);
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
 
-			    // Get the body of the response
-			    HttpEntity entity = response.getEntity();
-			    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
 
-			    JSONParser parse = new JSONParser();
-			    JSONObject o = (JSONObject) parse.parse(json);
-			    
-			    if(response.getStatusLine().getStatusCode() == 201) {
-			    	JSONObject chatter = ((JSONObject) o.get("chat"));
+		    JSONParser parse = new JSONParser();
+		    JSONObject o = (JSONObject) parse.parse(json);
+		    
+		    if(response.getStatusLine().getStatusCode() == 201) {
+		    	JSONObject chatter = ((JSONObject) o.get("chat"));
+		    	
+		    	String id = (String) chatter.get("_id");
+		    	msg.setId(id);
+		    			    	
+		    }
+		    else {
+		    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+	}
+	
+	public Set<Message> getAllNotifications() {
+		// function gets the logged-in user's notifications
+		Set<Message> messages = new HashSet<Message>();
+		//first request: all the messages from logged in user to the other user.
+		HttpGet request = new HttpGet("http://bb.manseth.com/chat/from/5cc6843f8554b0748e7505db"
+				+ "/to/" + UserController.getUser().getId());
+		
+		Master.appLogger.info(":: Getting all notifications for " + UserController.getUser().getfName());
+		
+		try {
+			// Add JSON to the body and headers indicating type
+		    request.addHeader("content-type", "application/json");
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONArray msgArray = (JSONArray) parse.parse(json);
+		    	
+		    	//loop through each message
+		    	for(int i = 0; i < msgArray.size(); i++) {
+		    		JSONObject chatter = (JSONObject) msgArray.get(i);
+			    	Message msg = new Message();
 			    	
-			    	String id = (String) chatter.get("_id");
-			    	msg.setId(id);
-			    			    	
-			    }
-			    else {
-			    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
-			    }
+			    	msg.setId((String) chatter.get("_id"));
+			    	long msTime =  ((Long) chatter.get("dateCreated"));
+			    	msg.setSendDate(new Date(msTime));
+			    	msg.setReceiver((String) chatter.get("otherUserId"));
+			    	msg.setSender((String) chatter.get("userId"));
+			    	msg.setText((String) chatter.get("message"));
+			    	
+			    	messages.add(msg);
+		    	}
+		    	
+		    }
+		    else {
+		    	Master.appLogger.info(":: Problem with get for message..");
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+		return messages;
+	}
+
+	public void populateMessages(JTextArea notificationText) {
+		//first we need all the notifications.
+		Set<Message> messages = getAllNotifications();
+		
+		//we will only print the first 10, sorted by date.
+		List<Message> sorted = messages.stream().collect(Collectors.toList());
+		sorted.sort((m1, m2) -> m2.compareTo(m1));
+		
+		for(int i = 0; i < sorted.size() && i < 10; i++) {
+			if(i == 0) {
+				notificationText.setText(sorted.get(i).getText() + " --- Send time: " + sorted.get(i).getSendDate());
 			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			finally {
-				request.releaseConnection();
+			else {
+				notificationText.setText(notificationText.getText() + "\n\n" + 
+						sorted.get(i).getText() + " --- Send time: " + sorted.get(i).getSendDate());
 			}
 			
 		}
+		
+	}
 
 }

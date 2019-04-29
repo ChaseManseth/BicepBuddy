@@ -16,75 +16,52 @@ import User.User;
 import Views.OtherProfileView;
 import bicepBuddyPackage.Master;
 
-class ButtonColumn extends AbstractCellEditor
-implements TableCellRenderer, TableCellEditor, ActionListener
-{
-JTable table;
-JButton renderButton;
-JButton editButton;
-String text;
-
-public ButtonColumn(JTable table, int column)
-{
-    super();
-    this.table = table;
-    renderButton = new JButton();
-
-    editButton = new JButton();
-    editButton.setFocusPainted( false );
-    editButton.addActionListener( this );
-
-    TableColumnModel columnModel = table.getColumnModel();
-    columnModel.getColumn(column).setCellRenderer( this );
-    columnModel.getColumn(column).setCellEditor( this );
-}
-
-public Component getTableCellRendererComponent(
-    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-{
-    if (hasFocus)
-    {
-        renderButton.setForeground(table.getForeground());
-        renderButton.setBackground(UIManager.getColor("Button.background"));
-    }
-    else if (isSelected)
-    {
-        renderButton.setForeground(table.getSelectionForeground());
-         renderButton.setBackground(table.getSelectionBackground());
-    }
-    else
-    {
-        renderButton.setForeground(table.getForeground());
-        renderButton.setBackground(UIManager.getColor("Button.background"));
-    }
-
-    renderButton.setText( (value == null) ? "" : value.toString() );
-    return renderButton;
-}
-
-public Component getTableCellEditorComponent(
-    JTable table, Object value, boolean isSelected, int row, int column)
-{
-    text = (value == null) ? "" : value.toString();
-    editButton.setText( text );
-    return editButton;
-}
-
-public Object getCellEditorValue(){
-    return text;
-}
-
-public void actionPerformed(ActionEvent e)
-{
-    fireEditingStopped();    
-    if(e.getActionCommand().equalsIgnoreCase("delete")) {
-        System.out.println( "I am deleting : " + table.getValueAt(table.getSelectedRow(), 0));//need to actually delete him
-    }
-    if(e.getActionCommand().equalsIgnoreCase("view")) {
-        Master.getInstance().updateFrame(new OtherProfileView((User)(table.getValueAt(table.getSelectedRow(), 0))));
-    }
-    
-    
-}
+class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener{
+	JTable table;
+	JButton renderButton;
+	JButton editButton;
+	String text;
+	
+	public ButtonColumn(JTable table, int column){
+	    super();
+	    this.table = table;
+	    renderButton = new JButton();
+	
+	    editButton = new JButton();
+	    editButton.setFocusPainted( false );
+	    editButton.addActionListener( this );
+	
+	    TableColumnModel columnModel = table.getColumnModel();
+	    columnModel.getColumn(column).setCellRenderer( this );
+	    columnModel.getColumn(column).setCellEditor( this );
+	}
+	
+	public Component getTableCellRendererComponent(    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+	    renderButton.setText( value.toString() );
+	    return renderButton;
+	}
+	
+	public Component getTableCellEditorComponent(
+	    JTable table, Object value, boolean isSelected, int row, int column){
+	    text = value.toString();
+	    editButton.setText( text );
+	    return editButton;
+	}
+	
+	public Object getCellEditorValue(){
+	    return text;
+	}
+	
+	public void actionPerformed(ActionEvent e){
+	    fireEditingStopped();    
+	    if(e.getActionCommand().equalsIgnoreCase("delete")) {
+	        System.out.println( "I am deleting : " + table.getValueAt(table.getSelectedRow(), 0));//need to actually delete him
+	    }
+	    if(e.getActionCommand().equalsIgnoreCase("view")) {
+	        Master.getInstance().updateFrame(new OtherProfileView((User)(table.getValueAt(table.getSelectedRow(), 0))));
+	    }
+	    
+	    
+	}
 }
 

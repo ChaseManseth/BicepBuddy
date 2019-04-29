@@ -18,6 +18,9 @@ import User.User;
 import User.UserController;
 import Views.OtherProfileView;
 import bicepBuddyPackage.Master;
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
+
 import javax.swing.JScrollPane;
 // TODO: Auto-generated Javadoc
 
@@ -48,7 +51,14 @@ public class AdminGui extends JPanel {
 		add(lblTotalUsers);
 
 		JButton btnRefresh = new JButton("Refresh ");
+		MaterialUIMovement.add(btnRefresh, MaterialColors.GRAY_600);
 		btnRefresh.setBounds(608, 114, 114, 25);
+		btnRefresh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//update table here
+			}
+		});
 		add(btnRefresh);
 
 		JLabel lblNewLabel = new JLabel(userCount.toString());

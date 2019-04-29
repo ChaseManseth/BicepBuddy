@@ -52,12 +52,12 @@ public class FriendsList extends JPanel{
 		//*************************************************************************************************************************
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblIncomingBuddies.setBounds(724, 126, 109, 15);
+		lblIncomingBuddies.setBounds(709, 126, 109, 15);
 		add(lblIncomingBuddies);
 		
 		JPanel incomingPanel = new JPanel();
 		incomingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		incomingPanel.setBounds(724, 147, 164, 340);
+		incomingPanel.setBounds(709, 147, 164, 340);
 		
 		JList incomingList = new JList();
 		incomingList.setListData(UserController.getInstance().getUser().getWaitingUsers().toArray());
@@ -75,12 +75,12 @@ public class FriendsList extends JPanel{
 		//**********************************************************************************************************************************
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPendingBuddies.setBounds(12, 126, 102, 15);
+		lblPendingBuddies.setBounds(22, 126, 102, 15);
 		add(lblPendingBuddies);
 		
 		JPanel pendingPanel = new JPanel();
 		pendingPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		pendingPanel.setBounds(12, 147, 164, 340);
+		pendingPanel.setBounds(22, 147, 164, 340);
 		
 		JList pendingList = new JList();
 		pendingList.setListData(UserController.getInstance().getUser().getPendingUsers().toArray());

@@ -145,7 +145,7 @@ public class ProfileView extends JPanel {
 		
 		JTextArea notificationText = new JTextArea();
 		notificationText.setEditable(false);
-		notificationText.setBounds(269, 92, 619, 374);
+		notificationText.setBounds(269, 92, 605, 374);
 		add(notificationText);
 		
 		//retrieve notifications and populate the field.

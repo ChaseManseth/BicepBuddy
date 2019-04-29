@@ -54,12 +54,12 @@ public class Login extends JPanel {
 		add(loginLabel);
 		
 		JLabel emailLabel = new JLabel("Email:");
-		emailLabel.setBounds(322, 187, 48, 14);
+		emailLabel.setBounds(322, 180, 48, 14);
 		add(emailLabel);
 		
 		emailTextField = new JTextField();
 		emailTextField.setBackground(Color.LIGHT_GRAY);
-		emailTextField.setBounds(431, 184, 192, 20);
+		emailTextField.setBounds(431, 171, 192, 33);
 		add(emailTextField);
 		emailTextField.setColumns(10);
 		
@@ -67,7 +67,7 @@ public class Login extends JPanel {
 		// Password Field
 		passwordField = new JPasswordField();
 		passwordField.setBackground(new Color(41,182,246));
-		passwordField.setBounds(433, 234, 185, 20);
+		passwordField.setBounds(433, 221, 185, 33);
 		add(passwordField);
 		passwordField.setColumns(10);
 		
@@ -85,11 +85,11 @@ public class Login extends JPanel {
 		// Password Background color
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(431, 234, 192, 20);
+		panel.setBounds(431, 221, 192, 33);
 		add(panel);
 		
 		JLabel passwordLabel = new JLabel("Password:");
-		passwordLabel.setBounds(322, 237, 81, 14);
+		passwordLabel.setBounds(322, 228, 81, 14);
 		add(passwordLabel);
 		
 		JButton loginBtn = new JButton("Login");

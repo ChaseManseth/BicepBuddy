@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Matching.Match;
+import Messaging.Message;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -87,6 +88,8 @@ public class User {
 	
 	/** The pending users. */
 	private List<User> pendingUsers;
+	
+	private List<Message> notifications;
 
 
 	/**
@@ -97,7 +100,14 @@ public class User {
 	public List<User> getPendingUsers() {
 		return pendingUsers;
 	}
+	
+	public List<Message> getNotifications() {
+		return notifications;
+	}
 
+	public void setNotifications(List<Message> notifications) {
+		this.notifications = notifications;
+	}
 
 	/**
 	 * Sets the pending users.

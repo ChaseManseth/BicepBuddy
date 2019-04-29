@@ -2,7 +2,9 @@ package User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +23,7 @@ import org.json.simple.parser.JSONParser;
 import Matching.Match;
 import Matching.MatchController;
 import Matching.Match.Status;
+import Messaging.Message;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -1080,7 +1083,7 @@ public class UserController {
 
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				return null;
 			} finally {
 				request.releaseConnection();
 			}
@@ -1102,17 +1105,23 @@ public class UserController {
 				for (Match m : UserController.getUser().getAccepted()) {
 					if (m.getStatus() == Status.Accepted) {
 						User other = UserController.getInstance().onlyGetUserById(m.getOther());
-						List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
-						users.add(other);
-						UserController.getInstance().getUser().setAcceptedUsers(users);
+						if(other != null) {
+							List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
+							users.add(other);
+							UserController.getInstance().getUser().setAcceptedUsers(users);
+						}
+						
 					}
 				}
 				
 				for (Match m : UserController.getUser().getWaiting()) {
 					User other = UserController.getInstance().onlyGetUserById(m.getOther());
-					List<User> users = UserController.getInstance().getUser().getWaitingUsers();
-					users.add(other);
-					UserController.getInstance().getUser().setWaitingUsers(users);
+					if(other != null) {
+						List<User> users = UserController.getInstance().getUser().getWaitingUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setWaitingUsers(users);
+					}
+					
 				}
 				
 				for (Match m : UserController.getUser().getAccepted()) {
@@ -1203,6 +1212,78 @@ public class UserController {
 			}
 			
 			return userList;
+		}
+		
+		public void notifyUser(User u) {
+			Message msg = new Message();
+			//generate random notification text.
+			Random r = new Random();
+			int messg = r.nextInt(5);
+			System.out.println(messg);
+			
+			//set the notification details
+			msg.setSender("5cc6843f8554b0748e7505db");
+			msg.setReceiver(u.getId());
+			msg.setSendDate(new Date());
+			if(messg == 0) {
+				msg.setText(u.getfName() + " " + u.getlName() + " is going to go pump iron!");
+			}
+			else if(messg == 1) {
+				msg.setText(u.getfName() + " " + u.getlName() + " is hitting up the SLC now!");
+			}
+			else if(messg == 2) {
+				msg.setText(u.getfName() + " " + u.getlName() + " is letting you know they're going to the gym!");
+			}
+			else if(messg == 3) {
+				msg.setText(u.getfName() + " " + u.getlName() + " wants you to come to the gym with them!");
+			}
+			else if(messg == 4) {
+				msg.setText(u.getfName() + " " + u.getlName() + " wants you to be their gym buddy right now!");
+			}
+			
+			Master.appLogger.info(":: Notification: " + msg.getText() + " going to user: " + u.getEmail());
+			
+			JSONObject notify = new JSONObject();
+			
+			notify.put("userId", msg.getSender());
+			notify.put("otherUserId", msg.getReceiver());
+			notify.put("message", msg.getText());
+			
+			HttpPost request = new HttpPost("http://bb.manseth.com/chat/");
+			try {
+				// Add JSON to the body and headers indicating type
+				StringEntity params = new StringEntity(notify.toJSONString());
+			    request.addHeader("content-type", "application/json");
+			    request.setEntity(params);
+
+			    // Execute the request
+			    HttpResponse response = httpClient.execute(request);
+
+			    // Get the body of the response
+			    HttpEntity entity = response.getEntity();
+			    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+			    JSONParser parse = new JSONParser();
+			    JSONObject o = (JSONObject) parse.parse(json);
+			    
+			    if(response.getStatusLine().getStatusCode() == 201) {
+			    	JSONObject chatter = ((JSONObject) o.get("chat"));
+			    	
+			    	String id = (String) chatter.get("_id");
+			    	msg.setId(id);
+			    			    	
+			    }
+			    else {
+			    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
+			    }
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				request.releaseConnection();
+			}
+			
 		}
 
 }

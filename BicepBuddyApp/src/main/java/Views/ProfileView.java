@@ -22,6 +22,7 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
+import javax.swing.JTextArea;
 /**
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
@@ -116,7 +117,7 @@ public class ProfileView extends JPanel {
 				btnStartMatching.setForeground(Color.black);
 			}
 		});
-		btnStartMatching.setBounds(459, 40, 188, 47);
+		btnStartMatching.setBounds(429, 11, 188, 47);
 		add(btnStartMatching);
 		
 		//*************************************************************************************************************************
@@ -125,7 +126,7 @@ public class ProfileView extends JPanel {
 		
 		JLabel lblFriends = new JLabel("Buddies");
 		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFriends.setBounds(269, 183, 150, 25);
+		lblFriends.setBounds(269, 199, 150, 15);
 		add(lblFriends);
 		
 		JPanel friendsPanel = new JPanel();
@@ -148,7 +149,7 @@ public class ProfileView extends JPanel {
 		//*************************************************************************************************************************
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblIncomingBuddies.setBounds(589, 188, 150, 14);
+		lblIncomingBuddies.setBounds(589, 199, 150, 14);
 		add(lblIncomingBuddies);
 		
 		JPanel incomingPanel = new JPanel();
@@ -171,7 +172,7 @@ public class ProfileView extends JPanel {
 		//**********************************************************************************************************************************
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPendingBuddies.setBounds(429, 189, 150, 14);
+		lblPendingBuddies.setBounds(427, 199, 150, 14);
 		add(lblPendingBuddies);
 		
 		JPanel pendingPanel = new JPanel();
@@ -208,6 +209,16 @@ public class ProfileView extends JPanel {
 		JLabel lblAge = new JLabel(age);
 		lblAge.setBounds(10, 300, 186, 15);
 		infoPanel.add(lblAge);
+		
+		JLabel notifyLabel = new JLabel("Notifications");
+		notifyLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		notifyLabel.setBounds(269, 63, 150, 16);
+		add(notifyLabel);
+		
+		JTextArea notificationText = new JTextArea();
+		notificationText.setEditable(false);
+		notificationText.setBounds(269, 92, 470, 98);
+		add(notificationText);
 		
 	}
 }

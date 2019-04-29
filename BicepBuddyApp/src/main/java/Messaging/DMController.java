@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -99,7 +100,7 @@ public class DMController{
 	
 	/** The Constant DATE_FORMAT. */
 	// Various constants
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss::MM:dd::yyyy");
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy :: HH:mm ---");
 	
 	/** The Constant MESSAGE_FILE. */
 	private static final String MESSAGE_FILE = "messageDB.csv";
@@ -414,11 +415,11 @@ public class DMController{
 	public void addMessage(JTextArea messageField, Message message) {
 		if(message.getSender().contentEquals(UserController.getUser().getId())) {
 			//this is us
-			messageField.setText(messageField.getText() + "\n\n" + message.getSendDate() + 
+			messageField.setText(messageField.getText() + "\n\n" + DATE_FORMAT.format(message.getSendDate()) + 
 					" " + "You: " + message.getText());
 		}
 		else {
-			messageField.setText(messageField.getText() + "\n\n" + message.getSendDate() + 
+			messageField.setText(messageField.getText() + "\n\n" + DATE_FORMAT.format(message.getSendDate()) + 
 					" " + dm.getPartner().getfName() + " " + dm.getPartner().getlName() + ": " + message.getText());
 		}
 	}

@@ -279,29 +279,29 @@ router.get('/:userID', (req, res, next) => {
 
 // Delete User
 // TODO: Make sure Admins can delete others accounts
-router.delete("/:userID", checkAuth, (req, res, next) => {
+router.delete("/:userID", (req, res, next) => {
     const id = req.params.userID;
-    const accessedId = req.headers.id;
-    if(accessedId != null && id == accessedId) {
-        User.deleteOne({_id: id})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                messsage: 'User Deleted'
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+    // const accessedId = req.headers.id;
+    // if(accessedId != null && id == accessedId) {
+       
+    // } else {
+    //     res.status(403).json({
+    //         message: 'Access not allowed!'
+    //     });
+    // }
+    User.deleteOne({_id: id})
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            messsage: 'User Deleted'
         });
-    } else {
-        res.status(403).json({
-            message: 'Access not allowed!'
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
         });
-    }
-
+    });
     
 });
 

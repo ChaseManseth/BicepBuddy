@@ -57,13 +57,13 @@ router.get('/', (req, res, next) => {
 });
 
 // Get Chat by Id
-router.get('/:chat', (req, res, next) => {
-    const id = req.params.matchId;
+router.get('/:chatId', (req, res, next) => {
+    const id = req.params.chatId;
     Chat.findById(id)
         .exec()
         .then(result => {
             res.status(200).json({
-                match: result
+                chat: result
             });
         })
         .catch(err => {

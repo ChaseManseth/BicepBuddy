@@ -140,12 +140,12 @@ public class ProfileView extends JPanel {
 		
 		JLabel notifyLabel = new JLabel("Notifications");
 		notifyLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		notifyLabel.setBounds(269, 63, 150, 16);
+		notifyLabel.setBounds(269, 69, 150, 16);
 		add(notifyLabel);
 		
 		JTextArea notificationText = new JTextArea();
 		notificationText.setEditable(false);
-		notificationText.setBounds(269, 92, 470, 98);
+		notificationText.setBounds(269, 92, 619, 374);
 		add(notificationText);
 		
 		//retrieve notifications and populate the field.

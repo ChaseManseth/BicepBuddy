@@ -1,10 +1,14 @@
 package admin;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractCellEditor;
@@ -68,31 +72,66 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 	        Master.getInstance().updateFrame(new OtherProfileView((User)(table.getValueAt(table.getSelectedRow(), 0))));
 	    }
 	    if(e.getActionCommand().equalsIgnoreCase("delete")) {
-	        System.out.println( "I am deleting : " + table.getValueAt(table.getSelectedRow(), 0));//need to actually delete him
-	        JFrame frame = new JFrame();
-			frame.setVisible(true);
-			frame.setTitle("Delete User?");
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setBounds(100, 100, 400, 200);
+	    	
+					JFrame confirm = new JFrame();
+					JPanel p = new JPanel();
+					p.setLayout(new BorderLayout());
+					confirm.getContentPane().add(p);
+					
+					JTextField uSure = new JTextField();
+					uSure.setText("Delete: " + ((User)(table.getValueAt(table.getSelectedRow(), 0))) +"'s acount?");
+					uSure.setEditable(false);
+					
+					JButton yesBtn = new JButton();
+					yesBtn.setText("YES");
+					yesBtn.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							UserController uc = new UserController();
+							//uc.deleteAccount(UserController.getUser());
+							confirm.dispose();
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							yesBtn.setBackground(Color.RED);
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							yesBtn.setBackground(new JButton().getBackground());
+						}
+					});
+					
+					JButton noBtn = new JButton();
+					noBtn.setText("NO ");
+					noBtn.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							confirm.dispose();
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							noBtn.setBackground(Color.GREEN);
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							noBtn.setBackground(new JButton().getBackground());
+						}
+					});
+					
+					
+					p.add(uSure, BorderLayout.PAGE_START);
+					p.add(yesBtn, BorderLayout.LINE_START);
+					p.add(noBtn, BorderLayout.LINE_END);
+					
+					confirm.setBounds(100, 100, 500, 200);
+					confirm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					confirm.setVisible(true);
 			
-			JPanel panel = new JPanel();
-			panel.setLayout(new FlowLayout());
-			
-			JTextField message = new JTextField();
-			message.setText("Delete User: " + table.getValueAt(table.getSelectedRow(), 0)+"?");
-			message.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			message.setEditable(false);
-			JButton yes = new JButton("Yes");
-			yes.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("Deletion was confirmed");
-					//UserController.getInstance().deleteAccount((User)(table.getValueAt(table.getSelectedRow(), 0)));
-					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-				}
-			});
-			panel.add(message);
-			panel.add(yes);
-			frame.getContentPane().add(panel);
+
 	    }	    
 	}
 }

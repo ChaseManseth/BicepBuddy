@@ -59,17 +59,6 @@ public class AdminGui extends JPanel {
         lblAllUsers.setBounds(591, 191, 66, 15);
         add(lblAllUsers);
 
-        JLabel lblFancyChartOr = new JLabel("Fancy chart or something");
-        lblFancyChartOr.setBounds(271, 119, 192, 15);
-        add(lblFancyChartOr);
-
-    	JLabel label = new JLabel("All users");
-    	label.setBounds(73, 191, 66, 15);
-		add(label);
-
-
-
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(381, 218, 485, 212);
 		add(scrollPane);
@@ -79,7 +68,6 @@ public class AdminGui extends JPanel {
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
-
 
 	}
 }

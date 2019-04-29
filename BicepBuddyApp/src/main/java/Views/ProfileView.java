@@ -74,6 +74,7 @@ public class ProfileView extends JPanel {
 		editProfileBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Master.appLogger.info(":: Accessed setting view from profile");
 				ViewController vc = new ViewController();
 				vc.settingsView();
 			}
@@ -102,6 +103,7 @@ public class ProfileView extends JPanel {
 		btnStartMatching.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Master.appLogger.info(":: Accessed matching view from profile");
 				MatchController.generateFrame();
 			}
 			@Override
@@ -135,6 +137,7 @@ public class ProfileView extends JPanel {
 		friendsList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
+		    	Master.appLogger.info(":: Accessed friends list for user " + ((User)friendsList.getSelectedValue()).toString());
 		    	Master.getInstance().updateFrame(new OtherProfileView((User)friendsList.getSelectedValue()));
 		    }
 		};
@@ -157,6 +160,7 @@ public class ProfileView extends JPanel {
 		incomingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener1 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
+		    	Master.appLogger.info(":: Accessed incoming list for user " + ((User)incomingList.getSelectedValue()).toString());
 		    	Master.getInstance().updateFrame(new OtherProfileView((User)incomingList.getSelectedValue()));
 		    }
 		};
@@ -179,6 +183,7 @@ public class ProfileView extends JPanel {
 		pendingList.setFont(new Font("Tahoma", Font.BOLD, 12));
 		MouseListener mouseListener2 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
+		    	Master.appLogger.info(":: Accessed pending list for user " + ((User)pendingList.getSelectedValue()).toString());
 		    	Master.getInstance().updateFrame(new OtherProfileView((User)pendingList.getSelectedValue()));
 		    }
 		};

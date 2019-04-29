@@ -102,13 +102,13 @@ public class MatchGUI extends JPanel{
 		prevMatchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: MatchGUI left button action");
-				/*if(curMatchShown == 0) {
+				if(curMatchShown == 0) {
 					curMatchShown = matches.size() - 1;
 				}
 				else {
 					curMatchShown--;
-				}*/
-				curMatchShown--;
+				}
+				//curMatchShown--;
 				setCurrentMatch();
 			}
 		});

@@ -1,11 +1,122 @@
-2019-04-28 21:31:29 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-28 21:31:31 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-28 21:31:43 INFO User.UserController getUserById :: Getting user by ID: ABC ABC from DB.
-2019-04-28 21:31:43 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62cfb43c8083bcd876dff
-2019-04-28 21:31:43 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-28 21:31:43 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-28 21:31:44 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-28 21:31:44 INFO User.UserController validateLogin :: User was logged in.
-2019-04-28 21:31:45 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 21:31:45 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-28 21:31:48 INFO Matching.MatchController directMatch :: Direct Match
+2019-04-28 22:39:38 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-28 22:39:40 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-28 22:39:47 INFO User.UserController getUserById :: Getting user by ID: reece kc from DB.
+2019-04-28 22:39:47 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6036843c8083bcd876d46
+2019-04-28 22:39:47 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-28 22:39:47 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-28 22:39:47 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
+2019-04-28 22:39:47 INFO User.UserController validateLogin :: User was logged in.
+2019-04-28 22:39:49 INFO Views.ProfileView$2 mouseClicked :: Accessed matching view from profile
+2019-04-28 22:39:49 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-28 22:39:49 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-28 22:39:49 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc5f46843c8083bcd876d32
+2019-04-28 22:39:49 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6036843c8083bcd876d46
+2019-04-28 22:39:49 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62ec543c8083bcd876e0b
+2019-04-28 22:39:49 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62ec543c8083bcd876e0b
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62cfb43c8083bcd876dff
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6036843c8083bcd876d46
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc5f46843c8083bcd876d32
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6236443c8083bcd876dd9
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc636aa43c8083bcd876e35
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6236443c8083bcd876dd9
+2019-04-28 22:39:50 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc636aa43c8083bcd876e35
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e65
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e66
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e67
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e68
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e69
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e6a
+2019-04-28 22:39:51 INFO Matching.MatchController createMatch :: Match generated with id 5cc671eb43c8083bcd876e6b
+2019-04-28 22:39:52 INFO Matching.MatchController createMatch :: Match generated with id 5cc671ec43c8083bcd876e6c
+2019-04-28 22:39:52 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-28 22:39:52 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:52 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 22:39:53 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:53 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:53 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 22:39:55 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:55 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:55 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:56 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:56 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:56 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:56 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:56 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 22:39:56 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:56 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:57 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 22:39:57 INFO Matching.MatchGUI$2 actionPerformed :: MatchGUI left button action
+2019-04-28 22:39:57 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:57 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 22:39:57 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:57 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:57 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 22:39:57 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:57 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:58 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 22:39:58 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:58 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user howdy pardner from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:39:59 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
+2019-04-28 22:39:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:39:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:00 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-28 22:40:00 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:40:00 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:00 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
+2019-04-28 22:40:00 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:40:00 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:00 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-28 22:40:00 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:40:00 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:01 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-28 22:40:01 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:40:01 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:01 INFO User.UserController onlyGetUserById :: Getting user bigtester bogtester from DB WITHOUT their match info.
+2019-04-28 22:40:01 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-28 22:40:01 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-28 22:40:01 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.

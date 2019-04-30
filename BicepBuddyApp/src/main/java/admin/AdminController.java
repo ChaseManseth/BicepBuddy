@@ -1,10 +1,13 @@
 package admin;
+import java.util.List;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import User.User;
 import admin.AdminGui;
 import bicepBuddyPackage.Master;
 
@@ -45,7 +48,7 @@ public class AdminController {
 		}
 		return myadmin;
 	}
-    public static JFreeChart getChart() {
+    public static JFreeChart getChart(List<User> everybody, String option) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("One", new Double(43.2));
         dataset.setValue("Two", new Double(10.0));

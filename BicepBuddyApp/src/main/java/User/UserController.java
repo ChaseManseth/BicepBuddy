@@ -29,11 +29,13 @@ import Matching.Match;
 import Matching.MatchController;
 import Matching.Match.Status;
 import Messaging.Message;
+import Views.LoadingView;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
 import bicepBuddyPackage.ErrorGUI;
 import bicepBuddyPackage.Master;
+import bicepBuddyPackage.Threader;
 
 // TODO: Auto-generated Javadoc
 /*
@@ -288,6 +290,7 @@ public class UserController {
 
 		    // Check if response was successful
 		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	
 		    	// Get response object
 			    JSONObject o = (JSONObject) new JSONParser().parse(json);
 
@@ -498,8 +501,8 @@ public class UserController {
 						frequency, timeOfDay, style, weight, experience);
 
 		    	// Add it to the DB
-				UserDB udb = new UserDB();
-				udb.addUser(user, password);
+				//UserDB udb = new UserDB();
+				//udb.addUser(user, password);
 
 				// Add the ID to the new User as well as the JWT
 				JSONObject userJSON = (JSONObject) o.get("user");

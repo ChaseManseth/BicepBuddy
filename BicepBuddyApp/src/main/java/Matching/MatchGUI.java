@@ -310,13 +310,14 @@ public class MatchGUI extends JPanel{
 		panel.setLayout(new FlowLayout());
 		
 		JTextField noMatchField = new JTextField();
-		noMatchField.setText("You have exhausted your matches from this list."
-				+ "Generate more matches by matching from your profile!");
+		noMatchField.setText("You have exhausted your matches from this list.");
 		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		noMatchField.setEditable(false);
 		
 		panel.add(noMatchField);
 		frame.getContentPane().add(panel);
+		
+		Master.updateFrame(new ProfileView());
 		
 	}
 	

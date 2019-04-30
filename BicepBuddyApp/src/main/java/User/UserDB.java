@@ -14,6 +14,10 @@ import bicepBuddyPackage.Master;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserDB.
+ * USERDB IS NOT USED ANYMORE, AS WE USE AN ACTUAL DATABASE (MONGODB)
+ * 
+ * THESE FUNCTIONS ARE DEPRECATED NOW.
+ * 
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 /*

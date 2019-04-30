@@ -173,6 +173,8 @@ public class Master {
 		panel = j;
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
+		frame.revalidate();
+		frame.repaint();
 		//panel.setVisible(false);
 		//panel = j;
 		//panel.setVisible(true);
@@ -289,6 +291,7 @@ public class Master {
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Loading logout");
 				UserController.setUser(null);
+				UserController.getInstance().setTimesMatchCalled(5);
 				UserController.getInstance().setChangesToMatches(true);
 
 				Master.appLogger.info(":: User logged out.");

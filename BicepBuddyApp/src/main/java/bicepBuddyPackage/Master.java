@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import Matching.MatchController;
@@ -36,6 +37,7 @@ import mdlaf.MaterialLookAndFeel;
 import java.awt.ComponentOrientation;
 import javax.swing.JMenu;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -77,6 +79,28 @@ public class Master {
 	/** The panel. */
 	private static JPanel panel;
 	
+	private JLabel loadingLabel = new JLabel("Loading . . .");
+	
+	private JMenuBar menuBar;
+	
+	public JMenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(JMenuBar menuBar) {
+		menuBar = menuBar;
+	}
+	
+	
+
+	public JLabel getLoadingLabel() {
+		return loadingLabel;
+	}
+
+	public void setLoadingLabel(JLabel loadingLabel) {
+		this.loadingLabel = loadingLabel;
+	}
+
 	/**
 	 * Gets the single instance of Master.
 	 *
@@ -130,16 +154,35 @@ public class Master {
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
+		
 
 		JMenu login = new JMenu("Login");
 		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading Login");
-				updateFrame(new Login());
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						updateFrame(new Login());
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
+				
 			}
 		});
 		menuBar.add(login);
@@ -149,8 +192,25 @@ public class Master {
 		signUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Loading signUp");
-				updateFrame(new Signup());
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						updateFrame(new Signup());
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(signUp);
@@ -193,7 +253,7 @@ public class Master {
 	public void loggedInMenuLoad() {
 		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		
 		this.frame.setJMenuBar(null);
 		this.frame.setJMenuBar(menuBar);
@@ -203,8 +263,25 @@ public class Master {
 		mnProfile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading Profile");
-				updateFrame(new ProfileView());
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						updateFrame(new ProfileView());
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(mnProfile);
@@ -226,8 +303,25 @@ public class Master {
 		settings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading Settings");
-				updateFrame(new SettingsView());
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						updateFrame(new SettingsView());
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(settings);
@@ -237,8 +331,25 @@ public class Master {
 		mnLists.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Master.appLogger.info("Loading Buddy Lists view");
-				updateFrame(new FriendsList());
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						updateFrame(new FriendsList());
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(mnLists);
@@ -248,9 +359,25 @@ public class Master {
 		mnMatch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading match view");
-				//create match controller
-				MatchController.generateFrame();
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						MatchController.generateFrame();
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(mnMatch);
@@ -261,9 +388,25 @@ public class Master {
 		administrator.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading administrator view");
-				//create user controller
-				AdminController.generateFrame();
+				menuBar.add(loadingLabel);
+				menuBar.revalidate();
+				menuBar.repaint();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						AdminController.generateFrame();
+						return null;
+					}
+					
+					protected void done() {
+						menuBar.remove(loadingLabel);
+						
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}.execute();
 			}
 		});
 		menuBar.add(administrator);
@@ -353,5 +496,17 @@ public class Master {
 	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	
+	public void addLoading() {
+		this.menuBar.add(loadingLabel);
+		this.menuBar.revalidate();
+		this.menuBar.repaint();
+	}
+	
+	public void unLoad() {
+		this.menuBar.remove(loadingLabel);
+		this.menuBar.revalidate();
+		this.menuBar.repaint();
 	}
 }

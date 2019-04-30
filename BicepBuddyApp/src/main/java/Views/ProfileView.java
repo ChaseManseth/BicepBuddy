@@ -23,6 +23,7 @@ import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 /**
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
@@ -76,8 +77,21 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed setting view from profile");
-				ViewController vc = new ViewController();
-				vc.settingsView();
+				
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						Master.getInstance().updateFrame(new SettingsView());
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 			}
 
 			@Override
@@ -105,7 +119,21 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed matching view from profile");
-				MatchController.generateFrame();
+				
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						MatchController.generateFrame();
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

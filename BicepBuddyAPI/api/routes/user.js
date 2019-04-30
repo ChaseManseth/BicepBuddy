@@ -48,7 +48,8 @@ router.post('/signup', (req, res, next)=> {
                             timeOfDay: req.body.timeOfDay,
                             workoutStyle: req.body.workoutStyle,
                             weight: req.body.weight,
-                            experience: req.body.experience
+                            experience: req.body.experience,
+                            profilePic: req.body.profilePic
                         });
 
                         user.save()

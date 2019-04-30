@@ -75,11 +75,11 @@ public class AdminGui extends JPanel {
 		add(lblNewLabel);
 
         JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(597, 102, 66, 15);
+        lblAllUsers.setBounds(614, 101, 66, 15);
         add(lblAllUsers);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(381, 129, 485, 343);
+		scrollPane.setBounds(447, 129, 419, 343);
 		add(scrollPane);
 		
 		AdminTableModel model = new AdminTableModel(everybody);
@@ -90,7 +90,7 @@ public class AdminGui extends JPanel {
 		scrollPane.setViewportView(table);
 		
         ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,"gender"));
-        myPanel.setBounds(33, 122, 326, 350);
+        myPanel.setBounds(33, 122, 379, 350);
         add(myPanel); 
 	}
 }

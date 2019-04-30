@@ -1,4 +1,6 @@
 package admin;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
@@ -48,15 +50,29 @@ public class AdminController {
 		}
 		return myadmin;
 	}
-    public static JFreeChart getChart(List<User> everybody, String option) {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Double(43.2));
-        dataset.setValue("Two", new Double(10.0));
-        dataset.setValue("Three", new Double(27.5));
-        dataset.setValue("Four", new Double(17.5));
-        dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));
-        return ChartFactory.createPieChart("Test1",dataset,false,true,false);
+    public static JFreeChart getChart(List<User> everybody, String option) { 
+        DefaultPieDataset data = new DefaultPieDataset();
+        String title ="Gender Demographics";
+        double mcount=0.0,fcount=0.0,ncount=0.0;
+        for (int i =0; i<everybody.size();i++) {
+        	if(everybody.get(i).getGender().equalsIgnoreCase("male")) {
+        		mcount+=1.0;
+        	}
+        	if(everybody.get(i).getGender().equalsIgnoreCase("female")) {
+        		fcount+=1.0;
+        	}
+        	if(everybody.get(i).getGender().equalsIgnoreCase("N/A")) {
+        		ncount+=1.0;
+        	}
+        }
+//        everybody.forEach(a -> {
+//        	data.setValue(a.getfName(), 1.0);
+//        });
+        data.setValue("Male", mcount);
+        data.setValue("Female", fcount);
+        data.setValue("N/A", ncount);
+
+        return ChartFactory.createPieChart(title,data,false,true,false);
     }
 
 	

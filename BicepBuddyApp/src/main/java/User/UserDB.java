@@ -68,9 +68,9 @@ public class UserDB {
 	}
 	
 	/**
-	 * Gets the num users.
+	 * Gets the number of users in the local CSV DB.
 	 *
-	 * @return the num users
+	 * @return the number of users in local CSV DB
 	 */
 	public int getNumUsers() {
 		int numUsers = 0;
@@ -94,7 +94,7 @@ public class UserDB {
 	/**
 	 * Tester get random user.
 	 *
-	 * @return the user
+	 * @return a random user
 	 */
 	public User testerGetRandomUser() {
 		Random r = new Random();
@@ -128,8 +128,8 @@ public class UserDB {
 	/**
 	 * Not exists.
 	 *
-	 * @param email the email
-	 * @return true, if successful
+	 * @param email email to verify with local CSV DB
+	 * @return true, if email does not yet exist in the local CSV DB
 	 */
 	public boolean notExists(String email) {
 		try {
@@ -161,8 +161,8 @@ public class UserDB {
 	/**
 	 * Adds the user.
 	 *
-	 * @param u the u
-	 * @param password the password
+	 * @param u the User to be added to the local CSV DB
+	 * @param password the password to be assigned to u
 	 */
 	//TODO: STORE HASHES OF PASSWORD, NOT PLAINTEXT
 	public void addUser(User u, String password) {
@@ -214,9 +214,9 @@ public class UserDB {
 	/**
 	 * Login.
 	 *
-	 * @param email the email
-	 * @param pass the pass
-	 * @return true, if successful
+	 * @param email the email of the User logging in
+	 * @param pass the password of the User logging in
+	 * @return true, if login was successful
 	 */
 	public boolean login(String email, String pass) {
 		try {
@@ -250,7 +250,7 @@ public class UserDB {
 	/**
 	 * Delete user.
 	 *
-	 * @param u the u
+	 * @param u the User to be deleted from the local CSV DB
 	 */
 	// seems to be the accepted method online lel
 	public void deleteUser(User u) {
@@ -291,21 +291,21 @@ public class UserDB {
 	/**
 	 * Edits the user.
 	 *
-	 * @param u the u
-	 * @param email the email
-	 * @param fName the f name
-	 * @param lName the l name
-	 * @param style the style
-	 * @param timeOfDay the time of day
-	 * @param gender the gender
-	 * @param prefGender the pref gender
-	 * @param freq the freq
-	 * @param goal the goal
-	 * @param weight the weight
-	 * @param exp the exp
-	 * @param age the age
-	 * @param phone the phone
-	 * @return true, if successful
+	 * @param u the User to edit
+	 * @param email the new email
+	 * @param fName the new first name
+	 * @param lName the new last name
+	 * @param style the new workout style
+	 * @param timeOfDay the new time of day
+	 * @param gender the new gender
+	 * @param prefGender the new preferred gender
+	 * @param freq the new workout frequency
+	 * @param goal the new workout goal
+	 * @param weight the new current weight
+	 * @param exp the new level of experience
+	 * @param age the new age
+	 * @param phone the new phone number
+	 * @return true, if successfully added to local CSV DB
 	 */
 	public boolean editUser(User u, String email, String fName, String lName, String style, String timeOfDay,
 			String gender, String prefGender, String freq, String goal, String weight, String exp, String age, String phone) {

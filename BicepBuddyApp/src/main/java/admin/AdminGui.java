@@ -30,8 +30,7 @@ import javax.swing.JScrollPane;
  */
 public class AdminGui extends JPanel {
 
-	/** The table 1. */
-	private JTable table_1;
+
 
 	/** The table. */
 	private JTable table;

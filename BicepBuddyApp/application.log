@@ -1,38 +1,41 @@
-2019-04-29 23:27:20 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-29 23:27:22 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc5f46843c8083bcd876d32
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc636aa43c8083bcd876e35
-2019-04-29 23:27:27 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-29 23:27:27 INFO User.UserController getAllNotifications :: Getting all notifications for bigtester
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc689498554b0748e750603
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6236443c8083bcd876dd9
-2019-04-29 23:27:27 INFO User.UserController validateLogin :: User was logged in.
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e158554b0748e750664
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
-2019-04-29 23:27:27 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e1b8554b0748e750665
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc7a6868554b0748e750680
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc7c1f28554b0748e7506f3
-2019-04-29 23:27:28 INFO Views.ProfileView$2 mouseClicked :: Accessed matching view from profile
-2019-04-29 23:27:28 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-29 23:27:28 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6036843c8083bcd876d46
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e1b8554b0748e750665
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62ec543c8083bcd876e0b
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc689498554b0748e750603
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62cfb43c8083bcd876dff
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e158554b0748e750664
-2019-04-29 23:27:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
-2019-04-29 23:27:29 INFO Matching.MatchController createMatch :: Match generated with id 5cc7ceaf8554b0748e750747
-2019-04-29 23:27:29 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
-2019-04-29 23:27:29 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-29 23:27:29 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-29 23:27:31 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-29 23:27:31 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-29 23:27:31 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-29 23:27:32 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-29 23:27:32 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
-2019-04-29 23:27:32 INFO User.UserController onlyGetUserById :: Getting user Zac Steudel from DB WITHOUT their match info.
-2019-04-29 23:27:33 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
-2019-04-29 23:27:33 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-29 23:27:33 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
-2019-04-29 23:27:34 INFO User.UserController getAllNotifications :: Getting all notifications for bigtester
+2019-04-29 23:35:43 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-29 23:35:44 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-29 23:36:25 INFO User.UserController validateSignup :: User's signup information was accepted.
+2019-04-29 23:36:26 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-29 23:36:26 INFO User.UserController getAllNotifications :: Getting all notifications for a
+2019-04-29 23:36:33 INFO User.UserController getAllNotifications :: Getting all notifications for a
+2019-04-29 23:36:36 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-29 23:36:37 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:37 INFO User.UserController getUsersByGender :: Retrieving users by gender: Female
+2019-04-29 23:36:37 INFO Matching.MatchController createMatch :: Match generated with id 5cc7d0d58554b0748e75074c
+2019-04-29 23:36:37 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-29 23:36:37 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:38 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:39 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:36:39 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:36:40 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:40 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:40 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:42 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:42 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:42 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:45 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:45 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:45 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:46 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:46 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:46 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:49 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:49 INFO User.UserController getUsersByGender :: Retrieving users by gender: Female
+2019-04-29 23:36:50 INFO Matching.MatchController createMatch :: Match generated with id 5cc7d0e18554b0748e75074d
+2019-04-29 23:36:50 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-29 23:36:50 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:50 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:51 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:36:51 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:36:52 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-29 23:36:52 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-29 23:36:52 INFO User.UserController onlyGetUserById :: Getting user Name2 LName2 from DB WITHOUT their match info.
+2019-04-29 23:36:57 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:36:57 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-29 23:37:04 INFO Matching.MatchController directMatch :: Direct Match

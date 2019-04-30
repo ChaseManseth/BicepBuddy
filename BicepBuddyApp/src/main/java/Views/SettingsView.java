@@ -72,26 +72,6 @@ public class SettingsView extends JPanel {
 		lblName2.setBounds(376, 12, 137, 15);
 		add(lblName2);
 		
-		JButton btnNewButton = new JButton("Change Image");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				btnNewButton.setForeground(Color.white);
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				btnNewButton.setForeground(Color.black);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				ViewController vc = new ViewController();
-				vc.changeProfileImageFrame();
-			}
-		});
-		btnNewButton.setBounds(64, 254, 169, 25);
-		add(btnNewButton);
-		MaterialUIMovement.add(btnNewButton, MaterialColors.GRAY_600);
-		
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(64, 307, 169, 25);
 		txtFirstName.setBackground(Color.LIGHT_GRAY);

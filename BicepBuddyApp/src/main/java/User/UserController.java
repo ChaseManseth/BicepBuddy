@@ -66,6 +66,18 @@ public class UserController {
 	/** The uc. */
 	private static UserController uc = null;
 	
+	private int timesMatchCalled = 5;
+	
+	public final int NUM_MATCHES_TO_GENERATE = 5;
+	
+	public int getTimesMatchCalled() {
+		return timesMatchCalled;
+	}
+
+	public void setTimesMatchCalled(int timesMatchCalled) {
+		this.timesMatchCalled = timesMatchCalled;
+	}
+
 	/** The http client. */
 	private HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
@@ -732,7 +744,7 @@ public class UserController {
 			    Master.appLogger.info(":: Retrieving users by gender: " + gender);
 
 			    // Loop through each user
-			    for(int j = 0; j < userArr.size(); j++) {
+			    for(int j = 0; j < userArr.size() && j < NUM_MATCHES_TO_GENERATE; j++) {
 			    	JSONObject result = (JSONObject) userArr.get(j);
 
 			    	// Getting the data of that user

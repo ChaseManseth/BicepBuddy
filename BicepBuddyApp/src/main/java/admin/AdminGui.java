@@ -1,7 +1,13 @@
 package admin;
-
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.ui.ApplicationFrame;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,16 +48,17 @@ public class AdminGui extends JPanel {
 		Integer userCount= UserController.getInstance().getAllUsers().size();
 		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator");
-		lblAdministrator.setBounds(381, 24, 135, 15);
+		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblAdministrator.setBounds(290, 12, 299, 36);
 		add(lblAdministrator);
 
 		JLabel lblTotalUsers = new JLabel("Total users:");
-		lblTotalUsers.setBounds(33, 119, 90, 15);
-		add(lblTotalUsers);
+		lblTotalUsers.setBounds(33, 72, 90, 15);
+		add(lblTotalUsers); 
 
 		JButton btnRefresh = new JButton("Refresh ");
 		MaterialUIMovement.add(btnRefresh, MaterialColors.GRAY_600);
-		btnRefresh.setBounds(608, 114, 114, 25);
+		btnRefresh.setBounds(752, 23, 114, 25);
 		btnRefresh.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -61,15 +68,15 @@ public class AdminGui extends JPanel {
 		add(btnRefresh);
 
 		JLabel lblNewLabel = new JLabel(userCount.toString());
-		lblNewLabel.setBounds(129, 119, 66, 15);
+		lblNewLabel.setBounds(122, 72, 66, 15);
 		add(lblNewLabel);
 
         JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(591, 191, 66, 15);
+        lblAllUsers.setBounds(597, 102, 66, 15);
         add(lblAllUsers);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(381, 218, 485, 212);
+		scrollPane.setBounds(381, 129, 485, 343);
 		add(scrollPane);
 		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
 		table = new JTable(model);
@@ -77,6 +84,37 @@ public class AdminGui extends JPanel {
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
+		
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("One", new Double(43.2));
+        dataset.setValue("Two", new Double(10.0));
+        dataset.setValue("Three", new Double(27.5));
+        dataset.setValue("Four", new Double(17.5));
+        dataset.setValue("Five", new Double(11.0));
+        dataset.setValue("Six", new Double(19.4));
+        JFreeChart chart = createChart(dataset);
+        ChartPanel myPanel= new ChartPanel(chart);
+        myPanel.setBounds(33, 122, 326, 350);
+        add(myPanel);
+       
 
 	}
+    private static JFreeChart createChart(PieDataset dataset) {
+        
+        JFreeChart chart = ChartFactory.createPieChart(
+            "Pie Chart Demo 1",  // chart title
+            dataset,             // data
+            true,               // include legend
+            true,
+            false
+        );
+
+        PiePlot plot = (PiePlot) chart.getPlot();
+//        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+//        plot.setNoDataMessage("No data available");
+//        plot.setCircular(false);
+//        plot.setLabelGap(0.02);
+        return chart;
+        
+    }
 }

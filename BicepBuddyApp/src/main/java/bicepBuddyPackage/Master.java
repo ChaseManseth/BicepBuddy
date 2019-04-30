@@ -451,7 +451,7 @@ public class Master {
 	 */
 	//out menu bar
 	public void loggedOutMenuLoad() {
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		this.frame.setJMenuBar(null);
 		this.frame.setJMenuBar(menuBar);
 

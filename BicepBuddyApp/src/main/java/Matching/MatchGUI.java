@@ -23,6 +23,7 @@ import Views.OtherProfileView;
 import Views.ProfileView;
 import Views.ViewController;
 import bicepBuddyPackage.Master;
+import javax.swing.JLabel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,8 +45,10 @@ public class MatchGUI extends JPanel{
 	
 	/** The matches. */
 	private List<Match> matches;
+	
+	private JLabel lblAcceptingMatch;
 
-	/**
+	private JLabel rejLabel;	/**
 	 * Instantiates a new match GUI.
 	 */
 	public MatchGUI() {		
@@ -168,23 +171,26 @@ public class MatchGUI extends JPanel{
 		acceptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Accept button pressed");
-				JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Accepted");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField acc = new JTextField();
-				acc.setText("You have accepted this match!");
-				acc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				acc.setEditable(false);
-				
-				panel.add(acc);
-				frame.getContentPane().add(panel);
-				Master.getInstance().addLoading();
+//				JFrame frame = new JFrame();
+//				frame.setVisible(true);
+//				frame.setTitle("Accepted");
+//				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//				frame.setBounds(100, 100, 400, 200);
+//				
+//				JPanel panel = new JPanel();
+//				panel.setLayout(new FlowLayout());
+//				
+//				JTextField acc = new JTextField();
+//				acc.setText("You have accepted this match!");
+//				acc.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//				acc.setEditable(false);
+//				
+//				panel.add(acc);
+//				frame.getContentPane().add(panel);
+//				Master.getInstance().addLoading();
+				lblAcceptingMatch.setVisible(true);
+				lblAcceptingMatch.revalidate();
+				lblAcceptingMatch.repaint();
 				
 				new SwingWorker<Void, Void>(){
 
@@ -210,7 +216,9 @@ public class MatchGUI extends JPanel{
 					}
 					@Override
 					protected void done() {
-						Master.getInstance().unLoad();
+						lblAcceptingMatch.setVisible(false);
+						lblAcceptingMatch.revalidate();
+						lblAcceptingMatch.repaint();
 					}
 				}.execute();
 				
@@ -246,7 +254,7 @@ public class MatchGUI extends JPanel{
 			 */
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Reject button pressed");
-				JFrame frame = new JFrame();
+				/*JFrame frame = new JFrame();
 				frame.setVisible(true);
 				frame.setTitle("Rejection");
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -258,9 +266,11 @@ public class MatchGUI extends JPanel{
 				JTextField rej = new JTextField();
 				rej.setText("You have rejected this match!");
 				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				rej.setEditable(false);
+				rej.setEditable(false);*/
 				//Rejects match here
-				Master.getInstance().addLoading();
+				rejLabel.setVisible(true);
+				rejLabel.revalidate();
+				rejLabel.repaint();
 				
 				new SwingWorker<Void, Void>(){
 
@@ -268,8 +278,8 @@ public class MatchGUI extends JPanel{
 					protected Void doInBackground() throws Exception {
 						MatchController.rejectMatch(matches.get(curMatchShown));
 						
-						panel.add(rej);
-						frame.getContentPane().add(panel);
+//						panel.add(rej);
+//						frame.getContentPane().add(panel);
 						matches.remove(matches.get(curMatchShown));
 						if(curMatchShown != 0) {
 							curMatchShown--;
@@ -285,7 +295,9 @@ public class MatchGUI extends JPanel{
 					}
 					@Override
 					protected void done() {
-						Master.getInstance().unLoad();
+						rejLabel.setVisible(false);
+						rejLabel.revalidate();
+						rejLabel.repaint();
 					}
 				}.execute();
 				
@@ -336,6 +348,20 @@ public class MatchGUI extends JPanel{
 		});
 		
 		this.add(userProfileButton);
+		
+		rejLabel = new JLabel("Rejecting Match . . .");
+		rejLabel.setForeground(new Color(255, 0, 0));
+		rejLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		rejLabel.setBounds(520, 336, 235, 51);
+		rejLabel.setVisible(false);
+		add(rejLabel);
+		
+		lblAcceptingMatch = new JLabel("Accepting Match . . .");
+		lblAcceptingMatch.setForeground(new Color(50, 205, 50));
+		lblAcceptingMatch.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAcceptingMatch.setBounds(109, 336, 235, 51);
+		lblAcceptingMatch.setVisible(false);
+		add(lblAcceptingMatch);
 	}
 	
 	/**

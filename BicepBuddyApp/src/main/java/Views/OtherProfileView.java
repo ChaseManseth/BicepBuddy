@@ -37,6 +37,10 @@ import mdlaf.utils.MaterialColors;
 public class OtherProfileView extends JPanel {
 
 	//private JFrame frame;
+	
+	private JLabel lblAcceptingMatch;
+
+	private JLabel rejLabel;
 
 	/**
 	 * Create the application.
@@ -167,16 +171,34 @@ public class OtherProfileView extends JPanel {
 			btnInvite.setForeground(Color.white);
 			btnInvite.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ViewController vc = new ViewController();
-					vc.inviteUserChange(u);
-					//Accept invite or send invite
-					if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
-						MatchController.acceptMatchOther(MatchController.findMatch(new Match(u,UserController.getUser())));
-					}
-					else {
-						MatchController.acceptMatchInitial(MatchController.directMatch(u));
-					}
-					UserController.getInstance().setChangesToMatches(true);
+//					ViewController vc = new ViewController();
+//					vc.inviteUserChange(u);
+					lblAcceptingMatch.setVisible(true);
+					lblAcceptingMatch.revalidate();
+					lblAcceptingMatch.repaint();
+					new SwingWorker<Void, Void>(){
+
+						@Override
+						protected Void doInBackground() throws Exception {
+							//Accept invite or send invite
+							if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
+								MatchController.acceptMatchOther(MatchController.findMatch(new Match(u,UserController.getUser())));
+							}
+							else {
+								MatchController.acceptMatchInitial(MatchController.directMatch(u));
+							}
+							UserController.getInstance().setChangesToMatches(true);
+							return null;
+						}
+
+						protected void done() {
+							lblAcceptingMatch.setVisible(false);
+							lblAcceptingMatch.revalidate();
+							lblAcceptingMatch.repaint();
+						}
+					}.execute();
+					
+					
 				}
 			});
 			btnInvite.addMouseListener(new MouseAdapter() {
@@ -198,14 +220,32 @@ public class OtherProfileView extends JPanel {
 			btnBlock.setBackground(new Color(255, 0, 0));
 			btnBlock.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ViewController vc = new ViewController();
-					vc.blockBuddyChange(u);
-					if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
-						MatchController.rejectMatch(MatchController.findMatch(new Match(u,UserController.getUser())));
-					}
-					else {
-						MatchController.rejectMatch(MatchController.directMatch(u));
-					}
+//					ViewController vc = new ViewController();
+//					vc.blockBuddyChange(u);
+					rejLabel.setVisible(true);
+					rejLabel.revalidate();
+					rejLabel.repaint();
+					new SwingWorker<Void, Void>(){
+
+						@Override
+						protected Void doInBackground() throws Exception {
+							//Accept invite or send invite
+							if (UserController.getUser().getWaiting().contains(new Match(u,UserController.getUser()))) {
+								MatchController.rejectMatch(MatchController.findMatch(new Match(u,UserController.getUser())));
+							}
+							else {
+								MatchController.rejectMatch(MatchController.directMatch(u));
+							}
+							return null;
+						}
+
+						protected void done() {
+							rejLabel.setVisible(false);
+							rejLabel.revalidate();
+							rejLabel.repaint();
+						}
+					}.execute();
+					
 				}
 			});
 			btnBlock.addMouseListener(new MouseAdapter() {
@@ -300,7 +340,19 @@ public class OtherProfileView extends JPanel {
 		lblNewLabel_3.setBounds(513, 118, 66, 15);
 		panel.add(lblNewLabel_3);
 		
+		rejLabel = new JLabel("Rejecting Match . . .");
+		rejLabel.setForeground(new Color(255, 0, 0));
+		rejLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		rejLabel.setBounds(633, 173, 235, 51);
+		rejLabel.setVisible(false);
+		add(rejLabel);
 		
+		lblAcceptingMatch = new JLabel("Accepting Match . . .");
+		lblAcceptingMatch.setForeground(new Color(50, 205, 50));
+		lblAcceptingMatch.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAcceptingMatch.setBounds(277, 173, 235, 51);
+		lblAcceptingMatch.setVisible(false);
+		add(lblAcceptingMatch);
 		
 	}
 	

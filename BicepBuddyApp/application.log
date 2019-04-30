@@ -1,23 +1,8 @@
-2019-04-30 12:05:29 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 12:05:31 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-30 12:05:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc85bf2caacc31bf5117517
-2019-04-30 12:05:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc85bf2caacc31bf5117515
-2019-04-30 12:05:38 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-30 12:05:38 INFO User.UserController getAllNotifications :: Getting all notifications for biggie
-2019-04-30 12:05:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8705acaacc31bf511751b
-2019-04-30 12:05:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc870dccaacc31bf511751e
-2019-04-30 12:05:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc87078caacc31bf511751c
-2019-04-30 12:05:38 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 12:05:40 INFO Views.ProfileView$2 mouseClicked :: Accessed matching view from profile
-2019-04-30 12:05:40 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-30 12:05:41 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-30 12:05:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8705acaacc31bf511751b
-2019-04-30 12:05:41 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
-2019-04-30 12:05:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc85bf2caacc31bf5117515
-2019-04-30 12:05:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc85bf2caacc31bf5117517
-2019-04-30 12:05:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc870dccaacc31bf511751e
-2019-04-30 12:05:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc87078caacc31bf511751c
-2019-04-30 12:05:41 INFO User.UserController getAllNotifications :: Getting all notifications for biggie
-2019-04-30 12:05:41 INFO Matching.MatchGUI noMatches :: No matches found
-2019-04-30 12:05:41 INFO User.UserController getAllNotifications :: Getting all notifications for biggie
-2019-04-30 12:05:41 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 12:19:55 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 12:19:56 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 12:20:07 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 12:20:08 INFO User.UserController getAllNotifications :: Getting all notifications for z
+2019-04-30 12:20:08 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 12:20:15 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 12:20:15 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 12:20:18 INFO User.UserController populateUserMatchesArray :: Updating user matches array.

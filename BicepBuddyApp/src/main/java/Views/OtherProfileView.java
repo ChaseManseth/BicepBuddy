@@ -90,7 +90,7 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblName2 = new JLabel(u.getfName() + " " + u.getlName() + "'s Profile");
 		lblName2.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblName2.setBounds(480, 26, 235, 19);
+		lblName2.setBounds(415, 26, 343, 19);
 		add(lblName2);
 		
 		int ind = UserController.getUser().getAccepted().indexOf(new Match(u,UserController.getUser()));
@@ -312,12 +312,12 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblGender = new JLabel("Gender:");
 		lblGender.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblGender.setBounds(301, 28, 78, 49);
+		lblGender.setBounds(267, 28, 78, 49);
 		panel.add(lblGender);
 		
 		JLabel lblPreferedBuddyGender = new JLabel("Preferred Buddy Gender:");
 		lblPreferedBuddyGender.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPreferedBuddyGender.setBounds(301, 101, 200, 49);
+		lblPreferedBuddyGender.setBounds(267, 101, 200, 49);
 		panel.add(lblPreferedBuddyGender);
 		
 		JLabel lblNewLabel = new JLabel(style);
@@ -332,12 +332,12 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblNewLabel_2 = new JLabel(gender);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(513, 45, 66, 15);
+		lblNewLabel_2.setBounds(488, 45, 91, 15);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel(preferedGender);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(513, 118, 66, 15);
+		lblNewLabel_3.setBounds(488, 118, 91, 15);
 		panel.add(lblNewLabel_3);
 		
 		rejLabel = new JLabel("Rejecting Match . . .");

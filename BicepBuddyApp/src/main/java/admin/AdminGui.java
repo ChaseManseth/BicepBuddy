@@ -62,7 +62,7 @@ public class AdminGui extends JPanel {
 		btnRefresh.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//update table here
+				//update table here  
 			}
 		});
 		add(btnRefresh);
@@ -85,6 +85,14 @@ public class AdminGui extends JPanel {
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 		
+
+        ChartPanel myPanel= new ChartPanel(getChart());
+        myPanel.setBounds(33, 122, 326, 350);
+        add(myPanel);
+       
+
+	}
+    private static JFreeChart getChart() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("One", new Double(43.2));
         dataset.setValue("Two", new Double(10.0));
@@ -92,29 +100,6 @@ public class AdminGui extends JPanel {
         dataset.setValue("Four", new Double(17.5));
         dataset.setValue("Five", new Double(11.0));
         dataset.setValue("Six", new Double(19.4));
-        JFreeChart chart = createChart(dataset);
-        ChartPanel myPanel= new ChartPanel(chart);
-        myPanel.setBounds(33, 122, 326, 350);
-        add(myPanel);
-       
-
-	}
-    private static JFreeChart createChart(PieDataset dataset) {
-        
-        JFreeChart chart = ChartFactory.createPieChart(
-            "Pie Chart Demo 1",  // chart title
-            dataset,             // data
-            true,               // include legend
-            true,
-            false
-        );
-
-        PiePlot plot = (PiePlot) chart.getPlot();
-//        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
-//        plot.setNoDataMessage("No data available");
-//        plot.setCircular(false);
-//        plot.setLabelGap(0.02);
-        return chart;
-        
+        return ChartFactory.createPieChart("Test1",dataset,false,true,false);
     }
 }

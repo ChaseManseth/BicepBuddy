@@ -31,7 +31,7 @@ public class FriendsList extends JPanel{
 		
 		JLabel lblFriends = new JLabel("Buddies");
 		lblFriends.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFriends.setBounds(363, 126, 48, 15);
+		lblFriends.setBounds(363, 126, 164, 15);
 		add(lblFriends);
 		
 		JPanel friendsPanel = new JPanel();
@@ -68,7 +68,7 @@ public class FriendsList extends JPanel{
 		//*************************************************************************************************************************
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblIncomingBuddies.setBounds(709, 126, 109, 15);
+		lblIncomingBuddies.setBounds(709, 126, 164, 15);
 		add(lblIncomingBuddies);
 		
 		JPanel incomingPanel = new JPanel();
@@ -105,7 +105,7 @@ public class FriendsList extends JPanel{
 		//**********************************************************************************************************************************
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPendingBuddies.setBounds(22, 126, 102, 15);
+		lblPendingBuddies.setBounds(22, 126, 164, 15);
 		add(lblPendingBuddies);
 		
 		JPanel pendingPanel = new JPanel();

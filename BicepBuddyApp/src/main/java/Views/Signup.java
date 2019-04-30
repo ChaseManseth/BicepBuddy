@@ -17,9 +17,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 
 import Matching.MatchAlgorithm;
 import User.UserController;
+import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -235,16 +237,30 @@ public class Signup extends JPanel {
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UserController uc = new UserController();
-				uc.validateSignup(firstTextField.getText(), lastTextField.getText(), 
-						 emailTextField.getText(), 
-						 phoneTextField.getText(), ageTextField.getText(), 
-						 (String)genderCombo.getSelectedItem(), (String)preferedGenderCombo.getSelectedItem(), 
-						 (String)goalsCombo.getSelectedItem(), (String)frequencyCombo.getSelectedItem(), 
-						 (String)timeOfDayCombo.getSelectedItem(), (String)styleCombo.getSelectedItem(), 
-						 (String)weightCombo.getSelectedItem(), 
-						 (String)experienceCombo.getSelectedItem(), password.getText(),
-						 confirmPW.getText());
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						UserController.getInstance().validateSignup(firstTextField.getText(), lastTextField.getText(), 
+								 emailTextField.getText(), 
+								 phoneTextField.getText(), ageTextField.getText(), 
+								 (String)genderCombo.getSelectedItem(), (String)preferedGenderCombo.getSelectedItem(), 
+								 (String)goalsCombo.getSelectedItem(), (String)frequencyCombo.getSelectedItem(), 
+								 (String)timeOfDayCombo.getSelectedItem(), (String)styleCombo.getSelectedItem(), 
+								 (String)weightCombo.getSelectedItem(), 
+								 (String)experienceCombo.getSelectedItem(), password.getText(),
+								 confirmPW.getText());
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
+				
+				
 			}
 			
 			@Override

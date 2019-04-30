@@ -23,11 +23,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 
 import Matching.MatchAlgorithm;
 import User.User;
 import User.UserController;
+import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -295,10 +297,24 @@ public class SettingsView extends JPanel {
 		
 		saver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
-						    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
-						    prefGender.getSelectedItem(), freqBox.getSelectedItem(), goalsBox.getSelectedItem(),
-						    weightBox.getSelectedItem(), expBox.getSelectedItem(), ageField.getText(), phoneField.getText());
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
+							    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
+							    prefGender.getSelectedItem(), freqBox.getSelectedItem(), goalsBox.getSelectedItem(),
+							    weightBox.getSelectedItem(), expBox.getSelectedItem(), ageField.getText(), phoneField.getText());
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
+				
 			}
 		});
 		saver.addMouseListener(new MouseAdapter() {

@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 
 import Matching.Match;
@@ -89,7 +90,21 @@ public class OtherProfileView extends JPanel {
 			btnChat.setForeground(Color.black);
 			btnChat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Master.updateFrame(new DMView(u));
+					Master.getInstance().addLoading();
+					
+					new SwingWorker<Void, Void>(){
+
+						@Override
+						protected Void doInBackground() throws Exception {
+							Master.updateFrame(new DMView(u));
+							return null;
+						}
+						
+						protected void done() {
+							Master.getInstance().unLoad();
+						}
+					}.execute();
+					
 					//DMController.getInstance(u);
 				}
 			});

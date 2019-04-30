@@ -25,6 +25,7 @@ import java.io.IOException;
 import javax.swing.border.MatteBorder;
 
 import User.UserController;
+import bicepBuddyPackage.Master;
 import bicepBuddyPackage.Threader;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
@@ -79,13 +80,20 @@ public class Login extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// user can press enter to log in.
+				Master.getInstance().addLoading();
+				
 				new SwingWorker<Void, Void>(){
 
 					@Override
 					protected Void doInBackground() throws Exception {
+						
 						UserController uc = new UserController();
 						uc.validateLogin(emailTextField.getText(), passwordField.getText());
 						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
 					}
 				}.execute();
 				
@@ -113,13 +121,20 @@ public class Login extends JPanel {
 		loginBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Master.getInstance().addLoading();
+				
 				new SwingWorker<Void, Void>(){
 
 					@Override
 					protected Void doInBackground() throws Exception {
+						
 						UserController uc = new UserController();
 						uc.validateLogin(emailTextField.getText(), passwordField.getText());
 						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
 					}
 				}.execute();
 			}
@@ -150,8 +165,23 @@ public class Login extends JPanel {
 		btnSignUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ViewController vc = new ViewController();
-				vc.signUpView();
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						
+						ViewController vc = new ViewController();
+						vc.signUpView();
+						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
+				
 			}
 			
 			@Override

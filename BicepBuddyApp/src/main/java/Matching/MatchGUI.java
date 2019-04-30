@@ -14,12 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 
 import User.User;
 import User.UserController;
 import User.UserDB;
 import Views.OtherProfileView;
 import Views.ProfileView;
+import Views.ViewController;
 import bicepBuddyPackage.Master;
 
 // TODO: Auto-generated Javadoc
@@ -182,22 +184,36 @@ public class MatchGUI extends JPanel{
 				
 				panel.add(acc);
 				frame.getContentPane().add(panel);
-				//Accepts match here
-				UserController.getInstance().setChangesToMatches(true);
-				MatchController.acceptMatchInitial(matches.get(curMatchShown));
+				Master.getInstance().addLoading();
 				
-				matches.remove(matches.get(curMatchShown));
-				if(curMatchShown != 0) {
-					curMatchShown--;
-				}
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						//Accepts match here
+						UserController.getInstance().setChangesToMatches(true);
+						MatchController.acceptMatchInitial(matches.get(curMatchShown));
+						
+						matches.remove(matches.get(curMatchShown));
+						if(curMatchShown != 0) {
+							curMatchShown--;
+						}
+						
+						if(matches.size() == 0) {
+							Master.getInstance().updateFrame(new ProfileView());
+							noMatches();
+						}
+						else {
+							setCurrentMatch();
+						}
+						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 				
-				if(matches.size() == 0) {
-					Master.getInstance().updateFrame(new ProfileView());
-					noMatches();
-				}
-				else {
-					setCurrentMatch();
-				}
 			}
 		});
 		acceptBtn.setBounds(109, 400, 271, 70);
@@ -244,21 +260,35 @@ public class MatchGUI extends JPanel{
 				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				rej.setEditable(false);
 				//Rejects match here
-				MatchController.rejectMatch(matches.get(curMatchShown));
+				Master.getInstance().addLoading();
 				
-				panel.add(rej);
-				frame.getContentPane().add(panel);
-				matches.remove(matches.get(curMatchShown));
-				if(curMatchShown != 0) {
-					curMatchShown--;
-				}
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						MatchController.rejectMatch(matches.get(curMatchShown));
+						
+						panel.add(rej);
+						frame.getContentPane().add(panel);
+						matches.remove(matches.get(curMatchShown));
+						if(curMatchShown != 0) {
+							curMatchShown--;
+						}
+						
+						if(matches.size() == 0) {
+							Master.getInstance().updateFrame(new ProfileView());
+						}
+						else {
+							setCurrentMatch();
+						}
+						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 				
-				if(matches.size() == 0) {
-					Master.getInstance().updateFrame(new ProfileView());
-				}
-				else {
-					setCurrentMatch();
-				}
 			}
 		});
 		rejectBtn.setBounds(520, 400, 271, 70);
@@ -287,7 +317,21 @@ public class MatchGUI extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				Master.appLogger.info(":: Button to " + matches.get(curMatchShown).getOther().toString() + " profile pressed");
 				//Goes to other profile here
-				Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther())));
+				Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						Master.getInstance().updateFrame(new OtherProfileView(UserController.getInstance()
+								.onlyGetUserById(matches.get(curMatchShown).getOther())));
+						return null;
+					}
+					@Override
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 			}
 		});
 		
@@ -327,12 +371,26 @@ public class MatchGUI extends JPanel{
 	//Updates match shown by index
 	public void setCurrentMatch() {
 		Master.appLogger.info(":: Currently shown match updated");
-		if(matches.size() != 0) {
-			curMatchShown = curMatchShown % matches.size();
-			User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
-			matchName.setText(other.getfName() + " " + other.getlName());
-			matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
-		}
+		Master.getInstance().addLoading();
+		
+		new SwingWorker<Void, Void>(){
+
+			@Override
+			protected Void doInBackground() throws Exception {
+				if(matches.size() != 0) {
+					curMatchShown = curMatchShown % matches.size();
+					User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
+					matchName.setText(other.getfName() + " " + other.getlName());
+					matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
+				}
+				return null;
+			}
+			@Override
+			protected void done() {
+				Master.getInstance().unLoad();
+			}
+		}.execute();
+		
 		
 	}
 	

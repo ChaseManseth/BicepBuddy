@@ -11,11 +11,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import Matching.MatchController;
 import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 
 public class FriendsList extends JPanel{
 	private JTextField buddiesLabel;
@@ -42,7 +44,21 @@ public class FriendsList extends JPanel{
 		MouseListener mouseListener = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
 		    	Master.appLogger.info(":: Accessed friends list for user " + ((User)friendsList.getSelectedValue()).toString());
-		    	Master.getInstance().updateFrame(new OtherProfileView((User)friendsList.getSelectedValue()));
+		    	Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						Master.getInstance().updateFrame(new OtherProfileView((User)friendsList.getSelectedValue()));
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
+		    	
 		    }
 		};
 		friendsList.addMouseListener(mouseListener);
@@ -65,7 +81,21 @@ public class FriendsList extends JPanel{
 		MouseListener mouseListener1 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
 		    	Master.appLogger.info(":: Accessed incoming list for user " + ((User)incomingList.getSelectedValue()).toString());
-		    	Master.getInstance().updateFrame(new OtherProfileView((User)incomingList.getSelectedValue()));
+		    	Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						Master.getInstance().updateFrame(new OtherProfileView((User)incomingList.getSelectedValue()));
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
+		    	
 		    }
 		};
 		incomingList.addMouseListener(mouseListener1);
@@ -88,7 +118,20 @@ public class FriendsList extends JPanel{
 		MouseListener mouseListener2 = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
 		    	Master.appLogger.info(":: Accessed pending list for user " + ((User)pendingList.getSelectedValue()).toString());
-		    	Master.getInstance().updateFrame(new OtherProfileView((User)pendingList.getSelectedValue()));
+		    	Master.getInstance().addLoading();
+				
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+				    	Master.getInstance().updateFrame(new OtherProfileView((User)pendingList.getSelectedValue()));
+						return null;
+					}
+					
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 		    }
 		};
 		pendingList.addMouseListener(mouseListener2);

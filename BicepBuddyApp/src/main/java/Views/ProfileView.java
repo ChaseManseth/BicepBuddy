@@ -22,6 +22,8 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
+import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 /**
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
@@ -75,8 +77,21 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed setting view from profile");
-				ViewController vc = new ViewController();
-				vc.settingsView();
+
+				Master.getInstance().addLoading();
+
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						Master.getInstance().updateFrame(new SettingsView());
+						return null;
+					}
+
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 			}
 
 			@Override
@@ -104,7 +119,21 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed matching view from profile");
-				MatchController.generateFrame();
+
+				Master.getInstance().addLoading();
+
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						MatchController.generateFrame();
+						return null;
+					}
+
+					protected void done() {
+						Master.getInstance().unLoad();
+					}
+				}.execute();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -136,31 +165,31 @@ public class ProfileView extends JPanel {
 		JLabel lblAge = new JLabel(age);
 		lblAge.setBounds(65, 312, 131, 15);
 		infoPanel.add(lblAge);
-		
+
 		JLabel lblName = new JLabel("Name:");
 		lblName.setBounds(7, 231, 48, 14);
 		infoPanel.add(lblName);
-		
+
 		JLabel lblEmail_1 = new JLabel("Email:");
 		lblEmail_1.setBounds(7, 256, 48, 14);
 		infoPanel.add(lblEmail_1);
-		
+
 		JLabel lblAge_1 = new JLabel("Age:");
 		lblAge_1.setBounds(7, 312, 48, 14);
 		infoPanel.add(lblAge_1);
-		
+
 		JLabel notifyLabel = new JLabel("Notifications");
 		notifyLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		notifyLabel.setBounds(269, 69, 150, 16);
 		add(notifyLabel);
-		
+
 		JTextArea notificationText = new JTextArea();
 		notificationText.setEditable(false);
 		notificationText.setBounds(269, 92, 605, 374);
 		add(notificationText);
-		
+
 		//retrieve notifications and populate the field.
 		UserController.getInstance().populateMessages(notificationText);
-		
+
 	}
 }

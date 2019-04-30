@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,8 +79,16 @@ public class Login extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// user can press enter to log in.
-				UserController uc = new UserController();
-				uc.validateLogin(emailTextField.getText(), passwordField.getText());
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						UserController uc = new UserController();
+						uc.validateLogin(emailTextField.getText(), passwordField.getText());
+						return null;
+					}
+				}.execute();
+				
 			}
 			
 		});
@@ -103,8 +113,15 @@ public class Login extends JPanel {
 		loginBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UserController uc = new UserController();
-				uc.validateLogin(emailTextField.getText(), passwordField.getText());
+				new SwingWorker<Void, Void>(){
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						UserController uc = new UserController();
+						uc.validateLogin(emailTextField.getText(), passwordField.getText());
+						return null;
+					}
+				}.execute();
 			}
 			
 			@Override

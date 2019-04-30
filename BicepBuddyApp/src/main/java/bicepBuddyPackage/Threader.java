@@ -1,20 +1,34 @@
 package bicepBuddyPackage;
 
-import Views.LoadingView;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+
+import Matching.Match;
+import Matching.MatchController;
 
 public class Threader implements Runnable{
 
+	private List<Match> matches;
+	private JSONArray ar;
 	
-	
-	public Threader() {
-		
+	public Threader(List<Match> m, JSONArray a) {
+		matches = m;
+		ar = a;
 	}
 	
 	@Override
 	public void run() {
-		//thread the loading screen
-		//****LOADING SCREEN ****
-    	Master.getInstance().updateFrame(new LoadingView());
+		for(int i = 0; i < ar.size(); i++) {
+			String matchId = (String) ar.get(i);
+
+			// Create the Match
+			// TODO move function to MatchController
+			Match m = MatchController.getMatchById(matchId);
+			matches.add(m);
+
+			// System.out.println(matchId);
+		}
 	}
 
 }

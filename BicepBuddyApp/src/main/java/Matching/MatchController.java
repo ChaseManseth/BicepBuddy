@@ -46,11 +46,16 @@ public class MatchController {
 	 * Generate matches.
 	 */
 	public static void generateMatches() {
-		UserController.getUser().setIdle(MatchAlgorithm.matchUser());
-		Master.appLogger.info(":: Matches generated from algorithm and added to idle");
-		// Updating Array State for User
-		UserController.getInstance().updateMatchedArrayState(UserController.getInstance().getUser());
+		if(UserController.getInstance().getTimesMatchCalled() == 5) {
+			UserController.getUser().setIdle(MatchAlgorithm.matchUser());
+			Master.appLogger.info(":: Matches generated from algorithm and added to idle");
+			// Updating Array State for User
+			UserController.getInstance().updateMatchedArrayState(UserController.getInstance().getUser());
+			
+			UserController.getInstance().setTimesMatchCalled(0);
+		}
 		
+		UserController.getInstance().setTimesMatchCalled(UserController.getInstance().getTimesMatchCalled() + 1);
 	}
 	
 	/**

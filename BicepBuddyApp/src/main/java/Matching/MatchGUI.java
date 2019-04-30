@@ -326,10 +326,13 @@ public class MatchGUI extends JPanel{
 	//Updates match shown by index
 	public void setCurrentMatch() {
 		Master.appLogger.info(":: Currently shown match updated");
-		curMatchShown = curMatchShown % matches.size();
-		User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
-		matchName.setText(other.getfName() + " " + other.getlName());
-		matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
+		if(matches.size() != 0) {
+			curMatchShown = curMatchShown % matches.size();
+			User other = UserController.getInstance().onlyGetUserById(matches.get(curMatchShown).getOther());
+			matchName.setText(other.getfName() + " " + other.getlName());
+			matchStrength.setText(matches.get(curMatchShown).getStrength() + "% Match");
+		}
+		
 	}
 	
 }

@@ -1,250 +1,102 @@
-2019-04-30 14:33:12 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 14:33:14 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc5f46843c8083bcd876d32
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc636aa43c8083bcd876e35
-2019-04-30 14:33:19 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-30 14:33:19 INFO User.UserController getAllNotifications :: Getting all notifications for bigtester
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc689498554b0748e750603
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc6236443c8083bcd876dd9
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc62d4243c8083bcd876e07
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e158554b0748e750664
-2019-04-30 14:33:19 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 14:33:19 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc73e1b8554b0748e750665
-2019-04-30 14:33:20 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc7a6868554b0748e750680
-2019-04-30 14:33:20 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc7c1f28554b0748e7506f3
-2019-04-30 14:33:22 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-30 14:33:23 INFO User.UserController onlyGetUserById :: Getting user testerbuddy loser from DB WITHOUT their match info.
-2019-04-30 14:33:23 INFO User.UserController onlyGetUserById :: Getting user Zac Steudel from DB WITHOUT their match info.
-2019-04-30 14:33:23 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
-2019-04-30 14:33:23 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
-2019-04-30 14:33:23 INFO User.UserController onlyGetUserById :: Getting user woweee woah from DB WITHOUT their match info.
-2019-04-30 14:33:24 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:25 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:25 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:26 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:26 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:26 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:26 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:26 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:26 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:29 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:29 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:32 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:32 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:42 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:42 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:42 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:43 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:43 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:43 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:43 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:45 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:45 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:45 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:46 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:46 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:46 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:46 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:46 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:46 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:48 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:48 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:48 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:48 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:48 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:48 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:49 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:49 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:49 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:49 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:49 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:51 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:51 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:51 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:51 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:51 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:51 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:52 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:52 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:52 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:52 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:54 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user testerbuddy loser
-2019-04-30 14:33:55 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:55 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:33:55 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:55 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:33:56 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:56 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:56 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:33:56 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:56 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:33:56 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:58 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:33:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:59 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:33:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:33:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:33:59 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:00 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-30 14:34:01 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-30 14:34:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e1bcaacc31bf5117535
-2019-04-30 14:34:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc870dccaacc31bf511751e
-2019-04-30 14:34:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88dc8caacc31bf511752f
-2019-04-30 14:34:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e35caacc31bf511753e
-2019-04-30 14:34:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8987acaacc31bf5117564
-2019-04-30 14:34:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8a327caacc31bf5117582
-2019-04-30 14:34:01 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
-2019-04-30 14:34:01 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 14:34:01 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
-2019-04-30 14:34:03 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user testerbuddy loser
-2019-04-30 14:34:04 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:04 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:34:04 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:04 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:34:04 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:04 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:04 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and testerbuddy
-2019-04-30 14:34:04 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:08 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:34:08 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:08 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:09 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:09 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:09 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:09 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:09 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:09 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:12 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:12 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:16 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:16 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:19 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:19 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:22 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:22 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:26 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:26 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:29 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:29 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:32 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:32 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:35 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:35 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:39 INFO Messaging.DMView$1 actionPerformed :: Message heydo to be sent.
-2019-04-30 14:34:39 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:39 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:42 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:42 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:42 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:45 INFO Messaging.DMView$1 actionPerformed :: Message me too to be sent.
-2019-04-30 14:34:45 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:45 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:49 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:34:49 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:49 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:50 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:50 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:50 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:50 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:51 INFO Messaging.DMView$1 actionPerformed :: Message wow to be sent.
-2019-04-30 14:34:53 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:53 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:55 INFO Messaging.DMView$1 actionPerformed :: Message wowoowowowoeo to be sent.
-2019-04-30 14:34:56 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:56 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:58 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Zac Steudel
-2019-04-30 14:34:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:59 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:34:59 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:34:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:34:59 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:02 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:02 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:03 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:03 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:06 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:06 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:06 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:06 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:06 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:09 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:09 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:09 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:09 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:12 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:12 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:13 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:13 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:16 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:16 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:16 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:16 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:19 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:19 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:19 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:19 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:22 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:22 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:22 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:22 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:23 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:26 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:26 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:26 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:26 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:26 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:29 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:29 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:29 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:29 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:29 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:32 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:32 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:32 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:32 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:32 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:35 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:35 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:36 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:36 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:36 INFO Messaging.DMView$1 actionPerformed :: Message howdysir to be sent.
-2019-04-30 14:35:36 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:39 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:39 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:39 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:39 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:39 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:42 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:42 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:42 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:42 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:42 INFO Messaging.DMView$1 actionPerformed :: Message ma'am to be sent.
-2019-04-30 14:35:42 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:45 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:45 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:45 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:45 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:46 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:49 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:49 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:49 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:49 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:52 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:52 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 14:35:52 INFO Messaging.DMController getMessageList :: Getting all messages between bigtester and Zac
-2019-04-30 14:35:52 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 14:35:54 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-30 14:35:54 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-30 14:35:57 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-30 14:35:57 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 14:35:57 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:28:25 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 15:28:26 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 15:28:51 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 15:28:52 INFO User.UserController validateSignup :: User's signup information was accepted.
+2019-04-30 15:28:53 INFO User.UserController getAllNotifications :: Getting all notifications for big 
+2019-04-30 15:29:00 INFO Views.ProfileView$2 mouseClicked :: Accessed matching view from profile
+2019-04-30 15:29:00 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-30 15:29:00 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-30 15:29:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88dc8caacc31bf511752f
+2019-04-30 15:29:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8987acaacc31bf5117564
+2019-04-30 15:29:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc870dccaacc31bf511751e
+2019-04-30 15:29:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e1bcaacc31bf5117535
+2019-04-30 15:29:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e35caacc31bf511753e
+2019-04-30 15:29:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b00bcaacc31bf51175c4
+2019-04-30 15:29:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b00bcaacc31bf51175c5
+2019-04-30 15:29:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b00bcaacc31bf51175c6
+2019-04-30 15:29:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b00bcaacc31bf51175c7
+2019-04-30 15:29:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b00bcaacc31bf51175c8
+2019-04-30 15:29:01 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-30 15:29:02 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:02 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:29:03 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:03 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:03 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:29:03 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:03 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:04 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-30 15:29:04 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:04 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:04 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
+2019-04-30 15:29:04 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:04 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:04 INFO User.UserController onlyGetUserById :: Getting user Name1 LName1 from DB WITHOUT their match info.
+2019-04-30 15:29:05 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:05 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:05 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:29:07 INFO Matching.MatchGUI$6 actionPerformed :: Accept button pressed
+2019-04-30 15:29:07 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:29:07 INFO Matching.MatchController acceptMatchInitial :: Match sent from big  bro to test lastname
+2019-04-30 15:29:08 INFO User.UserController getUserById :: Getting user by ID: test lastname from DB.
+2019-04-30 15:29:08 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc870dccaacc31bf511751e
+2019-04-30 15:29:08 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:08 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:29:10 INFO Matching.MatchGUI$6 actionPerformed :: Accept button pressed
+2019-04-30 15:29:10 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:29:10 INFO Matching.MatchController acceptMatchInitial :: Match sent from big  bro to test2 testy
+2019-04-30 15:29:10 INFO User.UserController getUserById :: Getting user by ID: test2 testy from DB.
+2019-04-30 15:29:10 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88dc8caacc31bf511752f
+2019-04-30 15:29:10 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:10 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-30 15:29:12 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-30 15:29:12 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:29:12 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:29:14 INFO Views.FriendsList$3 mouseClicked :: Accessed pending list for user test2 testy
+2019-04-30 15:29:18 INFO bicepBuddyPackage.Master$9 mouseClicked :: User logged out.
+2019-04-30 15:29:36 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e35caacc31bf511753e
+2019-04-30 15:29:36 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e1bcaacc31bf5117535
+2019-04-30 15:29:36 INFO User.UserController getAllNotifications :: Getting all notifications for Sicko
+2019-04-30 15:29:36 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 15:29:37 INFO Views.ProfileView$2 mouseClicked :: Accessed matching view from profile
+2019-04-30 15:29:37 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-30 15:29:37 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-30 15:29:37 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e1bcaacc31bf5117535
+2019-04-30 15:29:37 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8b00bcaacc31bf51175c6
+2019-04-30 15:29:37 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc88e35caacc31bf511753e
+2019-04-30 15:29:37 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8987acaacc31bf5117564
+2019-04-30 15:29:37 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8b00bcaacc31bf51175c7
+2019-04-30 15:29:38 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b030caacc31bf51175c9
+2019-04-30 15:29:38 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b030caacc31bf51175ca
+2019-04-30 15:29:38 INFO Matching.MatchController createMatch :: Match generated with id 5cc8b030caacc31bf51175cb
+2019-04-30 15:29:38 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-30 15:29:38 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:38 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:29:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:29:59 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:29:59 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:29:59 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:30:00 INFO User.UserController onlyGetUserById :: Getting user Hunter Long from DB WITHOUT their match info.
+2019-04-30 15:30:00 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
+2019-04-30 15:30:00 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:30:00 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:30:02 INFO Matching.MatchGUI$6 actionPerformed :: Accept button pressed
+2019-04-30 15:30:02 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:30:02 INFO Matching.MatchController acceptMatchInitial :: Match sent from Sicko  Manno to test lastname
+2019-04-30 15:30:02 INFO User.UserController getUserById :: Getting user by ID: test lastname from DB.
+2019-04-30 15:30:02 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8b00bcaacc31bf51175c6
+2019-04-30 15:30:03 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:30:03 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:30:04 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
+2019-04-30 15:30:04 INFO User.UserController onlyGetUserById :: Getting user reece kc from DB WITHOUT their match info.
+2019-04-30 15:30:04 INFO User.UserController onlyGetUserById :: Getting user test lastname from DB WITHOUT their match info.
+2019-04-30 15:30:06 INFO Views.FriendsList$3 mouseClicked :: Accessed pending list for user test lastname
+2019-04-30 15:30:08 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 15:30:11 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 15:30:13 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-30 15:30:13 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 15:30:13 INFO User.UserController onlyGetUserById :: Getting user test2 testy from DB WITHOUT their match info.
+2019-04-30 15:30:16 INFO User.UserController getAllNotifications :: Getting all notifications for Sicko
+2019-04-30 15:30:19 INFO Views.ProfileView$1 mouseClicked :: Accessed setting view from profile
+2019-04-30 15:30:25 INFO User.UserController getAllNotifications :: Getting all notifications for Sicko
+2019-04-30 15:30:26 INFO User.UserController editUser :: Editing user Sicko  Manno.

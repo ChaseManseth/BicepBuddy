@@ -2,6 +2,8 @@ package BicepTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 
@@ -95,5 +97,46 @@ public class UserTests {
 		assertEquals(curPhone, u.getPhone());
 		assertEquals(curAge, u.getAge());
 	}
+	
+	@Test
+	public void getsAllUsersByGender() {
+		List<User> users = UserController.getInstance().getUsersByGender("Male");
+		
+		assertTrue(!users.isEmpty());
+	}
+	
+	@Test
+	public void genderIsCorrect() {
+		List<User> users = UserController.getInstance().getUsersByGender("Male");
+		
+		for(int i = 0; i < users.size(); i++) {
+			assertTrue(users.get(i).getGender().contentEquals("Male"));
+		}
+	}
+	
+	@Test
+	public void getsCorrectUserByID() {
+		User u = UserController.getInstance().getUserById("5cc7c4c38554b0748e750726");
+		
+		assertTrue(u.getId().contentEquals("5cc7c4c38554b0748e750726"));
+		assertTrue(u.getEmail().contentEquals("chasemanseth@gmail.com"));
+	}
+	
+	@Test
+	public void onlyGetUserByIdDoesntGetMatches() {
+		User u = UserController.getInstance().onlyGetUserById("5cc7c4c38554b0748e750726");
+		
+		assertTrue(u.getAccepted().isEmpty());
+		assertTrue(u.getWaiting().isEmpty());
+		
+		assertTrue(u.getEmail().contentEquals("chasemanseth@gmail.com"));
+	}
 
+	@Test
+	public void matchActuallyPopulates() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+						
+		assertTrue(!UserController.getUser().getAccepted().isEmpty());
+		UserController.setUser(null);
+	}
 }

@@ -157,6 +157,7 @@ public class Master {
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
+		loadingLabel.setForeground(Color.BLUE);
 
 		JMenu login = new JMenu("Login");
 		login.setFont(new Font("Segoe UI", Font.PLAIN, 12));

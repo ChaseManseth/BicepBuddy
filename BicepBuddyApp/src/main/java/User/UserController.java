@@ -317,6 +317,7 @@ public class UserController {
 				String style = (String) userObj.get("workoutStyle");
 				String weight = (String) userObj.get("weight");
 				String experience = (String) userObj.get("experience");
+				String profilePic = (String) userObj.get("profilePic");
 
 				// Get all the match arrays
 				List<Match> accepted = new ArrayList<Match>();
@@ -382,6 +383,7 @@ public class UserController {
 				// Set ID, JWT and Matchs Arrays
 				user.setId(id);
 				user.setJwt(jwt);
+				user.setProfilePic(profilePic);
 
 //				accThread.join();
 //				waitThread.join();
@@ -400,8 +402,6 @@ public class UserController {
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
 		    }
-
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -484,6 +484,15 @@ public class UserController {
 		signUpJSON.put("workoutStyle", style);
 		signUpJSON.put("weight", weight);
 		signUpJSON.put("experience", experience);
+		
+		// Choose the profile pic
+		Random rand = new Random();
+		int max = 7, min = 1;
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		
+		String picLoc = "profilepic/" + Integer.toString(randomNum) + ".jpg";
+		
+		signUpJSON.put("profilePic", picLoc);
 
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
@@ -521,6 +530,7 @@ public class UserController {
 				JSONObject userJSON = (JSONObject) o.get("user");
 				user.setId((String) userJSON.get("_id"));
 				user.setJwt((String) o.get("token"));
+				user.setProfilePic(picLoc);
 
 				// Update the frame and Profile plus the Menu BAR
 				Master.getInstance().loggedInMenuLoad();
@@ -766,6 +776,9 @@ public class UserController {
 					String style = (String) result.get("workoutStyle");
 					String weight = (String) result.get("weight");
 					String experience = (String) result.get("experience");
+					String profilePic = (String) result.get("profilePic");
+					
+					//TODO 
 					
 					List<Match> accepted = new ArrayList<Match>();
 					List<Match> rejected = new ArrayList<Match>();
@@ -780,6 +793,7 @@ public class UserController {
 			    	User otherUser = new User(fName, lName, email, phone, age, gend, prefGender, goals, frequency,
 			    			timeOfDay, style, weight, experience);
 			    	otherUser.setId(id);
+			    	otherUser.setProfilePic(profilePic);
 			    	
 			    	//THREADING ATTEMPT
 					Thread accThread = new Thread(new Threader(accepted, accept));
@@ -793,7 +807,6 @@ public class UserController {
 						String matchId = (String) accept.get(i);
 
 						// Create the Match
-						// TODO move function to MatchController
 						Match m = MatchController.getMatchById(matchId);
 						accepted.add(m);
 
@@ -805,7 +818,6 @@ public class UserController {
 						String matchId = (String) reject.get(i);
 
 						// Create the Match
-						// TODO move function to MatchController
 						Match m =  MatchController.getMatchById(matchId);
 						rejected.add(m);
 
@@ -828,7 +840,6 @@ public class UserController {
 						String matchId = (String) wait.get(i);
 
 						// Create the Match
-						// TODO move function to MatchController
 						Match m =  MatchController.getMatchById(matchId);
 						waiting.add(m);
 
@@ -848,7 +859,7 @@ public class UserController {
 
 		    } else {
 		    	// FAIL!
-		    	System.err.println("Shit failed yo");
+		    	System.err.println("Stuff failed yo");
 		    }
 
 		} catch(Exception e) {
@@ -905,6 +916,7 @@ public class UserController {
 				String style = (String) result.get("workoutStyle");
 				String weight = (String) result.get("weight");
 				String experience = (String) result.get("experience");
+				String profilePic = (String) result.get("profilePic");
 
 				// Created a new user
 				newUser = new User(fName, lName, email, phone, age, gender, prefGender,
@@ -914,6 +926,7 @@ public class UserController {
 				// Add its ID
 				String idDB = (String) result.get("_id");
 				newUser.setId(idDB);
+				newUser.setProfilePic(profilePic);
 
 				// Load its Match Arrays
 				// Get all the match arrays
@@ -939,7 +952,6 @@ public class UserController {
 					String matchId = (String) accept.get(i);
 
 					// Create the Match
-					// TODO move function to MatchController
 					Match m = MatchController.getMatchById(matchId);
 					accepted.add(m);
 
@@ -951,7 +963,6 @@ public class UserController {
 					String matchId = (String) reject.get(i);
 
 					// Create the Match
-					// TODO move function to MatchController
 					Match m =  MatchController.getMatchById(matchId);
 					rejected.add(m);
 
@@ -974,7 +985,6 @@ public class UserController {
 					String matchId = (String) wait.get(i);
 
 					// Create the Match
-					// TODO move function to MatchController
 					Match m =  MatchController.getMatchById(matchId);
 					waiting.add(m);
 
@@ -1133,6 +1143,7 @@ public class UserController {
 					String style = (String) result.get("workoutStyle");
 					String weight = (String) result.get("weight");
 					String experience = (String) result.get("experience");
+					String profilePic = (String) result.get("profilePic");
 
 					// Created a new user
 					newUser = new User(fName, lName, email, phone, age, gender, prefGender,
@@ -1142,6 +1153,7 @@ public class UserController {
 					// Add its ID
 					String idDB = (String) result.get("_id");
 					newUser.setId(idDB);
+					newUser.setProfilePic(profilePic);
 
 			    } else {
 			    	Master.appLogger.warning(":: Failed to get the user! Maybe invalid id?");
@@ -1259,10 +1271,12 @@ public class UserController {
 						String style = (String) result.get("workoutStyle");
 						String weight = (String) result.get("weight");
 						String experience = (String) result.get("experience");
+						String profilePic = (String) result.get("profilePic");
 						
 				    	User otherUser = new User(fName, lName, email, phone, age, gender, prefGender, goals, frequency,
 				    			timeOfDay, style, weight, experience);
 				    	otherUser.setId(id);
+				    	otherUser.setProfilePic(profilePic);
 
 			    		userList.add(otherUser);
 				    }

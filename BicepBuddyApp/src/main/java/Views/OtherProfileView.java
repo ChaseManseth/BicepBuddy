@@ -3,16 +3,23 @@ package Views;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 
 import Matching.Match;
@@ -66,14 +73,14 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(54, 40, 165, 184);
-		/*try {
-		    BufferedImage myPicture = ImageIO.read(new File("hillary.jpg"));
+		try {
+		    BufferedImage myPicture = ImageIO.read(new File(u.getProfilePic()));
 		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 		            Image.SCALE_SMOOTH);
 			lblPic.setIcon(new ImageIcon(scaled));
         } catch (IOException e) {
     	    e.printStackTrace();
-        }*/
+        }
 	
 		add(lblPic);
 		
@@ -89,7 +96,21 @@ public class OtherProfileView extends JPanel {
 			btnChat.setForeground(Color.black);
 			btnChat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Master.updateFrame(new DMView(u));
+					Master.getInstance().addLoading();
+					
+					new SwingWorker<Void, Void>(){
+
+						@Override
+						protected Void doInBackground() throws Exception {
+							Master.updateFrame(new DMView(u));
+							return null;
+						}
+						
+						protected void done() {
+							Master.getInstance().unLoad();
+						}
+					}.execute();
+					
 					//DMController.getInstance(u);
 				}
 			});

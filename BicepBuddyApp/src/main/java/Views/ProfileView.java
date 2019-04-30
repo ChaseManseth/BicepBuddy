@@ -2,22 +2,22 @@ package Views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-import Matching.Match;
-import Matching.Match.Status;
 import Matching.MatchController;
-import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
@@ -51,14 +51,14 @@ public class ProfileView extends JPanel {
 
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(54, 40, 165, 184);
-		/*try {
-		    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
+		try {
+		    BufferedImage myPicture = ImageIO.read(new File(UserController.getInstance().getUser().getProfilePic()));
 		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 		            Image.SCALE_SMOOTH);
 			lblPic.setIcon(new ImageIcon(scaled));
         } catch (IOException e) {
     	    e.printStackTrace();
-        }*/
+        }
 
 		add(lblPic);
 
@@ -77,9 +77,9 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed setting view from profile");
-				
+
 				Master.getInstance().addLoading();
-				
+
 				new SwingWorker<Void, Void>(){
 
 					@Override
@@ -87,7 +87,7 @@ public class ProfileView extends JPanel {
 						Master.getInstance().updateFrame(new SettingsView());
 						return null;
 					}
-					
+
 					protected void done() {
 						Master.getInstance().unLoad();
 					}
@@ -119,9 +119,9 @@ public class ProfileView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Master.appLogger.info(":: Accessed matching view from profile");
-				
+
 				Master.getInstance().addLoading();
-				
+
 				new SwingWorker<Void, Void>(){
 
 					@Override
@@ -129,7 +129,7 @@ public class ProfileView extends JPanel {
 						MatchController.generateFrame();
 						return null;
 					}
-					
+
 					protected void done() {
 						Master.getInstance().unLoad();
 					}
@@ -155,29 +155,41 @@ public class ProfileView extends JPanel {
 		infoPanel.setLayout(null);
 
 		JLabel lblEmail = new JLabel(email);
-		lblEmail.setBounds(10, 264, 186, 15);
+		lblEmail.setBounds(7, 279, 186, 22);
 		infoPanel.add(lblEmail);
 
 		JLabel lblFirstname = new JLabel(fname);
-		lblFirstname.setBounds(10, 224, 186, 28);
+		lblFirstname.setBounds(65, 224, 131, 28);
 		infoPanel.add(lblFirstname);
 
 		JLabel lblAge = new JLabel(age);
-		lblAge.setBounds(10, 300, 186, 15);
+		lblAge.setBounds(65, 312, 131, 15);
 		infoPanel.add(lblAge);
-		
+
+		JLabel lblName = new JLabel("Name:");
+		lblName.setBounds(7, 231, 48, 14);
+		infoPanel.add(lblName);
+
+		JLabel lblEmail_1 = new JLabel("Email:");
+		lblEmail_1.setBounds(7, 256, 48, 14);
+		infoPanel.add(lblEmail_1);
+
+		JLabel lblAge_1 = new JLabel("Age:");
+		lblAge_1.setBounds(7, 312, 48, 14);
+		infoPanel.add(lblAge_1);
+
 		JLabel notifyLabel = new JLabel("Notifications");
 		notifyLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		notifyLabel.setBounds(269, 69, 150, 16);
 		add(notifyLabel);
-		
+
 		JTextArea notificationText = new JTextArea();
 		notificationText.setEditable(false);
 		notificationText.setBounds(269, 92, 605, 374);
 		add(notificationText);
-		
+
 		//retrieve notifications and populate the field.
 		UserController.getInstance().populateMessages(notificationText);
-		
+
 	}
 }

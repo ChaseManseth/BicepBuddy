@@ -42,7 +42,7 @@ public class ProfileView extends JPanel {
 		style = UserController.getUser().getStyle();
 		email = UserController.getUser().getEmail();
 		// END USER DATA
-
+ 
 		//frame = new JFrame();
 		setBounds(0, 0, 900, 500);
 

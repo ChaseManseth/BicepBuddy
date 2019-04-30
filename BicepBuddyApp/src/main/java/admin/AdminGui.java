@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import User.User;
 import User.UserController;
 import Views.OtherProfileView;
+import Views.SettingsView;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
@@ -47,8 +48,8 @@ public class AdminGui extends JPanel {
 	public AdminGui() {
 		Integer userCount= UserController.getInstance().getAllUsers().size();
 		setLayout(null);
-		JLabel lblAdministrator = new JLabel("Administrator");
-		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 30));
+		JLabel lblAdministrator = new JLabel("Administrator Dashboard");
+		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblAdministrator.setBounds(290, 12, 299, 36);
 		add(lblAdministrator);
 
@@ -62,7 +63,7 @@ public class AdminGui extends JPanel {
 		btnRefresh.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//update table here  
+				Master.getInstance().updateFrame(new AdminGui()); 
 			}
 		});
 		add(btnRefresh);

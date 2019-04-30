@@ -107,6 +107,7 @@ public class OtherProfileView extends JPanel {
 						@Override
 						protected Void doInBackground() throws Exception {
 							Master.updateFrame(new DMView(u));
+							Master.getInstance().stop = false;
 							return null;
 						}
 						

@@ -5,6 +5,10 @@ package Messaging;
 
 import javax.swing.Box;
 import javax.swing.Box.Filler;
+
+import Matching.Match;
+import Matching.MatchController;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import User.User;
 import User.UserController;
@@ -28,6 +33,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.Semaphore;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -39,6 +46,8 @@ public class DMView extends JPanel {
 	
 	/** The message sender. */
 	private JTextField messageSender;
+	
+	public Semaphore textUpdateSem = new Semaphore(1);
 	
 	/**
 	 * Instantiates a new DM view.
@@ -79,15 +88,19 @@ public class DMView extends JPanel {
 							Calendar.getInstance().getTime(), messageSender.getText());
 					controller.sendMessage(message);
 					messageSender.setText("");
-					
+					try {
+						textUpdateSem.acquire();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					controller.addMessage(messageField, message);
+					textUpdateSem.release();
 				}
 				
 			}
 		});
 		messageSender.setActionCommand("send");
-		
-		DMController.getInstance().populateMessages(messageField);
 		
 		JScrollPane messagePane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		messagePane.setBounds(12, 13, 876, 452);
@@ -95,6 +108,25 @@ public class DMView extends JPanel {
 		messagePane.setVisible(true);
 		add(messagePane);
 		
+		DMController.getInstance().populateMessages(messageField, messagePane);
+		
+		//SWING WORKER THAT CONTINUALLY POPULATES MESSAGES
+		new SwingWorker<Void, Void>(){
+			@Override
+			protected Void doInBackground() throws Exception {
+				//Accept invite or send invite
+				Master.getInstance().stop = false;
+				//acquire permit
+				while(Master.getInstance().stop == false) {
+					textUpdateSem.acquire();
+					DMController.getInstance().populateMessages(messageField, messagePane);
+					textUpdateSem.release();
+					
+					Thread.sleep(3000);
+				}
+				return null;
+			}
+		}.execute();
 		
 				
 		/*JTextField messageField = new JTextField("Enter message here...");

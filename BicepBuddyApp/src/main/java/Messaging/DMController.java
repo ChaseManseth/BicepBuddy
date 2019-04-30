@@ -25,6 +25,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -56,6 +57,18 @@ public class DMController{
 	/** The dm view. */
 	private DMView dmView = null;
 	
+	private int numMessages = 0;
+		
+	public boolean loadingCont = true;
+	
+	public int getNumMessages() {
+		return numMessages;
+	}
+
+	public void setNumMessages(int numMessages) {
+		this.numMessages = numMessages;
+	}
+
 	/**
 	 * Gets the dm.
 	 *
@@ -189,6 +202,7 @@ public class DMController{
 	 */
 	@SuppressWarnings("unchecked")
 	public void sendMessage(Message msg) {
+		this.setNumMessages(this.getNumMessages() + 1);
 		JSONObject chat = new JSONObject();
 		
 		chat.put("userId", msg.getSender());
@@ -396,14 +410,23 @@ public class DMController{
 	 *
 	 * @param messageField the message field
 	 */
-	public void populateMessages(JTextArea messageField) {
+	public void populateMessages(JTextArea messageField, JScrollPane pane) {
 		// first get the sorted message list
+		updateMessages();
 		List<Message> sortedMessages = dm.getSorted();
-		
-		for(int i = 0; i < sortedMessages.size(); i++) {
-			//for each message, print the date, then the sender, then the message.
-			addMessage(messageField, sortedMessages.get(i));
+		if(getNumMessages() != sortedMessages.size()) {
+			Master.appLogger.info(":: Populating messages");
+			int pos = messageField.getCaretPosition();
+			setNumMessages(sortedMessages.size());
+			messageField.setText("");
+			
+			for(int i = 0; i < sortedMessages.size(); i++) {
+				//for each message, print the date, then the sender, then the message.
+				addMessage(messageField, sortedMessages.get(i));
+			}
+			messageField.setCaretPosition(messageField.getDocument().getLength());
 		}
+		
 	}
 	
 	/**

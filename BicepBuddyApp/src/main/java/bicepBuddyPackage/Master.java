@@ -21,6 +21,7 @@ import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import Matching.MatchController;
+import Messaging.DMController;
 import Messaging.DMView;
 import User.UserController;
 import User.UserDB;
@@ -52,6 +53,7 @@ public class Master {
 	/** The master. */
 	//holds all of the components (views)
 	private static Master master = null;
+	public boolean stop = true;
 
 	//create static logger (SINGLETON PATTERN)
 	static {
@@ -242,8 +244,12 @@ public class Master {
 		// remove the current JPanel so that our frame doesn't have a billion
 		// panels in it when we switch views a bunch
 		//frame.remove(frame.getContentPane());
-		
-		//frame.setVisible(true);
+		if(DMController.getInstance() != null) {
+			Master.getInstance().stop = true;
+		}
+		if(DMController.getInstance() != null) {
+			DMController.getInstance().setNumMessages(0);
+		}
 	}
 
 	//FACADE PATTERN: function encapsulates the loading of the logged

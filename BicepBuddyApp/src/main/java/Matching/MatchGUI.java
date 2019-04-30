@@ -199,6 +199,7 @@ public class MatchGUI extends JPanel{
 						//Accepts match here
 						UserController.getInstance().setChangesToMatches(true);
 						MatchController.acceptMatchInitial(matches.get(curMatchShown));
+						UserController.getInstance().setTimesMatchCalled(5);
 						
 						matches.remove(matches.get(curMatchShown));
 						if(curMatchShown != 0) {
@@ -277,6 +278,7 @@ public class MatchGUI extends JPanel{
 					@Override
 					protected Void doInBackground() throws Exception {
 						MatchController.rejectMatch(matches.get(curMatchShown));
+						UserController.getInstance().setTimesMatchCalled(5);
 						
 //						panel.add(rej);
 //						frame.getContentPane().add(panel);

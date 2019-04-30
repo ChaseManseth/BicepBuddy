@@ -189,6 +189,7 @@ public class OtherProfileView extends JPanel {
 								MatchController.acceptMatchInitial(MatchController.directMatch(u));
 							}
 							UserController.getInstance().setChangesToMatches(true);
+							UserController.getInstance().setTimesMatchCalled(5);
 							return null;
 						}
 
@@ -237,6 +238,7 @@ public class OtherProfileView extends JPanel {
 							else {
 								MatchController.rejectMatch(MatchController.directMatch(u));
 							}
+							UserController.getInstance().setTimesMatchCalled(5);
 							return null;
 						}
 

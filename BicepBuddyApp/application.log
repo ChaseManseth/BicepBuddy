@@ -1,2 +1,3 @@
-2019-04-29 22:01:11 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-29 22:01:13 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-29 23:41:52 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-29 23:41:53 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-29 23:42:11 INFO User.UserController validateSignup :: User's signup information was accepted.

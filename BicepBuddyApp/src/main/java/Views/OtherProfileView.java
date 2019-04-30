@@ -3,11 +3,17 @@ package Views;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,14 +72,14 @@ public class OtherProfileView extends JPanel {
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(54, 40, 165, 184);
-		/*try {
-		    BufferedImage myPicture = ImageIO.read(new File("hillary.jpg"));
+		try {
+		    BufferedImage myPicture = ImageIO.read(new File(u.getProfilePic()));
 		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
 		            Image.SCALE_SMOOTH);
 			lblPic.setIcon(new ImageIcon(scaled));
         } catch (IOException e) {
     	    e.printStackTrace();
-        }*/
+        }
 	
 		add(lblPic);
 		

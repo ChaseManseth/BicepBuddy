@@ -84,32 +84,32 @@ public class Signup extends JPanel {
 		
 		JComboBox preferedGenderCombo = new JComboBox(MatchAlgorithm.GENDERS);
 		preferedGenderCombo.setBackground(Color.LIGHT_GRAY);
-		preferedGenderCombo.setBounds(455, 320, 150, 25);
+		preferedGenderCombo.setBounds(697, 240, 150, 25);
 		add(preferedGenderCombo);
 		
 		JComboBox goalsCombo = new JComboBox(MatchAlgorithm.GOALS);
 		goalsCombo.setBackground(Color.LIGHT_GRAY);
-		goalsCombo.setBounds(455, 400, 150, 25);
+		goalsCombo.setBounds(200, 320, 150, 25);
 		add(goalsCombo);
 		
 		JComboBox frequencyCombo = new JComboBox(MatchAlgorithm.FREQUENCIES);
 		frequencyCombo.setBackground(Color.LIGHT_GRAY);
-		frequencyCombo.setBounds(700, 80, 150, 25);
+		frequencyCombo.setBounds(455, 320, 150, 25);
 		add(frequencyCombo);
 		
 		JComboBox timeOfDayCombo = new JComboBox(MatchAlgorithm.TIMES);
 		timeOfDayCombo.setBackground(Color.LIGHT_GRAY);
-		timeOfDayCombo.setBounds(700, 160, 150, 25);
+		timeOfDayCombo.setBounds(697, 320, 150, 25);
 		add(timeOfDayCombo);
 		
 		JComboBox styleCombo = new JComboBox(MatchAlgorithm.STYLES);
 		styleCombo.setBackground(Color.LIGHT_GRAY);
-		styleCombo.setBounds(700, 240, 150, 25);
+		styleCombo.setBounds(200, 400, 150, 25);
 		add(styleCombo);
 		
 		JComboBox weightCombo = new JComboBox(MatchAlgorithm.WEIGHTCLASS);
 		weightCombo.setBackground(Color.LIGHT_GRAY);
-		weightCombo.setBounds(700, 320, 150, 25);
+		weightCombo.setBounds(455, 400, 150, 25);
 		add(weightCombo);
 		
 		JComboBox experienceCombo = new JComboBox(MatchAlgorithm.EXPERIENCE);
@@ -126,25 +126,25 @@ public class Signup extends JPanel {
 		
 		lastTextField = new JTextField();
 		lastTextField.setBackground(Color.LIGHT_GRAY);
-		lastTextField.setBounds(200, 160, 150, 25);
+		lastTextField.setBounds(455, 80, 150, 25);
 		add(lastTextField);
 		lastTextField.setColumns(10);
 		
 		emailTextField = new JTextField();
 		emailTextField.setBackground(Color.LIGHT_GRAY);
-		emailTextField.setBounds(200, 240, 150, 25);
+		emailTextField.setBounds(700, 80, 150, 25);
 		add(emailTextField);
 		emailTextField.setColumns(10);
 		
 		phoneTextField = new JTextField();
 		phoneTextField.setBackground(Color.LIGHT_GRAY);
-		phoneTextField.setBounds(455, 80, 150, 25);
+		phoneTextField.setBounds(700, 160, 150, 25);
 		add(phoneTextField);
 		phoneTextField.setColumns(10);
 		
 		ageTextField = new JTextField();
 		ageTextField.setBackground(Color.LIGHT_GRAY);
-		ageTextField.setBounds(455, 160, 150, 25);
+		ageTextField.setBounds(200, 240, 150, 25);
 		add(ageTextField);
 		ageTextField.setColumns(10);
 		
@@ -153,27 +153,27 @@ public class Signup extends JPanel {
 		add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(200, 145, 107, 14);
+		lblLastName.setBounds(455, 65, 107, 14);
 		add(lblLastName);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(200, 225, 48, 14);
+		lblEmail.setBounds(700, 65, 48, 14);
 		add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(200, 305, 115, 14);
+		lblPassword.setBounds(200, 145, 115, 14);
 		add(lblPassword);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
-		lblConfirmPassword.setBounds(200, 385, 150, 14);
+		lblConfirmPassword.setBounds(455, 145, 150, 14);
 		add(lblConfirmPassword);
 		
 		JLabel lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setBounds(455, 65, 127, 14);
+		lblPhoneNumber.setBounds(700, 145, 127, 14);
 		add(lblPhoneNumber);
 		
 		JLabel lblAge = new JLabel("Age");
-		lblAge.setBounds(455, 145, 48, 14);
+		lblAge.setBounds(200, 225, 48, 14);
 		add(lblAge);
 		
 		JLabel lblGender = new JLabel("Gender");
@@ -181,27 +181,27 @@ public class Signup extends JPanel {
 		add(lblGender);
 		
 		JLabel lblPreferedGender = new JLabel("Preferred Buddy Gender");
-		lblPreferedGender.setBounds(455, 305, 193, 14);
+		lblPreferedGender.setBounds(697, 225, 193, 14);
 		add(lblPreferedGender);
 		
 		JLabel lblGoals = new JLabel("Goals");
-		lblGoals.setBounds(455, 385, 48, 14);
+		lblGoals.setBounds(200, 305, 48, 14);
 		add(lblGoals);
 		
 		JLabel lblFrequency = new JLabel("Frequency");
-		lblFrequency.setBounds(700, 65, 121, 14);
+		lblFrequency.setBounds(455, 305, 121, 14);
 		add(lblFrequency);
 		
 		JLabel lblTimeOfDay = new JLabel("Time of Day");
-		lblTimeOfDay.setBounds(700, 145, 121, 14);
+		lblTimeOfDay.setBounds(697, 305, 121, 14);
 		add(lblTimeOfDay);
 		
 		JLabel lblStyle = new JLabel("Style");
-		lblStyle.setBounds(700, 225, 48, 14);
+		lblStyle.setBounds(200, 385, 48, 14);
 		add(lblStyle);
 		
 		JLabel lblWeight = new JLabel("Weight");
-		lblWeight.setBounds(700, 305, 99, 14);
+		lblWeight.setBounds(455, 385, 99, 14);
 		add(lblWeight);
 		
 		JLabel lblExperience = new JLabel("Experience");
@@ -210,24 +210,24 @@ public class Signup extends JPanel {
 		
 		password = new JPasswordField();
 		password.setBackground(new Color(41,182,246));
-		password.setBounds(202, 322, 142, 23);
+		password.setBounds(202, 162, 142, 23);
 		add(password);
 		
 		// Password Background color
 		JPanel pwBkg = new JPanel();
 		pwBkg.setBackground(Color.LIGHT_GRAY);
-		pwBkg.setBounds(200, 322, 150, 23);
+		pwBkg.setBounds(200, 162, 150, 23);
 		add(pwBkg);
 		
 		confirmPW = new JPasswordField();
 		confirmPW.setBackground(new Color(41,182,246));
-		confirmPW.setBounds(202, 405, 142, 23);
+		confirmPW.setBounds(457, 165, 142, 23);
 		add(confirmPW);
 		
 		// Password Background color
 		JPanel confirmPwBkg = new JPanel();
 		confirmPwBkg.setBackground(Color.LIGHT_GRAY);
-		confirmPwBkg.setBounds(200, 405, 150, 23);
+		confirmPwBkg.setBounds(455, 165, 150, 23);
 		add(confirmPwBkg);
 		
 		//submission of user data. Data will be submitted to the controller,

@@ -29,19 +29,35 @@ public class AdminTableModel extends AbstractTableModel {
     		    });
      }
 
-
+/**
+ * Gets the current column count
+ */
 public int getColumnCount() {
 return columnNames.length;
 }
 
+/**
+ * Gets the current column count
+ */
 public int getRowCount() {
 return data.size();
 }
 
+/**
+ * Gets the name of the column at col
+ * 
+ * @param col the column whose name will be retrieved
+ */
 public String getColumnName(int col) {
 return columnNames[col];
 }
 
+/**
+ * Gets the value at the position of row and col
+ * 
+ * @param row the row of the value to retrieve
+ * @param col the col of the value to retrieve
+ */
 public Object getValueAt(int row, int col) {
 	Object val;
 	switch(col) {
@@ -60,21 +76,46 @@ public Object getValueAt(int row, int col) {
 	return val;
 }
 
+/**
+ * Gets the Class of the column at c
+ * 
+ * @param c the target column
+ */
 public Class getColumnClass(int c) {
 	return getValueAt(0, c).getClass();
 }
 
-
+/**
+ * Returns based on whether or not the specified cell can be changed
+ * 
+ * @param row the target row
+ * @param col the target column
+ * 
+ * @return true, if cell at row, col can be changed
+ */
 public boolean isCellEditable(int row, int col) {
 	return col>0;
 }
 
+/**
+ * Sets the value of cell at row, col to value
+ * 
+ * @param value new value to be stored
+ * @param row the target row
+ * @param col the target column
+ */
 public void setValueAt(Object value, int row, int col) {
 		if(col == 0) {
 			  data.get(row).setMyUser((User)value);
 			  fireTableCellUpdated(row, col);
 		} 
 }
+
+/**
+ * Removes the target row from the model
+ * 
+ * @param row the target row to remove
+ */
 public void removeRow(int row) {
    	data.remove(row);
     fireTableRowsDeleted(row, row);

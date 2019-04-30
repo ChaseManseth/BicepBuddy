@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -88,6 +89,7 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							UserController.getInstance().deleteUser((User)(table.getValueAt(table.getSelectedRow(), 0)));
+							((AdminTableModel)table.getModel()).removeRow(table.convertRowIndexToModel(table.getSelectedRow()));
 							confirm.dispose();
 						}
 						

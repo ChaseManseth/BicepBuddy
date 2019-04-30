@@ -575,20 +575,12 @@ public class UserController {
 	
 	
 	public void deleteUser(User u) {
-//		UserDB udb = new UserDB();
-//		udb.deleteUser(u);
-//		Master.getInstance().getFrame().dispose();
 
-		// Actually Delete a User from the DB
-		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpDelete request = new HttpDelete(baseUrl + u.getId());
 
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
-			request.addHeader("Authorization", "Bearer " + u.getJwt());
-			request.addHeader("id", u.getId());
 
 			// Execute the request
 			HttpResponse response = httpClient.execute(request);
@@ -597,9 +589,6 @@ public class UserController {
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// User Profile was Deleted!
 		    	Master.appLogger.info(":: Deleting user " + u.getfName() + " " + u.getlName() + " from DB.");
-		    	//user = null;
-		    	//Master.getInstance().loggedOutMenuLoad();
-		    	//Master.getInstance().updateFrame(new Login());
 		    } else {
 		    	ErrorGUI eg = new ErrorGUI("You don't have access to this action!");
 		    }
@@ -1244,6 +1233,7 @@ public class UserController {
 						
 				    	User otherUser = new User(fName, lName, email, phone, age, gender, prefGender, goals, frequency,
 				    			timeOfDay, style, weight, experience);
+				    	otherUser.setId(id);
 
 			    		userList.add(otherUser);
 				    }

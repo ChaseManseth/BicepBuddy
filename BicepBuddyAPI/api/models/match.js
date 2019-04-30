@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// Match Object Model
 const mongoose = require('mongoose');
 
 const matchSchema = mongoose.Schema({

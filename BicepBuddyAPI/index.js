@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// Server Start
 const http = require('http');
 const app = require('./app');
 

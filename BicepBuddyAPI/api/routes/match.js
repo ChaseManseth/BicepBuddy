@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// Match Routes
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -20,8 +24,6 @@ router.post('/', (req, res, next) => {
         userId: req.body.userId,
         matchedUserId: req.body.matchedUserId,
         status: req.body.status,
-// TODO Uncomment this when ready
-        // killDate: req.body.killDate,
         strength: req.body.strength
     });
 

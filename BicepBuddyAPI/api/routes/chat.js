@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// Chat Routes
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -13,7 +17,7 @@ const Chat = require('../models/chat');
 const JWT_KEY = "secret";
 // END
 
-// Match Creation
+// Chat Message Creation
 router.post('/', (req, res, next) => {
     const chat = new Chat({
         _id: new mongoose.Types.ObjectId(),

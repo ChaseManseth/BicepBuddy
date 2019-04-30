@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// App Logic
 const express = require('express');
 const app = express();
 const morgan = require('morgan');

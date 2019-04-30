@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// Chat Object Model
 const mongoose = require('mongoose');
 
 const chatSchema = mongoose.Schema({

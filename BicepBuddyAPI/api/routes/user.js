@@ -1,3 +1,7 @@
+// Author: Chase Manseth
+// Date: 4/30/2019
+
+// User Routes
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -144,20 +148,11 @@ router.patch('/:userID', (req, res, next) => {
                 error: err
             });
         });
-
-    // if(accessedId != null && id == accessedId) {
-        
-    // } else {
-    //     res.status(403).json({
-    //         message: 'Action not allowed!'
-    //     });
-    // }
 });
 
 // Get a list of all the users
 router.get('/', (req, res, next) => {
     User.find()
-        // .select('_id firstname lastname email')
         .exec()
         .then(docs => {
             const response = {
@@ -236,8 +231,6 @@ router.get('/get_users_by_gender/:gender', (req, res, next) => {
 router.get('/:userID', (req, res, next) => {
     const id = req.params.userID;
     const accessedId = req.headers.id;
-    // console.log(accessedId);
-    // console.log(id);
 
     User.findById(id)
     .exec()
@@ -249,47 +242,13 @@ router.get('/:userID', (req, res, next) => {
     .catch(err => {
         return res.status(409);
     });
-     // Check If User accessing this user is self
-    // if(accessedId != null && id == accessedId) {
-    //     User.findById(id)
-    //     .exec()
-    //     .then(result => {
-    //         return res.status(200).json({
-    //             result: result
-    //         });
-    //     })
-    //     .catch(err => {
-    //         return res.status(409);
-    //     });
-    // } else {
-    //     User.findById(id)
-    //     .select('firstname lastname gender profilePic preferredGender' + 
-    //     'weight workoutStyle goals experience timeOfDay frequency')
-    //     .exec()
-    //     .then(result => {
-    //         return res.status(200).json({
-    //             result: result
-    //         });
-    //     })
-    //     .catch(err => {
-    //         return res.status(409);
-    //     });
-    // }
     
 });
 
 // Delete User
-// TODO: Make sure Admins can delete others accounts
 router.delete("/:userID", (req, res, next) => {
     const id = req.params.userID;
-    // const accessedId = req.headers.id;
-    // if(accessedId != null && id == accessedId) {
-       
-    // } else {
-    //     res.status(403).json({
-    //         message: 'Access not allowed!'
-    //     });
-    // }
+    
     User.deleteOne({_id: id})
     .exec()
     .then(result => {

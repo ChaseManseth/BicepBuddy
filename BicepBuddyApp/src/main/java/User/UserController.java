@@ -576,7 +576,7 @@ public class UserController {
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
-			request.addHeader("Authorization", "Bearer " + user.getJwt());
+			request.addHeader("Authorization", "Bearer " + u.getJwt());
 			request.addHeader("id", u.getId());
 
 			// Execute the request

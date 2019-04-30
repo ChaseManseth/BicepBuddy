@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -27,7 +28,7 @@ import Views.SettingsView;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-
+import java.util.List;
 import javax.swing.JScrollPane;
 // TODO: Auto-generated Javadoc
 
@@ -46,7 +47,8 @@ public class AdminGui extends JPanel {
 	 * Instantiates a new admin gui.
 	 */
 	public AdminGui() {
-		Integer userCount= UserController.getInstance().getAllUsers().size();
+		List<User> everybody =UserController.getInstance().getAllUsers();
+		Integer userCount= everybody.size();
 		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator Dashboard");
 		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -79,28 +81,19 @@ public class AdminGui extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(381, 129, 485, 343);
 		add(scrollPane);
-		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
+		
+		AdminTableModel model = new AdminTableModel(everybody);
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 		
-
-        ChartPanel myPanel= new ChartPanel(getChart());
+        ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart());
         myPanel.setBounds(33, 122, 326, 350);
         add(myPanel);
        
 
 	}
-    private static JFreeChart getChart() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Double(43.2));
-        dataset.setValue("Two", new Double(10.0));
-        dataset.setValue("Three", new Double(27.5));
-        dataset.setValue("Four", new Double(17.5));
-        dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));
-        return ChartFactory.createPieChart("Test1",dataset,false,true,false);
-    }
+
 }

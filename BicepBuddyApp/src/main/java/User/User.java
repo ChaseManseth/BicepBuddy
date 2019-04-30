@@ -61,6 +61,9 @@ public class User {
 	/** The experience. */
 	private String experience;
 	
+	/** The profilePic. */
+	private String profilePic;
+	
 	/** The accepted. */
 	private List<Match> accepted;
 	
@@ -389,6 +392,24 @@ public class User {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * Gets the profilePic.
+	 *
+	 * @return the profilePic
+	 */
+	public String getProfilePic() {
+		return profilePic;
+	}
+	
+	/**
+	 * Sets the profilePic.
+	 *
+	 * @param id the new profilePic
+	 */
+	public void setProfilePic(String pic) {
+		this.profilePic = pic;
 	}
 	
 	/**

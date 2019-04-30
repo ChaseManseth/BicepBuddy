@@ -73,7 +73,6 @@ public class AdminGui extends JPanel {
 		scrollPane.setBounds(381, 218, 485, 212);
 		add(scrollPane);
 		AdminTableModel model = new AdminTableModel(UserController.getInstance().getAllUsers());
-		//UserController.getInstance().getAllUsers().forEach(u -> System.out.println(u.getId()));
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);

@@ -330,8 +330,17 @@ public class UserController {
 				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
 
 				// Go through all the accepted matches and get the from the DB, build them and store it
+				
+				//THREADING ATTEMPT
+				Thread accThread = new Thread(new Threader(accepted, accept));
+				accThread.start();
+				Thread rejThread = new Thread(new Threader(rejected, reject));
+				rejThread.start();
+				Thread waitThread = new Thread(new Threader(waiting, wait));
+				waitThread.start();
+				
 				// Accept Matches
-				for(int i = 0; i < accept.size(); i++) {
+				/*for(int i = 0; i < accept.size(); i++) {
 					String matchId = (String) accept.get(i);
 
 					// Create the Match
@@ -364,7 +373,7 @@ public class UserController {
 					waiting.add(m);
 
 					//System.out.println(matchId);
-				}
+				}*/
 
 				// Build the user
 				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
@@ -374,6 +383,10 @@ public class UserController {
 				user.setId(id);
 				user.setJwt(jwt);
 
+//				accThread.join();
+//				waitThread.join();
+//				rejThread.join();
+				
 				user.setAccepted(accepted);
 				user.setRejected(rejected);
 				user.setIdle(idle);
@@ -768,7 +781,15 @@ public class UserController {
 			    			timeOfDay, style, weight, experience);
 			    	otherUser.setId(id);
 			    	
-			    	for(int i = 0; i < accept.size(); i++) {
+			    	//THREADING ATTEMPT
+					Thread accThread = new Thread(new Threader(accepted, accept));
+					accThread.start();
+					Thread rejThread = new Thread(new Threader(rejected, reject));
+					rejThread.start();
+					Thread waitThread = new Thread(new Threader(waiting, wait));
+					waitThread.start();
+			    	
+			    	/*for(int i = 0; i < accept.size(); i++) {
 						String matchId = (String) accept.get(i);
 
 						// Create the Match
@@ -792,15 +813,15 @@ public class UserController {
 					}
 
 					// Idle Matches
-					/*for(int i = 0; i < idl.size(); i++) {
-						String matchId = (String) idl.get(i);
-
-						// Create the Match
-						// TODO move function to MatchController
-						Match m =  MatchController.getMatchById(matchId);
-						idle.add(m);
-
-					}*/
+//					for(int i = 0; i < idl.size(); i++) {
+//						String matchId = (String) idl.get(i);
+//
+//						// Create the Match
+//						// TODO move function to MatchController
+//						Match m =  MatchController.getMatchById(matchId);
+//						idle.add(m);
+//
+//					}
 
 					// Waiting Matches
 					for(int i = 0; i < wait.size(); i++) {
@@ -811,9 +832,12 @@ public class UserController {
 						Match m =  MatchController.getMatchById(matchId);
 						waiting.add(m);
 
-					}
+					}*/
 
 					// Add the Match Arrays to the User object
+//					accThread.join();
+//					waitThread.join();
+//					rejThread.join();
 					otherUser.setAccepted(accepted);
 					otherUser.setRejected(rejected);
 					//otherUser.setIdle(idle);
@@ -903,9 +927,15 @@ public class UserController {
 				JSONArray idl = (JSONArray) result.get("idleMatches");
 				JSONArray wait = (JSONArray) result.get("waitingMatches");
 
-				// Go through all the accepted matches and get the from the DB, build them and store it
-				// Accept Matches
-				for(int i = 0; i < accept.size(); i++) {
+				//THREADING ATTEMPT
+				Thread accThread = new Thread(new Threader(accepted, accept));
+				accThread.start();
+				Thread rejThread = new Thread(new Threader(rejected, reject));
+				rejThread.start();
+				Thread waitThread = new Thread(new Threader(waiting, wait));
+				waitThread.start();
+		    	
+		    	/*for(int i = 0; i < accept.size(); i++) {
 					String matchId = (String) accept.get(i);
 
 					// Create the Match
@@ -929,16 +959,15 @@ public class UserController {
 				}
 
 				// Idle Matches
-				/*for(int i = 0; i < idl.size(); i++) {
-					String matchId = (String) idl.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m =  MatchController.getMatchById(matchId);
-					idle.add(m);
-
-					//System.out.println(matchId);
-				}*/
+//				for(int i = 0; i < idl.size(); i++) {
+//					String matchId = (String) idl.get(i);
+//
+//					// Create the Match
+//					// TODO move function to MatchController
+//					Match m =  MatchController.getMatchById(matchId);
+//					idle.add(m);
+//
+//				}
 
 				// Waiting Matches
 				for(int i = 0; i < wait.size(); i++) {
@@ -949,8 +978,8 @@ public class UserController {
 					Match m =  MatchController.getMatchById(matchId);
 					waiting.add(m);
 
-					//System.out.println(matchId);
-				}
+				}*/
+
 
 				// Add the Match Arrays to the User object
 				newUser.setAccepted(accepted);

@@ -23,6 +23,7 @@ import Matching.MatchController;
 import Messaging.DMView;
 import User.UserController;
 import User.UserDB;
+import Views.FriendsList;
 import Views.Login;
 import Views.OtherProfileView;
 import Views.ProfileView;
@@ -228,6 +229,17 @@ public class Master {
 			}
 		});
 		menuBar.add(settings);
+		
+		JMenu mnLists = new JMenu("Buddy Lists");
+		mnLists.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		mnLists.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Master.appLogger.info("Loading Buddy Lists view");
+				updateFrame(new FriendsList());
+			}
+		});
+		menuBar.add(mnLists);
 
 		JMenu mnMatch = new JMenu("Match");
 		mnMatch.setFont(new Font("Segoe UI", Font.PLAIN, 12));

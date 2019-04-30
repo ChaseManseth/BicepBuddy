@@ -2,7 +2,14 @@ package User;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.swing.JTextArea;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +28,7 @@ import org.json.simple.parser.JSONParser;
 import Matching.Match;
 import Matching.MatchController;
 import Matching.Match.Status;
+import Messaging.Message;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -280,93 +288,81 @@ public class UserController {
 
 			    // Get all user data
 			    String id = (String) userObj.get("_id");
-			    user = getUserById(id);
-//				String fName = (String) userObj.get("firstname");
-//				String lName = (String) userObj.get("lastname");
-//				String emailDB = (String) userObj.get("email");
-//				String phone = (String) userObj.get("phoneNumber");
-//				String age = (String) userObj.get("age");
-//				String gender = (String) userObj.get("gender");
-//				String prefGender = (String) userObj.get("preferredGender");
-//				String goals = (String) userObj.get("goals");
-//				String frequency = (String) userObj.get("frequency");
-//				String timeOfDay = (String) userObj.get("timeOfDay");
-//				String style = (String) userObj.get("workoutStyle");
-//				String weight = (String) userObj.get("weight");
-//				String experience = (String) userObj.get("experience");
-//
-//				// Get all the match arrays
-//				List<Match> accepted = new ArrayList<Match>();
-//				List<Match> rejected = new ArrayList<Match>();
-//				List<Match> idle = new ArrayList<Match>();
-//				List<Match> waiting = new ArrayList<Match>();
-//
-//				JSONArray accept = (JSONArray) userObj.get("acceptedMatches");
-//				JSONArray reject = (JSONArray) userObj.get("rejectedMatches");
-//				JSONArray idl = (JSONArray) userObj.get("idleMatches");
-//				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
-//
-//				// Go through all the accepted matches and get the from the DB, build them and store it
-//				// Accept Matches
-//				for(int i = 0; i < accept.size(); i++) {
-//					String matchId = (String) accept.get(i);
-//
-//					// Create the Match
-//					// TODO move function to MatchController
-//					Match m = getMatchById(matchId);
-//					accepted.add(m);
-//
-//					// System.out.println(matchId);
-//				}
-//
-//				// Reject Matches
-//				for(int i = 0; i < reject.size(); i++) {
-//					String matchId = (String) reject.get(i);
-//
-//					// Create the Match
-//					// TODO move function to MatchController
-//					Match m = getMatchById(matchId);
-//					rejected.add(m);
-//
-//					//System.out.println(matchId);
-//				}
-//
-//				// Idle Matches
-//				for(int i = 0; i < idl.size(); i++) {
-//					String matchId = (String) idl.get(i);
-//
-//					// Create the Match
-//					// TODO move function to MatchController
-//					Match m = getMatchById(matchId);
-//					idle.add(m);
-//
-//					//System.out.println(matchId);
-//				}
-//
-//				// Waiting Matches
-//				for(int i = 0; i < wait.size(); i++) {
-//					String matchId = (String) wait.get(i);
-//
-//					// Create the Match
-//					// TODO move function to MatchController
-//					Match m = getMatchById(matchId);
-//					waiting.add(m);
-//
-//					//System.out.println(matchId);
-//				}
-//
-//				// Build the user
-//				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
-//						goals, frequency, timeOfDay, style, weight, experience);
-//
-//				// Set ID, JWT and Matchs Arrays
-//				user.setId(id);
-//				user.setJwt(jwt);
-//
-//				user.setAccepted(accepted);
-//				user.setRejected(rejected);
-//				user.setIdle(idle);
-//				user.setWaiting(waiting);
+			    //user = getUserById(id);
+				String fName = (String) userObj.get("firstname");
+				String lName = (String) userObj.get("lastname");
+				String emailDB = (String) userObj.get("email");
+				String phone = (String) userObj.get("phoneNumber");
+				String age = (String) userObj.get("age");
+				String gender = (String) userObj.get("gender");
+				String prefGender = (String) userObj.get("preferredGender");
+				String goals = (String) userObj.get("goals");
+				String frequency = (String) userObj.get("frequency");
+				String timeOfDay = (String) userObj.get("timeOfDay");
+				String style = (String) userObj.get("workoutStyle");
+				String weight = (String) userObj.get("weight");
+				String experience = (String) userObj.get("experience");
+
+				// Get all the match arrays
+				List<Match> accepted = new ArrayList<Match>();
+				List<Match> rejected = new ArrayList<Match>();
+				List<Match> idle = new ArrayList<Match>();
+				List<Match> waiting = new ArrayList<Match>();
+
+				JSONArray accept = (JSONArray) userObj.get("acceptedMatches");
+				JSONArray reject = (JSONArray) userObj.get("rejectedMatches");
+				JSONArray idl = (JSONArray) userObj.get("idleMatches");
+				JSONArray wait = (JSONArray) userObj.get("waitingMatches");
+
+				// Go through all the accepted matches and get the from the DB, build them and store it
+				// Accept Matches
+				for(int i = 0; i < accept.size(); i++) {
+					String matchId = (String) accept.get(i);
+
+					// Create the Match
+					// TODO move function to MatchController
+					Match m = MatchController.getMatchById(matchId);
+					accepted.add(m);
+
+					// System.out.println(matchId);
+				}
+
+				// Reject Matches
+				for(int i = 0; i < reject.size(); i++) {
+					String matchId = (String) reject.get(i);
+
+					// Create the Match
+					// TODO move function to MatchController
+					Match m = MatchController.getMatchById(matchId);
+					rejected.add(m);
+
+					//System.out.println(matchId);
+				}
+
+				// Waiting Matches
+				for(int i = 0; i < wait.size(); i++) {
+					String matchId = (String) wait.get(i);
+
+					// Create the Match
+					// TODO move function to MatchController
+					Match m = MatchController.getMatchById(matchId);
+					waiting.add(m);
+
+					//System.out.println(matchId);
+				}
+
+				// Build the user
+				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
+						goals, frequency, timeOfDay, style, weight, experience);
+
+				// Set ID, JWT and Matchs Arrays
+				user.setId(id);
+				user.setJwt(jwt);
+
+				user.setAccepted(accepted);
+				user.setRejected(rejected);
+				user.setIdle(idle);
+				user.setWaiting(waiting);
 
 				// Return the profile page
 				Master.getInstance().loggedInMenuLoad();
@@ -1120,7 +1116,7 @@ public class UserController {
 
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				return null;
 			} finally {
 				request.releaseConnection();
 			}
@@ -1142,17 +1138,23 @@ public class UserController {
 				for (Match m : UserController.getUser().getAccepted()) {
 					if (m.getStatus() == Status.Accepted) {
 						User other = UserController.getInstance().onlyGetUserById(m.getOther());
-						List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
-						users.add(other);
-						UserController.getInstance().getUser().setAcceptedUsers(users);
+						if(other != null) {
+							List<User> users = UserController.getInstance().getUser().getAcceptedUsers();
+							users.add(other);
+							UserController.getInstance().getUser().setAcceptedUsers(users);
+						}
+						
 					}
 				}
 				
 				for (Match m : UserController.getUser().getWaiting()) {
 					User other = UserController.getInstance().onlyGetUserById(m.getOther());
-					List<User> users = UserController.getInstance().getUser().getWaitingUsers();
-					users.add(other);
-					UserController.getInstance().getUser().setWaitingUsers(users);
+					if(other != null) {
+						List<User> users = UserController.getInstance().getUser().getWaitingUsers();
+						users.add(other);
+						UserController.getInstance().getUser().setWaitingUsers(users);
+					}
+					
 				}
 				
 				for (Match m : UserController.getUser().getAccepted()) {
@@ -1244,5 +1246,153 @@ public class UserController {
 			
 			return userList;
 		}
+		
+	public void notifyUser(User u) {
+		Message msg = new Message();
+		//generate random notification text.
+		Random r = new Random();
+		int messg = r.nextInt(5);
+		System.out.println(messg);
+		
+		//set the notification details
+		msg.setSender("5cc6843f8554b0748e7505db");
+		msg.setReceiver(u.getId());
+		msg.setSendDate(new Date());
+		if(messg == 0) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is going to go pump iron!");
+		}
+		else if(messg == 1) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is hitting up the SLC now!");
+		}
+		else if(messg == 2) {
+			msg.setText(user.getfName() + " " + user.getlName() + " is letting you know they're going to the gym!");
+		}
+		else if(messg == 3) {
+			msg.setText(user.getfName() + " " + user.getlName() + " wants you to come to the gym with them!");
+		}
+		else if(messg == 4) {
+			msg.setText(user.getfName() + " " + user.getlName() + " wants you to be their gym buddy right now!");
+		}
+		
+		Master.appLogger.info(":: Notification: " + msg.getText() + " going to user: " + u.getEmail());
+		
+		JSONObject notify = new JSONObject();
+		
+		notify.put("userId", msg.getSender());
+		notify.put("otherUserId", msg.getReceiver());
+		notify.put("message", msg.getText());
+		
+		HttpPost request = new HttpPost("http://bb.manseth.com/chat/");
+		try {
+			// Add JSON to the body and headers indicating type
+			StringEntity params = new StringEntity(notify.toJSONString());
+		    request.addHeader("content-type", "application/json");
+		    request.setEntity(params);
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    JSONObject o = (JSONObject) parse.parse(json);
+		    
+		    if(response.getStatusLine().getStatusCode() == 201) {
+		    	JSONObject chatter = ((JSONObject) o.get("chat"));
+		    	
+		    	String id = (String) chatter.get("_id");
+		    	msg.setId(id);
+		    			    	
+		    }
+		    else {
+		    	Master.appLogger.info("" + response.getStatusLine().getStatusCode());
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+	}
+	
+	public Set<Message> getAllNotifications() {
+		// function gets the logged-in user's notifications
+		Set<Message> messages = new HashSet<Message>();
+		//first request: all the messages from logged in user to the other user.
+		HttpGet request = new HttpGet("http://bb.manseth.com/chat/from/5cc6843f8554b0748e7505db"
+				+ "/to/" + UserController.getUser().getId());
+		
+		Master.appLogger.info(":: Getting all notifications for " + UserController.getUser().getfName());
+		
+		try {
+			// Add JSON to the body and headers indicating type
+		    request.addHeader("content-type", "application/json");
+
+		    // Execute the request
+		    HttpResponse response = httpClient.execute(request);
+
+		    // Get the body of the response
+		    HttpEntity entity = response.getEntity();
+		    String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+
+		    JSONParser parse = new JSONParser();
+		    
+		    if(response.getStatusLine().getStatusCode() == 200) {
+		    	JSONArray msgArray = (JSONArray) parse.parse(json);
+		    	
+		    	//loop through each message
+		    	for(int i = 0; i < msgArray.size(); i++) {
+		    		JSONObject chatter = (JSONObject) msgArray.get(i);
+			    	Message msg = new Message();
+			    	
+			    	msg.setId((String) chatter.get("_id"));
+			    	long msTime =  ((Long) chatter.get("dateCreated"));
+			    	msg.setSendDate(new Date(msTime));
+			    	msg.setReceiver((String) chatter.get("otherUserId"));
+			    	msg.setSender((String) chatter.get("userId"));
+			    	msg.setText((String) chatter.get("message"));
+			    	
+			    	messages.add(msg);
+		    	}
+		    	
+		    }
+		    else {
+		    	Master.appLogger.info(":: Problem with get for message..");
+		    }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			request.releaseConnection();
+		}
+		
+		return messages;
+	}
+
+	public void populateMessages(JTextArea notificationText) {
+		//first we need all the notifications.
+		Set<Message> messages = getAllNotifications();
+		
+		//we will only print the first 10, sorted by date.
+		List<Message> sorted = messages.stream().collect(Collectors.toList());
+		sorted.sort((m1, m2) -> m2.compareTo(m1));
+		
+		for(int i = 0; i < sorted.size() && i < 10; i++) {
+			if(i == 0) {
+				notificationText.setText(sorted.get(i).getText() + " --- Send time: " + sorted.get(i).getSendDate());
+			}
+			else {
+				notificationText.setText(notificationText.getText() + "\n\n" + 
+						sorted.get(i).getText() + " --- Send time: " + sorted.get(i).getSendDate());
+			}
+			
+		}
+		
+	}
 
 }

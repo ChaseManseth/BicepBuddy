@@ -29,6 +29,7 @@ import java.awt.event.WindowListener;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 /**
  * The Class DMView.
@@ -51,6 +52,7 @@ public class DMView extends JPanel {
 		this.setBounds(100, 100, 900, 550);
 		
 		JTextArea messageField = new JTextArea();
+		messageField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		messageField.setEditable(false);
 		messageField.setBounds(12, 13, 876, 441);
 		messageField.setWrapStyleWord(true);

@@ -16,10 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import Matching.Match;
-import Matching.MatchController;
-import Messaging.DMController;
-import Messaging.DMView;
 import Matching.Match.Status;
+import Matching.MatchController;
+import Messaging.DMView;
 import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
@@ -112,6 +111,15 @@ public class OtherProfileView extends JPanel {
 			JButton notifyBtn = new JButton("It's gym time " + u.getfName() + "!");
 			notifyBtn.setBackground(MaterialColors.GRAY_400);
 			notifyBtn.setForeground(Color.black);
+			
+			notifyBtn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					UserController.getInstance().notifyUser(u);
+				}
+				
+			});
 			
 			MaterialUIMovement.add(notifyBtn, MaterialColors.GRAY_600);
 			notifyBtn.addMouseListener(new MouseAdapter() {

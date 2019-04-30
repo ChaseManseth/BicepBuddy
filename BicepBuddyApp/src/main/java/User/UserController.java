@@ -568,12 +568,13 @@ public class UserController {
 		// Open the post response
 //		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpDelete request = new HttpDelete(baseUrl + u.getId());
+		System.out.println("The user's id" + u.getId());
 
 		try {
 			// Set headers
 			request.addHeader("content-type", "application/json");
-			request.addHeader("Authorization", "Bearer " + u.getJwt());
-			request.addHeader("id", u.getId());
+//			request.addHeader("Authorization", "Bearer " + u.getJwt());
+//			request.addHeader("id", u.getId());
 
 			// Execute the request
 			HttpResponse response = httpClient.execute(request);
@@ -1229,6 +1230,7 @@ public class UserController {
 						
 				    	User otherUser = new User(fName, lName, email, phone, age, gender, prefGender, goals, frequency,
 				    			timeOfDay, style, weight, experience);
+				    	otherUser.setId(id);
 
 			    		userList.add(otherUser);
 				    }

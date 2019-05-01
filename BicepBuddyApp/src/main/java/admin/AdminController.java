@@ -55,9 +55,8 @@ public class AdminController {
         DefaultPieDataset data = new DefaultPieDataset();
         String title =option + " Demographics";
         String [] attributes = new String [everybody.size()];
-        String [] possibilities = new String [5]; 
-        int [] counts = new int [5];
-
+        String [] possibilities = new String [0]; 
+        int [] counts = new int [0];
         for (int i =0; i<everybody.size();i++) {
         	switch (option) {
 				case "Gender":
@@ -74,8 +73,49 @@ public class AdminController {
 					}
 					attributes[i] = everybody.get(i).getWeight();
 					break;
+				case "Preferred":
+					if (i==0) {
+						possibilities =MatchAlgorithm.GENDERS; 
+						counts = new int [MatchAlgorithm.GENDERS.length];
+					}
+					attributes[i] = everybody.get(i).getPrefGender();
+					break;
+				case "Goals":
+					if (i==0) {
+						possibilities =MatchAlgorithm.GOALS; 
+						counts = new int [MatchAlgorithm.GOALS.length];
+					}
+					attributes[i] = everybody.get(i).getGoals();
+					break;
+				case "Frequency":
+					if (i==0) {
+						possibilities =MatchAlgorithm.FREQUENCIES; 
+						counts = new int [MatchAlgorithm.FREQUENCIES.length];
+					}
+					attributes[i] = everybody.get(i).getFrequency();
+					break;
+				case "Time":
+					if (i==0) {
+						possibilities =MatchAlgorithm.TIMES; 
+						counts = new int [MatchAlgorithm.TIMES.length];
+					}
+					attributes[i] = everybody.get(i).getTimeOfDay();
+					break;
+				case "Style":
+					if (i==0) {
+						possibilities =MatchAlgorithm.STYLES; 
+						counts = new int [MatchAlgorithm.STYLES.length];
+					}
+					attributes[i] = everybody.get(i).getStyle();
+					break;
+				case "Experience":
+					if (i==0) {
+						possibilities =MatchAlgorithm.EXPERIENCE; 
+						counts = new int [MatchAlgorithm.EXPERIENCE.length];
+					}
+					attributes[i] = everybody.get(i).getExperience();
+					break;
 			}
-        	
         }
         for (int i =0; i<everybody.size();i++) {
             for (int j = 0; j< possibilities.length; j++) {
@@ -91,10 +131,7 @@ public class AdminController {
 	            data.setValue(possibilities[j],counts[j]);
         	}
         }
-
         return ChartFactory.createPieChart(title,data,false,true,false);
-    }
-
-	
+    }	
 	
 }

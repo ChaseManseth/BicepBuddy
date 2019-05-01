@@ -693,7 +693,7 @@ public class UserController {
 			    Master.appLogger.info(":: Retrieving users by gender: " + gender);
 
 			    // Loop through each user
-			    for(int j = 0; j < userArr.size() && j < NUM_MATCHES_TO_GENERATE; j++) {
+			    for(int j = 0; j < userArr.size() /*&& j < NUM_MATCHES_TO_GENERATE*/; j++) {
 			    	JSONObject result = (JSONObject) userArr.get(j);
 
 			    	// Getting the data of that user

@@ -124,8 +124,6 @@ public class UserController {
 		return changesToMatches;
 	}
 
-
-
 	/**
 	 * Sets the changes to matches.
 	 *
@@ -134,8 +132,6 @@ public class UserController {
 	public void setChangesToMatches(boolean changesToMatches) {
 		this.changesToMatches = changesToMatches;
 	}
-
-
 
 	/**
 	 * Gets the user.
@@ -201,7 +197,7 @@ public class UserController {
 
 
 	/**
-	 * Validate signup.
+	 * Validate signup, but checking that all required fields have correct data.
 	 *
 	 * @param fName the f name
 	 * @param lname the lname
@@ -219,7 +215,6 @@ public class UserController {
 	 * @param pass the pass
 	 * @param confPass the conf pass
 	 */
-	//TODO
 	public void validateSignup(String fName, String lname, String email, String phone, String age,
 			String gender, String prefGender, String goals, String freq,
 			String timeOfDay, String style, String weight, String exp, String pass,
@@ -229,12 +224,6 @@ public class UserController {
 			ErrorGUI eg = new ErrorGUI("Required fields: first name, last name, email, password");
 			return;
 		}
-
-//		UserDB dbInstance = new UserDB();
-//		if(!dbInstance.notExists(email)) {
-//			ErrorGUI eg = new ErrorGUI("This email exists in the system already.");
-//			return;
-//		}
 
 		if(!pass.contentEquals(confPass)) {
 			ErrorGUI eg = new ErrorGUI("Make the passwords match to create account.");
@@ -262,7 +251,7 @@ public class UserController {
 	}
 
 	/**
-	 * Validate login.
+	 * Validate login, checks the database to see if a user can login with credentials in the parameters.
 	 *
 	 * @param email the email
 	 * @param pass the pass
@@ -270,12 +259,6 @@ public class UserController {
 	//TODO
 	@SuppressWarnings("unchecked")
 	public void validateLogin(String email, String pass) {
-//		UserDB udb = new UserDB();
-//		if(udb.login(email, pass)) {
-//			Master.appLogger.info(":: User was logged in.");
-//			Master.getInstance().loggedInMenuLoad();
-//			Master.getInstance().updateFrame(new ProfileView());
-//		}
 
 		// Actual Database login
 		// Create the object in JSON
@@ -284,7 +267,6 @@ public class UserController {
 		loginJSON.put("password", pass);
 
 		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(baseUrl + "login");
 
 		try {
@@ -351,42 +333,6 @@ public class UserController {
 				rejThread.start();
 				Thread waitThread = new Thread(new Threader(waiting, wait));
 				waitThread.start();
-				
-				// Accept Matches
-				/*for(int i = 0; i < accept.size(); i++) {
-					String matchId = (String) accept.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = MatchController.getMatchById(matchId);
-					accepted.add(m);
-
-					// System.out.println(matchId);
-				}
-
-				// Reject Matches
-				for(int i = 0; i < reject.size(); i++) {
-					String matchId = (String) reject.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = MatchController.getMatchById(matchId);
-					rejected.add(m);
-
-					//System.out.println(matchId);
-				}
-
-				// Waiting Matches
-				for(int i = 0; i < wait.size(); i++) {
-					String matchId = (String) wait.get(i);
-
-					// Create the Match
-					// TODO move function to MatchController
-					Match m = MatchController.getMatchById(matchId);
-					waiting.add(m);
-
-					//System.out.println(matchId);
-				}*/
 
 				// Build the user
 				user = new User(fName, lName, emailDB, phone, age, gender, prefGender,
@@ -396,10 +342,6 @@ public class UserController {
 				user.setId(id);
 				user.setJwt(jwt);
 				user.setProfilePic(profilePic);
-
-//				accThread.join();
-//				waitThread.join();
-//				rejThread.join();
 				
 				user.setAccepted(accepted);
 				user.setRejected(rejected);
@@ -424,7 +366,7 @@ public class UserController {
 
     // User Signup
 	/**
-     * Creates the user.
+     * Creates the user and stores it in the database and sets the static user.
      *
      * @param fName the f name
      * @param lName the l name
@@ -507,7 +449,6 @@ public class UserController {
 		signUpJSON.put("profilePic", picLoc);
 
 		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(baseUrl + "signup");
 
 		try {
@@ -526,8 +467,6 @@ public class UserController {
 		    JSONParser parse = new JSONParser();
 		    JSONObject o = (JSONObject) parse.parse(json);
 
-//		    System.out.println(o.toJSONString());
-
 		    // Successful Signup
 		    if(response.getStatusLine().getStatusCode() == 201) {
 		    	// Add the user Object Info
@@ -535,8 +474,6 @@ public class UserController {
 						frequency, timeOfDay, style, weight, experience);
 
 		    	// Add it to the DB
-				//UserDB udb = new UserDB();
-				//udb.addUser(user, password);
 
 				// Add the ID to the new User as well as the JWT
 				JSONObject userJSON = (JSONObject) o.get("user");
@@ -565,18 +502,13 @@ public class UserController {
 	}
 
 	/**
-	 * Delete account.
+	 * Delete account from the settings page and update database.
 	 *
 	 * @param u the u
 	 */
 	public void deleteAccount(User u) {
-//		UserDB udb = new UserDB();
-//		udb.deleteUser(u);
-//		Master.getInstance().getFrame().dispose();
-
 		// Actually Delete a User from the DB
 		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpDelete request = new HttpDelete(baseUrl + user.getId());
 
 		try {
@@ -610,7 +542,7 @@ public class UserController {
 	
 	
 	/**
-	 * Delete user.
+	 * Delete user from the database.
 	 *
 	 * @param u the u
 	 */
@@ -641,7 +573,7 @@ public class UserController {
 	}
 
 	/**
-	 * Edits the user.
+	 * Edits the user and updates user on the DB.
 	 *
 	 * @param email the email
 	 * @param fName the f name
@@ -661,12 +593,6 @@ public class UserController {
 	public void editUser(String email, String fName, String lName, Object style, Object timeOfDay,
 			Object gender, Object prefGender, Object freq, Object goal, Object weight, Object exp,
 			String age, String phone) {
-//		UserDB udb = new UserDB();
-//		if(udb.editUser(UserController.getUser(), email, fName, lName, (String) style, (String) timeOfDay,
-//				     (String) gender, (String) prefGender, (String) freq, (String) goal, (String) weight,
-//				     (String) exp, age, phone)) {
-//			SettingsView.saved();
-//		}
 
 		// Create the JSON to post to the API
 		JSONObject editProfileJSON = new JSONObject();
@@ -686,7 +612,6 @@ public class UserController {
 
 		// Actual DB edit User
 		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPatch request = new HttpPatch(baseUrl + user.getId());
 
 		try {
@@ -729,7 +654,7 @@ public class UserController {
 	}
 
 	/**
-	 * Gets the users by gender.
+	 * Gets the users by gender from the DB
 	 *
 	 * @param gender the gender
 	 * @return the users by gender
@@ -739,7 +664,6 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 
 		// Open the post response
-//		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpGet request;
 
 		// Chose the right url to query
@@ -766,9 +690,6 @@ public class UserController {
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// SUCCESS!
-
-		    	// Get response object
-//			    JSONObject o = (JSONObject) new JSONParser().parse(json);
 
 			    // Get the Array of Users
 			    JSONArray userArr = (JSONArray) new JSONParser().parse(json);
@@ -800,7 +721,6 @@ public class UserController {
 					String experience = (String) result.get("experience");
 					String profilePic = (String) result.get("profilePic");
 					
-					//TODO 
 					
 					List<Match> accepted = new ArrayList<Match>();
 					List<Match> rejected = new ArrayList<Match>();
@@ -825,55 +745,8 @@ public class UserController {
 					Thread waitThread = new Thread(new Threader(waiting, wait));
 					waitThread.start();
 			    	
-			    	/*for(int i = 0; i < accept.size(); i++) {
-						String matchId = (String) accept.get(i);
-
-						// Create the Match
-						Match m = MatchController.getMatchById(matchId);
-						accepted.add(m);
-
-						// System.out.println(matchId);
-					}
-
-					// Reject Matches
-					for(int i = 0; i < reject.size(); i++) {
-						String matchId = (String) reject.get(i);
-
-						// Create the Match
-						Match m =  MatchController.getMatchById(matchId);
-						rejected.add(m);
-
-						//System.out.println(matchId);
-					}
-
-					// Idle Matches
-//					for(int i = 0; i < idl.size(); i++) {
-//						String matchId = (String) idl.get(i);
-//
-//						// Create the Match
-//						// TODO move function to MatchController
-//						Match m =  MatchController.getMatchById(matchId);
-//						idle.add(m);
-//
-//					}
-
-					// Waiting Matches
-					for(int i = 0; i < wait.size(); i++) {
-						String matchId = (String) wait.get(i);
-
-						// Create the Match
-						Match m =  MatchController.getMatchById(matchId);
-						waiting.add(m);
-
-					}*/
-
-					// Add the Match Arrays to the User object
-//					accThread.join();
-//					waitThread.join();
-//					rejThread.join();
 					otherUser.setAccepted(accepted);
 					otherUser.setRejected(rejected);
-					//otherUser.setIdle(idle);
 					otherUser.setWaiting(waiting);
 
 		    		userList.add(otherUser);
@@ -896,7 +769,7 @@ public class UserController {
 
 
 	/**
-	 * Gets the user by id.
+	 * Gets the user by id from the database.
 	 *
 	 * @param id the id
 	 * @return the user by id
@@ -970,49 +843,6 @@ public class UserController {
 				Thread waitThread = new Thread(new Threader(waiting, wait));
 				waitThread.start();
 		    	
-		    	/*for(int i = 0; i < accept.size(); i++) {
-					String matchId = (String) accept.get(i);
-
-					// Create the Match
-					Match m = MatchController.getMatchById(matchId);
-					accepted.add(m);
-
-					// System.out.println(matchId);
-				}
-
-				// Reject Matches
-				for(int i = 0; i < reject.size(); i++) {
-					String matchId = (String) reject.get(i);
-
-					// Create the Match
-					Match m =  MatchController.getMatchById(matchId);
-					rejected.add(m);
-
-					//System.out.println(matchId);
-				}
-
-				// Idle Matches
-//				for(int i = 0; i < idl.size(); i++) {
-//					String matchId = (String) idl.get(i);
-//
-//					// Create the Match
-//					// TODO move function to MatchController
-//					Match m =  MatchController.getMatchById(matchId);
-//					idle.add(m);
-//
-//				}
-
-				// Waiting Matches
-				for(int i = 0; i < wait.size(); i++) {
-					String matchId = (String) wait.get(i);
-
-					// Create the Match
-					Match m =  MatchController.getMatchById(matchId);
-					waiting.add(m);
-
-				}*/
-
-
 				// Add the Match Arrays to the User object
 				newUser.setAccepted(accepted);
 				newUser.setRejected(rejected);
@@ -1035,11 +865,10 @@ public class UserController {
 	}
 	
 	/**
-	 * Update matched array state.
+	 * Update matched array state to the database.
 	 *
 	 * @param u the u
 	 */
-	// TODO - updateMatchedArrayState
 	@SuppressWarnings("unchecked")
 	public void updateMatchedArrayState(User u) {
 		JSONObject updateArrays = new JSONObject();
@@ -1123,7 +952,7 @@ public class UserController {
 	}
 	
 	/**
-	 * Only get user by id.
+	 * Only get user by id from the DB.
 	 *
 	 * @param id the id
 	 * @return the user
@@ -1239,7 +1068,7 @@ public class UserController {
 		}
 		
 		/**
-		 * Gets the all users.
+		 * Gets the all users from the database.
 		 *
 		 * @return the all users
 		 */
@@ -1318,7 +1147,7 @@ public class UserController {
 		}
 		
 	/**
-	 * Notify user.
+	 * Notify user that someone wants to lift with them.
 	 *
 	 * @param u the u
 	 */
@@ -1395,7 +1224,7 @@ public class UserController {
 	}
 	
 	/**
-	 * Gets the all notifications.
+	 * Gets the all notifications from the database
 	 *
 	 * @return the all notifications
 	 */
@@ -1455,7 +1284,7 @@ public class UserController {
 	}
 
 	/**
-	 * Populate messages.
+	 * Populate messages. Goes through the notification messages and addes it to the JtextArea
 	 *
 	 * @param notificationText the notification text
 	 */

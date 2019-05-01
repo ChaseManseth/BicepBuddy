@@ -358,10 +358,6 @@ public class User {
 		this.style = (String) style;
 		this.weight = (String) weight;
 		this.experience = (String) exp;
-		/*this.accepted = new ArrayList<>();
-		this.rejected = new ArrayList<>();
-		this.idle = new ArrayList<>();
-		this.waiting = new ArrayList<>();*/
 	}
 	
 	/* (non-Javadoc)

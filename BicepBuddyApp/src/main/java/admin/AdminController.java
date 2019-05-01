@@ -53,7 +53,7 @@ public class AdminController {
 	}
     public static JFreeChart getChart(List<User> everybody, String option) { 
         DefaultPieDataset data = new DefaultPieDataset();
-        String title =option + " Demographics";
+        String title =option + " Statistics";
         String [] attributes = new String [everybody.size()];
         String [] possibilities = new String [0]; 
         int [] counts = new int [0];

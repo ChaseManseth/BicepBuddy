@@ -46,6 +46,7 @@ public class AdminGui extends JPanel {
 
 	/** The table. */
 	private JTable table;
+	private ChartPanel chartPanel;
 
 	/**
 	 * Instantiates a new admin gui.
@@ -57,16 +58,21 @@ public class AdminGui extends JPanel {
 		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator Dashboard");
 		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblAdministrator.setBounds(290, 12, 299, 36);
+		lblAdministrator.setBounds(313, 16, 299, 36);
 		add(lblAdministrator);
-
-		JLabel lblTotalUsers = new JLabel("Total users:");
-		lblTotalUsers.setBounds(33, 72, 90, 15);
-		add(lblTotalUsers); 
+		
+        JLabel lblAllUsers = new JLabel("All " + userCount.toString() +" users");
+        lblAllUsers.setBounds(640, 151, 106, 15);
+        add(lblAllUsers);
+        
+		JLabel lblChoose = new JLabel("Choose:");
+		lblChoose.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblChoose.setBounds(33, 120, 66, 15);
+		add(lblChoose);
 
 		JButton btnRefresh = new JButton("Refresh ");
 		MaterialUIMovement.add(btnRefresh, MaterialColors.GRAY_600);
-		btnRefresh.setBounds(752, 23, 114, 25);
+		btnRefresh.setBounds(752, 27, 114, 25);
 		btnRefresh.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -75,31 +81,23 @@ public class AdminGui extends JPanel {
 		});
 		add(btnRefresh);
 		
-        ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,(String)("Gender")));
-        myPanel.setBounds(33, 151, 450, 350);
-        add(myPanel);
+		chartPanel = new ChartPanel(AdminController.getInstance().getChart(everybody,(String)("Gender")));
+        chartPanel.setBounds(33, 151, 450, 350);
+        add(chartPanel);
 
         JComboBox comboBox = new JComboBox(options);
-        comboBox.setBounds(156, 67, 150, 25);
+        comboBox.setBounds(109, 115, 150, 25);
         comboBox.setSelectedItem("Gender");
         add(comboBox);
         comboBox.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
-            	remove(myPanel);
-            	ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,(String)(comboBox.getSelectedItem())));
-                myPanel.setBounds(33, 151, 450, 350);
-                add(myPanel);
-                myPanel.revalidate();
-                myPanel.repaint();
+            	remove(chartPanel);
+            	chartPanel = new ChartPanel(AdminController.getInstance().getChart(everybody,(String)(comboBox.getSelectedItem())));
+                chartPanel.setBounds(33, 151, 450, 350);
+                add(chartPanel);
+                chartPanel.repaint();
             }
         });
-		JLabel lblNewLabel = new JLabel(userCount.toString());
-		lblNewLabel.setBounds(122, 72, 66, 15);
-		add(lblNewLabel);
-
-        JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(661, 151, 66, 15);
-        add(lblAllUsers);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(500, 180, 366, 321);

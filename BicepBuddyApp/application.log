@@ -1,6 +1,6 @@
-2019-04-30 19:59:33 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 19:59:34 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-30 19:59:44 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-30 19:59:44 INFO User.UserController getAllNotifications :: Getting all notifications for Bob
-2019-04-30 19:59:44 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 19:59:47 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 21:57:36 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 21:57:37 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 21:57:47 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 21:57:48 INFO User.UserController getAllNotifications :: Getting all notifications for Bob
+2019-04-30 21:57:48 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 21:57:50 INFO User.UserController getAllUsers :: Retrieving all users from the DB.

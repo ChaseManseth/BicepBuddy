@@ -1,71 +1,37 @@
-2019-04-30 22:17:52 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 22:17:53 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-30 22:18:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901adcaacc31bf511776d
-2019-04-30 22:18:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4bcaacc31bf51177f6
-2019-04-30 22:18:01 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-30 22:18:01 INFO User.UserController getAllNotifications :: Getting all notifications for Chase
-2019-04-30 22:18:01 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 22:18:13 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-30 22:18:13 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:18:13 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:19:57 INFO User.UserController getAllNotifications :: Getting all notifications for Chase
-2019-04-30 22:19:59 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
-2019-04-30 22:20:00 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe14caacc31bf5117752
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4bcaacc31bf51177f6
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe32caacc31bf5117753
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90c57caacc31bf51177da
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4acaacc31bf51177f5
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901cacaacc31bf5117773
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe14caacc31bf5117752
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901cacaacc31bf5117774
-2019-04-30 22:20:00 INFO Matching.MatchController createMatch :: Match generated with id 5cc9105dcaacc31bf51177f7
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4bcaacc31bf51177f6
-2019-04-30 22:20:00 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9033dcaacc31bf5117784
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f32caacc31bf51177ee
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4acaacc31bf51177f5
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9033dcaacc31bf5117785
-2019-04-30 22:20:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc9105ecaacc31bf51177f8
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90422caacc31bf5117792
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90422caacc31bf5117793
-2019-04-30 22:20:01 INFO Matching.MatchController createMatch :: Match generated with id 5cc9105ecaacc31bf51177f9
-2019-04-30 22:20:01 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042bcaacc31bf51177a0
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042ccaacc31bf51177a1
-2019-04-30 22:20:01 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-30 22:20:01 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 22:20:01 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042ccaacc31bf51177a1
-2019-04-30 22:20:01 INFO User.UserController onlyGetUserById :: Getting user Mark Zucc from DB WITHOUT their match info.
-2019-04-30 22:20:04 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
-2019-04-30 22:20:04 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 22:20:04 INFO User.UserController onlyGetUserById :: Getting user Mark Zucc from DB WITHOUT their match info.
-2019-04-30 22:20:05 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
-2019-04-30 22:20:05 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 22:20:05 INFO User.UserController onlyGetUserById :: Getting user Bob Rein from DB WITHOUT their match info.
-2019-04-30 22:20:06 INFO Matching.MatchGUI$4 actionPerformed :: MatchGUI right button action
-2019-04-30 22:20:06 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 22:20:06 INFO User.UserController onlyGetUserById :: Getting user Jason Bourne from DB WITHOUT their match info.
-2019-04-30 22:20:07 INFO Matching.MatchGUI$6 actionPerformed :: Accept button pressed
-2019-04-30 22:20:08 INFO User.UserController onlyGetUserById :: Getting user Jason Bourne from DB WITHOUT their match info.
-2019-04-30 22:20:08 INFO Matching.MatchController acceptMatchInitial :: Match sent from Chase Manseth to Jason Bourne
-2019-04-30 22:20:08 INFO User.UserController getUserById :: Getting user by ID: Jason Bourne from DB.
-2019-04-30 22:20:08 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe14caacc31bf5117752
-2019-04-30 22:20:08 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe32caacc31bf5117753
-2019-04-30 22:20:08 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
-2019-04-30 22:20:08 INFO User.UserController onlyGetUserById :: Getting user Bob Rein from DB WITHOUT their match info.
-2019-04-30 22:20:11 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-30 22:20:11 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:20:12 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:20:12 INFO User.UserController onlyGetUserById :: Getting user Jason Bourne from DB WITHOUT their match info.
-2019-04-30 22:20:16 INFO bicepBuddyPackage.Master$9 mouseClicked :: User logged out.
-2019-04-30 22:20:23 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901adcaacc31bf511776d
-2019-04-30 22:20:23 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4bcaacc31bf51177f6
-2019-04-30 22:20:23 INFO User.UserController getAllNotifications :: Getting all notifications for Chase
-2019-04-30 22:20:23 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9105dcaacc31bf51177f7
-2019-04-30 22:20:23 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 22:20:24 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-30 22:20:24 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:20:25 INFO User.UserController onlyGetUserById :: Getting user Zachary Steudel from DB WITHOUT their match info.
-2019-04-30 22:20:25 INFO User.UserController onlyGetUserById :: Getting user Jason Bourne from DB WITHOUT their match info.
-2019-04-30 22:20:53 INFO Views.FriendsList$2 mouseClicked :: Accessed incoming list for user Zachary Steudel
-2019-04-30 22:20:54 INFO User.UserController getAllNotifications :: Getting all notifications for Chase
+2019-04-30 22:39:00 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 22:39:01 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 22:39:33 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90c57caacc31bf51177da
+2019-04-30 22:39:33 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 22:39:33 INFO User.UserController getAllNotifications :: Getting all notifications for Ash
+2019-04-30 22:39:33 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 22:39:38 INFO User.UserController getUsersByGender :: Retrieving users by gender: Male
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc91217caacc31bf5117804
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90c57caacc31bf51177da
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc912bfcaacc31bf511780d
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe14caacc31bf5117752
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe32caacc31bf5117753
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9105dcaacc31bf51177f7
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4bcaacc31bf51177f6
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901cacaacc31bf5117773
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc901cacaacc31bf5117774
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe14caacc31bf5117752
+2019-04-30 22:39:38 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc912bfcaacc31bf511780d
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc912c2caacc31bf5117810
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc912c2caacc31bf5117810
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9033dcaacc31bf5117784
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9033dcaacc31bf5117785
+2019-04-30 22:39:39 INFO Matching.MatchController createMatch :: Match generated with id 5cc914fbcaacc31bf511781f
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f4acaacc31bf51177f5
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90f32caacc31bf51177ee
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90422caacc31bf5117792
+2019-04-30 22:39:39 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc90422caacc31bf5117793
+2019-04-30 22:39:39 INFO Matching.MatchController createMatch :: Match generated with id 5cc914fbcaacc31bf5117820
+2019-04-30 22:39:40 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042bcaacc31bf51177a0
+2019-04-30 22:39:40 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042ccaacc31bf51177a1
+2019-04-30 22:39:40 INFO Matching.MatchController createMatch :: Match generated with id 5cc914fccaacc31bf5117821
+2019-04-30 22:39:40 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc9042ccaacc31bf51177a1
+2019-04-30 22:39:40 INFO Matching.MatchController createMatch :: Match generated with id 5cc914fccaacc31bf5117822
+2019-04-30 22:39:40 INFO Matching.MatchController generateMatches :: Matches generated from algorithm and added to idle
+2019-04-30 22:39:40 INFO Matching.MatchGUI <init> :: Match generation called by MatchGUI
+2019-04-30 22:39:40 INFO Matching.MatchGUI setCurrentMatch :: Currently shown match updated
+2019-04-30 22:39:40 INFO User.UserController onlyGetUserById :: Getting user Jason Bourne from DB WITHOUT their match info.

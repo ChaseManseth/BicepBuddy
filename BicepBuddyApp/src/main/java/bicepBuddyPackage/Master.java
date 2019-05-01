@@ -395,35 +395,37 @@ public class Master {
 		});
 		menuBar.add(mnMatch);
 		
-		
-		JMenu administrator = new JMenu("Administrator"); 
-		administrator.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		administrator.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				menuBar.add(loadingLabel);
-				menuBar.revalidate();
-				menuBar.repaint();
-				
-				new SwingWorker<Void, Void>(){
-
-					@Override
-					protected Void doInBackground() throws Exception {
-						AdminController.generateFrame();
-						return null;
-					}
+		if(UserController.getUser()!=null && (UserController.getUser().getEmail().equalsIgnoreCase("chasemanseth@gmail.com")||
+				UserController.getUser().getEmail().equalsIgnoreCase("bob@rein.com")||
+				UserController.getUser().getEmail().equalsIgnoreCase("zacharysteudel@gmail.com"))){
+			JMenu administrator = new JMenu("Administrator"); 
+			administrator.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+			administrator.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					menuBar.add(loadingLabel);
+					menuBar.revalidate();
+					menuBar.repaint();
 					
-					protected void done() {
-						menuBar.remove(loadingLabel);
+					new SwingWorker<Void, Void>(){
+	
+						@Override
+						protected Void doInBackground() throws Exception {
+							AdminController.generateFrame();
+							return null;
+						}
 						
-						menuBar.revalidate();
-						menuBar.repaint();
-					}
-				}.execute();
-			}
-		});
-		menuBar.add(administrator);	
-
+						protected void done() {
+							menuBar.remove(loadingLabel);
+							
+							menuBar.revalidate();
+							menuBar.repaint();
+						}
+					}.execute();
+				}
+			});
+			menuBar.add(administrator);	
+		}
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		logout.addMouseListener(new MouseAdapter() {

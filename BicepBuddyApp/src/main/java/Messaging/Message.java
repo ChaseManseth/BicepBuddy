@@ -2,10 +2,6 @@ package Messaging;
 
 import java.util.Date;
 
-import User.User;
-
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Message.
  *

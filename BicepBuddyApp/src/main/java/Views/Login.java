@@ -1,19 +1,9 @@
-
 package Views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingWorker;
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,16 +12,20 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.border.MatteBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import User.UserController;
 import bicepBuddyPackage.Master;
-import bicepBuddyPackage.Threader;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-import javax.swing.JPasswordField;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Login.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -45,7 +39,7 @@ public class Login extends JPanel {
 	private JPasswordField passwordField;
 
 	/**
-	 * Create the panel.
+	 * Create the panel and add function listeners for any actions.
 	 */
 	public Login() {
 		

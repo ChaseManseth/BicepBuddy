@@ -11,33 +11,32 @@ import java.util.Map;
 import User.User;
 import User.UserController;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatchAlgorithm.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class MatchAlgorithm {
-	
+
 	/** The critical value. */
 	//Priority % value
 	private static int criticalValue = 100; // Pass or fail
-	
+
 	/** The important value. */
 	private static int importantValue = 40;
-	
+
 	/** The pref value. */
 	private static int prefValue = 30;
-	
+
 	/** The minor value. */
 	private static int minorValue = 20;
-	
+
 	/** The quality value. */
 	private static int qualityValue = 10;
-	
+
 	/** The prioritycount. */
 	//Number of priorities
 	public static int PRIORITYCOUNT = 5;
-	
+
 	/** The matchesreturned. */
 	//Number of matches returned
 	public static int MATCHESRETURNED = 10;
@@ -47,70 +46,70 @@ public class MatchAlgorithm {
 	 */
 	//Use .ordinal for rank 1-5
 	enum Priority{
-		
+
 		/** The Critical. */
-		Critical, 
- /** The Important. */
- //Pass or fail
+		Critical,
+		/** The Important. */
+		//Pass or fail
 		Important,
-		
+
 		/** The Preference. */
 		Preference,
-		
+
 		/** The Minor. */
 		Minor,
-		
+
 		/** The Quality. */
 		Quality
 	};
-	
+
 	/** The pref gender priority. */
 	//Used for calculating priorities
 	private static Priority prefGenderPriority = Priority.Critical;
-	
+
 	/** The weight priority. */
 	private static Priority weightPriority = Priority.Preference;
-	
+
 	/** The style priority. */
 	private static Priority stylePriority = Priority.Important;
-	
+
 	/** The time priority. */
 	private static Priority timePriority = Priority.Important;
-	
+
 	/** The freq priority. */
 	private static Priority freqPriority = Priority.Minor;
-	
+
 	/** The goal priority. */
 	private static Priority goalPriority = Priority.Quality;
-	
+
 	/** The exp priority. */
 	private static Priority expPriority = Priority.Preference;
-	
+
 	/** The age priority. */
 	private static Priority agePriority = Priority.Minor;
-	
+
 	/** The genders. */
 	//String arrays for preferences
 	public static String GENDERS[] = {"N/A", "Male","Female"};
-	
+
 	/** The weightclass. */
 	public static String WEIGHTCLASS[] = {"N/A", "<100","100-125","125-150","150-175","175-200","200-225","225-250","250-275","275-300","300+"};
-	
+
 	/** The styles. */
 	public static String STYLES[] = {"N/A", "Cardio","Weights","Power Lifting","Body Building"};
-	
+
 	/** The times. */
 	public static String TIMES[] = {"N/A", "Early Morning","Morning","Afternoon","Evening"};
-	
+
 	/** The frequencies. */
 	public static String FREQUENCIES[] = {"N/A", "Once","3 Times","5 Times","Every Day","Multiple Times"};
-	
+
 	/** The goals. */
 	public static String GOALS[] = {"N/A", "Lose Weight","Stay Healthy","Get Healthy","Gain Weight","Get Swole","I'm Addicted"};
-	
+
 	/** The experience. */
 	public static String EXPERIENCE[] = {"N/A", "None","Little","Moderate","Regular","Experienced"};
-	
+
 	/** The ages. */
 	public static String AGES[] = {"<18","19-20","21-22","23-24","25-26","27+"};
 
@@ -119,20 +118,20 @@ public class MatchAlgorithm {
 	 * Instantiates a new match algorithm.
 	 */
 	public MatchAlgorithm() {}
-	
+
 	/**
 	 * Direct match.
+	 * GET MATCH BY ID to get Strength
 	 *
 	 * @param other the other
 	 * @return the match
 	 */
-	// GET MATCH BY ID to get Strength
 	public static Match directMatch(User other) {
 		Match m = new Match(UserController.getUser(),other,calculateRatios(other));
-		
+
 		// Create the match in the DB
 		m.setId(MatchController.createMatch(m));
-		
+
 		return m;
 	}
 
@@ -170,9 +169,9 @@ public class MatchAlgorithm {
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
         	Match temp = new Match(UserController.getUser().getId(),m.getKey().getId(),0);
         	//Checking accepted, rejected, and idle arrays
-        	if (UserController.getUser().getAccepted().contains(temp) || 
-        			UserController.getUser().getRejected().contains(temp) || 
-        			UserController.getUser().getWaiting().contains(temp) || 
+        	if (UserController.getUser().getAccepted().contains(temp) ||
+        			UserController.getUser().getRejected().contains(temp) ||
+        			UserController.getUser().getWaiting().contains(temp) ||
         			UserController.getUser().getId().equals(m.getKey().getId())) {
         		toRemove.add(m.getKey());
         	}
@@ -186,35 +185,35 @@ public class MatchAlgorithm {
         Integer counter = 0;
         for (Map.Entry<User, Integer> m : ratios.entrySet()) {
         	Match match = new Match(UserController.getUser(),m.getKey(),m.getValue());
-        	
+
         	// Create the match in the DB
     		String id = MatchController.createMatch(match);
     		// Set the id of the Match
     		match.setId(id);
-        	
+
         	matches.add(match);
         	counter++;
         	if (counter > MATCHESRETURNED) {
         		break;
         	}
         }
-        
+
         Collections.sort(matches, new Comparator<Match>() {
 			public int compare(Match o1, Match o2) {
 				return -1 * (o1.getStrength()).compareTo(o2.getStrength());
 			}
         });
-        
+
 
 		return matches;
 	}
 
 	/**
 	 * Possible matches.
+	 * Get all possible users who fit the Priority 1 Category
 	 *
 	 * @return the list
 	 */
-	//Get all possible users who fit the Priority 1 Category
 	public static List<User> possibleMatches(){
 		// Gets a list of users based on the current users prefered gender
 		List<User> users1 = UserController.getInstance().getUsersByGender(UserController.getUser().getPrefGender());
@@ -223,7 +222,7 @@ public class MatchAlgorithm {
 	}
 
 	/**
-	 * Calculate ratios.
+	 * Calculate ratios all matches.
 	 *
 	 * @param other the other
 	 * @return the integer
@@ -287,16 +286,16 @@ public class MatchAlgorithm {
 		result /= PRIORITYCOUNT;
 		return result;
 	}
-	
+
 	/**
 	 * Calculate ratio.
+	 * Calculates ratio between 2 users
 	 *
 	 * @param length the length
 	 * @param userOptIdx the user opt idx
 	 * @param otherOptIdx the other opt idx
 	 * @return the integer
 	 */
-	//Calculates ratio between 2 users
 	public static Integer calculateRatio(Integer length,Integer userOptIdx,Integer otherOptIdx) {
 		Integer data = userOptIdx - otherOptIdx;
 		if (data < 0) {

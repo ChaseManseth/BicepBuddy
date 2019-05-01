@@ -1,7 +1,6 @@
 package Matching;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -20,7 +19,6 @@ import User.User;
 import User.UserController;
 import bicepBuddyPackage.Master;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatchController.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -115,7 +113,6 @@ public class MatchController {
 	 *
 	 * @param match the match
 	 */
-	//************************************************************************************************************************
 	public static void acceptMatchInitial(Match match) {
 		Master.appLogger.info(":: Match sent from " + 
 				UserController.getUser().toString() + " to " + 
@@ -236,12 +233,11 @@ public class MatchController {
 	}
 	
 	/**
-	 * Gets the match by id.
+	 * Gets the match by id from the database.
 	 *
 	 * @param id the id
 	 * @return the match by id
 	 */
-	// TODO - getMatchById
 	public static Match getMatchById(String id) {
 		Master.appLogger.info(":: Match fully fetched with id " + id);
 		
@@ -296,15 +292,14 @@ public class MatchController {
 	
 	/**
 	 * Creates the match.
+	 * Create a Match in the DB
 	 *
 	 * @param m the m
 	 * @return the string
 	 */
-	// Create a Match in the DB
 	@SuppressWarnings("unchecked")
 	public static String createMatch(Match m) {
 		String id = "";
-		
 		
 		// Create the Post JSON
 		JSONObject createMatchJSON = new JSONObject();
@@ -361,10 +356,10 @@ public class MatchController {
 	
 	/**
 	 * Update match.
+	 * Update an Existing Match in the DB
 	 *
 	 * @param m the m
 	 */
-	// Update an Existing Match in the DB
 	@SuppressWarnings("unchecked")
 	public static void updateMatch(Match m) {
 		Master.appLogger.info(":: Match updated with id " + m.getId());

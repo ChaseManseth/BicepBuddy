@@ -9,7 +9,6 @@ import java.util.List;
 import Matching.Match;
 import Messaging.Message;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class User.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook

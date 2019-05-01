@@ -3,10 +3,14 @@ package BicepTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.swing.JTextArea;
 
 import org.junit.After;
 import org.junit.jupiter.api.Test;
 
+import Messaging.Message;
 import User.User;
 import User.UserController;
 import Views.ProfileView;
@@ -116,15 +120,16 @@ public class UserTests {
 	
 	@Test
 	public void getsCorrectUserByID() {
-		User u = UserController.getInstance().getUserById("5cc7c4c38554b0748e750726");
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		User u = UserController.getInstance().getUserById(UserController.getUser().getId());
 		
-		assertTrue(u.getId().contentEquals("5cc7c4c38554b0748e750726"));
-		assertTrue(u.getEmail().contentEquals("chasemanseth@gmail.com"));
+		assertTrue(u.getId().contentEquals(UserController.getUser().getId()));
+		assertTrue(u.getEmail().contentEquals("zacharysteudel@gmail.com"));
 	}
 	
 	@Test
 	public void onlyGetUserByIdDoesntGetMatches() {
-		User u = UserController.getInstance().onlyGetUserById("5cc7c4c38554b0748e750726");
+		User u = UserController.getInstance().onlyGetUserById("5cc8e687caacc31bf511763c");
 		
 		assertTrue(u.getAccepted().isEmpty());
 		assertTrue(u.getWaiting().isEmpty());
@@ -138,5 +143,40 @@ public class UserTests {
 						
 		assertTrue(!UserController.getUser().getAccepted().isEmpty());
 		UserController.setUser(null);
+	}
+	
+	@Test
+	public void getAllUsersNotEmpty() {
+		List<User> users = UserController.getInstance().getAllUsers();
+		assertTrue(!users.isEmpty());
+	}
+	
+	@Test
+	public void notificationsNotEmpty() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		
+		Set<Message> notifications = UserController.getInstance().getAllNotifications();
+		
+		assertTrue(!notifications.isEmpty());
+		
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void populateNotificationsTest() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		
+		JTextArea jt = new JTextArea();
+		UserController.getInstance().populateMessages(jt);
+		assertTrue(!jt.getText().isEmpty());
+		
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void testUserEquals() {
+		User u = new User();
+		User y = u;
+		assertTrue(u.equals(y));
 	}
 }

@@ -1,33 +1,15 @@
 package Messaging;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import java.util.logging.Level;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,8 +24,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import User.User;
-import bicepBuddyPackage.Master;
 import User.UserController;
+import bicepBuddyPackage.Master;
 
 /**
  * The Class DMController.
@@ -57,14 +39,26 @@ public class DMController{
 	/** The dm view. */
 	private DMView dmView = null;
 	
+	/** The num messages. */
 	private int numMessages = 0;
 		
+	/** The loading cont. */
 	public boolean loadingCont = true;
 	
+	/**
+	 * Gets the num messages.
+	 *
+	 * @return the num messages
+	 */
 	public int getNumMessages() {
 		return numMessages;
 	}
 
+	/**
+	 * Sets the num messages.
+	 *
+	 * @param numMessages the new num messages
+	 */
 	public void setNumMessages(int numMessages) {
 		this.numMessages = numMessages;
 	}
@@ -139,19 +133,7 @@ public class DMController{
 		updateMessages();
 	}
 	
-	/*
-	 * Updates the DMView
-	 */
-	/*public void updateView() {
-		dmView.update(dm.getSorted());
-	}*/
-	
-	
-	
 	/**
-	 * Update messages.
-	 */
-	/*
 	 * Updates all messages and the DMView
 	 */
 	public void updateMessages() {
@@ -162,14 +144,11 @@ public class DMController{
 	
 	
 	/**
-	 * Gets the single instance of DMController.
+	 * Gets the single instance of DMController. Creates instance if it does not exist or the partner changes
 	 *
 	 * @param partner the partner
 	 * @param dmView the dm view
 	 * @return single instance of DMController
-	 */
-	/*
-	 * Creates instance if it does not exist or the partner changes
 	 */
 	public static DMController getInstance(User partner, DMView dmView) {
 		// If not made, make one; if different User, refresh
@@ -185,18 +164,16 @@ public class DMController{
 	
 	/**
 	 * Gets the single instance of DMController.
+	 * Should only be used to get an already existing DMController instance
 	 *
 	 * @return single instance of DMController
-	 */
-	/*
-	 * Should only be used to get an already existing DMController instance
 	 */
 	public static DMController getInstance() {
 		return controller;
 	}
 	
 	/**
-	 * Send message.
+	 * Send message and add it to the database.
 	 *
 	 * @param msg the msg
 	 */
@@ -248,7 +225,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Gets the chat by id.
+	 * Gets the chat by id from the database.
 	 *
 	 * @param id the id
 	 * @return the chat by id
@@ -298,7 +275,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Gets the message list.
+	 * Gets the message list from the database.
 	 *
 	 * @param otherID the other ID
 	 * @return the message list
@@ -406,17 +383,16 @@ public class DMController{
 	}
 
 	/**
-	 * Populate messages.
+	 * Populate messages to the JtextArea upon receiving updated data.
 	 *
 	 * @param messageField the message field
 	 */
-	public void populateMessages(JTextArea messageField, JScrollPane pane) {
+	public void populateMessages(JTextArea messageField) {
 		// first get the sorted message list
 		updateMessages();
 		List<Message> sortedMessages = dm.getSorted();
 		if(getNumMessages() != sortedMessages.size()) {
 			Master.appLogger.info(":: Populating messages");
-			int pos = messageField.getCaretPosition();
 			setNumMessages(sortedMessages.size());
 			messageField.setText("");
 			
@@ -430,7 +406,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Adds the message.
+	 * Adds the message to the JTextField.
 	 *
 	 * @param messageField the message field
 	 * @param message the message
@@ -447,111 +423,3 @@ public class DMController{
 		}
 	}
 }
-
-/*
- * Creates message to send, adds it to DM instance, updates the DMView accordingly
- */
-/*public void sendMessage(String text) {
-	Message message = new Message(UserController.getUser(), dm.getPartner(), Calendar.getInstance().getTime(), text);
-	dm.add(message);
-	updateView();
-	saveMessage(message);
-}*/
-
-/*
- * Writes all Messages from DM instance to csv file
- */
-/*public static void saveMessage(Message message) {
-	BufferedWriter writer = null;
-	try {
-		writer = new BufferedWriter(new FileWriter(MESSAGE_FILE, true));
-		
-		String line = message.getSender()getId()
-				+ "," + message.getReceiver().getId()
-				+ "," + DATE_FORMAT.format(message.getSendDate())
-				+ "," + message.getText().replaceAll("[^\\p{L}\\p{Z}]","");
-		
-		writer.write(line);
-		writer.newLine();
-		
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} finally {
-		if(writer != null) {
-			try {
-				writer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Master.appLogger.log(Level.WARNING, e.getMessage());
-			}
-		}
-	}
-}*/
-
-/*
- * Reads all Messages from csv file that were sent by the logged in user and
- * received by the specified User
- */
-/*public static Set<Message> loadMessages(User partner) {
-	Set<Message> messages = new HashSet<>();
-	
-	BufferedReader reader = null;
-	try {
-		reader = new BufferedReader(new FileReader(MESSAGE_FILE));
-		
-		String line = new String();
-		while((line = reader.readLine()) != null) {
-			String[] split = line.split(",");
-			
-			if(split.length == 4) {
-				User sender = null, receiver = null;
-				Date sendDate = null;
-				Message message = null;
-				UserController uc = UserController.getInstance();
-				
-				sender = uc.getUserById(split[0]);
-				receiver = uc.getUserById(split[1]);
-				
-				// Filter out messages not applicable
-				if((sender.getId().equals(UserController.getUser().getId()) && receiver.getId().equals(partner.getId()))
-						|| (sender.getId().equals(partner.getId()) && receiver.getId().equals(UserController.getUser().getId()))) {
-				
-					try {
-						sendDate = DATE_FORMAT.parse(split[2]);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Master.appLogger.log(Level.WARNING, e.getMessage());
-						sendDate = new Date();
-					}
-					String text = split[3];
-					message = new Message(sender, receiver, sendDate, text);
-					messages.add(message);
-				}
-			}
-		}
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} finally {
-		if(reader != null) {
-			try {
-				reader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Master.appLogger.log(Level.WARNING, e.getMessage());
-			}
-		}
-	}
-	
-	return messages;
-}*/

@@ -1,20 +1,25 @@
 package Views;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.UIManager;
 
 import bicepBuddyPackage.Master;
 
-import java.awt.Color;
+/**
+ * The Class MatchGUI.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LoadingView.
  */
 public class LoadingView extends JPanel{
+	
+	/** The loading field. */
 	private JTextField loadingField;
 	
 	/**

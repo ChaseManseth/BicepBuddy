@@ -2,30 +2,42 @@ package admin;
 
 import User.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminTableModelRow.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class AdminTableModelRow {
 	
 	/** User whose data is used for this row. */
 	User myUser;
 	
-	/**  */
+	/** The delete string. */
 	String deleteString = "delete";
 	
-	/**  */
+	/** The view string. */
 	String viewString = "view";
 	
-	/** Gets the user for this row. */
+	/**
+	 *  Gets the user for this row.
+	 *
+	 * @return the my user
+	 */
 	public User getMyUser() {
 		return myUser;
 	}
 	
+	/**
+	 * Instantiates a new admin table model row.
+	 */
 	public AdminTableModelRow() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Instantiates this row with data from myUser
-	 * 
+	 * Instantiates this row with data from myUser.
+	 *
 	 * @param myUser the User whose data will populate this row
 	 */
 	public AdminTableModelRow(User myUser) {
@@ -34,8 +46,8 @@ public class AdminTableModelRow {
 	}
 
 	/**
-	 * Update value of this row's myUser
-	 * 
+	 * Update value of this row's myUser.
+	 *
 	 * @param myUser new User
 	 */
 	public void setMyUser(User myUser) {
@@ -43,8 +55,8 @@ public class AdminTableModelRow {
 	}
 	
 	/**
-	 * Gets the deleteString
-	 * 
+	 * Gets the deleteString.
+	 *
 	 * @return deleteString
 	 */
 	public String getDeleteString() {
@@ -52,8 +64,8 @@ public class AdminTableModelRow {
 	}
 	
 	/**
-	 * Updates the value of deleteString
-	 * 
+	 * Updates the value of deleteString.
+	 *
 	 * @param deleteString new value
 	 */
 	public void setDeleteString(String deleteString) {
@@ -61,8 +73,8 @@ public class AdminTableModelRow {
 	}
 	
 	/**
-	 * Gets the viewString
-	 * 
+	 * Gets the viewString.
+	 *
 	 * @return viewString
 	 */
 	public String getViewString() {
@@ -70,8 +82,8 @@ public class AdminTableModelRow {
 	}
 	
 	/**
-	 * Updates the viewString
-	 * 
+	 * Updates the viewString.
+	 *
 	 * @param viewString new value
 	 */
 	public void setViewString(String viewString) {

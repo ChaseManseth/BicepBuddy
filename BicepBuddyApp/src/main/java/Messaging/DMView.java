@@ -3,15 +3,13 @@
  */
 package Messaging;
 
-import javax.swing.Box;
-import javax.swing.Box.Filler;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.concurrent.Semaphore;
 
-import Matching.Match;
-import Matching.MatchController;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,21 +21,6 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.utils.MaterialColors;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
-import java.util.Calendar;
-import java.util.List;
-import java.util.concurrent.Semaphore;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-
 /**
  * The Class DMView.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -47,10 +30,11 @@ public class DMView extends JPanel {
 	/** The message sender. */
 	private JTextField messageSender;
 	
+	/** The text update semaphore. */
 	public Semaphore textUpdateSem = new Semaphore(1);
 	
 	/**
-	 * Instantiates a new DM view.
+	 * Instantiates a new DM view with asynchronous messaging.
 	 *
 	 * @param otherUser the other user
 	 */
@@ -108,7 +92,7 @@ public class DMView extends JPanel {
 		messagePane.setVisible(true);
 		add(messagePane);
 		
-		DMController.getInstance().populateMessages(messageField, messagePane);
+		DMController.getInstance().populateMessages(messageField);
 		
 		//SWING WORKER THAT CONTINUALLY POPULATES MESSAGES
 		new SwingWorker<Void, Void>(){
@@ -119,7 +103,7 @@ public class DMView extends JPanel {
 				//acquire permit
 				while(Master.getInstance().stop == false) {
 					textUpdateSem.acquire();
-					DMController.getInstance().populateMessages(messageField, messagePane);
+					DMController.getInstance().populateMessages(messageField);
 					textUpdateSem.release();
 					
 					Thread.sleep(3000);
@@ -127,51 +111,6 @@ public class DMView extends JPanel {
 				return null;
 			}
 		}.execute();
-		
-				
-		/*JTextField messageField = new JTextField("Enter message here...");
-		messageField.setBounds(0, 356, 830, -356);
-		messageField.setColumns(25);
-		messageField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("send")) {
-					DMController controller = DMController.getInstance();
-					Master.appLogger.info(":: Message Field triggered!");
-					
-					Message message = new Message(UserController.getUser().getId(), otherUser.getId(), 
-							Calendar.getInstance().getTime(), messageField.getText());
-					controller.sendMessage(message);
-					messageField.setText("");
-				}
-				
-			}
-		});
-		messageField.setActionCommand("send");
-		
-		JButton sendButton = new JButton("Send");
-		sendButton.setBounds(0, 149, 194, -149);
-		sendButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("send")) {
-					DMController controller = DMController.getInstance();
-					Master.appLogger.info(":: Message Field triggered!");
-					
-					Message message = new Message(UserController.getUser().getId(), otherUser.getId(), 
-							Calendar.getInstance().getTime(), messageField.getText());
-					controller.sendMessage(message);
-					messageField.setText("");
-				}
-				
-			}
-		});
-		sendButton.setActionCommand("send");
-		
-		this.add(messageField);
-		this.add(sendButton);*/
-				
-		//mainPanel.setBackground(Color.GRAY);
 				
 	}
 }

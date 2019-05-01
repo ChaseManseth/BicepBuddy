@@ -20,7 +20,7 @@ import bicepBuddyPackage.Master;
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class AdminController {
-	
+
 	/** The http client. */
 	private static HttpClient httpClient = HttpClientBuilder.create().build();
 	// Testing
@@ -28,17 +28,17 @@ public class AdminController {
 	/** The base url. */
 	// Production
 	private static String baseUrl = "http://bb.manseth.com/match/";
-	
+
 	/** The myadmin. */
 	private static AdminController myadmin = null;
-	
+
 	/**
 	 * Generate frame.
 	 */
 	public static void generateFrame() {
 		Master.updateFrame(new AdminGui());
 	}
-	
+
 	/**
 	 * Gets the single instance of AdminController.
 	 *
@@ -51,66 +51,74 @@ public class AdminController {
 		}
 		return myadmin;
 	}
-    public static JFreeChart getChart(List<User> everybody, String option) { 
+
+    /**
+     * Gets the chart to display user data.
+     *
+     * @param everybody the everybody
+     * @param option the option
+     * @return the chart
+     */
+    public static JFreeChart getChart(List<User> everybody, String option) {
         DefaultPieDataset data = new DefaultPieDataset();
         String title =option + " Statistics";
         String [] attributes = new String [everybody.size()];
-        String [] possibilities = new String [0]; 
+        String [] possibilities = new String [0];
         int [] counts = new int [0];
         for (int i =0; i<everybody.size();i++) {
         	switch (option) {
 				case "Gender":
 					if (i==0) {
-						possibilities =MatchAlgorithm.GENDERS; 
+						possibilities =MatchAlgorithm.GENDERS;
 						counts = new int [MatchAlgorithm.GENDERS.length];
 					}
 					attributes[i] = everybody.get(i).getGender();
 					break;
 				case "Weight":
 					if (i==0) {
-						possibilities =MatchAlgorithm.WEIGHTCLASS; 
+						possibilities =MatchAlgorithm.WEIGHTCLASS;
 						counts = new int [MatchAlgorithm.WEIGHTCLASS.length];
 					}
 					attributes[i] = everybody.get(i).getWeight();
 					break;
 				case "Preferred":
 					if (i==0) {
-						possibilities =MatchAlgorithm.GENDERS; 
+						possibilities =MatchAlgorithm.GENDERS;
 						counts = new int [MatchAlgorithm.GENDERS.length];
 					}
 					attributes[i] = everybody.get(i).getPrefGender();
 					break;
 				case "Goals":
 					if (i==0) {
-						possibilities =MatchAlgorithm.GOALS; 
+						possibilities =MatchAlgorithm.GOALS;
 						counts = new int [MatchAlgorithm.GOALS.length];
 					}
 					attributes[i] = everybody.get(i).getGoals();
 					break;
 				case "Frequency":
 					if (i==0) {
-						possibilities =MatchAlgorithm.FREQUENCIES; 
+						possibilities =MatchAlgorithm.FREQUENCIES;
 						counts = new int [MatchAlgorithm.FREQUENCIES.length];
 					}
 					attributes[i] = everybody.get(i).getFrequency();
 					break;
 				case "Time":
 					if (i==0) {
-						possibilities =MatchAlgorithm.TIMES; 
+						possibilities =MatchAlgorithm.TIMES;
 						counts = new int [MatchAlgorithm.TIMES.length];
 					}
 					attributes[i] = everybody.get(i).getTimeOfDay();
 					break;
 				case "Style":
 					if (i==0) {
-						possibilities =MatchAlgorithm.STYLES; 
+						possibilities =MatchAlgorithm.STYLES;
 						counts = new int [MatchAlgorithm.STYLES.length];
 					}
 					attributes[i] = everybody.get(i).getStyle();
 					break;
 				case "Experience":
 					if (i==0) {
-						possibilities =MatchAlgorithm.EXPERIENCE; 
+						possibilities =MatchAlgorithm.EXPERIENCE;
 						counts = new int [MatchAlgorithm.EXPERIENCE.length];
 					}
 					attributes[i] = everybody.get(i).getExperience();
@@ -132,6 +140,6 @@ public class AdminController {
         	}
         }
         return ChartFactory.createPieChart(title,data,false,true,false);
-    }	
-	
+    }
+
 }

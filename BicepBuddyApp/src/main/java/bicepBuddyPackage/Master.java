@@ -2,57 +2,51 @@ package bicepBuddyPackage;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Insets;
-import java.awt.Rectangle;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import Matching.MatchController;
+import Matching.MatchGUI;
 import Messaging.DMController;
-import Messaging.DMView;
 import User.UserController;
-import User.UserDB;
 import Views.FriendsList;
 import Views.Login;
-import Views.OtherProfileView;
 import Views.ProfileView;
 import Views.SettingsView;
 import Views.Signup;
 import admin.AdminController;
-import admin.AdminGui;
 import mdlaf.MaterialLookAndFeel;
 
-import java.awt.ComponentOrientation;
-import javax.swing.JMenu;
-import java.awt.Font;
-import javax.swing.JLabel;
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class Master.
+ * The Class Master. Master is the central hub of the program. It has the Master frame 
+ * where the panels with the Bicep Buddy Application live. Example of the MEDIATOR PATTERN,
+ * where Master will act as a midway between panels as the program transitions views. 
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class Master {
 
-	/** The Constant appLogger. */
+	/** The Logger for the program. */
 	public final static Logger appLogger = Logger.getLogger(Master.class.getName());
 	//master is an example of the COMPOSITE PATTERN
-	/** The master. */
+	/** The master frame. */
 	//holds all of the components (views)
 	private static Master master = null;
+	
+	/** This boolean will act as a flag for the DM semaphore. */
 	public boolean stop = true;
 
 	//create static logger (SINGLETON PATTERN)
@@ -65,46 +59,66 @@ public class Master {
 			appLogger.info(":: Beginning Swing App");
 
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	
 
-	/** The frame. */
+	/** The frame of the program. */
 	private static JFrame frame;
 	
-	/** The panel. */
+	/** The panel that is currently being shown. */
 	private static JPanel panel;
 	
+	/** The loading label for when a new action is loading. */
 	private JLabel loadingLabel = new JLabel("Loading . . .");
 	
+	/** The menu bar that holds the main travel dock for going between views.. */
 	private JMenuBar menuBar;
 	
+	/**
+	 * Gets the menu bar.
+	 *
+	 * @return the menu bar
+	 */
 	public JMenuBar getMenuBar() {
 		return menuBar;
 	}
 
+	/**
+	 * Sets the menu bar.
+	 *
+	 * @param menuBar the new menu bar
+	 */
 	public void setMenuBar(JMenuBar menuBar) {
-		menuBar = menuBar;
+		this.menuBar = menuBar;
 	}
 	
 	
 
+	/**
+	 * Gets the loading label.
+	 *
+	 * @return the loading label
+	 */
 	public JLabel getLoadingLabel() {
 		return loadingLabel;
 	}
 
+	/**
+	 * Sets the loading label.
+	 *
+	 * @param loadingLabel: the new loading label
+	 */
 	public void setLoadingLabel(JLabel loadingLabel) {
 		this.loadingLabel = loadingLabel;
 	}
 
 	/**
-	 * Gets the single instance of Master.
+	 * Gets the single instance of Master Frame.
 	 *
 	 * @return single instance of Master
 	 */
@@ -119,16 +133,17 @@ public class Master {
 	}
 
 	/**
-	 * Launch the application.
+	 * Launch the application, instantiate the singleton Master Frame.
 	 *
-	 * @param args the arguments
+	 * @param args: command-line args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new MaterialLookAndFeel());
-					Master.getInstance().frame.setVisible(true);
+					Master.getInstance();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -137,7 +152,7 @@ public class Master {
 	}
 
 	/**
-	 * Create the application.
+	 * Launch the application.
 	 */
 	public Master() {
 		initialize();
@@ -226,9 +241,10 @@ public class Master {
 	}
 
 	/**
-	 * Update frame.
+	 * Update frame. Switches out the panel and destroys the memory 
+	 * associated with the previous panels.
 	 *
-	 * @param j the j
+	 * @param j: new panel to be switched in to the frame.
 	 */
 	//FACADE: Handles switching out the panel every time we change views.
 	public static void updateFrame(JPanel j) {
@@ -238,12 +254,8 @@ public class Master {
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
-		//panel.setVisible(false);
-		//panel = j;
-		//panel.setVisible(true);
-		// remove the current JPanel so that our frame doesn't have a billion
-		// panels in it when we switch views a bunch
-		//frame.remove(frame.getContentPane());
+		
+		// make sure to stop the thread that is running the DM's.
 		if(DMController.getInstance() != null) {
 			Master.getInstance().stop = true;
 		}
@@ -252,11 +264,11 @@ public class Master {
 		}
 	}
 
-	//FACADE PATTERN: function encapsulates the loading of the logged
-	/**
-	 * Logged in menu load.
+	/**FACADE PATTERN: function encapsulates the loading of the logged
+	/*
+	 * Logged in menu load. Function instantiates the menu bar for the program
+	 * after logging in, allowing the user to traverse to the correct views.
 	 */
-	//in menu bar.
 	public void loggedInMenuLoad() {
 		//start the master frame with only the signup and login menu bars
 		//available. When the user logs in, open up the other menu bar options.
@@ -292,18 +304,6 @@ public class Master {
 			}
 		});
 		menuBar.add(mnProfile);
-
-		/*JMenu mnOtherUserProfile = new JMenu("Other User Profile");
-		mnOtherUserProfile.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		mnOtherUserProfile.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("Loading OtherProfile");
-				UserDB udb = new UserDB();
-				updateFrame(new OtherProfileView(udb.testerGetRandomUser()));
-			}
-		});
-		menuBar.add(mnOtherUserProfile);*/
 
 		JMenu settings = new JMenu("Settings");
 		settings.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -374,7 +374,13 @@ public class Master {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						MatchController.generateFrame();
+						MatchController.generateMatches();
+						if(!UserController.getUser().getIdle().isEmpty()) {
+							MatchController.generateFrame();
+						}
+						else {
+							MatchGUI.noMatches();
+						}
 						return null;
 					}
 					
@@ -416,23 +422,7 @@ public class Master {
 				}.execute();
 			}
 		});
-		menuBar.add(administrator);
-
-		
-		/*
-		 * JMenu chat = new JMenu("Chat"); chat.setFont(new Font("Segoe UI", Font.PLAIN,
-		 * 12)); chat.addMouseListener(new MouseAdapter() {
-		 * 
-		 * @Override public void mouseClicked(MouseEvent e) {
-		 * Master.appLogger.info(":: Loading DM View..."); // Placeholder invocation for
-		 * testing User.User user =
-		 * UserController.getInstance().getUserById("5cbfc7992060cc3d409469e8");
-		 * DMController.getInstance(user).updateView();
-		 * frame.addComponentListener(DMController.getInstance());
-		 * System.out.println(UserController.getUser().getId()); } });
-		 * menuBar.add(chat);
-		 */
-		
+		menuBar.add(administrator);	
 
 		JMenu logout = new JMenu("Log Out");
 		logout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -451,11 +441,11 @@ public class Master {
 		menuBar.add(logout);
 	}
 
-	//FACADE PATTERN: encapsulates loading the logged
+	//FACADE PATTERN: encapsulates loading the logged out menu loading.
 	/**
-	 * Logged out menu load.
+	 * Logged out menu load. Gets rid of the travel bay so the user can't access
+	 * the UI when logged out.
 	 */
-	//out menu bar
 	public void loggedOutMenuLoad() {
 		menuBar = new JMenuBar();
 		this.frame.setJMenuBar(null);
@@ -499,18 +489,24 @@ public class Master {
 	/**
 	 * Sets the frame.
 	 *
-	 * @param frame the new frame
+	 * @param frame: the new frame
 	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
 	
+	/**
+	 * Adds the loading label to the menu bar.
+	 */
 	public void addLoading() {
 		this.menuBar.add(loadingLabel);
 		this.menuBar.revalidate();
 		this.menuBar.repaint();
 	}
 	
+	/**
+	 * get rid of the loading label.
+	 */
 	public void unLoad() {
 		this.menuBar.remove(loadingLabel);
 		this.menuBar.revalidate();

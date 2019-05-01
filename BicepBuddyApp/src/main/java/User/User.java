@@ -9,7 +9,6 @@ import java.util.List;
 import Matching.Match;
 import Messaging.Message;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class User.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -92,6 +91,7 @@ public class User {
 	/** The pending users. */
 	private List<User> pendingUsers;
 	
+	/** The notifications. */
 	private List<Message> notifications;
 
 
@@ -104,10 +104,20 @@ public class User {
 		return pendingUsers;
 	}
 	
+	/**
+	 * Gets the notifications.
+	 *
+	 * @return the notifications
+	 */
 	public List<Message> getNotifications() {
 		return notifications;
 	}
 
+	/**
+	 * Sets the notifications.
+	 *
+	 * @param notifications the new notifications
+	 */
 	public void setNotifications(List<Message> notifications) {
 		this.notifications = notifications;
 	}
@@ -347,10 +357,6 @@ public class User {
 		this.style = (String) style;
 		this.weight = (String) weight;
 		this.experience = (String) exp;
-		/*this.accepted = new ArrayList<>();
-		this.rejected = new ArrayList<>();
-		this.idle = new ArrayList<>();
-		this.waiting = new ArrayList<>();*/
 	}
 	
 	/* (non-Javadoc)
@@ -406,7 +412,7 @@ public class User {
 	/**
 	 * Sets the profilePic.
 	 *
-	 * @param id the new profilePic
+	 * @param pic the new profile pic
 	 */
 	public void setProfilePic(String pic) {
 		this.profilePic = pic;

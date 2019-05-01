@@ -18,13 +18,19 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 import Matching.MatchController;
+import Matching.MatchGUI;
 import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+// TODO: Auto-generated Javadoc
+
 /**
+ * The Class ProfileView. Shows the panel for the user's profile. Will allow them to move
+ * to other panels.
+ *
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class ProfileView extends JPanel {
@@ -43,10 +49,8 @@ public class ProfileView extends JPanel {
 		email = UserController.getUser().getEmail();
 		// END USER DATA
  
-		//frame = new JFrame();
 		setBounds(0, 0, 900, 500);
 
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 
 		JLabel lblPic = new JLabel("");
@@ -126,7 +130,13 @@ public class ProfileView extends JPanel {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						MatchController.generateFrame();
+						MatchController.generateMatches();
+						if(!UserController.getUser().getIdle().isEmpty()) {
+							MatchController.generateFrame();
+						}
+						else {
+							MatchGUI.noMatches();
+						}
 						return null;
 					}
 

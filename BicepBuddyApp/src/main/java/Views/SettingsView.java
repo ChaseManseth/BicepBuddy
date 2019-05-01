@@ -37,18 +37,32 @@ import javax.swing.JMenu;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+
+/**
+ * The Class SettingsView. Will allow the users to see and change their settings.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
 public class SettingsView extends JPanel {
 
+	/** The field for user's first name. */
 	private JTextField txtFirstName;
+	
+	/** The email field. */
 	private JTextField txtEmail;
+	
+	/** The last name field. */
 	private JTextField txtLastName;
+	
+	/** The age field. */
 	private JTextField ageField;
+	
+	/** The phone field. */
 	private JTextField phoneField;
 
 
 
 	/**
-	 * Create the application.
+	 * Create the settings view.
 	 */
 	public SettingsView() {
 		User u = UserController.getUser();
@@ -57,40 +71,12 @@ public class SettingsView extends JPanel {
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(64, 62, 169, 175);
-		/*try {
-		    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
-		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
-		            Image.SCALE_SMOOTH);
-			lblPic.setIcon(new ImageIcon(scaled));
-        } catch (IOException e) {
-    	    e.printStackTrace();
-        }*/
 	
 		add(lblPic);
 		
 		JLabel lblName2 = new JLabel("Account Settings");
 		lblName2.setBounds(376, 12, 137, 15);
 		add(lblName2);
-		
-		JButton btnNewButton = new JButton("Change Image");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				btnNewButton.setForeground(Color.white);
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				btnNewButton.setForeground(Color.black);
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				ViewController vc = new ViewController();
-				vc.changeProfileImageFrame();
-			}
-		});
-		btnNewButton.setBounds(64, 254, 169, 25);
-		add(btnNewButton);
-		MaterialUIMovement.add(btnNewButton, MaterialColors.GRAY_600);
 		
 		txtFirstName = new JTextField();
 		txtFirstName.setBounds(64, 307, 169, 25);
@@ -162,8 +148,6 @@ public class SettingsView extends JPanel {
 		JLabel label_3 = new JLabel("Frequency");
 		label_3.setBounds(282, 359, 107, 15);
 		add(label_3);
-		
-		
 		
 		JButton deleter = new JButton("Delete My Profile");
 		deleter.addActionListener(new ActionListener() {
@@ -330,6 +314,9 @@ public class SettingsView extends JPanel {
 		add(saver);
 	}
 	
+	/**
+	 * Pops up a frame that indicates that we saved our changes.
+	 */
 	public static void saved() {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
@@ -348,6 +335,9 @@ public class SettingsView extends JPanel {
 		frame.getContentPane().add(panel);
 	}
 	
+	/**
+	 * Deprecated and unused.
+	 */
 	public static void changeImageFrame() {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);

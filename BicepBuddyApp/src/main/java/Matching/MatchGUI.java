@@ -1,7 +1,7 @@
 package Matching;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,14 +19,10 @@ import javax.swing.SwingWorker;
 
 import User.User;
 import User.UserController;
-import User.UserDB;
 import Views.OtherProfileView;
 import Views.ProfileView;
-import Views.ViewController;
 import bicepBuddyPackage.Master;
-import javax.swing.JLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatchGUI.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -46,9 +43,13 @@ public class MatchGUI extends JPanel{
 	/** The matches. */
 	private List<Match> matches;
 	
+	/** The lbl accepting match. */
 	private JLabel lblAcceptingMatch;
 
-	private JLabel rejLabel;	/**
+	/** The rej label. */
+	private JLabel rejLabel;	
+	
+	/**
 	 * Instantiates a new match GUI.
 	 */
 	public MatchGUI() {		
@@ -59,13 +60,7 @@ public class MatchGUI extends JPanel{
 		
 		//Matches generated here
 		Master.appLogger.info(":: Match generation called by MatchGUI");
-		MatchController.generateMatches();
 		matches = MatchController.getMatches(UserController.getUser());
-		
-		if (matches.size() == 0) {
-			Master.updateFrame(new ProfileView());
-			noMatches();
-		}
 		
 		//text field to handle match's name
 		matchName = new JTextField();
@@ -171,23 +166,6 @@ public class MatchGUI extends JPanel{
 		acceptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Accept button pressed");
-//				JFrame frame = new JFrame();
-//				frame.setVisible(true);
-//				frame.setTitle("Accepted");
-//				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//				frame.setBounds(100, 100, 400, 200);
-//				
-//				JPanel panel = new JPanel();
-//				panel.setLayout(new FlowLayout());
-//				
-//				JTextField acc = new JTextField();
-//				acc.setText("You have accepted this match!");
-//				acc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//				acc.setEditable(false);
-//				
-//				panel.add(acc);
-//				frame.getContentPane().add(panel);
-//				Master.getInstance().addLoading();
 				lblAcceptingMatch.setVisible(true);
 				lblAcceptingMatch.revalidate();
 				lblAcceptingMatch.repaint();
@@ -199,6 +177,7 @@ public class MatchGUI extends JPanel{
 						//Accepts match here
 						UserController.getInstance().setChangesToMatches(true);
 						MatchController.acceptMatchInitial(matches.get(curMatchShown));
+						UserController.getInstance().setTimesMatchCalled(5);
 						
 						matches.remove(matches.get(curMatchShown));
 						if(curMatchShown != 0) {
@@ -254,19 +233,6 @@ public class MatchGUI extends JPanel{
 			 */
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Reject button pressed");
-				/*JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Rejection");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField rej = new JTextField();
-				rej.setText("You have rejected this match!");
-				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				rej.setEditable(false);*/
 				//Rejects match here
 				rejLabel.setVisible(true);
 				rejLabel.revalidate();
@@ -277,9 +243,8 @@ public class MatchGUI extends JPanel{
 					@Override
 					protected Void doInBackground() throws Exception {
 						MatchController.rejectMatch(matches.get(curMatchShown));
-						
-//						panel.add(rej);
-//						frame.getContentPane().add(panel);
+						UserController.getInstance().setTimesMatchCalled(5);
+
 						matches.remove(matches.get(curMatchShown));
 						if(curMatchShown != 0) {
 							curMatchShown--;
@@ -362,39 +327,44 @@ public class MatchGUI extends JPanel{
 		lblAcceptingMatch.setBounds(109, 336, 235, 51);
 		lblAcceptingMatch.setVisible(false);
 		add(lblAcceptingMatch);
+		
+		if (matches.size() == 0) {
+			noMatches();
+		}
 	}
 	
 	/**
-	 * No matches.
+	 * If no matches found print message
 	 */
-	public void noMatches() {
+	public static void noMatches() {
 		Master.appLogger.info(":: No matches found");
+		UserController.getInstance().setTimesMatchCalled(5);
 		
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
 		frame.setTitle("No Matches");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(200, 200, 800, 400);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		frame.setLayout(new BorderLayout());
 		
 		JTextField noMatchField = new JTextField();
-		noMatchField.setText("You have exhausted your matches from this list.");
-		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		noMatchField.setBounds(0, 0, 400, 100);
+		noMatchField.setText("No more matches. Modify your settings"
+				+ " to receive more matches!");
+		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		noMatchField.setEditable(false);
 		
-		panel.add(noMatchField);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		Master.updateFrame(new ProfileView());
+		frame.getContentPane().add(noMatchField);
+		noMatchField.setColumns(10);
 		
 	}
 	
 	/**
 	 * Sets the current match.
+	 * Updates match shown by index
 	 */
-	//Updates match shown by index
 	public void setCurrentMatch() {
 		Master.appLogger.info(":: Currently shown match updated");
 		Master.getInstance().addLoading();

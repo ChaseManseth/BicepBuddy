@@ -19,8 +19,18 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FriendsList.
+ */
 public class FriendsList extends JPanel{
+	
+	/** The buddies label. */
 	private JTextField buddiesLabel;
+	
+	/**
+	 * Instantiates a new friends list.
+	 */
 	public FriendsList() {
 		setBounds(0, 0, 900, 500);
 		

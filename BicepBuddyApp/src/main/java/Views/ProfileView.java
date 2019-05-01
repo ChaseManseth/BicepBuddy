@@ -25,7 +25,11 @@ import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+// TODO: Auto-generated Javadoc
+
 /**
+ * The Class ProfileView.
+ *
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class ProfileView extends JPanel {

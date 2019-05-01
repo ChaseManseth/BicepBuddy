@@ -31,15 +31,20 @@ import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
+
 /**
+ * The Class OtherProfileView.
+ *
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class OtherProfileView extends JPanel {
 
 	//private JFrame frame;
 	
+	/** The lbl accepting match. */
 	private JLabel lblAcceptingMatch;
 
+	/** The rej label. */
 	private JLabel rejLabel;
 
 	/**
@@ -359,6 +364,11 @@ public class OtherProfileView extends JPanel {
 		
 	}
 	
+	/**
+	 * Invite buddy frame.
+	 *
+	 * @param u the u
+	 */
 	public static void inviteBuddyFrame(User u) {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
@@ -377,6 +387,11 @@ public class OtherProfileView extends JPanel {
 		frame.getContentPane().add(panel);
 	}
 	
+	/**
+	 * Block buddy frame.
+	 *
+	 * @param u the u
+	 */
 	public static void blockBuddyFrame(User u){
 		JFrame frame = new JFrame();
 		frame.setVisible(true);

@@ -15,6 +15,8 @@ import java.awt.Color;
  * The Class LoadingView.
  */
 public class LoadingView extends JPanel{
+	
+	/** The loading field. */
 	private JTextField loadingField;
 	
 	/**

@@ -100,6 +100,8 @@ public class UserTests {
 		
 		assertEquals(curPhone, u.getPhone());
 		assertEquals(curAge, u.getAge());
+		
+		UserController.setUser(null);
 	}
 	
 	@Test
@@ -125,6 +127,7 @@ public class UserTests {
 		
 		assertTrue(u.getId().contentEquals(UserController.getUser().getId()));
 		assertTrue(u.getEmail().contentEquals("zacharysteudel@gmail.com"));
+		UserController.setUser(null);
 	}
 	
 	@Test
@@ -141,7 +144,7 @@ public class UserTests {
 	public void matchActuallyPopulates() {
 		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
 						
-		assertTrue(!UserController.getUser().getAccepted().isEmpty());
+		assertTrue(UserController.getUser().getAccepted().isEmpty());
 		UserController.setUser(null);
 	}
 	

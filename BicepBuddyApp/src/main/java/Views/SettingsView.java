@@ -287,7 +287,6 @@ public class SettingsView extends JPanel {
 				
 				new SwingWorker<Void, Void>(){
 
-					@Override
 					protected Void doInBackground() throws Exception {
 						UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
 							    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),

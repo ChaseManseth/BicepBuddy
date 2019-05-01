@@ -1,21 +1,56 @@
-2019-04-30 20:28:41 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 20:28:43 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
-2019-04-30 20:28:54 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
-2019-04-30 20:28:54 INFO User.UserController getInstance :: Instantiating instance of UserController.
-2019-04-30 20:28:54 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
-2019-04-30 20:28:55 INFO User.UserController validateLogin :: User was logged in.
-2019-04-30 20:28:57 INFO User.UserController populateUserMatchesArray :: Updating user matches array.
-2019-04-30 20:28:57 INFO User.UserController onlyGetUserById :: Getting user Chase Manseth from DB WITHOUT their match info.
-2019-04-30 20:28:58 INFO Views.FriendsList$1 mouseClicked :: Accessed friends list for user Chase Manseth
-2019-04-30 20:28:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 20:28:59 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Chase
-2019-04-30 20:28:59 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 20:28:59 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Chase
-2019-04-30 20:29:00 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 20:29:00 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 20:29:00 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Chase
-2019-04-30 20:29:00 INFO Messaging.DMController populateMessages :: Populating messages
-2019-04-30 20:29:01 INFO Messaging.DMView$1 actionPerformed :: Message yooo to be sent.
-2019-04-30 20:29:03 INFO Messaging.DMController updateMessages :: Updating messages...
-2019-04-30 20:29:03 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Chase
-2019-04-30 20:29:04 INFO Messaging.DMView$1 actionPerformed :: Message sdjhsjhds to be sent.
+2019-04-30 20:36:19 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 20:36:19 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 20:36:21 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 20:36:21 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
+2019-04-30 20:36:22 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 20:36:22 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 20:36:22 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:22 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:22 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:22 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:23 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:23 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:23 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:23 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:23 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
+2019-04-30 20:36:23 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 20:36:24 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 20:36:24 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:24 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:24 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:24 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:24 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:24 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:24 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:24 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:25 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
+2019-04-30 20:36:25 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 20:36:25 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 20:36:25 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:25 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:25 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:25 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:25 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:25 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:26 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
+2019-04-30 20:36:26 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 20:36:26 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 20:36:26 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:26 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:26 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:26 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:26 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:26 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:27 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:27 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:27 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:28 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8e828caacc31bf5117640
+2019-04-30 20:36:28 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 20:36:28 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 20:36:28 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:28 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:29 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:29 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:29 INFO Messaging.DMController updateMessages :: Updating messages...
+2019-04-30 20:36:29 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary
+2019-04-30 20:36:29 INFO Messaging.DMController getMessageList :: Getting all messages between Zachary and Zachary

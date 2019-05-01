@@ -9,6 +9,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import Matching.MatchAlgorithm;
 import User.User;
 import admin.AdminGui;
 import bicepBuddyPackage.Master;
@@ -52,25 +53,44 @@ public class AdminController {
 	}
     public static JFreeChart getChart(List<User> everybody, String option) { 
         DefaultPieDataset data = new DefaultPieDataset();
-        String title ="Gender Demographics";
-        double mcount=0.0,fcount=0.0,ncount=0.0;
+        String title =option + " Demographics";
+        String [] attributes = new String [everybody.size()];
+        String [] possibilities = new String [5]; 
+        int [] counts = new int [5];
+
         for (int i =0; i<everybody.size();i++) {
-        	if(everybody.get(i).getGender().equalsIgnoreCase("male")) {
-        		mcount+=1.0;
-        	}
-        	if(everybody.get(i).getGender().equalsIgnoreCase("female")) {
-        		fcount+=1.0;
-        	}
-        	if(everybody.get(i).getGender().equalsIgnoreCase("N/A")) {
-        		ncount+=1.0;
+        	switch (option) {
+				case "Gender":
+					if (i==0) {
+						possibilities =MatchAlgorithm.GENDERS; 
+						counts = new int [MatchAlgorithm.GENDERS.length];
+					}
+					attributes[i] = everybody.get(i).getGender();
+					break;
+				case "Weight":
+					if (i==0) {
+						possibilities =MatchAlgorithm.WEIGHTCLASS; 
+						counts = new int [MatchAlgorithm.WEIGHTCLASS.length];
+					}
+					attributes[i] = everybody.get(i).getWeight();
+					break;
+			}
+        	
+        }
+        for (int i =0; i<everybody.size();i++) {
+            for (int j = 0; j< possibilities.length; j++) {
+            	if(possibilities[j].equalsIgnoreCase(attributes[i])) {
+            		counts [j]++;
+            	}
+            }
+        }
+
+
+        for (int j = 0; j< possibilities.length; j++) {
+        	if(counts[j]>0) {
+	            data.setValue(possibilities[j],counts[j]);
         	}
         }
-//        everybody.forEach(a -> {
-//        	data.setValue(a.getfName(), 1.0);
-//        });
-        data.setValue("Male", mcount);
-        data.setValue("Female", fcount);
-        data.setValue("N/A", ncount);
 
         return ChartFactory.createPieChart(title,data,false,true,false);
     }

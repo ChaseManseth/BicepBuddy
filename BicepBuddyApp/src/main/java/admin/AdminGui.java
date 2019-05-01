@@ -89,7 +89,7 @@ public class AdminGui extends JPanel {
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 		
-        ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,"gender"));
+        ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,"Weight"));
         myPanel.setBounds(33, 122, 379, 350);
         add(myPanel); 
 	}

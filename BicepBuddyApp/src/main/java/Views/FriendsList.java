@@ -28,9 +28,6 @@ import bicepBuddyPackage.Master;
  */
 public class FriendsList extends JPanel{
 	
-	/** The buddies label. */
-	private JTextField buddiesLabel;
-	
 	/**
 	 * Instantiates a new friends list and loads all friends into meaningful spots.
 	 */
@@ -148,13 +145,9 @@ public class FriendsList extends JPanel{
 		pendingPanel.add(pendingList);
 		add(pendingPanel);
 		
-		buddiesLabel = new JTextField();
-		buddiesLabel.setEditable(false);
-		buddiesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		buddiesLabel.setText("Your Buddy Lists");
-		buddiesLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-		buddiesLabel.setBounds(293, 13, 310, 39);
-		add(buddiesLabel);
-		buddiesLabel.setColumns(10);
+		JLabel lblYourBuddyLists = new JLabel("Your Buddy Lists");
+		lblYourBuddyLists.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblYourBuddyLists.setBounds(348, 30, 191, 15);
+		add(lblYourBuddyLists);
 	}
 }

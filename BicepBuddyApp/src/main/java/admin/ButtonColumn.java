@@ -39,7 +39,6 @@ import bicepBuddyPackage.Master;
 
 /*
  * NOTE: PORTIONS OF THIS CODE WERE TAKEN AND ADAPTED FROM  Rob Camick AND HIS WEB PAGE http://www.camick.com/java/source/ButtonColumn.java 
- * 		 PLEASE DON'T SUE US. THANK YOU.
  */
 @SuppressWarnings("serial")
 class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener{

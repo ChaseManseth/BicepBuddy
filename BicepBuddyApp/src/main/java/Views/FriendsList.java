@@ -9,22 +9,34 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
-import Matching.MatchController;
-import User.User;
-import User.UserController;
-import bicepBuddyPackage.Master;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.border.LineBorder;
 
+import User.User;
+import User.UserController;
+import bicepBuddyPackage.Master;
+
+/**
+ * The Class MatchGUI.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
+
+/**
+ * The Class FriendsList.
+ */
 public class FriendsList extends JPanel{
+	
+	/** The buddies label. */
 	private JTextField buddiesLabel;
+	
+	/**
+	 * Instantiates a new friends list and loads all friends into meaningful spots.
+	 */
 	public FriendsList() {
 		setBounds(0, 0, 900, 500);
 		
-		//*************************************************************************************************************************
 		//In user accepted and other accepted
 		UserController.getInstance().populateUserMatchesArray();
 		setLayout(null);
@@ -65,7 +77,6 @@ public class FriendsList extends JPanel{
 		friendsPanel.add(friendsList);
 		add(friendsPanel);
 		
-		//*************************************************************************************************************************
 		JLabel lblIncomingBuddies = new JLabel("Incoming Buddies");
 		lblIncomingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblIncomingBuddies.setBounds(709, 126, 179, 15);
@@ -102,7 +113,6 @@ public class FriendsList extends JPanel{
 		incomingPanel.add(incomingList);
 		add(incomingPanel);
 		
-		//**********************************************************************************************************************************
 		JLabel lblPendingBuddies = new JLabel("Pending Buddies");
 		lblPendingBuddies.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPendingBuddies.setBounds(22, 126, 203, 15);

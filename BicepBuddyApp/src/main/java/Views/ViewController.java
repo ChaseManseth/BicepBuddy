@@ -3,9 +3,8 @@ package Views;
 import User.User;
 import bicepBuddyPackage.Master;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ViewController.
+ * The Class ViewController. Will control changing between views.
  *
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
@@ -15,20 +14,22 @@ public class ViewController {
 	 * Sign up view.
 	 */
 	public void signUpView() {
-		Master.getInstance().updateFrame(new Signup());
+		Master.getInstance();
+		Master.updateFrame(new Signup());
 	}
 	
 	/**
 	 * Login view.
 	 */
 	public void loginView() {
-		Master.getInstance().updateFrame(new Login());
+		Master.getInstance();
+		Master.updateFrame(new Login());
 	}
 
 	/**
 	 * Invite user change.
 	 *
-	 * @param u the u
+	 * @param u: User sent in.
 	 */
 	public void inviteUserChange(User u) {
 		OtherProfileView.inviteBuddyFrame(u);
@@ -37,7 +38,7 @@ public class ViewController {
 	/**
 	 * Block buddy change.
 	 *
-	 * @param u the u
+	 * @param u: User sent in.
 	 */
 	public void blockBuddyChange(User u) {
 		OtherProfileView.blockBuddyFrame(u);
@@ -47,11 +48,12 @@ public class ViewController {
 	 * Settings view.
 	 */
 	public void settingsView() {
-		Master.getInstance().updateFrame(new SettingsView());
+		Master.getInstance();
+		Master.updateFrame(new SettingsView());
 	}
 
 	/**
-	 * Change profile image frame.
+	 * Change profile image frame. DEPRECATED
 	 */
 	public void changeProfileImageFrame() {
 		SettingsView.changeImageFrame();

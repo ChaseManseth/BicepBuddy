@@ -29,18 +29,19 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JPasswordField;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Signup.
+ * The Class Signup. This is the view where the user can create an account
+ * and put in the fields that they would like their account to have. User is required
+ * to enter name, last name, email, password.
  *
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class Signup extends JPanel {
 	
-	/** The first text field. */
+	/** The first name text field. */
 	private JTextField firstTextField;
 	
-	/** The last text field. */
+	/** The last name text field. */
 	private JTextField lastTextField;
 	
 	/** The email text field. */
@@ -52,14 +53,14 @@ public class Signup extends JPanel {
 	/** The age text field. */
 	private JTextField ageTextField;
 	
-	/** The password. */
+	/** The password field. */
 	private JPasswordField password;
 	
-	/** The confirm PW. */
+	/** The confirm PW field. */
 	private JPasswordField confirmPW;
 
 	/**
-	 * Create the panel.
+	 * Create the panel for Signup.
 	 */
 	public Signup() {
 		setBounds(new Rectangle(0, 0, 900, 500));
@@ -259,7 +260,6 @@ public class Signup extends JPanel {
 						Master.getInstance().unLoad();
 					}
 				}.execute();
-				
 				
 			}
 			

@@ -39,7 +39,6 @@ import mdlaf.utils.MaterialColors;
  */
 public class OtherProfileView extends JPanel {
 
-	//private JFrame frame;
 	
 	/** The lbl accepting match. */
 	private JLabel lblAcceptingMatch;
@@ -48,9 +47,9 @@ public class OtherProfileView extends JPanel {
 	private JLabel rejLabel;
 
 	/**
-	 * Create the application.
+	 * Creates the other Profile view based on the parameter.
 	 *
-	 * @param u the u
+	 * @param u the User
 	 */
 	public OtherProfileView(User u) {
 		// user data
@@ -60,24 +59,19 @@ public class OtherProfileView extends JPanel {
 		fname = u.getfName();
 		lname = u.getlName();
 		style = u.getStyle();
-		//email = "redacted";
 		gender = u.getGender();
 		preferedGender = u.getPrefGender();
 		frequency = u.getFrequency();
 		Integer percent = 0;
-		//*********************************************************************************************
 		Match tempMatch = MatchController.findMatch(new Match(u,UserController.getUser()));
 		if (tempMatch == null) {
 			tempMatch = MatchController.directMatch(u);
 		}
 		percent = tempMatch.getStrength();
-		//*********************************************************************************************
 		// END USER DATA
 
-		//frame = new JFrame();
 		setBounds(0, 0, 900, 500);
 
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		
 		JLabel lblPic = new JLabel("");
@@ -120,8 +114,7 @@ public class OtherProfileView extends JPanel {
 							Master.getInstance().unLoad();
 						}
 					}.execute();
-					
-					//DMController.getInstance(u);
+
 				}
 			});
 			btnChat.setBounds(277, 174, 263, 71);
@@ -167,7 +160,6 @@ public class OtherProfileView extends JPanel {
 			add(notifyBtn);
 		}
 		
-		//*********************************************************************************************
 		//If not accepted or rejected yet display
 		else if(!UserController.getUser().getAccepted().contains(new Match(u,UserController.getUser())) && 
 				!UserController.getUser().getRejected().contains(new Match(u,UserController.getUser()))) {
@@ -177,8 +169,7 @@ public class OtherProfileView extends JPanel {
 			btnInvite.setForeground(Color.white);
 			btnInvite.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					ViewController vc = new ViewController();
-//					vc.inviteUserChange(u);
+
 					lblAcceptingMatch.setVisible(true);
 					lblAcceptingMatch.revalidate();
 					lblAcceptingMatch.repaint();
@@ -227,8 +218,6 @@ public class OtherProfileView extends JPanel {
 			btnBlock.setBackground(new Color(255, 0, 0));
 			btnBlock.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					ViewController vc = new ViewController();
-//					vc.blockBuddyChange(u);
 					rejLabel.setVisible(true);
 					rejLabel.revalidate();
 					rejLabel.repaint();
@@ -269,7 +258,6 @@ public class OtherProfileView extends JPanel {
 			btnBlock.setBounds(599, 103, 188, 47);
 			add(btnBlock);
 		}
-		//*********************************************************************************************
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));

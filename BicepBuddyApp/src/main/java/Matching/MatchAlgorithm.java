@@ -131,7 +131,7 @@ public class MatchAlgorithm {
 		Match m = new Match(UserController.getUser(),other,calculateRatios(other));
 		
 		// Create the match in the DB
-//		MatchController.createMatch(m);
+		m.setId(MatchController.createMatch(m));
 		
 		return m;
 	}

@@ -38,19 +38,19 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SettingsView.
+ * The Class SettingsView. Will allow the users to see and change their settings.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class SettingsView extends JPanel {
 
-	/** The txt first name. */
+	/** The field for user's first name. */
 	private JTextField txtFirstName;
 	
-	/** The txt email. */
+	/** The email field. */
 	private JTextField txtEmail;
 	
-	/** The txt last name. */
+	/** The last name field. */
 	private JTextField txtLastName;
 	
 	/** The age field. */
@@ -62,7 +62,7 @@ public class SettingsView extends JPanel {
 
 
 	/**
-	 * Create the application.
+	 * Create the settings view.
 	 */
 	public SettingsView() {
 		User u = UserController.getUser();
@@ -71,14 +71,6 @@ public class SettingsView extends JPanel {
 		
 		JLabel lblPic = new JLabel("");
 		lblPic.setBounds(64, 62, 169, 175);
-		/*try {
-		    BufferedImage myPicture = ImageIO.read(new File("thedonald.jpeg"));
-		    Image scaled = myPicture.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(),
-		            Image.SCALE_SMOOTH);
-			lblPic.setIcon(new ImageIcon(scaled));
-        } catch (IOException e) {
-    	    e.printStackTrace();
-        }*/
 	
 		add(lblPic);
 		
@@ -156,8 +148,6 @@ public class SettingsView extends JPanel {
 		JLabel label_3 = new JLabel("Frequency");
 		label_3.setBounds(282, 359, 107, 15);
 		add(label_3);
-		
-		
 		
 		JButton deleter = new JButton("Delete My Profile");
 		deleter.addActionListener(new ActionListener() {
@@ -325,7 +315,7 @@ public class SettingsView extends JPanel {
 	}
 	
 	/**
-	 * Saved.
+	 * Pops up a frame that indicates that we saved our changes.
 	 */
 	public static void saved() {
 		JFrame frame = new JFrame();
@@ -346,7 +336,7 @@ public class SettingsView extends JPanel {
 	}
 	
 	/**
-	 * Change image frame.
+	 * Deprecated and unused.
 	 */
 	public static void changeImageFrame() {
 		JFrame frame = new JFrame();

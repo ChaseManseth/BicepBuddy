@@ -523,7 +523,7 @@ public class UserController {
 			// Get the Respose Back
 		    if(response.getStatusLine().getStatusCode() == 200) {
 		    	// User Profile was Deleted!
-		    	Master.appLogger.info(":: Deleting user " + u.getfName() + " " + u.getlName() + " from DB.");
+		    	Master.appLogger.info(":: Deleting user " + user.getfName() + " " + user.getlName() + " from DB.");
 		    	user = null;
 		    	Master.getInstance().loggedOutMenuLoad();
 		    	Master.getInstance().updateFrame(new Login());
@@ -1112,6 +1112,11 @@ public class UserController {
 				    	String fName = (String) result.get("firstname");
 						String lName = (String) result.get("lastname");
 						String email = (String) result.get("email");
+						
+						if(email.contentEquals("notification@gmail.com")) {
+							continue;
+						}
+						
 						String phone = (String) result.get("phoneNumber");
 						String age = (String) result.get("age");
 						String gender = (String) result.get("gender");

@@ -1,2 +1,8 @@
-2019-04-30 20:57:04 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
-2019-04-30 20:57:06 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 21:08:29 INFO bicepBuddyPackage.Master <clinit> :: Beginning Swing App
+2019-04-30 21:08:31 INFO bicepBuddyPackage.Master getInstance :: Loading Master Frame
+2019-04-30 21:08:41 INFO Matching.MatchController getMatchById :: Match fully fetched with id 5cc8fe32caacc31bf5117753
+2019-04-30 21:08:41 INFO User.UserController getInstance :: Instantiating instance of UserController.
+2019-04-30 21:08:41 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary
+2019-04-30 21:08:41 INFO User.UserController validateLogin :: User was logged in.
+2019-04-30 21:08:45 INFO User.UserController getAllUsers :: Retrieving all users from the DB.
+2019-04-30 21:09:16 INFO User.UserController getAllNotifications :: Getting all notifications for Zachary

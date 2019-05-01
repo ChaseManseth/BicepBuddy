@@ -31,12 +31,32 @@ import Views.OtherProfileView;
 import Views.ViewController;
 import bicepBuddyPackage.Master;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ButtonColumn.
+ * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
+ */
+@SuppressWarnings("serial")
 class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener{
+	
+	/** The table. */
 	JTable table;
+	
+	/** The render button. */
 	JButton renderButton;
+	
+	/** The edit button. */
 	JButton editButton;
+	
+	/** The text. */
 	String text;
 	
+	/**
+	 * Instantiates a new button column.
+	 *
+	 * @param table the table
+	 * @param column the column
+	 */
 	public ButtonColumn(JTable table, int column){
 	    super();
 	    this.table = table;
@@ -51,11 +71,17 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 	    columnModel.getColumn(column).setCellEditor( this );
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+	 */
 	public Component getTableCellRendererComponent(    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
 	    renderButton.setText( value.toString() );
 	    return renderButton;
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
+	 */
 	public Component getTableCellEditorComponent(
 	    JTable table, Object value, boolean isSelected, int row, int column){
 	    text = value.toString();
@@ -63,10 +89,16 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 	    return editButton;
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.CellEditor#getCellEditorValue()
+	 */
 	public Object getCellEditorValue(){
 	    return text;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e){
 	    fireEditingStopped();    
 	    if(e.getActionCommand().equalsIgnoreCase("view")) {

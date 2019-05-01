@@ -19,10 +19,17 @@ import User.User;
 public class AdminTableModel extends AbstractTableModel {
 
  
+    /** The column names. */
     private String[] columnNames = {"User","Delete User"," View Profile"};
 
+    /** The data. */
     private ArrayList<AdminTableModelRow> data = new ArrayList<AdminTableModelRow>();
 
+     /**
+      * Instantiates a new admin table model.
+      *
+      * @param myList the my list
+      */
      public AdminTableModel (List<User> myList) {    	 
     	 myList.forEach(a  -> {
     		    data.add( new AdminTableModelRow(a));
@@ -30,33 +37,39 @@ public class AdminTableModel extends AbstractTableModel {
      }
 
 /**
- * Gets the current column count
+ * Gets the current column count.
+ *
+ * @return the column count
  */
 public int getColumnCount() {
 return columnNames.length;
 }
 
 /**
- * Gets the current column count
+ * Gets the current column count.
+ *
+ * @return the row count
  */
 public int getRowCount() {
 return data.size();
 }
 
 /**
- * Gets the name of the column at col
- * 
+ * Gets the name of the column at col.
+ *
  * @param col the column whose name will be retrieved
+ * @return the column name
  */
 public String getColumnName(int col) {
 return columnNames[col];
 }
 
 /**
- * Gets the value at the position of row and col
- * 
+ * Gets the value at the position of row and col.
+ *
  * @param row the row of the value to retrieve
  * @param col the col of the value to retrieve
+ * @return the value at
  */
 public Object getValueAt(int row, int col) {
 	Object val;
@@ -77,20 +90,20 @@ public Object getValueAt(int row, int col) {
 }
 
 /**
- * Gets the Class of the column at c
- * 
+ * Gets the Class of the column at c.
+ *
  * @param c the target column
+ * @return the column class
  */
 public Class getColumnClass(int c) {
 	return getValueAt(0, c).getClass();
 }
 
 /**
- * Returns based on whether or not the specified cell can be changed
- * 
+ * Returns based on whether or not the specified cell can be changed.
+ *
  * @param row the target row
  * @param col the target column
- * 
  * @return true, if cell at row, col can be changed
  */
 public boolean isCellEditable(int row, int col) {
@@ -98,8 +111,8 @@ public boolean isCellEditable(int row, int col) {
 }
 
 /**
- * Sets the value of cell at row, col to value
- * 
+ * Sets the value of cell at row, col to value.
+ *
  * @param value new value to be stored
  * @param row the target row
  * @param col the target column
@@ -112,8 +125,8 @@ public void setValueAt(Object value, int row, int col) {
 }
 
 /**
- * Removes the target row from the model
- * 
+ * Removes the target row from the model.
+ *
  * @param row the target row to remove
  */
 public void removeRow(int row) {

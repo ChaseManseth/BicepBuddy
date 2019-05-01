@@ -81,14 +81,14 @@ public class SettingsView extends JPanel {
 		add(lblName2);
 		
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(64, 307, 169, 25);
+		txtFirstName.setBounds(64, 66, 169, 25);
 		txtFirstName.setBackground(Color.LIGHT_GRAY);
 		add(txtFirstName);
 		txtFirstName.setText(u.getfName());
 		txtFirstName.setColumns(10);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(64, 405, 169, 25);
+		txtEmail.setBounds(64, 209, 169, 25);
 		txtEmail.setBackground(Color.LIGHT_GRAY);
 		add(txtEmail);
 		txtEmail.setText(u.getEmail());
@@ -96,7 +96,7 @@ public class SettingsView extends JPanel {
 		
 		txtLastName = new JTextField();
 		txtLastName.setText(u.getlName());
-		txtLastName.setBounds(64, 356, 169, 25);
+		txtLastName.setBounds(64, 145, 169, 25);
 		txtLastName.setBackground(Color.LIGHT_GRAY);
 		add(txtLastName);
 		txtLastName.setColumns(10);

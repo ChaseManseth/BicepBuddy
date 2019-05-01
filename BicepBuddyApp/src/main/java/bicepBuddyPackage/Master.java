@@ -21,6 +21,7 @@ import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import Matching.MatchController;
+import Matching.MatchGUI;
 import Messaging.DMController;
 import Messaging.DMView;
 import User.UserController;
@@ -374,7 +375,13 @@ public class Master {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						MatchController.generateFrame();
+						MatchController.generateMatches();
+						if(!UserController.getUser().getIdle().isEmpty()) {
+							MatchController.generateFrame();
+						}
+						else {
+							MatchGUI.noMatches();
+						}
 						return null;
 					}
 					

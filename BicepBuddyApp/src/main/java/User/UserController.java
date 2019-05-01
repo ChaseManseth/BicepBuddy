@@ -766,6 +766,11 @@ public class UserController {
 			    	String fName = (String) result.get("firstname");
 					String lName = (String) result.get("lastname");
 					String email = (String) result.get("email");
+					// don't consider the notification user
+					if(email.contentEquals("notification@gmail.com")) {
+						continue;
+					}
+					
 					String phone = (String) result.get("phoneNumber");
 					String age = (String) result.get("age");
 					String gend = (String) result.get("gender");
@@ -1303,7 +1308,7 @@ public class UserController {
 		System.out.println(messg);
 		
 		//set the notification details
-		msg.setSender("5cc6843f8554b0748e7505db");
+		msg.setSender("5cc8dfc5caacc31bf5117638");
 		msg.setReceiver(u.getId());
 		msg.setSendDate(new Date());
 		if(messg == 0) {

@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 import Matching.MatchController;
+import Matching.MatchGUI;
 import User.UserController;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
@@ -126,7 +127,13 @@ public class ProfileView extends JPanel {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						MatchController.generateFrame();
+						MatchController.generateMatches();
+						if(!UserController.getUser().getIdle().isEmpty()) {
+							MatchController.generateFrame();
+						}
+						else {
+							MatchGUI.noMatches();
+						}
 						return null;
 					}
 

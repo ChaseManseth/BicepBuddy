@@ -1,5 +1,6 @@
 package Matching;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -9,9 +10,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
@@ -59,13 +62,7 @@ public class MatchGUI extends JPanel{
 		
 		//Matches generated here
 		Master.appLogger.info(":: Match generation called by MatchGUI");
-		MatchController.generateMatches();
 		matches = MatchController.getMatches(UserController.getUser());
-		
-		if (matches.size() == 0) {
-			Master.updateFrame(new ProfileView());
-			noMatches();
-		}
 		
 		//text field to handle match's name
 		matchName = new JTextField();
@@ -364,32 +361,38 @@ public class MatchGUI extends JPanel{
 		lblAcceptingMatch.setBounds(109, 336, 235, 51);
 		lblAcceptingMatch.setVisible(false);
 		add(lblAcceptingMatch);
+		
+		if (matches.size() == 0) {
+			noMatches();
+		}
 	}
 	
 	/**
 	 * No matches.
 	 */
-	public void noMatches() {
+	public static void noMatches() {
 		Master.appLogger.info(":: No matches found");
+		UserController.getInstance().setTimesMatchCalled(5);
 		
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
 		frame.setTitle("No Matches");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(200, 200, 800, 400);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		frame.setLayout(new BorderLayout());
 		
 		JTextField noMatchField = new JTextField();
-		noMatchField.setText("You have exhausted your matches from this list.");
-		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		noMatchField.setBounds(0, 0, 400, 100);
+		noMatchField.setText("No more matches. Modify your settings"
+				+ " to receive more matches!");
+		noMatchField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		noMatchField.setEditable(false);
 		
-		panel.add(noMatchField);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		Master.updateFrame(new ProfileView());
+		frame.getContentPane().add(noMatchField);
+		noMatchField.setColumns(10);
+		
 		
 	}
 	

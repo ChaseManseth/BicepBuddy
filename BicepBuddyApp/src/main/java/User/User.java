@@ -92,6 +92,7 @@ public class User {
 	/** The pending users. */
 	private List<User> pendingUsers;
 	
+	/** The notifications. */
 	private List<Message> notifications;
 
 
@@ -104,10 +105,20 @@ public class User {
 		return pendingUsers;
 	}
 	
+	/**
+	 * Gets the notifications.
+	 *
+	 * @return the notifications
+	 */
 	public List<Message> getNotifications() {
 		return notifications;
 	}
 
+	/**
+	 * Sets the notifications.
+	 *
+	 * @param notifications the new notifications
+	 */
 	public void setNotifications(List<Message> notifications) {
 		this.notifications = notifications;
 	}
@@ -406,7 +417,7 @@ public class User {
 	/**
 	 * Sets the profilePic.
 	 *
-	 * @param id the new profilePic
+	 * @param pic the new profile pic
 	 */
 	public void setProfilePic(String pic) {
 		this.profilePic = pic;

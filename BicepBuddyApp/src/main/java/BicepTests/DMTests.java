@@ -8,7 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import Messaging.DM;
+import Messaging.DMController;
+import Messaging.DMView;
 import Messaging.Message;
+import User.UserController;
 
 class DMTests {
 
@@ -31,4 +34,13 @@ class DMTests {
 		assertTrue(!dms.isEmpty());
 	}
 
+	@Test
+	public void newDM() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
+		
+		assertTrue(dc.getDm() != null);
+		assertTrue(dc.getDm().getPartner().getEmail().contentEquals("zacharysteudel@gmail.com"));
+		UserController.setUser(null);
+	}
 }

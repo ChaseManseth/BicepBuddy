@@ -68,14 +68,26 @@ public class UserController {
 	/** The uc. */
 	private static UserController uc = null;
 	
+	/** The times match called. */
 	private int timesMatchCalled = 5;
 	
+	/** The num matches to generate. */
 	public final int NUM_MATCHES_TO_GENERATE = 5;
 	
+	/**
+	 * Gets the times match called.
+	 *
+	 * @return the times match called
+	 */
 	public int getTimesMatchCalled() {
 		return timesMatchCalled;
 	}
 
+	/**
+	 * Sets the times match called.
+	 *
+	 * @param timesMatchCalled the new times match called
+	 */
 	public void setTimesMatchCalled(int timesMatchCalled) {
 		this.timesMatchCalled = timesMatchCalled;
 	}
@@ -597,6 +609,11 @@ public class UserController {
 	
 	
 	
+	/**
+	 * Delete user.
+	 *
+	 * @param u the u
+	 */
 	public void deleteUser(User u) {
 
 		HttpDelete request = new HttpDelete(baseUrl + u.getId());
@@ -1300,6 +1317,11 @@ public class UserController {
 			return userList;
 		}
 		
+	/**
+	 * Notify user.
+	 *
+	 * @param u the u
+	 */
 	public void notifyUser(User u) {
 		Message msg = new Message();
 		//generate random notification text.
@@ -1372,6 +1394,11 @@ public class UserController {
 		
 	}
 	
+	/**
+	 * Gets the all notifications.
+	 *
+	 * @return the all notifications
+	 */
 	public Set<Message> getAllNotifications() {
 		// function gets the logged-in user's notifications
 		Set<Message> messages = new HashSet<Message>();
@@ -1427,6 +1454,11 @@ public class UserController {
 		return messages;
 	}
 
+	/**
+	 * Populate messages.
+	 *
+	 * @param notificationText the notification text
+	 */
 	public void populateMessages(JTextArea notificationText) {
 		//first we need all the notifications.
 		Set<Message> messages = getAllNotifications();

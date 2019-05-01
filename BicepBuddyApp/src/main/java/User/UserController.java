@@ -218,12 +218,12 @@ public class UserController {
 			String confPass) {
 		if(fName.isEmpty() || lname.isEmpty() || email.isEmpty() || pass.isEmpty() ||
 		   confPass.isEmpty()) {
-			ErrorGUI eg = new ErrorGUI("Required fields: first name, last name, email, password");
+			new ErrorGUI("Required fields: first name, last name, email, password");
 			return;
 		}
 
 		if(!pass.contentEquals(confPass)) {
-			ErrorGUI eg = new ErrorGUI("Make the passwords match to create account.");
+			new ErrorGUI("Make the passwords match to create account.");
 			return;
 		}
 
@@ -236,7 +236,7 @@ public class UserController {
 			}
 		}
 		catch(NumberFormatException e) {
-			ErrorGUI eg = new ErrorGUI("Phone and/or Age must be integer values ONLY.");
+			new ErrorGUI("Phone and/or Age must be integer values ONLY.");
 			return;
 		}
 		//we got here because their stuff was accepted
@@ -351,7 +351,7 @@ public class UserController {
 				Master.appLogger.info(":: User was logged in.");
 
 		    } else {
-		    	ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
+		    	new ErrorGUI("Please enter valid username and password.");
 		    }
 
 		} catch (Exception e) {
@@ -483,7 +483,7 @@ public class UserController {
 				Master.getInstance().updateFrame(new ProfileView());
 
 		    } else {
-		    	ErrorGUI eg = new ErrorGUI((String) o.get("message"));
+		    	new ErrorGUI((String) o.get("message"));
 				return;
 		    }
 
@@ -525,7 +525,7 @@ public class UserController {
 		    	Master.getInstance().loggedOutMenuLoad();
 		    	Master.getInstance().updateFrame(new Login());
 		    } else {
-		    	ErrorGUI eg = new ErrorGUI("You don't have access to this action!");
+		    	new ErrorGUI("You don't have access to this action!");
 		    }
 
 		} catch (Exception e) {
@@ -559,7 +559,7 @@ public class UserController {
 		    	// User Profile was Deleted!
 		    	Master.appLogger.info(":: Deleting user " + u.getfName() + " " + u.getlName() + " from DB.");
 		    } else {
-		    	ErrorGUI eg = new ErrorGUI("You don't have access to this action!");
+		    	new ErrorGUI("You don't have access to this action!");
 		    }
 
 		} catch (Exception e) {
@@ -639,7 +639,7 @@ public class UserController {
 		    } else {
 		    	// FAIL!
 		    	Master.getInstance().updateFrame(new ProfileView());
-		    	ErrorGUI eg = new ErrorGUI("Your changes couldn't be saved!");
+		    	new ErrorGUI("Your changes couldn't be saved!");
 		    }
 
 
@@ -1013,6 +1013,7 @@ public class UserController {
 
 
 			} catch (Exception e) {
+				e.printStackTrace();
 				return null;
 			} finally {
 				request.releaseConnection();

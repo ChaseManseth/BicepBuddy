@@ -493,8 +493,8 @@ public class Master {
 	 *
 	 * @param frame: the new frame
 	 */
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
+	public static void setFrame(JFrame frame) {
+		Master.frame = frame;
 	}
 	
 	/**

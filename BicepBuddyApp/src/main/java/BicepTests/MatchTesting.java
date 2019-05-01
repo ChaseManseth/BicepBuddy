@@ -156,9 +156,9 @@ public class MatchTesting {
 		assertTrue(UserController.getUser().getAccepted().contains(m1) && m1.getStatus() == Status.Accepted);
 	}
 	@Test @DisplayName("Testing rejectMatch")
-	public void rejectTest() {
+	public static void rejectTest() {
 		MatchController.rejectMatch(m2);
-		user3 = UserController.getInstance().getUserById(user3.getId());
+		MatchTesting.user3 = UserController.getInstance().getUserById(user3.getId());
 		assertTrue(UserController.getUser().getRejected().contains(m2) && m2.getStatus() == Status.Rejected);
 	}
 	

@@ -1,41 +1,25 @@
 package admin;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.ui.ApplicationFrame;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.LineBorder;
+
+import org.jfree.chart.ChartPanel;
 
 import User.User;
 import User.UserController;
-import Views.OtherProfileView;
-import Views.SettingsView;
 import bicepBuddyPackage.Master;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-import java.util.List;
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
-// TODO: Auto-generated Javadoc
 
 /**
  * The Class AdminGui.
@@ -106,8 +90,8 @@ public class AdminGui extends JPanel {
 		AdminTableModel model = new AdminTableModel(everybody);
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
-		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
-		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
+		new ButtonColumn(table, 1);
+		new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
 	}
 }

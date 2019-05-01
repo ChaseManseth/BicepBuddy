@@ -1376,7 +1376,7 @@ public class UserController {
 		// function gets the logged-in user's notifications
 		Set<Message> messages = new HashSet<Message>();
 		//first request: all the messages from logged in user to the other user.
-		HttpGet request = new HttpGet("http://bb.manseth.com/chat/from/5cc6843f8554b0748e7505db"
+		HttpGet request = new HttpGet("http://bb.manseth.com/chat/from/5cc8dfc5caacc31bf5117638"
 				+ "/to/" + UserController.getUser().getId());
 		
 		Master.appLogger.info(":: Getting all notifications for " + UserController.getUser().getfName());

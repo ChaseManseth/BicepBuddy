@@ -291,6 +291,7 @@ public class SettingsView extends JPanel {
 							    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),
 							    prefGender.getSelectedItem(), freqBox.getSelectedItem(), goalsBox.getSelectedItem(),
 							    weightBox.getSelectedItem(), expBox.getSelectedItem(), ageField.getText(), phoneField.getText());
+						UserController.getInstance().setTimesMatchCalled(5);
 						return null;
 					}
 					

@@ -841,6 +841,10 @@ public class UserController {
 				waitThread.start();
 		    	
 				// Add the Match Arrays to the User object
+				accThread.join();
+				rejThread.join();
+				waitThread.join();
+				
 				newUser.setAccepted(accepted);
 				newUser.setRejected(rejected);
 				newUser.setIdle(idle);

@@ -131,7 +131,7 @@ public class MatchController {
 		UserController.getUser().setAccepted(matches);
 		
 		// Updating Array State for User
-		uc.updateMatchedArrayState(uc.getUser());
+		uc.updateMatchedArrayState(UserController.getUser());
 		
 		
 		//add to other waiting

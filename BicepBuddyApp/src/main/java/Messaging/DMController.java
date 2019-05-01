@@ -1,33 +1,15 @@
 package Messaging;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import java.util.logging.Level;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,10 +24,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import User.User;
-import bicepBuddyPackage.Master;
 import User.UserController;
+import bicepBuddyPackage.Master;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DMController.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -152,19 +133,7 @@ public class DMController{
 		updateMessages();
 	}
 	
-	/*
-	 * Updates the DMView
-	 */
-	/*public void updateView() {
-		dmView.update(dm.getSorted());
-	}*/
-	
-	
-	
 	/**
-	 * Update messages.
-	 */
-	/*
 	 * Updates all messages and the DMView
 	 */
 	public void updateMessages() {
@@ -175,14 +144,11 @@ public class DMController{
 	
 	
 	/**
-	 * Gets the single instance of DMController.
+	 * Gets the single instance of DMController. Creates instance if it does not exist or the partner changes
 	 *
 	 * @param partner the partner
 	 * @param dmView the dm view
 	 * @return single instance of DMController
-	 */
-	/*
-	 * Creates instance if it does not exist or the partner changes
 	 */
 	public static DMController getInstance(User partner, DMView dmView) {
 		// If not made, make one; if different User, refresh
@@ -198,18 +164,16 @@ public class DMController{
 	
 	/**
 	 * Gets the single instance of DMController.
+	 * Should only be used to get an already existing DMController instance
 	 *
 	 * @return single instance of DMController
-	 */
-	/*
-	 * Should only be used to get an already existing DMController instance
 	 */
 	public static DMController getInstance() {
 		return controller;
 	}
 	
 	/**
-	 * Send message.
+	 * Send message and add it to the database.
 	 *
 	 * @param msg the msg
 	 */
@@ -261,7 +225,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Gets the chat by id.
+	 * Gets the chat by id from the database.
 	 *
 	 * @param id the id
 	 * @return the chat by id
@@ -311,7 +275,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Gets the message list.
+	 * Gets the message list from the database.
 	 *
 	 * @param otherID the other ID
 	 * @return the message list
@@ -419,7 +383,7 @@ public class DMController{
 	}
 
 	/**
-	 * Populate messages.
+	 * Populate messages to the JtextArea upon receiving updated data.
 	 *
 	 * @param messageField the message field
 	 */
@@ -442,7 +406,7 @@ public class DMController{
 	}
 	
 	/**
-	 * Adds the message.
+	 * Adds the message to the JTextField.
 	 *
 	 * @param messageField the message field
 	 * @param message the message

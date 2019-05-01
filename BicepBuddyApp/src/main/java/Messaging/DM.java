@@ -4,17 +4,13 @@
 package Messaging;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import User.User;
-import User.UserController;
-import bicepBuddyPackage.Master;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DM.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -36,7 +32,7 @@ public class DM {
 	}
 	
 	/**
-	 * Gets the sorted.
+	 * Gets the sorted array of messages.
 	 *
 	 * @return the sorted
 	 */
@@ -47,7 +43,7 @@ public class DM {
 	}
 	
 	/**
-	 * Gets the partner.
+	 * Gets the partner user object.
 	 *
 	 * @return the partner
 	 */
@@ -56,7 +52,7 @@ public class DM {
 	}
 	
 	/**
-	 * Sets the partner.
+	 * Sets the partner user object.
 	 *
 	 * @param partner the new partner
 	 */
@@ -97,7 +93,6 @@ public class DM {
 	 * @return the accepted matches
 	 */
 	public List<User> getAcceptedMatches() {
-		// TODO: Retrieve list of accepted matches
 		return new ArrayList<User>();
 	}
 }

@@ -11,7 +11,6 @@ import java.util.Map;
 import User.User;
 import User.UserController;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatchAlgorithm.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -50,8 +49,8 @@ public class MatchAlgorithm {
 		
 		/** The Critical. */
 		Critical, 
- /** The Important. */
- //Pass or fail
+		/** The Important. */
+		//Pass or fail
 		Important,
 		
 		/** The Preference. */
@@ -122,16 +121,13 @@ public class MatchAlgorithm {
 	
 	/**
 	 * Direct match.
+	 * GET MATCH BY ID to get Strength
 	 *
 	 * @param other the other
 	 * @return the match
 	 */
-	// GET MATCH BY ID to get Strength
 	public static Match directMatch(User other) {
 		Match m = new Match(UserController.getUser(),other,calculateRatios(other));
-		
-		// Create the match in the DB
-//		MatchController.createMatch(m);
 		
 		return m;
 	}
@@ -211,10 +207,10 @@ public class MatchAlgorithm {
 
 	/**
 	 * Possible matches.
+	 * Get all possible users who fit the Priority 1 Category
 	 *
 	 * @return the list
 	 */
-	//Get all possible users who fit the Priority 1 Category
 	public static List<User> possibleMatches(){
 		// Gets a list of users based on the current users prefered gender
 		List<User> users1 = UserController.getInstance().getUsersByGender(UserController.getUser().getPrefGender());
@@ -223,7 +219,7 @@ public class MatchAlgorithm {
 	}
 
 	/**
-	 * Calculate ratios.
+	 * Calculate ratios all matches.
 	 *
 	 * @param other the other
 	 * @return the integer
@@ -290,13 +286,13 @@ public class MatchAlgorithm {
 	
 	/**
 	 * Calculate ratio.
+	 * Calculates ratio between 2 users
 	 *
 	 * @param length the length
 	 * @param userOptIdx the user opt idx
 	 * @param otherOptIdx the other opt idx
 	 * @return the integer
 	 */
-	//Calculates ratio between 2 users
 	public static Integer calculateRatio(Integer length,Integer userOptIdx,Integer otherOptIdx) {
 		Integer data = userOptIdx - otherOptIdx;
 		if (data < 0) {

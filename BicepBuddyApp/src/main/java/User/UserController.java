@@ -26,10 +26,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import Matching.Match;
-import Matching.MatchController;
 import Matching.Match.Status;
 import Messaging.Message;
-import Views.LoadingView;
 import Views.Login;
 import Views.ProfileView;
 import Views.SettingsView;
@@ -37,7 +35,6 @@ import bicepBuddyPackage.ErrorGUI;
 import bicepBuddyPackage.Master;
 import bicepBuddyPackage.Threader;
 
-// TODO: Auto-generated Javadoc
 /*
  * User Controller will be able to speak with user and the "DB".
  */

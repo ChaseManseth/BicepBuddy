@@ -2,7 +2,6 @@ package Matching;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,25 +9,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
 import User.User;
 import User.UserController;
-import User.UserDB;
 import Views.OtherProfileView;
 import Views.ProfileView;
-import Views.ViewController;
 import bicepBuddyPackage.Master;
-import javax.swing.JLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MatchGUI.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -53,7 +47,9 @@ public class MatchGUI extends JPanel{
 	private JLabel lblAcceptingMatch;
 
 	/** The rej label. */
-	private JLabel rejLabel;	/**
+	private JLabel rejLabel;	
+	
+	/**
 	 * Instantiates a new match GUI.
 	 */
 	public MatchGUI() {		
@@ -170,23 +166,6 @@ public class MatchGUI extends JPanel{
 		acceptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Accept button pressed");
-//				JFrame frame = new JFrame();
-//				frame.setVisible(true);
-//				frame.setTitle("Accepted");
-//				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//				frame.setBounds(100, 100, 400, 200);
-//				
-//				JPanel panel = new JPanel();
-//				panel.setLayout(new FlowLayout());
-//				
-//				JTextField acc = new JTextField();
-//				acc.setText("You have accepted this match!");
-//				acc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//				acc.setEditable(false);
-//				
-//				panel.add(acc);
-//				frame.getContentPane().add(panel);
-//				Master.getInstance().addLoading();
 				lblAcceptingMatch.setVisible(true);
 				lblAcceptingMatch.revalidate();
 				lblAcceptingMatch.repaint();
@@ -254,19 +233,6 @@ public class MatchGUI extends JPanel{
 			 */
 			public void actionPerformed(ActionEvent e) {
 				Master.appLogger.info(":: Reject button pressed");
-				/*JFrame frame = new JFrame();
-				frame.setVisible(true);
-				frame.setTitle("Rejection");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setBounds(100, 100, 400, 200);
-				
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				
-				JTextField rej = new JTextField();
-				rej.setText("You have rejected this match!");
-				rej.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				rej.setEditable(false);*/
 				//Rejects match here
 				rejLabel.setVisible(true);
 				rejLabel.revalidate();
@@ -278,9 +244,7 @@ public class MatchGUI extends JPanel{
 					protected Void doInBackground() throws Exception {
 						MatchController.rejectMatch(matches.get(curMatchShown));
 						UserController.getInstance().setTimesMatchCalled(5);
-						
-//						panel.add(rej);
-//						frame.getContentPane().add(panel);
+
 						matches.remove(matches.get(curMatchShown));
 						if(curMatchShown != 0) {
 							curMatchShown--;
@@ -370,7 +334,7 @@ public class MatchGUI extends JPanel{
 	}
 	
 	/**
-	 * No matches.
+	 * If no matches found print message
 	 */
 	public static void noMatches() {
 		Master.appLogger.info(":: No matches found");
@@ -395,13 +359,12 @@ public class MatchGUI extends JPanel{
 		frame.getContentPane().add(noMatchField);
 		noMatchField.setColumns(10);
 		
-		
 	}
 	
 	/**
 	 * Sets the current match.
+	 * Updates match shown by index
 	 */
-	//Updates match shown by index
 	public void setCurrentMatch() {
 		Master.appLogger.info(":: Currently shown match updated");
 		Master.getInstance().addLoading();

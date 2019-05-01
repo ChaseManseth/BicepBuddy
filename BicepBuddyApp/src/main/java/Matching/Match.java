@@ -8,7 +8,6 @@ import java.util.List;
 import User.User;
 import User.UserController;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Match.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -165,22 +164,22 @@ public class Match {
 	}
 	
 	/**
-	 * Accept.
+	 * Accept a match.
+	 * Used to determine status
 	 */
-	//Used to determine status
 	public void accept() {
 		status = Status.Accepted;
 	}
 	
 	/**
-	 * Reject.
+	 * Reject a match.
 	 */
 	public void reject() {
 		status = Status.Rejected;
 	}
 	
 	/**
-	 * Idle.
+	 * Idle a match.
 	 */
 	public void idle() {
 		status = Status.Idle;
@@ -188,10 +187,10 @@ public class Match {
 	
 	/**
 	 * Gets the other.
+	 * Used to get user not currently logged in
 	 *
 	 * @return the other
 	 */
-	//Used to get user not currently logged in
 	public String getOther() {
 		if (UserController.getUser().getId().contentEquals(users.get(0))) {
 			return users.get(1);
@@ -200,7 +199,7 @@ public class Match {
 	}
 	
 	/**
-	 * Gets the status.
+	 * Gets the status of match.
 	 *
 	 * @return the status
 	 */

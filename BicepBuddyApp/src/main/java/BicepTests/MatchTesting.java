@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.After;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,9 +52,6 @@ public class MatchTesting {
 		user1 = UserController.getInstance().getUserById("5cc8f596caacc31bf511765c");
 		user2 = UserController.getInstance().getUserById("5cc8f597caacc31bf511765d");
 		user3 = UserController.getInstance().getUserById("5cc8f598caacc31bf511765e");
-		/*UserController.getInstance().createUser("Mark","Zucc","markzucc@gmail.com","123-456-7890","25","Male","Male","Get Swole","Multiple Times","Early Morning","Cardio","150-175","Regular"," ");
-		UserController.getInstance().createUser("Other","Dude","otherdude@gmail.com","098-765-4321","26","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate"," ");
-		UserController.getInstance().createUser("Lady","Dudette","ladydudette@gmail.com","111-111-1111","32","Male","Male","Stay Healthy","Every Day","Morning","Cardio","125-150","Moderate"," ");*/
 		UserController.setUser(user1);
 		m1 = MatchController.directMatch(user2);
 		m2 = MatchController.directMatch(user3);
@@ -168,7 +165,7 @@ public class MatchTesting {
 	/**
 	 * Tear down.
 	 */
-	@AfterAll
+	@After
 	public static void tearDown() {
 
 	}

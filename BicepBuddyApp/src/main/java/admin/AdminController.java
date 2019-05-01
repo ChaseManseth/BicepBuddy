@@ -52,7 +52,7 @@ public class AdminController {
 	}
     
     /**
-     * Gets the chart.
+     * Gets the chart to display user data.
      *
      * @param everybody the everybody
      * @param option the option
@@ -73,9 +73,7 @@ public class AdminController {
         		ncount+=1.0;
         	}
         }
-//        everybody.forEach(a -> {
-//        	data.setValue(a.getfName(), 1.0);
-//        });
+
         data.setValue("Male", mcount);
         data.setValue("Female", fcount);
         data.setValue("N/A", ncount);

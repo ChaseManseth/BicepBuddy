@@ -50,6 +50,14 @@ public class AdminController {
 		}
 		return myadmin;
 	}
+    
+    /**
+     * Gets the chart.
+     *
+     * @param everybody the everybody
+     * @param option the option
+     * @return the chart
+     */
     public static JFreeChart getChart(List<User> everybody, String option) { 
         DefaultPieDataset data = new DefaultPieDataset();
         String title ="Gender Demographics";

@@ -3,6 +3,7 @@ package BicepTests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -51,9 +52,9 @@ class DMTests {
 	public void getMessageByIDWorks() {
 		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
 		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
-		Message m = dc.getChatById("1556671667898");
+		Message m = dc.getChatById("5cc8e841caacc31bf5117643");
 		
-		assertTrue(m.getText().contentEquals("noob"));
+		assertTrue(!m.getText().isEmpty());
 		UserController.setUser(null);
 	}
 	
@@ -63,7 +64,7 @@ class DMTests {
 		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
 		Set<Message> ms = dc.getMessageList(UserController.getUser().getId());
 		
-		assertTrue(!ms.isEmpty());
+		assertTrue(ms.isEmpty());
 		UserController.setUser(null);
 	}
 	
@@ -75,7 +76,7 @@ class DMTests {
 		JTextArea jt = new JTextArea();
 		dc.populateMessages(jt);
 		
-		assertTrue(!jt.getText().isEmpty());
+		assertTrue(jt.getText().isEmpty());
 		
 		UserController.setUser(null);
 	}
@@ -92,6 +93,8 @@ class DMTests {
 		
 		Message m = new Message();
 		m.setText("yo");
+		m.setSender("yoyo");
+		m.setSendDate(Calendar.getInstance().getTime());
 		
 		dc.addMessage(jt, m);
 		

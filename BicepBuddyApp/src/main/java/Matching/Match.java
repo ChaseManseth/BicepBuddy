@@ -288,6 +288,13 @@ public class Match {
 		this.status = status;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Match [users=" + users + ", status=" + status + ", strength=" + strength + ", id=" + id + "]";
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

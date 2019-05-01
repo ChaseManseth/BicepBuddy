@@ -5,9 +5,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ErrorGUI.
+ * The Class ErrorGUI. Class will pop up an error frame for the user.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
 public class ErrorGUI {
@@ -15,13 +14,13 @@ public class ErrorGUI {
 	/** The frame. */
 	private JFrame frame;
 	
-	/** The error msg. */
+	/** The error message field. */
 	private JTextField errorMsg;
 	
 	/**
 	 * Instantiates a new error GUI.
 	 *
-	 * @param message the message
+	 * @param message: Message to be printed on the Error frame.
 	 */
 	public ErrorGUI(String message) {
 		frame = new JFrame("ERROR");

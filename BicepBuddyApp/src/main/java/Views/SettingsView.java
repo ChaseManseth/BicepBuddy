@@ -70,11 +70,6 @@ public class SettingsView extends JPanel {
 		setBounds(100, 100, 900, 560);
 		setLayout(null);
 		
-		JLabel lblPic = new JLabel("");
-		lblPic.setBounds(64, 62, 169, 175);
-	
-		add(lblPic);
-		
 		JLabel lblName2 = new JLabel("Account Settings");
 		lblName2.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblName2.setBounds(356, 12, 203, 15);
@@ -287,7 +282,6 @@ public class SettingsView extends JPanel {
 				
 				new SwingWorker<Void, Void>(){
 
-					@Override
 					protected Void doInBackground() throws Exception {
 						UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
 							    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),

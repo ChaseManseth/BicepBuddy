@@ -1,6 +1,9 @@
 package BicepTests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,13 @@ class DMTests {
 			fail();
 		}
 		
-		//Message m2 = new Message
+		Message m2 = new Message();
+		
+		d.add(m2);
+		d.add(m1);
+		
+		List<Message> dms = d.getSorted();
+		assertTrue(!dms.isEmpty());
 	}
 
 }

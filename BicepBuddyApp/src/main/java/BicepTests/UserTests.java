@@ -129,7 +129,7 @@ public class UserTests {
 	
 	@Test
 	public void onlyGetUserByIdDoesntGetMatches() {
-		User u = UserController.getInstance().onlyGetUserById("5cc7c4c38554b0748e750726");
+		User u = UserController.getInstance().onlyGetUserById("5cc8e687caacc31bf511763c");
 		
 		assertTrue(u.getAccepted().isEmpty());
 		assertTrue(u.getWaiting().isEmpty());

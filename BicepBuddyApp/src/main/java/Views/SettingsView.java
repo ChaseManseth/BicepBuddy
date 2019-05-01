@@ -37,6 +37,7 @@ import javax.swing.JMenu;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import java.awt.Font;
 
 /**
  * The Class SettingsView. Will allow the users to see and change their settings.
@@ -75,7 +76,8 @@ public class SettingsView extends JPanel {
 		add(lblPic);
 		
 		JLabel lblName2 = new JLabel("Account Settings");
-		lblName2.setBounds(376, 12, 137, 15);
+		lblName2.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblName2.setBounds(356, 12, 203, 15);
 		add(lblName2);
 		
 		txtFirstName = new JTextField();
@@ -100,7 +102,7 @@ public class SettingsView extends JPanel {
 		txtLastName.setColumns(10);
 
 		JComboBox styleBox = new JComboBox(MatchAlgorithm.STYLES);
-		styleBox.setBounds(410, 62, 169, 32);
+		styleBox.setBounds(418, 62, 161, 32);
 		styleBox.setBackground(Color.LIGHT_GRAY);
 		styleBox.setSelectedItem(u.getStyle());
 		add(styleBox);
@@ -110,7 +112,7 @@ public class SettingsView extends JPanel {
 		add(lblWorkoutStyle);
 		
 		JComboBox timeOfDay = new JComboBox(MatchAlgorithm.TIMES);
-		timeOfDay.setBounds(410, 141, 167, 32);
+		timeOfDay.setBounds(416, 141, 161, 32);
 		timeOfDay.setBackground(Color.LIGHT_GRAY);
 		timeOfDay.setSelectedItem(u.getTimeOfDay());
 		add(timeOfDay);
@@ -120,7 +122,7 @@ public class SettingsView extends JPanel {
 		add(label);
 		
 		JComboBox gender = new JComboBox(MatchAlgorithm.GENDERS);
-		gender.setBounds(410, 205, 169, 32);
+		gender.setBounds(418, 205, 161, 32);
 		gender.setBackground(Color.LIGHT_GRAY);
 		gender.setSelectedItem(u.getGender());
 		add(gender);
@@ -130,7 +132,7 @@ public class SettingsView extends JPanel {
 		add(label_1);
 		
 		JComboBox prefGender = new JComboBox(MatchAlgorithm.GENDERS);
-		prefGender.setBounds(410, 277, 169, 32);
+		prefGender.setBounds(418, 277, 161, 32);
 		prefGender.setBackground(Color.LIGHT_GRAY);
 		prefGender.setSelectedItem(u.getPrefGender());
 		add(prefGender);
@@ -140,13 +142,13 @@ public class SettingsView extends JPanel {
 		add(label_2);
 		
 		JComboBox freqBox = new JComboBox(MatchAlgorithm.FREQUENCIES);
-		freqBox.setBounds(410, 350, 169, 32);
+		freqBox.setBounds(418, 350, 161, 32);
 		freqBox.setBackground(Color.LIGHT_GRAY);
 		freqBox.setSelectedItem(u.getFrequency());
 		add(freqBox);
 		
-		JLabel label_3 = new JLabel("Frequency");
-		label_3.setBounds(282, 359, 107, 15);
+		JLabel label_3 = new JLabel("Weekly Frequency");
+		label_3.setBounds(282, 359, 137, 15);
 		add(label_3);
 		
 		JButton deleter = new JButton("Delete My Profile");
@@ -229,7 +231,7 @@ public class SettingsView extends JPanel {
 		add(lblGoal);
 		
 		JComboBox goalsBox = new JComboBox(MatchAlgorithm.GOALS);
-		goalsBox.setBounds(681, 62, 181, 32);
+		goalsBox.setBounds(693, 62, 169, 32);
 		goalsBox.setBackground(Color.LIGHT_GRAY);
 		goalsBox.setSelectedItem(u.getGoals());
 		add(goalsBox);
@@ -239,7 +241,7 @@ public class SettingsView extends JPanel {
 		add(lblWeight);
 		
 		JComboBox weightBox = new JComboBox(MatchAlgorithm.WEIGHTCLASS);
-		weightBox.setBounds(681, 141, 181, 32);
+		weightBox.setBounds(693, 141, 169, 32);
 		weightBox.setSelectedItem(u.getWeight());
 		weightBox.setBackground(Color.LIGHT_GRAY);
 		add(weightBox);
@@ -249,7 +251,7 @@ public class SettingsView extends JPanel {
 		add(lblExperience);
 		
 		JComboBox expBox = new JComboBox(MatchAlgorithm.EXPERIENCE);
-		expBox.setBounds(681, 205, 181, 32);
+		expBox.setBounds(693, 205, 169, 32);
 		expBox.setBackground(Color.LIGHT_GRAY);
 		expBox.setSelectedItem(u.getExperience());
 		add(expBox);
@@ -259,7 +261,7 @@ public class SettingsView extends JPanel {
 		add(lblAge);
 		
 		ageField = new JTextField();
-		ageField.setBounds(681, 281, 169, 25);
+		ageField.setBounds(694, 281, 156, 25);
 		ageField.setText(u.getAge());
 		ageField.setBackground(Color.LIGHT_GRAY);
 		add(ageField);
@@ -273,7 +275,7 @@ public class SettingsView extends JPanel {
 		phoneField.setColumns(10);
 		phoneField.setBackground(Color.LIGHT_GRAY);
 		phoneField.setText(u.getPhone());
-		phoneField.setBounds(681, 355, 169, 25);
+		phoneField.setBounds(694, 355, 156, 25);
 		add(phoneField);
 		
 		JButton saver = new JButton("Save changes");

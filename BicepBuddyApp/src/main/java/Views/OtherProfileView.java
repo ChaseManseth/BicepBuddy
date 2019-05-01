@@ -88,8 +88,8 @@ public class OtherProfileView extends JPanel {
 		add(lblPic);
 		
 		JLabel lblName2 = new JLabel(u.getfName() + " " + u.getlName() + "'s Profile");
-		lblName2.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblName2.setBounds(415, 26, 343, 19);
+		lblName2.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblName2.setBounds(385, 25, 361, 19);
 		add(lblName2);
 		
 		int ind = UserController.getUser().getAccepted().indexOf(new Match(u,UserController.getUser()));

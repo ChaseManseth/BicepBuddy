@@ -9,6 +9,10 @@ import org.jfree.data.general.PieDataset;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -30,38 +34,45 @@ import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 import java.util.List;
 import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
 // TODO: Auto-generated Javadoc
 
 /**
  * The Class AdminGui.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
+
 public class AdminGui extends JPanel {
-
-
 
 	/** The table. */
 	private JTable table;
+	private ChartPanel chartPanel;
 
 	/**
 	 * Instantiates a new admin gui.
 	 */
 	public AdminGui() {
+		 String options[] = {"Gender", "Weight","Preferred","Goals","Frequency", "Time","Style","Experience"};
 		List<User> everybody =UserController.getInstance().getAllUsers();
 		Integer userCount= everybody.size();
 		setLayout(null);
 		JLabel lblAdministrator = new JLabel("Administrator Dashboard");
 		lblAdministrator.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblAdministrator.setBounds(290, 12, 299, 36);
+		lblAdministrator.setBounds(313, 16, 299, 36);
 		add(lblAdministrator);
-
-		JLabel lblTotalUsers = new JLabel("Total users:");
-		lblTotalUsers.setBounds(33, 72, 90, 15);
-		add(lblTotalUsers); 
+		
+        JLabel lblAllUsers = new JLabel("All " + userCount.toString() +" users");
+        lblAllUsers.setBounds(640, 151, 106, 15);
+        add(lblAllUsers);
+        
+		JLabel lblChoose = new JLabel("Choose:");
+		lblChoose.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblChoose.setBounds(33, 120, 66, 15);
+		add(lblChoose);
 
 		JButton btnRefresh = new JButton("Refresh ");
 		MaterialUIMovement.add(btnRefresh, MaterialColors.GRAY_600);
-		btnRefresh.setBounds(752, 23, 114, 25);
+		btnRefresh.setBounds(752, 27, 114, 25);
 		btnRefresh.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,17 +80,27 @@ public class AdminGui extends JPanel {
 			}
 		});
 		add(btnRefresh);
+		
+		chartPanel = new ChartPanel(AdminController.getInstance().getChart(everybody,(String)("Gender")));
+        chartPanel.setBounds(33, 151, 450, 350);
+        add(chartPanel);
 
-		JLabel lblNewLabel = new JLabel(userCount.toString());
-		lblNewLabel.setBounds(122, 72, 66, 15);
-		add(lblNewLabel);
-
-        JLabel lblAllUsers = new JLabel("All users");
-        lblAllUsers.setBounds(614, 101, 66, 15);
-        add(lblAllUsers);
+        JComboBox comboBox = new JComboBox(options);
+        comboBox.setBounds(109, 115, 150, 25);
+        comboBox.setSelectedItem("Gender");
+        add(comboBox);
+        comboBox.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+            	remove(chartPanel);
+            	chartPanel = new ChartPanel(AdminController.getInstance().getChart(everybody,(String)(comboBox.getSelectedItem())));
+                chartPanel.setBounds(33, 151, 450, 350);
+                add(chartPanel);
+                chartPanel.repaint();
+            }
+        });
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(447, 129, 419, 343);
+		scrollPane.setBounds(500, 180, 366, 321);
 		add(scrollPane);
 		
 		AdminTableModel model = new AdminTableModel(everybody);
@@ -88,9 +109,5 @@ public class AdminGui extends JPanel {
 		ButtonColumn buttonColumn1 = new ButtonColumn(table, 1);
 		ButtonColumn buttonColumn2 = new ButtonColumn(table, 2);
 		scrollPane.setViewportView(table);
-		
-        ChartPanel myPanel= new ChartPanel(AdminController.getInstance().getChart(everybody,"gender"));
-        myPanel.setBounds(33, 122, 379, 350);
-        add(myPanel); 
 	}
 }

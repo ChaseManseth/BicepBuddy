@@ -191,8 +191,8 @@ public class Signup extends JPanel {
 		lblGoals.setBounds(200, 305, 48, 14);
 		add(lblGoals);
 		
-		JLabel lblFrequency = new JLabel("Frequency");
-		lblFrequency.setBounds(455, 305, 121, 14);
+		JLabel lblFrequency = new JLabel("Weekly Frequency");
+		lblFrequency.setBounds(455, 305, 150, 14);
 		add(lblFrequency);
 		
 		JLabel lblTimeOfDay = new JLabel("Time of Day");

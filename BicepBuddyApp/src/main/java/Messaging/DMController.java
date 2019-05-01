@@ -45,6 +45,7 @@ import User.User;
 import bicepBuddyPackage.Master;
 import User.UserController;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DMController.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -57,14 +58,26 @@ public class DMController{
 	/** The dm view. */
 	private DMView dmView = null;
 	
+	/** The num messages. */
 	private int numMessages = 0;
 		
+	/** The loading cont. */
 	public boolean loadingCont = true;
 	
+	/**
+	 * Gets the num messages.
+	 *
+	 * @return the num messages
+	 */
 	public int getNumMessages() {
 		return numMessages;
 	}
 
+	/**
+	 * Sets the num messages.
+	 *
+	 * @param numMessages the new num messages
+	 */
 	public void setNumMessages(int numMessages) {
 		this.numMessages = numMessages;
 	}
@@ -410,13 +423,12 @@ public class DMController{
 	 *
 	 * @param messageField the message field
 	 */
-	public void populateMessages(JTextArea messageField, JScrollPane pane) {
+	public void populateMessages(JTextArea messageField) {
 		// first get the sorted message list
 		updateMessages();
 		List<Message> sortedMessages = dm.getSorted();
 		if(getNumMessages() != sortedMessages.size()) {
 			Master.appLogger.info(":: Populating messages");
-			int pos = messageField.getCaretPosition();
 			setNumMessages(sortedMessages.size());
 			messageField.setText("");
 			
@@ -447,111 +459,3 @@ public class DMController{
 		}
 	}
 }
-
-/*
- * Creates message to send, adds it to DM instance, updates the DMView accordingly
- */
-/*public void sendMessage(String text) {
-	Message message = new Message(UserController.getUser(), dm.getPartner(), Calendar.getInstance().getTime(), text);
-	dm.add(message);
-	updateView();
-	saveMessage(message);
-}*/
-
-/*
- * Writes all Messages from DM instance to csv file
- */
-/*public static void saveMessage(Message message) {
-	BufferedWriter writer = null;
-	try {
-		writer = new BufferedWriter(new FileWriter(MESSAGE_FILE, true));
-		
-		String line = message.getSender()getId()
-				+ "," + message.getReceiver().getId()
-				+ "," + DATE_FORMAT.format(message.getSendDate())
-				+ "," + message.getText().replaceAll("[^\\p{L}\\p{Z}]","");
-		
-		writer.write(line);
-		writer.newLine();
-		
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} finally {
-		if(writer != null) {
-			try {
-				writer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Master.appLogger.log(Level.WARNING, e.getMessage());
-			}
-		}
-	}
-}*/
-
-/*
- * Reads all Messages from csv file that were sent by the logged in user and
- * received by the specified User
- */
-/*public static Set<Message> loadMessages(User partner) {
-	Set<Message> messages = new HashSet<>();
-	
-	BufferedReader reader = null;
-	try {
-		reader = new BufferedReader(new FileReader(MESSAGE_FILE));
-		
-		String line = new String();
-		while((line = reader.readLine()) != null) {
-			String[] split = line.split(",");
-			
-			if(split.length == 4) {
-				User sender = null, receiver = null;
-				Date sendDate = null;
-				Message message = null;
-				UserController uc = UserController.getInstance();
-				
-				sender = uc.getUserById(split[0]);
-				receiver = uc.getUserById(split[1]);
-				
-				// Filter out messages not applicable
-				if((sender.getId().equals(UserController.getUser().getId()) && receiver.getId().equals(partner.getId()))
-						|| (sender.getId().equals(partner.getId()) && receiver.getId().equals(UserController.getUser().getId()))) {
-				
-					try {
-						sendDate = DATE_FORMAT.parse(split[2]);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Master.appLogger.log(Level.WARNING, e.getMessage());
-						sendDate = new Date();
-					}
-					String text = split[3];
-					message = new Message(sender, receiver, sendDate, text);
-					messages.add(message);
-				}
-			}
-		}
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		Master.appLogger.log(Level.WARNING, e.getMessage());
-	} finally {
-		if(reader != null) {
-			try {
-				reader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Master.appLogger.log(Level.WARNING, e.getMessage());
-			}
-		}
-	}
-	
-	return messages;
-}*/

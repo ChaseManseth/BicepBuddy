@@ -38,6 +38,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DMView.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
@@ -47,6 +48,7 @@ public class DMView extends JPanel {
 	/** The message sender. */
 	private JTextField messageSender;
 	
+	/** The text update sem. */
 	public Semaphore textUpdateSem = new Semaphore(1);
 	
 	/**
@@ -108,7 +110,7 @@ public class DMView extends JPanel {
 		messagePane.setVisible(true);
 		add(messagePane);
 		
-		DMController.getInstance().populateMessages(messageField, messagePane);
+		DMController.getInstance().populateMessages(messageField);
 		
 		//SWING WORKER THAT CONTINUALLY POPULATES MESSAGES
 		new SwingWorker<Void, Void>(){
@@ -119,7 +121,7 @@ public class DMView extends JPanel {
 				//acquire permit
 				while(Master.getInstance().stop == false) {
 					textUpdateSem.acquire();
-					DMController.getInstance().populateMessages(messageField, messagePane);
+					DMController.getInstance().populateMessages(messageField);
 					textUpdateSem.release();
 					
 					Thread.sleep(3000);

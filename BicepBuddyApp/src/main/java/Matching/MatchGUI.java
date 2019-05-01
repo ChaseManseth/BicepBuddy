@@ -49,8 +49,10 @@ public class MatchGUI extends JPanel{
 	/** The matches. */
 	private List<Match> matches;
 	
+	/** The lbl accepting match. */
 	private JLabel lblAcceptingMatch;
 
+	/** The rej label. */
 	private JLabel rejLabel;	/**
 	 * Instantiates a new match GUI.
 	 */

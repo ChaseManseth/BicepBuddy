@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.swing.JTextArea;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +44,61 @@ class DMTests {
 		
 		assertTrue(dc.getDm() != null);
 		assertTrue(dc.getDm().getPartner().getEmail().contentEquals("zacharysteudel@gmail.com"));
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void getMessageByIDWorks() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
+		Message m = dc.getChatById("1556671667898");
+		
+		assertTrue(m.getText().contentEquals("noob"));
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void getListOfMessages() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
+		Set<Message> ms = dc.getMessageList(UserController.getUser().getId());
+		
+		assertTrue(!ms.isEmpty());
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void populateTheMessageField() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
+		
+		JTextArea jt = new JTextArea();
+		dc.populateMessages(jt);
+		
+		assertTrue(!jt.getText().isEmpty());
+		
+		UserController.setUser(null);
+	}
+	
+	@Test
+	public void addMessageTest() {
+		UserController.getInstance().validateLogin("zacharysteudel@gmail.com", "password");
+		DMController dc = new DMController(UserController.getUser(), new DMView(UserController.getUser()));
+		
+		JTextArea jt = new JTextArea();
+		dc.populateMessages(jt);
+		
+		int b4Size = jt.getText().length();
+		
+		Message m = new Message();
+		m.setText("yo");
+		
+		dc.addMessage(jt, m);
+		
+		int afterSize = jt.getText().length();
+		
+		assertTrue(afterSize > b4Size);
+		
 		UserController.setUser(null);
 	}
 }

@@ -37,12 +37,26 @@ import javax.swing.JMenu;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SettingsView.
+ */
 public class SettingsView extends JPanel {
 
+	/** The txt first name. */
 	private JTextField txtFirstName;
+	
+	/** The txt email. */
 	private JTextField txtEmail;
+	
+	/** The txt last name. */
 	private JTextField txtLastName;
+	
+	/** The age field. */
 	private JTextField ageField;
+	
+	/** The phone field. */
 	private JTextField phoneField;
 
 
@@ -310,6 +324,9 @@ public class SettingsView extends JPanel {
 		add(saver);
 	}
 	
+	/**
+	 * Saved.
+	 */
 	public static void saved() {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);
@@ -328,6 +345,9 @@ public class SettingsView extends JPanel {
 		frame.getContentPane().add(panel);
 	}
 	
+	/**
+	 * Change image frame.
+	 */
 	public static void changeImageFrame() {
 		JFrame frame = new JFrame();
 		frame.setVisible(true);

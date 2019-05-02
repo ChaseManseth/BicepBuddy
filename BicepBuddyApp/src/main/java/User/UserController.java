@@ -980,32 +980,35 @@ public class UserController {
 
 				    // Result
 				    JSONObject result = (JSONObject) o.get("result");
+				    if(result != null) {
+				    	// Get Data to build a User object
+					    String fName = (String) result.get("firstname");
+						String lName = (String) result.get("lastname");
+						String email = (String) result.get("email");
+						String phone = (String) result.get("phoneNumber");
+						String age = (String) result.get("age");
+						String gender = (String) result.get("gender");
+						String prefGender = (String) result.get("preferredGender");
+						String goals = (String) result.get("goals");
+						String frequency = (String) result.get("frequency");
+						String timeOfDay = (String) result.get("timeOfDay");
+						String style = (String) result.get("workoutStyle");
+						String weight = (String) result.get("weight");
+						String experience = (String) result.get("experience");
+						String profilePic = (String) result.get("profilePic");
 
-				    // Get Data to build a User object
-				    String fName = (String) result.get("firstname");
-					String lName = (String) result.get("lastname");
-					String email = (String) result.get("email");
-					String phone = (String) result.get("phoneNumber");
-					String age = (String) result.get("age");
-					String gender = (String) result.get("gender");
-					String prefGender = (String) result.get("preferredGender");
-					String goals = (String) result.get("goals");
-					String frequency = (String) result.get("frequency");
-					String timeOfDay = (String) result.get("timeOfDay");
-					String style = (String) result.get("workoutStyle");
-					String weight = (String) result.get("weight");
-					String experience = (String) result.get("experience");
-					String profilePic = (String) result.get("profilePic");
+						// Created a new user
+						newUser = new User(fName, lName, email, phone, age, gender, prefGender,
+								goals, frequency, timeOfDay, style, weight, experience);
+						Master.appLogger.info(":: Getting user " + fName + " " + lName + " from DB WITHOUT their match info.");
 
-					// Created a new user
-					newUser = new User(fName, lName, email, phone, age, gender, prefGender,
-							goals, frequency, timeOfDay, style, weight, experience);
-					Master.appLogger.info(":: Getting user " + fName + " " + lName + " from DB WITHOUT their match info.");
+						// Add its ID
+						String idDB = (String) result.get("_id");
+						newUser.setId(idDB);
+						newUser.setProfilePic(profilePic);
+				    }
 
-					// Add its ID
-					String idDB = (String) result.get("_id");
-					newUser.setId(idDB);
-					newUser.setProfilePic(profilePic);
+				    
 
 			    } else {
 			    	Master.appLogger.warning(":: Failed to get the user! Maybe invalid id?");

@@ -70,25 +70,20 @@ public class SettingsView extends JPanel {
 		setBounds(100, 100, 900, 560);
 		setLayout(null);
 		
-		JLabel lblPic = new JLabel("");
-		lblPic.setBounds(64, 62, 169, 175);
-	
-		add(lblPic);
-		
 		JLabel lblName2 = new JLabel("Account Settings");
 		lblName2.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblName2.setBounds(356, 12, 203, 15);
 		add(lblName2);
 		
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(64, 307, 169, 25);
+		txtFirstName.setBounds(64, 66, 169, 25);
 		txtFirstName.setBackground(Color.LIGHT_GRAY);
 		add(txtFirstName);
 		txtFirstName.setText(u.getfName());
 		txtFirstName.setColumns(10);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(64, 405, 169, 25);
+		txtEmail.setBounds(64, 209, 169, 25);
 		txtEmail.setBackground(Color.LIGHT_GRAY);
 		add(txtEmail);
 		txtEmail.setText(u.getEmail());
@@ -96,7 +91,7 @@ public class SettingsView extends JPanel {
 		
 		txtLastName = new JTextField();
 		txtLastName.setText(u.getlName());
-		txtLastName.setBounds(64, 356, 169, 25);
+		txtLastName.setBounds(64, 145, 169, 25);
 		txtLastName.setBackground(Color.LIGHT_GRAY);
 		add(txtLastName);
 		txtLastName.setColumns(10);
@@ -287,7 +282,6 @@ public class SettingsView extends JPanel {
 				
 				new SwingWorker<Void, Void>(){
 
-					@Override
 					protected Void doInBackground() throws Exception {
 						UserController.getInstance().editUser(txtEmail.getText(), txtFirstName.getText(), txtLastName.getText(),
 							    styleBox.getSelectedItem(), timeOfDay.getSelectedItem(), gender.getSelectedItem(),

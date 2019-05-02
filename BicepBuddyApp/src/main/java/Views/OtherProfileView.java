@@ -173,6 +173,8 @@ public class OtherProfileView extends JPanel {
 					lblAcceptingMatch.setVisible(true);
 					lblAcceptingMatch.revalidate();
 					lblAcceptingMatch.repaint();
+					UserController.getInstance().setChangesToMatches(true);
+					UserController.getInstance().setTimesMatchCalled(5);
 					new SwingWorker<Void, Void>(){
 
 						@Override
@@ -184,8 +186,6 @@ public class OtherProfileView extends JPanel {
 							else {
 								MatchController.acceptMatchInitial(MatchController.directMatch(u));
 							}
-							UserController.getInstance().setChangesToMatches(true);
-							UserController.getInstance().setTimesMatchCalled(5);
 							return null;
 						}
 
@@ -221,6 +221,8 @@ public class OtherProfileView extends JPanel {
 					rejLabel.setVisible(true);
 					rejLabel.revalidate();
 					rejLabel.repaint();
+					UserController.getInstance().setTimesMatchCalled(5);
+					UserController.getInstance().setChangesToMatches(true);
 					new SwingWorker<Void, Void>(){
 
 						@Override

@@ -39,7 +39,7 @@ public class MatchAlgorithm {
 
 	/** The matchesreturned. */
 	//Number of matches returned
-	public static int MATCHESRETURNED = 10;
+	public static int MATCHESRETURNED = 5;
 	//Priority enum
 	/**
 	 * The Enum Priority.

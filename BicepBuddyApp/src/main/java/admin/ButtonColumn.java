@@ -36,6 +36,10 @@ import bicepBuddyPackage.Master;
  * The Class ButtonColumn.
  * @authors: Zachary Steudel, Hunter Long, Chase Manseth, Bob Rein, Reece Kemball-Cook
  */
+
+/*
+ * NOTE: PORTIONS OF THIS CODE WERE TAKEN AND ADAPTED FROM  Rob Camick AND HIS WEB PAGE http://www.camick.com/java/source/ButtonColumn.java 
+ */
 @SuppressWarnings("serial")
 class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener{
 	
@@ -46,7 +50,7 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 	JButton renderButton;
 	
 	/** The edit button. */
-	JButton editButton;
+	JButton editButton; 
 	
 	/** The text. */
 	String text;
@@ -74,7 +78,7 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 	/* (non-Javadoc)
 	 * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
 	 */
-	public Component getTableCellRendererComponent(    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
 	    renderButton.setText( value.toString() );
 	    return renderButton;
 	}
@@ -148,7 +152,6 @@ class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, Tabl
 						public void mouseEntered(MouseEvent e) {
 							noBtn.setBackground(Color.GREEN);
 						}
-						
 						@Override
 						public void mouseExited(MouseEvent e) {
 							noBtn.setBackground(new JButton().getBackground());

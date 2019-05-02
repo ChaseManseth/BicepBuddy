@@ -240,7 +240,7 @@ public class UserDB {
 		}
 		
 		
-		ErrorGUI eg = new ErrorGUI("Please enter valid username and password.");
+		new ErrorGUI("Please enter valid username and password.");
 		return false;
 	}
 
@@ -311,7 +311,7 @@ public class UserDB {
 		
 		Master.appLogger.info(":: Opening CSV DB file to edit user: " + u.getEmail());
 		if(!email.contentEquals(u.getEmail()) && !notExists(email)) {
-			ErrorGUI eg = new ErrorGUI("Email already exists. Can't change.");
+			new ErrorGUI("Email already exists. Can't change.");
 			Master.appLogger.info(":: Couldn't edit user settings.");
 			return false;
 		}

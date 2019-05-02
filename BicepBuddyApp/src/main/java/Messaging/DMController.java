@@ -107,7 +107,7 @@ public class DMController{
 	
 	/** The Constant DATE_FORMAT. */
 	// Various constants
-	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy :: HH:mm ---");
+	private final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy :: HH:mm ---");
 	
 	/** The Constant MESSAGE_FILE. */
 	private static final String MESSAGE_FILE = "messageDB.csv";
